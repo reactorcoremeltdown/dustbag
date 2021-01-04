@@ -1,5 +1,5 @@
 firewall: early apply_rules
-	@echo "Setting up firewall"
+	@printf "`tput bold`Firewall setup completed`tput sgr0`"
 
 template_rules:
 	bash stages/firewall/templates/input.sh stages/firewall/variables/firewall.json
