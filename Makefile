@@ -2,15 +2,7 @@ all: early firewall repos packages users services
 
 include stages/early/early.mk
 include stages/firewall/firewall.mk
-
-repos:
-	@echo "Debian repositories"
-
-packages: repos
-	@echo "Debian packages"
-
-users: early
-	@echo "System users"
-
-services: users packages
-	@echo "System services"
+include stages/repos/repos.mk
+include stages/packages/packages.mk
+include stages/users/users.mk
+include stages/services/services.mk
