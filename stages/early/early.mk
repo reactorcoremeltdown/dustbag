@@ -5,9 +5,9 @@ HOSTNAME := $(shell cat variables/main.json | jq -r .hostname)
 early: test shell_history hostname apt_configs keygen earlystagepackages
 ifeq ($(UNAME), Linux)
 	echo "provisioning done" > /etc/default/earlystageconfigs;
-	@printf "`tput bold`Early stage provisioning completed`tput sgr0`"
+	@printf "`tput bold`Early stage provisioning completed`tput sgr0`\n"
 else
-	@printf "`tput bold`This operating system is not supported`tput sgr0`"
+	@printf "`tput bold`This operating system is not supported`tput sgr0`\n"
 	exit 1
 endif
 
