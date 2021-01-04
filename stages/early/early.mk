@@ -14,8 +14,8 @@ test:
 	jq --version
 
 shell_history:
-	test -f /root/.zsh_history || ln -s /dev/null /root/.zsh_history
-	test -f /root/.bash_history || ln -s /dev/null /root/.bash_history
+	test -L /root/.zsh_history || ln -s /dev/null /root/.zsh_history
+	test -L /root/.bash_history || ln -s /dev/null /root/.bash_history
 
 hostname:
 	hostnamectl set-hostname $(HOSTNAME)
