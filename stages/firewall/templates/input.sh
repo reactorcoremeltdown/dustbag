@@ -8,7 +8,7 @@ WORLDV6=`jq -cr '.shortcuts.WORLDV6' ${1}`
 cat <<EOF > /etc/firewall/iptables-input
 /sbin/iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 /sbin/iptables -A INPUT -p icmp -j ACCEPT
-/sbib/iptables -A INPUT -i lo -j ACCEPT
+/sbin/iptables -A INPUT -i lo -j ACCEPT
 EOF
 
 jq -cr '.rules[] | "/sbin/iptables -A INPUT -i IFACE -p \(.protocol) -s \(.address_v4) --dport \(.port) -j ACCEPT -m comment --comment \"Allowing \(.name) from \(.address_v4)\""' ${1} | sed "s|IFACE|${IFACE}|g;s|worldv4|${WORLDV4}|g" >> /etc/firewall/iptables-input
@@ -22,7 +22,7 @@ EOF
 cat <<EOF > /etc/firewall/ip6tables-input
 /sbin/ip6tables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 /sbin/ip6tables -A INPUT -p icmp -j ACCEPT
-/sbib/ip6tables -A INPUT -i lo -j ACCEPT
+/sbin/ip6tables -A INPUT -i lo -j ACCEPT
 EOF
 
 jq -cr '.rules[] | "/sbin/ip6tables -A INPUT -i IFACE -p \(.protocol) -s \(.address_v6) --dport \(.port) -j ACCEPT -m comment --comment \"Allowing \(.name) from \(.address_v6)\""' ${1} | sed "s|IFACE|${IFACE}|g;s|worldv6|${WORLDV6}|g" >> /etc/firewall/ip6tables-input
