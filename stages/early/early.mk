@@ -1,6 +1,6 @@
 UNAME := $(shell uname)
 RETRY := $(shell test -f /etc/default/earlystageconfigs && echo "true")
-HOSTNAME := "buster.rcmd.space"
+HOSTNAME := $(shell cat variables/main.json | jq -r .hostname)
 
 early: test shell_history hostname apt_configs keygen earlystagepackages
 ifeq ($(UNAME), Linux)
