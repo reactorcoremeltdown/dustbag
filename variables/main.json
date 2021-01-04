@@ -1,3 +1,15 @@
 {
-    "hostname": "buster.rcmd.space"
+    "hostname": "buster.rcmd.space",
+    "debian": {
+        "repositories": [
+            { "name": "Yandex mirror backports",
+                "key": "https://mirror.yandex.ru/ubuntu/project/ubuntu-archive-keyring.gpg",
+                "url": "https://mirror.yandex.ru/debian",
+                "section": "main" },
+            { "name": "Docker",
+                "key": "https://download.docker.com/linux/debian/gpg",
+                "url": "https://download.docker.com/linux/debian",
+                "section": "stable" }
+        ]
+    }
 }
