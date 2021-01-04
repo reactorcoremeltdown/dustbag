@@ -7,7 +7,7 @@ template_rules:
 apply_rules: template_rules
 	iptables --flush INPUT
 	cat /etc/firewall/iptables-input | bash
-	iptables-save
+	iptables-save > /etc/iptables/rules.v4
 	ip6tables --flush INPUT
 	cat /etc/firewall/ip6tables-input | bash
-	iptables-save
+	iptables-save > /etc/iptables/rules.v6
