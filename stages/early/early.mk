@@ -1,12 +1,17 @@
 UNAME := $(shell uname)
 HOSTNAME := "buster.rcmd.space"
+
 early: test shell_history hostname apt_configs keygen
+ifeq ($(UNAME), Linux)
 	@echo "Early stage"
 	echo "provisioning done" > /etc/default/earlystageconfigs; \
+else
+	@echo "This operating system is not supported"
+	exit 1
+endif
 
 test:
 	jq --version
-	test $(UNAME) = "Linux" || exit 1
 
 shell_history:
 	ln -s /dev/null /root/.zsh_history
@@ -22,3 +27,6 @@ apt_configs:
 
 keygen:
 	test -f /root/.ssh/id_rsa || ssh-keygen -t rsa -N '' -f /root/.ssh/id_rsa
+
+earlystagepackages:
+	apt update && apt install 
