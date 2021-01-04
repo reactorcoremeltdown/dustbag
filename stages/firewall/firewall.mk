@@ -1,5 +1,13 @@
-firewall: early rules
+firewall: early apply_rules
 	@echo "Setting up firewall"
 
-rules:
+template_rules:
 	bash stages/firewall/templates/input.sh stages/firewall/variables/firewall.json
+
+apply_rules: template_rules
+	iptables --flush INPUT
+	cat /etc/firewall/iptables-input | bash
+	iptables-save
+	ip6tables --flush INPUT
+	cat /etc/firewall/ip6tables-input | bash
+	iptables-save
