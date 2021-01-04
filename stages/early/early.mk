@@ -21,7 +21,7 @@ hostname:
 	hostnamectl set-hostname $(HOSTNAME)
 
 apt_configs:
-	cp files/forceuserdefinedconfigs /etc/apt/apt.conf.d/forceuserdefinedconfigs
+	cp stages/early/files/forceuserdefinedconfigs /etc/apt/apt.conf.d/forceuserdefinedconfigs
 	chmod 644 /etc/apt/apt.conf.d/forceuserdefinedconfigs
 	chown root:root /etc/apt/apt.conf.d/forceuserdefinedconfigs
 
