@@ -6,3 +6,4 @@ include stages/repos/repos.mk
 include stages/packages/packages.mk
 include stages/users/users.mk
 include stages/services/services.mk
+include stages/monitoring/monitoring.mk
