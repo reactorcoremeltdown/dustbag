@@ -1,4 +1,4 @@
-all: early firewall repos packages users services
+all: early firewall repos packages users services monitoring
 
 include stages/early/early.mk
 include stages/firewall/firewall.mk
