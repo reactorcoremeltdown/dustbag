@@ -1,2 +1,5 @@
+PACKAGES := $(shell jq -cr '.debian.packages[]' | xargs)
+
 packages: repos
-	@echo "Installing packages"
+	dpkg-query -s $(PACKAGES) || apt-get install -y $(PACKAGES)
+	@printf "`tput bold`Installing Debian packages complete`tput sgr0`"
