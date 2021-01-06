@@ -54,5 +54,12 @@
           "todoman",
           "vim"
         ]
-    }
+    },
+    "users": [
+        { "name": "apps", "shell": "/bin/bash", "keygen": true},
+        { "name": "rcmd", "shell": "/bin/bash", "keygen": true },
+        { "name": "git", "shell": "/bin/bash", "keygen": true },
+        { "name": "radicale", "shell": "/bin/bash", "keygen": false },
+        { "name": "ledger", "shell": "/bin/bash", "keygen": false }
+    ]
 }
