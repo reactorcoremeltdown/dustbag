@@ -1,0 +1,1 @@
+* * * * * /home/ledger/bin/track_pocket_expenses.sh | logger -t ledger

@@ -1,2 +1,5 @@
-services: users packages
+services: users packages crons
 	@echo "Setting up services"
+
+crons:
+	
