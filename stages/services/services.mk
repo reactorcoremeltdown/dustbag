@@ -3,3 +3,12 @@ services: users packages crons
 
 crons:
 	bash stages/services/templates/crons.sh stages/services/files/crons/
+
+nginx_sites:
+	bash stages/services/templates/nginx/sites/
+	bash stages/services/templates/nginx/sites/
+	bash stages/services/templates/nginx/sites/
+	bash stages/services/templates/nginx/sites/
+	bash stages/services/templates/nginx/sites/
+	bash stages/services/templates/nginx/sites/
+
