@@ -61,5 +61,16 @@
         { "name": "git", "shell": "/bin/bash", "groups": [ "git", "docker", "syncthing" ], "keygen": true },
         { "name": "radicale", "shell": "/bin/bash", "groups": [ "radicale" ], "keygen": false },
         { "name": "ledger", "shell": "/bin/bash", "groups": [ "ledger", "apps" ], "keygen": false }
-    ]
+    ],
+    "nginx": {
+        "variables": {
+            "ssl_certificate": "/etc/letsencrypt/live/it-the-drote.tk/fullchain.pem",
+            "ssl_certificate_key": "/etc/letsencrypt/live/it-the-drote.tk/privkey.pem",
+            "blog_ssl_certificate": "/etc/letsencrypt/live/tiredsysadmin.cc/fullchain.pem",
+            "blog_ssl_certificate_key": "/etc/letsencrypt/live/tiredsysadmin.cc/privkey.pem",
+            "new_ssl_certificate": "/etc/letsencrypt/live/rcmd.space/fullchain.pem",
+            "new_ssl_certificate_key": "/etc/letsencrypt/live/rcmd.space/privkey.pem",
+            "ssl_ciphers": "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!CAMELLIA:!DES:!MD5:!PSK:!RC4"
+        }
+    }
 }
