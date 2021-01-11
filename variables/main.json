@@ -36,6 +36,7 @@
           "iptables-persistent",
           "lua-dbi-mysql",
           "mariadb-server",
+          "nginx",
           "openvpn",
           "percona-toolkit",
           "postfix",
