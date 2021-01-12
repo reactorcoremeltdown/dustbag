@@ -9,7 +9,7 @@
       "interval": 10,
       "description": "Radicale SSL certificate",
       "environment": "internal",
-      "notify": "squadcast"
+      "notify": "telegram"
     },
     {
       "name": "site_https",
@@ -20,7 +20,7 @@
       "interval": 10,
       "description": "Main Website SSL certificate",
       "environment": "internal",
-      "notify": "squadcast"
+      "notify": "telegram"
     },
     {
       "name": "blog_https",
@@ -31,7 +31,7 @@
       "interval": 10,
       "description": "Blog Website SSL certificate",
       "environment": "internal",
-      "notify": "squadcast"
+      "notify": "telegram"
     },
     {
       "name": "transmission_https",
@@ -42,7 +42,7 @@
       "interval": 10,
       "description": "Transmission SSL certificate",
       "environment": "internal",
-      "notify": "squadcast"
+      "notify": "telegram"
     },
     {
       "name": "xmpp_server_ssl",
@@ -53,7 +53,7 @@
       "interval": 10,
       "description": "XMPP server TLS certificate",
       "environment": "external",
-      "notify": "squadcast"
+      "notify": "telegram"
     },
     {
       "name": "xmpp_server_alive",
@@ -64,7 +64,7 @@
       "interval": 1,
       "description": "XMPP server",
       "environment": "external",
-      "notify": "squadcast"
+      "notify": "telegram"
     },
     {
       "name": "postfix_alive",
@@ -75,7 +75,7 @@
       "interval": 1,
       "description": "Postfix",
       "environment": "internal",
-      "notify": "squadcast"
+      "notify": "telegram"
     },
     {
       "name": "kernel_version",
@@ -86,7 +86,7 @@
       "interval": 480,
       "description": "Linux Kernel Version",
       "environment": "internal",
-      "notify": "squadcast"
+      "notify": "telegram"
     },
     {
       "name": "free_space",
@@ -97,7 +97,7 @@
       "interval": 3,
       "description": "Free space on disk",
       "environment": "external",
-      "notify": "squadcast"
+      "notify": "telegram"
     },
     {
       "name": "api_website",
@@ -108,7 +108,7 @@
       "interval": 1,
       "description": "RCMD API website",
       "environment": "internal",
-      "notify": "squadcast"
+      "notify": "telegram"
     },
     {
       "name": "api_https",
@@ -119,7 +119,7 @@
       "interval": 10,
       "description": "API HTTPS certificate",
       "environment": "internal",
-      "notify": "squadcast"
+      "notify": "telegram"
     },
     {
       "name": "traccar",
@@ -141,7 +141,7 @@
       "interval": 1440,
       "description": "CalDAV backups",
       "environment": "internal",
-      "notify": "squadcast"
+      "notify": "telegram"
     },
     {
       "name": "website_backups",
@@ -152,7 +152,7 @@
       "interval": 1440,
       "description": "Website backups",
       "environment": "internal",
-      "notify": "squadcast"
+      "notify": "telegram"
     }
   ]
 }
