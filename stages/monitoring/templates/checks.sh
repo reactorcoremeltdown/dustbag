@@ -2,7 +2,7 @@
 
 IFS=$'\n'
 
-for check in $(jq -cr '.checks_templates' ${1}); do
+for check in $(jq -cr '.checks_templates[]' ${1}); do
     source <(echo "${check}" | jq '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     echo "${check}"
     let "interval = interval * 60"
