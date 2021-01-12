@@ -22,6 +22,7 @@ monit_restart:
 monit: monit_files monit_restart
 
 checks_configs:
-	@echo "Not implemented yet"
+	bash stages/monitoring/templates/checks.sh stages/monitoring/variables/checks.json
+	@printf "`tput bold`Partially implemented: installing monit checks complete`tput sgr0`\n"
 
 checks: checks_configs monit_restart
