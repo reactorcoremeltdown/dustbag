@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var moment = require('moment');
+var leicht = require('/usr/lib/leicht/leicht.js')
+var recipient = parseInt(fs.readFileSync('/etc/datasources/pisun-default-chat', 'utf8').split('\n')[0]);
+
+upgradeLog = fs.readFileSync('/var/log/apt/history.log', 'utf8');
+lines = upgradeLog.split('\n');
+
+currentDate = moment().format('YYYY-MM-DD');
+lastOperationDate = lines[lines.length - 5].split(' ')[1];
+upgradeCommand = lines[lines.length - 4].split(' ')[1];
+upgradedPackages = lines[lines.length - 3].split(/ (.+)?/)[1].replace(/\), /g, ")\n")
+
+if( currentDate == lastOperationDate && upgradeCommand == '/usr/bin/unattended-upgrade') {
+	leicht.sendMessage(recipient, 0, 'An unattended upgrade was performed today.\nHere is a list of upgraded packages:\n\n' +
+		upgradedPackages +
+		'\n', false, '/tmp/pisun.socket');
+}
