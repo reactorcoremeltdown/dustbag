@@ -11,7 +11,7 @@ monit_files:
 monit_restart:
 	systemctl restart monit.service
 
-monit: monit_files monit restart
+monit: monit_files monit_restart
 
 checks_configs:
 	@echo "Not implemented yet"
