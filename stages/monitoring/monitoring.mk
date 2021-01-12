@@ -19,7 +19,7 @@ monit_files:
 monit_restart:
 	systemctl restart monit.service
 
-monit: monit_files monit_restart
+monit: monit_files
 
 checks_configs:
 	bash stages/monitoring/templates/checks.sh stages/monitoring/variables/checks.json
