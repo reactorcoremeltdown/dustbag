@@ -3,7 +3,7 @@ monitoring: monit checks
 
 monit_files:
 	apt-get install -y monit
-	install -D -v -m 644 \
+	install -D -v -m 700 \
 		stages/monitoring/files/configs/monitrc /etc/monit
 	install -d /etc/monit/plugins && \
 		install -D -v -m 755 \
