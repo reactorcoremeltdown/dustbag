@@ -2,6 +2,7 @@
 
 for check in $(jq -cr '.checks_templates' ${1}); do
     source <(echo "${check}" | jq '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
+    echo "${check}" | jq '. | to_entries[] | [.key,(.value|@sh)] | join("=")'
     let "interval = interval * 60"
     echo ${name}
     cat << EOF > /etc/monit/conf.d/${name}.conf
