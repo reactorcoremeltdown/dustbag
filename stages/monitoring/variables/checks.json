@@ -2,7 +2,7 @@
   "checks_templates": [
     {
       "name": "dav_https",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_https_certificate",
       "type": "alert",
       "argument": "dav.rcmd.space",
@@ -13,7 +13,7 @@
     },
     {
       "name": "provisioning",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_file",
       "type": "alert",
       "argument": "/etc/default/earlystageconfigs",
@@ -24,7 +24,7 @@
     },
     {
       "name": "site_https",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_https_certificate",
       "type": "alert",
       "argument": "rcmd.space",
@@ -35,7 +35,7 @@
     },
     {
       "name": "blog_https",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_https_certificate",
       "type": "alert",
       "argument": "blog.rcmd.space",
@@ -57,7 +57,7 @@
     },
     {
       "name": "xmpp_server_ssl",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_xmpp_certificate",
       "type": "alert",
       "argument": "it-the-drote.tk",
@@ -68,7 +68,7 @@
     },
     {
       "name": "xmpp_server_alive",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_systemd_service",
       "type": "alert",
       "argument": "prosody.service",
@@ -79,7 +79,7 @@
     },
     {
       "name": "postfix_alive",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_systemd_service",
       "type": "alert",
       "argument": "postfix.service",
@@ -90,7 +90,7 @@
     },
     {
       "name": "kernel_version",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_kernel_version",
       "type": "alert",
       "argument": "",
@@ -101,7 +101,7 @@
     },
     {
       "name": "free_space",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_disk_space",
       "type": "alert",
       "argument": "/dev/vda1",
@@ -112,7 +112,7 @@
     },
     {
       "name": "api_website",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_http_ping",
       "type": "alert",
       "argument": "https://api.rcmd.space/v4/healthcheck",
@@ -123,7 +123,7 @@
     },
     {
       "name": "api_https",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_https_certificate",
       "type": "alert",
       "argument": "api.rcmd.space",
@@ -134,7 +134,7 @@
     },
     {
       "name": "traccar",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_traccar_logs",
       "type": "alert",
       "argument": "TRACCAR_DEVICE_ID",
