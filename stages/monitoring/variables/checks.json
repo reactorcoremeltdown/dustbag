@@ -2,7 +2,7 @@
   "checks_templates": [
     {
       "name": "dav_https",
-      "state": "absent",
+      "state": "present",
       "plugin": "check_https_certificate",
       "type": "alert",
       "argument": "dav.rcmd.space",
