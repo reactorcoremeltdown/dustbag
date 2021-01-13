@@ -11,6 +11,7 @@ nginx_sites:
 	bash stages/services/templates/nginx/sites/dav.sh
 	bash stages/services/templates/nginx/sites/default.sh
 	bash stages/services/templates/nginx/sites/git.sh
+	bash stages/services/templates/nginx/sites/netdata.sh
 	bash stages/services/templates/nginx/sites/podcasts.sh
 	bash stages/services/templates/nginx/sites/site.sh
 	bash stages/services/templates/nginx/sites/sync.sh
