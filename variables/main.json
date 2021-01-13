@@ -53,6 +53,7 @@
           "uuid-runtime",
           "khal",
           "todoman",
+          "kpcli",
           "vim"
         ]
     },
