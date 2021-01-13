@@ -14,12 +14,12 @@ monit_files:
 	install -d /etc/monit/scripts && \
 		install -D -v -m 755 \
 		stages/monitoring/files/scripts/* /etc/monit/scripts
-	@printf "`tput bold`Partially implemented: installing monit complete`tput sgr0`\n"
 
 monit_restart:
 	systemctl restart monit.service
 
 monit: monit_files
+	@printf "`tput bold`Partially implemented: installing monit complete`tput sgr0`\n"
 
 netdata_files:
 	apt-get install -y netdata
@@ -28,6 +28,7 @@ netdata_restart:
 	systemctl restart netdata
 
 netdata: netdata_files
+	@printf "`tput bold`Partially implemented: installing netdata complete`tput sgr0`\n"
 
 checks_configs:
 	bash stages/monitoring/templates/checks.sh stages/monitoring/variables/checks.json
