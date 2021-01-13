@@ -1,5 +1,5 @@
 monitoring: monit netdata checks
-	@echo "Not implemented yet"
+	@printf "`tput bold`Setting up monitoring completed`tput sgr0`\n"
 
 monit_files:
 	apt-get install -y monit
