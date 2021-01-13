@@ -1,4 +1,4 @@
-monitoring: monit checks
+monitoring: monit netdata checks
 	@echo "Not implemented yet"
 
 monit_files:
@@ -21,8 +21,16 @@ monit_restart:
 
 monit: monit_files
 
+netdata_files:
+	apt-get install -y netdata
+
+netdata_restart:
+	systemctl restart netdata
+
+netdata: netdata_files
+
 checks_configs:
 	bash stages/monitoring/templates/checks.sh stages/monitoring/variables/checks.json
 	@printf "`tput bold`Partially implemented: installing monit checks complete`tput sgr0`\n"
 
-checks: checks_configs monit_restart
+checks: checks_configs monit_restart netdata_restart
