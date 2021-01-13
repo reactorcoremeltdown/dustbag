@@ -12,6 +12,17 @@
       "notify": "telegram"
     },
     {
+      "name": "provisioning",
+      "state": "present",
+      "plugin": "check_file",
+      "type": "alert",
+      "argument": "/etc/default/earlystageconfigs",
+      "interval": 1,
+      "description": "Provisioning file",
+      "environment": "internal",
+      "notify": "telegram"
+    },
+    {
       "name": "site_https",
       "state": "present",
       "plugin": "check_https_certificate",
