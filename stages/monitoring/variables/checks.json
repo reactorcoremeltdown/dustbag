@@ -94,7 +94,7 @@
       "plugin": "check_kernel_version",
       "type": "alert",
       "argument": "",
-      "interval": "2d",
+      "interval": "48h",
       "description": "Linux Kernel Version",
       "environment": "internal",
       "notify": "telegram"
@@ -149,7 +149,7 @@
       "plugin": "check_duplicity_backup",
       "type": "alert",
       "argument": "file:///var/storage/wastebox/Backups/radicale/",
-      "interval": "3d",
+      "interval": "72h",
       "description": "CalDAV backups",
       "environment": "internal",
       "notify": "telegram"
@@ -160,7 +160,7 @@
       "plugin": "check_duplicity_backup",
       "type": "alert",
       "argument": "file:///var/storage/wastebox/Backups/websites/",
-      "interval": "3d",
+      "interval": "72h",
       "description": "Website backups",
       "environment": "internal",
       "notify": "telegram"
