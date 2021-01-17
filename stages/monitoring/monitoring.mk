@@ -9,7 +9,9 @@ wtfd_files:
 		stages/monitoring/files/bin/wtfd /usr/local/bin
 	install -D -v -m 644 \
 		stages/monitoring/files/configs/wtfd.service /etc/systemd/system
-	install -d /etc/monitoring
+	install -d /etc/monitoring && \
+		install -D -v -m 644 \
+		stages/monitoring/files/configs/config.ini /etc/monitoring
 	install -d /etc/monitoring/configs
 	install -d /etc/monitoring/plugins && \
 		install -D -v -m 755 \
@@ -24,7 +26,7 @@ wtfd_restart:
 	systemctl restart wtfd.service
 
 wtfd: wtfd_files wtfd_restart
-	@pritnf "`tput bold`Installing wtfd complete`tput sgr0`\n"
+	@printf "`tput bold`Installing wtfd complete`tput sgr0`\n"
 
 netdata_files:
 	apt-get install -y netdata
