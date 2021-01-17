@@ -1,8 +1,5 @@
-monitoring: monit wtfd netdata checks
+monitoring: wtfd netdata checks
 	@printf "`tput bold`Setting up monitoring completed`tput sgr0`\n"
-
-monit:
-	apt-get purge -y monit
 
 wtfd_files:
 	install -D -v -m 755 \
