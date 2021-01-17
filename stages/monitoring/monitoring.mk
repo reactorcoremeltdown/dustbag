@@ -41,4 +41,4 @@ checks_configs:
 	bash stages/monitoring/templates/checks.sh stages/monitoring/variables/checks.json
 	@printf "`tput bold`Partially implemented: installing monit checks complete`tput sgr0`\n"
 
-checks: checks_configs
+checks: checks_configs wtfd_restart
