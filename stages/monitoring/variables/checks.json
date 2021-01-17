@@ -17,7 +17,7 @@
       "plugin": "check_file",
       "type": "alert",
       "argument": "/etc/default/earlystageconfigs",
-      "interval": "1m",
+      "interval": "15s",
       "description": "Provisioning file",
       "environment": "internal",
       "notify": "telegram"
