@@ -6,7 +6,7 @@
       "plugin": "check_https_certificate",
       "type": "alert",
       "argument": "dav.rcmd.space",
-      "interval": 10,
+      "interval": "10m",
       "description": "Radicale SSL certificate",
       "environment": "internal",
       "notify": "telegram"
@@ -17,7 +17,7 @@
       "plugin": "check_file",
       "type": "alert",
       "argument": "/etc/default/earlystageconfigs",
-      "interval": 1,
+      "interval": "1m",
       "description": "Provisioning file",
       "environment": "internal",
       "notify": "telegram"
@@ -28,7 +28,7 @@
       "plugin": "check_https_certificate",
       "type": "alert",
       "argument": "rcmd.space",
-      "interval": 10,
+      "interval": "10m",
       "description": "Main Website SSL certificate",
       "environment": "internal",
       "notify": "telegram"
@@ -39,7 +39,7 @@
       "plugin": "check_https_certificate",
       "type": "alert",
       "argument": "blog.rcmd.space",
-      "interval": 10,
+      "interval": "10m",
       "description": "Blog Website SSL certificate",
       "environment": "internal",
       "notify": "telegram"
@@ -50,7 +50,7 @@
       "plugin": "check_https_certificate",
       "type": "alert",
       "argument": "transmission.it-the-drote.tk",
-      "interval": 10,
+      "interval": "10m",
       "description": "Transmission SSL certificate",
       "environment": "internal",
       "notify": "telegram"
@@ -61,7 +61,7 @@
       "plugin": "check_xmpp_certificate",
       "type": "alert",
       "argument": "it-the-drote.tk",
-      "interval": 10,
+      "interval": "10m",
       "description": "XMPP server TLS certificate",
       "environment": "external",
       "notify": "telegram"
@@ -72,7 +72,7 @@
       "plugin": "check_systemd_service",
       "type": "alert",
       "argument": "prosody.service",
-      "interval": 1,
+      "interval": "1m",
       "description": "XMPP server",
       "environment": "external",
       "notify": "telegram"
@@ -83,7 +83,7 @@
       "plugin": "check_systemd_service",
       "type": "alert",
       "argument": "postfix.service",
-      "interval": 1,
+      "interval": "1m",
       "description": "Postfix",
       "environment": "internal",
       "notify": "telegram"
@@ -94,7 +94,7 @@
       "plugin": "check_kernel_version",
       "type": "alert",
       "argument": "",
-      "interval": 480,
+      "interval": "2d",
       "description": "Linux Kernel Version",
       "environment": "internal",
       "notify": "telegram"
@@ -105,7 +105,7 @@
       "plugin": "check_disk_space",
       "type": "alert",
       "argument": "/dev/vda1",
-      "interval": 3,
+      "interval": "3m",
       "description": "Free space on disk",
       "environment": "external",
       "notify": "telegram"
@@ -116,7 +116,7 @@
       "plugin": "check_http_ping",
       "type": "alert",
       "argument": "https://api.rcmd.space/v4/healthcheck",
-      "interval": 1,
+      "interval": "1m",
       "description": "RCMD API website",
       "environment": "internal",
       "notify": "telegram"
@@ -127,7 +127,7 @@
       "plugin": "check_https_certificate",
       "type": "alert",
       "argument": "api.rcmd.space",
-      "interval": 10,
+      "interval": "10m",
       "description": "API HTTPS certificate",
       "environment": "internal",
       "notify": "telegram"
@@ -138,7 +138,7 @@
       "plugin": "check_traccar_logs",
       "type": "alert",
       "argument": "TRACCAR_DEVICE_ID",
-      "interval": 10,
+      "interval": "10m",
       "description": "Check traccar reported location",
       "environment": "internal",
       "notify": "traccar"
@@ -149,7 +149,7 @@
       "plugin": "check_duplicity_backup",
       "type": "alert",
       "argument": "file:///var/storage/wastebox/Backups/radicale/",
-      "interval": 1440,
+      "interval": "3d",
       "description": "CalDAV backups",
       "environment": "internal",
       "notify": "telegram"
@@ -160,7 +160,7 @@
       "plugin": "check_duplicity_backup",
       "type": "alert",
       "argument": "file:///var/storage/wastebox/Backups/websites/",
-      "interval": 1440,
+      "interval": "3d",
       "description": "Website backups",
       "environment": "internal",
       "notify": "telegram"

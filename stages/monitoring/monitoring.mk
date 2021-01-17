@@ -1,25 +1,30 @@
-monitoring: monit netdata checks
+monitoring: monit wtfd netdata checks
 	@printf "`tput bold`Setting up monitoring completed`tput sgr0`\n"
 
-monit_files:
-	apt-get install -y monit
-	install -D -v -m 700 \
-		stages/monitoring/files/configs/monitrc /etc/monit
-	install -d /etc/monit/plugins && \
-		install -D -v -m 755 \
-		stages/monitoring/files/plugins/* /etc/monit/plugins
-	install -d /etc/monit/handlers && \
-		install -D -v -m 755 \
-		stages/monitoring/files/handlers/* /etc/monit/handlers
-	install -d /etc/monit/scripts && \
-		install -D -v -m 755 \
-		stages/monitoring/files/scripts/* /etc/monit/scripts
+monit:
+	apt-get purge -y monit
 
-monit_restart:
-	systemctl restart monit.service
+wtfd_files:
+	install -D -v -m 755 \
+		stages/monitoring/files/bin/wtfd /usr/local/bin
+	install -D -v -m 644 \
+		stages/monitoring/files/configs/wtfd.service /etc/systemd/system
+	install -d /etc/monitoring
+	install -d /etc/monitoring/configs
+	install -d /etc/monitoring/plugins && \
+		install -D -v -m 755 \
+		stages/monitoring/files/plugins/* /etc/monitoring/plugins
+	install -d /etc/monitoring/notifiers && \
+		install -D -v -m 755 \
+		stages/monitoring/files/handlers/* /etc/monitoring/notifiers
+	systemctl daemon-reload
+	systemctl enable wtfd.service
 
-monit: monit_files
-	@printf "`tput bold`Partially implemented: installing monit complete`tput sgr0`\n"
+wtfd_restart:
+	systemctl restart wtfd.service
+
+wtfd: wtfd_files wtfd_restart
+	@pritnf "`tput bold`Installing wtfd complete`tput sgr0`\n"
 
 netdata_files:
 	apt-get install -y netdata
