@@ -155,6 +155,15 @@
       "notify": "gotify"
     },
     {
+      "name": "gitea_website",
+      "state": "present",
+      "description": "Gitea deployment on RCMD.SPACE",
+      "plugin": "check_http_ping",
+      "argument": "https://git.rcmd.space/healthcheck",
+      "interval": "1m",
+      "notify": "gotify"
+    },
+    {
       "name": "gitea_responsetime",
       "state": "present",
       "description": "Response Time of git.rcmd.space",
