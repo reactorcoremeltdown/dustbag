@@ -48,6 +48,24 @@ server {
 
     location / {
         proxy_pass http://127.0.0.1:26001;
+        proxy_http_version 1.1;
+
+        # Ensuring it can use websockets
+        proxy_set_header   Upgrade \$http_upgrade;
+        proxy_set_header   Connection "upgrade";
+        proxy_set_header   X-Real-IP \$remote_addr;
+        proxy_set_header   X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto http;
+        proxy_redirect     http:// \$scheme://;
+
+        # The proxy must preserve the host because gotify verifies the host with the origin
+        # for WebSocket connections
+        proxy_set_header   Host \$http_host;
+
+        # These sets the timeout so that the websocket can stay alive
+        proxy_connect_timeout   7m;
+        proxy_send_timeout      7m;
+        proxy_read_timeout      7m;
     }
 }
 
