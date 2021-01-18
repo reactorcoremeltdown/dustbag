@@ -75,6 +75,22 @@ server {
         proxy_set_header X-Forwarded-Proto \$scheme;
         proxy_read_timeout 1d;
     }
+    location /internal {
+        limit_req zone=api;
+
+        proxy_pass http://127.0.0.1:26005;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        proxy_read_timeout 1d;
+    }
+    location /internal/healthcheck {
+        proxy_pass http://127.0.0.1:26005;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        proxy_read_timeout 1d;
+    }
     location /hooks/healthcheck {
         return 301 https://\$server_name/v5/healthcheck;
     }
