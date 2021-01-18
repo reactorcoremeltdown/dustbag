@@ -12,7 +12,7 @@ for check in $(curl -s http://localhost:8881/ | jq -cr '.[]'); do
             echo -e "\e[33m${Name}: WARNING\e[0m\n\t${Description}\n\e[90m${Output}\e[0m\n"
             ;;
         "2")
-            echo -e "\e[31m${Name}: CRITICAL\e[0m\n\t${Description}\n\e[90m${Output}\e[0m\n"
+            echo -e "\e[31m${Name}: CRITICAL\e[0m\n\t${Description}\n\e[31m${Output}\e[0m\n"
             ;;
     esac
 done
