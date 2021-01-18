@@ -155,6 +155,42 @@
       "notify": "telegram"
     },
     {
+      "name": "gitea_responsetime",
+      "state": "present",
+      "description": "Response Time of git.rcmd.space",
+      "plugin": "check_site_response_time",
+      "argument": "/var/log/nginx/git.rcmd.space_access.log",
+      "interval": "10m",
+      "notify": "telegram"
+    },
+    {
+      "name": "site_responsetime",
+      "state": "present",
+      "description": "Response Time of rcmd.space",
+      "plugin": "check_site_response_time",
+      "argument": "/var/log/nginx/rcmd.space_access.log",
+      "interval": "10m",
+      "notify": "telegram"
+    },
+    {
+      "name": "api_responsetime",
+      "state": "present",
+      "description": "Response Time of api.rcmd.space",
+      "plugin": "check_site_response_time",
+      "argument": "/var/log/nginx/api.rcmd.space_access.log",
+      "interval": "10m",
+      "notify": "telegram"
+    },
+    {
+      "name": "blog_responsetime",
+      "state": "present",
+      "description": "Response Time of tiredsysadmin.cc",
+      "plugin": "check_site_response_time",
+      "argument": "/var/log/nginx/tiredsysadmin.cc_access.log",
+      "interval": "10m",
+      "notify": "telegram"
+    },
+    {
       "name": "website_backups",
       "state": "present",
       "plugin": "check_duplicity_backup",
