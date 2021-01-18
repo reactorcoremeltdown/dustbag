@@ -4,6 +4,8 @@ monitoring: wtfd netdata checks
 wtfd_files:
 	install -D -v -m 755 \
 		stages/monitoring/files/bin/wtfd /usr/local/bin
+	install -D -v -m 755 \
+		stages/monitoring/files/bin/wtf /usr/local/bin
 	install -D -v -m 644 \
 		stages/monitoring/files/configs/wtfd.service /etc/systemd/system
 	install -d /etc/monitoring && \
