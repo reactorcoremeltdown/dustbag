@@ -42,10 +42,13 @@ server {
     server_name git.rcmd.space;
 
     # Enabling authentication, just to be sure
-    auth_basic "Protected area";
-    auth_basic_user_file /etc/datasources/htpasswd;
 
     location / {
+        auth_basic "Protected area";
+        auth_basic_user_file /etc/datasources/htpasswd;
+        proxy_pass http://127.0.0.1:25010;
+    }
+    location /healthcheck {
         proxy_pass http://127.0.0.1:25010;
     }
 }
