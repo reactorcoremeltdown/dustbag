@@ -9,7 +9,7 @@
       "interval": "10m",
       "description": "Radicale SSL certificate",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "provisioning",
@@ -20,7 +20,7 @@
       "interval": "15s",
       "description": "Provisioning file",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "site_https",
@@ -31,7 +31,7 @@
       "interval": "10m",
       "description": "Main Website SSL certificate",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "blog_https",
@@ -42,7 +42,7 @@
       "interval": "10m",
       "description": "Blog Website SSL certificate",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "transmission_https",
@@ -53,7 +53,7 @@
       "interval": "10m",
       "description": "Transmission SSL certificate",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "xmpp_server_ssl",
@@ -64,7 +64,7 @@
       "interval": "10m",
       "description": "XMPP server TLS certificate",
       "environment": "external",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "xmpp_server_alive",
@@ -75,7 +75,7 @@
       "interval": "1m",
       "description": "XMPP server",
       "environment": "external",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "postfix_alive",
@@ -86,7 +86,7 @@
       "interval": "1m",
       "description": "Postfix",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "kernel_version",
@@ -97,7 +97,7 @@
       "interval": "48h",
       "description": "Linux Kernel Version",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "free_space",
@@ -108,7 +108,7 @@
       "interval": "3m",
       "description": "Free space on disk",
       "environment": "external",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "api_website",
@@ -119,7 +119,7 @@
       "interval": "1m",
       "description": "RCMD API website",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "api_https",
@@ -130,7 +130,7 @@
       "interval": "10m",
       "description": "API HTTPS certificate",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "traccar",
@@ -152,7 +152,7 @@
       "interval": "72h",
       "description": "CalDAV backups",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "gitea_responsetime",
@@ -161,7 +161,7 @@
       "plugin": "check_site_response_time",
       "argument": "/var/log/nginx/git.rcmd.space_access.log",
       "interval": "10m",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "site_responsetime",
@@ -170,7 +170,7 @@
       "plugin": "check_site_response_time",
       "argument": "/var/log/nginx/rcmd.space_access.log",
       "interval": "10m",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "api_responsetime",
@@ -179,7 +179,7 @@
       "plugin": "check_site_response_time",
       "argument": "/var/log/nginx/api.rcmd.space_access.log",
       "interval": "10m",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "blog_responsetime",
@@ -188,7 +188,7 @@
       "plugin": "check_site_response_time",
       "argument": "/var/log/nginx/tiredsysadmin.cc_access.log",
       "interval": "10m",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "website_backups",
@@ -199,7 +199,7 @@
       "interval": "72h",
       "description": "Website backups",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     }
   ]
 }
