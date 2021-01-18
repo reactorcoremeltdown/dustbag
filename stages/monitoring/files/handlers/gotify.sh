@@ -17,9 +17,9 @@ case $STATUS in
     ;;
 esac
 
-curl -s "https://notifications.rcmd.space/message?token=${bot_token}" \
-    --data-urlencode 'title=WTFD' \
-    --data-urlencode "message=${text}" \
-    --data-urlencode "priority=5"
+curl -s -XPOST \
+    --header "Content-Type: application/json" \
+    "https://notifications.rcmd.space/message?token=${bot_token}" \
+    --data "{ \"message\": \"${text}\", \"title\": \"WTFD\", \"priority\": 5 }"
 
 exit 0
