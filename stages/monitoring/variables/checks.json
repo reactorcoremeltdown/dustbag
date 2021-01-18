@@ -173,6 +173,15 @@
       "notify": "gotify"
     },
     {
+      "name": "caldav_responsetime",
+      "state": "present",
+      "description": "Response Time of dav.rcmd.space",
+      "plugin": "check_site_response_time",
+      "argument": "/var/log/nginx/dav.rcmd.space_access.log",
+      "interval": "10m",
+      "notify": "gotify"
+    },
+    {
       "name": "site_responsetime",
       "state": "present",
       "description": "Response Time of rcmd.space",
