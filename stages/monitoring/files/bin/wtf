@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 
+IFS=$'\n'
+
 for check in $(curl -s http://localhost:8881/ | jq -cr '.[]'); do
     source <(echo "${check}" | jq -r '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     case ${Status} in
         "0")
-            echo "OK"
+            echo -e "\e[32m${Name}: OK\e[0m\n\t${Description}\n"
             ;;
         "1")
-            echo "WARNING"
+            echo -e "\e[33m${Name}: WARNING\e[0m\n\t${Description}\n"
             ;;
         "2")
-            echo "CRITICAL"
+            echo -e "\e[31m${Name}: CRITICAL\e[0m\n\t${Description}\n"
             ;;
     esac
 done
