@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+for check in $(curl -s http://localhost:8881/ | jq -cr '.[]'); do
+    source <(echo "${check}" | jq -r '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
+    case ${Status} in
+        "0")
+            echo "OK"
+            ;;
+        "1")
+            echo "WARNING"
+            ;;
+        "2")
+            echo "CRITICAL"
+            ;;
+    esac
+done
