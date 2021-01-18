@@ -16,6 +16,6 @@ interval = ${interval}
 notify = ${notify}.sh
 EOF
     else
-        rm -frv /etc/monitoring/configs/${name}.cfg
+        rm -frv /etc/monitoring/configs/${name}.ini
     fi
 done
