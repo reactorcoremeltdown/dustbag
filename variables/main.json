@@ -2,11 +2,6 @@
     "hostname": "buster.rcmd.space",
     "debian": {
         "repositories": [
-            { "name": "backports",
-                "state": "present",
-                "key": "https://mirror.yandex.ru/ubuntu/project/ubuntu-archive-keyring.gpg",
-                "url": "https://mirror.yandex.ru/debian",
-                "section": "main" },
             { "name": "docker",
                 "state": "present",
                 "key": "https://download.docker.com/linux/debian/gpg",
