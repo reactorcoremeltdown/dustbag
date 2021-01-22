@@ -10,9 +10,12 @@ for user in `jq -cr '.users[]' ${1}`; do
             su ${name} -c 'ssh-keygen -b 2048 -t rsa q -N ""'
         fi
         if [[ ${authorized_keys} = 'true' ]]; then
+            install -d -m 700 \
+                -g ${name} -o ${name} \
+                $(getent passwd ${name} | cut -f 6 -d ':')/.ssh
             install -D -v -m 600 \
                 -g ${name} -o ${name} \
-                stages/users/file/authorized_keys $(echo ~${name})/.ssh/
+                stages/users/file/authorized_keys $(getent passwd ${name} | cut -f 6 -d ':')/.ssh
         fi
     fi
     echo "${groups}"
