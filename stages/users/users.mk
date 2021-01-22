@@ -3,5 +3,5 @@ users: early sudoers
 	@printf "`tput bold`Setting up system users complete`tput sgr0`\n"
 
 sudoers:
-	install -D -v -m 755 \
+	install -D -v -m 440 \
 	stages/users/files/etc/sudoers.d/* /etc/sudoers.d/
