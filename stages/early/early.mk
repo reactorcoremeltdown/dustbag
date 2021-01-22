@@ -42,5 +42,13 @@ ifneq ($(RETRY), true)
 	apt update && apt install dirmngr \
 		apt-transport-https \
 		certbot \
-		python3-certbot-dns-cloudflare
+		python3-certbot-dns-cloudflare \
+		locales
+endif
+
+locales:
+ifneq ($(RETRY), true)
+	install -D -v -m 755 \
+		stages/early/files/locale.gen /etc/locale.gen
+	locale-gen
 endif
