@@ -174,7 +174,7 @@
     },
     {
       "name": "caldav_responsetime",
-      "state": "present",
+      "state": "absent",
       "description": "Response Time of dav.rcmd.space",
       "plugin": "check_site_response_time",
       "argument": "/var/log/nginx/dav.rcmd.space_access.log",
