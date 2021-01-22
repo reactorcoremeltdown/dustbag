@@ -8,7 +8,7 @@ early: test shell_history hostname apt_configs keygen earlystagepackages locales
 
 test:
 ifeq ($(UNAME), Linux)
-	jq --version
+	jq --version || apt install -y jq
 else
 	@printf "`tput bold`This operating system is not supported`tput sgr0`\n"
 	exit 1
@@ -39,7 +39,7 @@ endif
 
 earlystagepackages:
 ifneq ($(RETRY), true)
-	apt update && apt install dirmngr \
+	apt update && apt install -y dirmngr \
 		apt-transport-https \
 		certbot \
 		python3-certbot-dns-cloudflare \
