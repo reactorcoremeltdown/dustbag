@@ -1,6 +1,6 @@
 all: early firewall repos packages users services monitoring
 
-lite: early repos packages users
+lite: early repos packages_lite users
 
 include stages/early/early.mk
 include stages/firewall/firewall.mk

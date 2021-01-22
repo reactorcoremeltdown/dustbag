@@ -8,6 +8,24 @@
                 "url": "https://download.docker.com/linux/debian",
                 "section": "stable" }
         ],
+        "packages_lite": [
+          "at",
+          "bc",
+          "htop",
+          "bash-completion",
+          "curl",
+          "git",
+          "jq",
+          "markdown",
+          "ffmpeg",
+          "iptables-persistent",
+          "sqlite3",
+          "sshfs",
+          "syncthing",
+          "tinc",
+          "uuid-runtime",
+          "vim"
+        ],
         "packages": [
           "cowsay",
           "at",
