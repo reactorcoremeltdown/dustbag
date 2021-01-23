@@ -2,16 +2,29 @@
     "hostname": "buster.rcmd.space",
     "debian": {
         "repositories": [
-            { "name": "backports",
-                "state": "present",
-                "key": "https://mirror.yandex.ru/ubuntu/project/ubuntu-archive-keyring.gpg",
-                "url": "https://mirror.yandex.ru/debian",
-                "section": "main" },
             { "name": "docker",
                 "state": "present",
                 "key": "https://download.docker.com/linux/debian/gpg",
                 "url": "https://download.docker.com/linux/debian",
                 "section": "stable" }
+        ],
+        "packages_lite": [
+          "at",
+          "bc",
+          "htop",
+          "bash-completion",
+          "curl",
+          "git",
+          "jq",
+          "markdown",
+          "ffmpeg",
+          "iptables-persistent",
+          "sqlite3",
+          "sshfs",
+          "syncthing",
+          "tinc",
+          "uuid-runtime",
+          "vim"
         ],
         "packages": [
           "cowsay",
@@ -59,11 +72,11 @@
         ]
     },
     "users": [
-        { "name": "apps", "shell": "/bin/bash", "groups": [ "apps", "git" ], "keygen": true},
-        { "name": "rcmd", "shell": "/bin/bash", "groups": [ "rcmd", "apps", "radicale", "syncthing" ], "keygen": true },
-        { "name": "git", "shell": "/bin/bash", "groups": [ "git", "docker", "syncthing" ], "keygen": true },
-        { "name": "radicale", "shell": "/bin/bash", "groups": [ "radicale" ], "keygen": false },
-        { "name": "ledger", "shell": "/bin/bash", "groups": [ "ledger", "apps" ], "keygen": false }
+        { "name": "apps", "shell": "/bin/bash", "groups": [ "apps", "git" ], "keygen": true, "authorized_keys": true},
+        { "name": "rcmd", "shell": "/bin/bash", "groups": [ "rcmd", "apps", "radicale", "syncthing" ], "keygen": true, "authorized_keys": true },
+        { "name": "git", "shell": "/bin/bash", "groups": [ "git", "docker", "syncthing" ], "keygen": true, "authorized_keys": true },
+        { "name": "radicale", "shell": "/bin/bash", "groups": [ "radicale" ], "keygen": false, "authorized_keys": true },
+        { "name": "ledger", "shell": "/bin/bash", "groups": [ "ledger", "apps" ], "keygen": false, "authorized_keys": true }
     ],
     "nginx": {
         "variables": {

@@ -2,13 +2,13 @@ UNAME := $(shell uname)
 RETRY := $(shell test -f /etc/default/earlystageconfigs && echo "true")
 HOSTNAME := $(shell cat variables/main.json | jq -r .hostname)
 
-early: test shell_history hostname apt_configs keygen earlystagepackages
+early: test shell_history hostname apt_configs keygen earlystagepackages locales profiles
 	echo "provisioning done" > /etc/default/earlystageconfigs;
 	@printf "`tput bold`Early stage provisioning completed`tput sgr0`\n"
 
 test:
 ifeq ($(UNAME), Linux)
-	jq --version
+	jq --version || apt install -y jq
 else
 	@printf "`tput bold`This operating system is not supported`tput sgr0`\n"
 	exit 1
@@ -39,8 +39,22 @@ endif
 
 earlystagepackages:
 ifneq ($(RETRY), true)
-	apt update && apt install dirmngr \
+	apt update && apt install -y dirmngr \
 		apt-transport-https \
 		certbot \
-		python3-certbot-dns-cloudflare
+		python3-certbot-dns-cloudflare \
+		locales
+endif
+
+locales:
+ifneq ($(RETRY), true)
+	install -D -v -m 644 \
+		stages/early/files/locale.gen /etc
+	locale-gen
+endif
+
+profiles:
+ifneq ($(RETRY), true)
+	install -D -v -m 644 \
+		stages/early/files/99-bashrc.sh /etc/profile.d
 endif
