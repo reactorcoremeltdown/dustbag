@@ -19,5 +19,5 @@ for user in `jq -cr '.users[]' ${1}`; do
                 stages/users/files/authorized_keys ${HOMEDIR}/.ssh
         fi
     fi
-    echo "${groups}"
+    #echo "${groups}"
 done
