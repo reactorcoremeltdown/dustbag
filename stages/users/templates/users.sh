@@ -16,7 +16,7 @@ for user in `jq -cr '.users[]' ${1}`; do
                 ${HOMEDIR}/.ssh
             install -D -v -m 600 \
                 -g ${name} -o ${name} \
-                stages/users/file/authorized_keys ${HOMEDIR}/.ssh
+                stages/users/files/authorized_keys ${HOMEDIR}/.ssh
         fi
     fi
     echo "${groups}"
