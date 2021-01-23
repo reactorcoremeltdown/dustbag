@@ -50,7 +50,7 @@ locales:
 ifneq ($(RETRY), true)
 	install -D -v -m 644 \
 		stages/early/files/locale.gen /etc
-	locale-gen
+	/sbin/locale-gen
 endif
 
 profiles:
