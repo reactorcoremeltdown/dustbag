@@ -165,7 +165,7 @@
     },
     {
       "name": "gitea_responsetime",
-      "state": "present",
+      "state": "absent",
       "description": "Response Time of git.rcmd.space",
       "plugin": "check_site_response_time",
       "argument": "/var/log/nginx/git.rcmd.space_access.log",
