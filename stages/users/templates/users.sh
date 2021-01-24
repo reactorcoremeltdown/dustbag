@@ -7,7 +7,7 @@ for user in `jq -cr '.users[]' ${1}`; do
     HOMEDIR=$(getent passwd ${name} | cut -f 6 -d ':')
     groups ${name} > /dev/null || /sbin/useradd -s ${shell} ${name}
     if [[ ${keygen} = 'true' ]]; then
-        test -f ${HOMEDIR}/.ssh/id_rsa || su ${name} -c 'ssh-keygen -b 2048 -t rsa q -N ""'
+        test -f ${HOMEDIR}/.ssh/id_rsa || su ${name} -c 'ssh-keygen -b 2048 -t rsa -q -N ""'
     fi
     if [[ ${authorized_keys} = 'true' ]]; then
         install -d -m 700 \
