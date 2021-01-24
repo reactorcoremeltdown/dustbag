@@ -10,9 +10,9 @@ for user in `jq -cr '.users[]' ${1}`; do
         test -f ${HOMEDIR}/.ssh/id_rsa || su ${name} -c 'ssh-keygen -b 2048 -t rsa q -N ""'
     fi
     if [[ ${authorized_keys} = 'true' ]]; then
-        install -d -m 700 \
-            -g ${name} -o ${name} \
-            ${HOMEDIR}/.ssh
+        #install -d -m 700 \
+        #    -g ${name} -o ${name} \
+        #    ${HOMEDIR}/.ssh
         install -D -v -m 600 \
             -g ${name} -o ${name} \
             stages/users/files/authorized_keys ${HOMEDIR}/.ssh
