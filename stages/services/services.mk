@@ -9,6 +9,7 @@ nginx_sites:
 	bash stages/services/templates/nginx/sites/bank.sh
 	bash stages/services/templates/nginx/sites/blog.sh
 	bash stages/services/templates/nginx/sites/dav.sh
+	bash stages/services/templates/nginx/sites/drone.sh
 	bash stages/services/templates/nginx/sites/default.sh
 	bash stages/services/templates/nginx/sites/git.sh
 	bash stages/services/templates/nginx/sites/netdata.sh
