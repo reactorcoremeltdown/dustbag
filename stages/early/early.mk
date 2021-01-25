@@ -20,11 +20,6 @@ ifneq ($(RETRY), true)
 	test -L /root/.bash_history || ln -s /dev/null /root/.bash_history
 endif
 
-hostname:
-ifneq ($(RETRY), true)
-	hostnamectl set-hostname $(HOSTNAME)
-endif
-
 apt_configs:
 ifneq ($(RETRY), true)
 	cp stages/early/files/forceuserdefinedconfigs /etc/apt/apt.conf.d/forceuserdefinedconfigs
