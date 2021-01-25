@@ -2,7 +2,7 @@ UNAME := $(shell uname)
 RETRY := $(shell test -f /etc/default/earlystageconfigs && echo "true")
 HOSTNAME := $(shell cat variables/main.json | jq -r .hostname)
 
-early: test shell_history hostname apt_configs keygen earlystagepackages locales profiles
+early: test shell_history apt_configs keygen earlystagepackages locales profiles
 	echo "provisioning done" > /etc/default/earlystageconfigs;
 	@printf "`tput bold`Early stage provisioning completed`tput sgr0`\n"
 
