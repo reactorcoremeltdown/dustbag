@@ -2,7 +2,7 @@
 
 source <(jq -r '.nginx.variables | to_entries[] | [.key,(.value|@sh)] | join("=")' variables/main.json)
 
-SITE='notifications'
+SITE='drone'
 
 cat <<EOF > /etc/nginx/sites-available/${SITE}.conf
 server {
@@ -47,7 +47,7 @@ server {
 ##    auth_basic_user_file /etc/datasources/htpasswd;
 
     location / {
-        proxy_pass http://127.0.0.1:26001;
+        proxy_pass http://127.0.0.1:28000;
         proxy_http_version 1.1;
 
         # Ensuring it can use websockets
