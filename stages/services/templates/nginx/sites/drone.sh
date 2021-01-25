@@ -71,4 +71,4 @@ server {
 
 EOF
 
-ln -sf /etc/nginx/sites-available/${SITE}.conf /etc/nginx/sites-enabled/${SITE}.conf
+rm -f /etc/nginx/sites-enabled/${SITE}.conf || true
