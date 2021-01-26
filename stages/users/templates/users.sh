@@ -18,5 +18,5 @@ for user in `jq -cr '.users[]' ${1}`; do
             -g ${name} -o ${name} \
             stages/users/files/authorized_keys ${HOMEDIR}/.ssh
     fi
-    sh -c "usermod -G ${groups} ${name}"
+    usermod -G ${groups} ${name}
 done
