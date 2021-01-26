@@ -1,4 +1,4 @@
 #!/bin/bash -e
 
-git clone git@git.rcmd.space:rcmd/${REPO_NAME}.git
+git clone --depth 1 git@git.rcmd.space:rcmd/${REPO_NAME}.git
 cd ${REPO_NAME} && make
