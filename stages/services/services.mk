@@ -5,7 +5,7 @@ crons:
 	bash stages/services/templates/crons.sh stages/services/files/crons/
 
 laminar:
-	install -d /etc/systemd/system/laminar.service.d/
+	install -d /etc/systemd/system/laminar.service.d
 	install -D -v -m 644 \
 		stages/services/files/etc/systemd/system/laminar.service.d/service.conf \
 		/etc/systemd/system/laminar.service.d
