@@ -2,7 +2,7 @@
 
 source <(jq -r '.nginx.variables | to_entries[] | [.key,(.value|@sh)] | join("=")' variables/main.json)
 
-SITE='drone'
+SITE='ci'
 
 cat <<EOF > /etc/nginx/sites-available/${SITE}.conf
 server {
@@ -71,4 +71,5 @@ server {
 
 EOF
 
-rm -f /etc/nginx/sites-enabled/${SITE}.conf || true
+rm -f /etc/nginx/sites-available/drone.conf || true
+ln -sf /etc/nginx/sites-available/${SITE}.conf /etc/nginx/sites-enabled/${SITE}.conf
