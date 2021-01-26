@@ -1,8 +1,15 @@
-services: users packages crons nginx
+services: users packages crons laminar nginx
 	@echo "Setting up services"
 
 crons:
 	bash stages/services/templates/crons.sh stages/services/files/crons/
+
+laminar:
+	install -d /etc/systemd/system/laminar.service.d/
+	install -D -v -m 644 \
+		stages/services/files/etc/systemd/system/laminar.service.d/service.conf \
+		/etc/systemd/system/laminar.service.d
+	systemctl daemon-reload
 
 nginx_sites:
 	bash stages/services/templates/nginx/sites/api.sh
