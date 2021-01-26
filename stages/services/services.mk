@@ -8,6 +8,7 @@ nginx_sites:
 	bash stages/services/templates/nginx/sites/api.sh
 	bash stages/services/templates/nginx/sites/bank.sh
 	bash stages/services/templates/nginx/sites/blog.sh
+	bash stages/services/templates/nginx/sites/ci.sh
 	bash stages/services/templates/nginx/sites/dav.sh
 	bash stages/services/templates/nginx/sites/default.sh
 	bash stages/services/templates/nginx/sites/git.sh
