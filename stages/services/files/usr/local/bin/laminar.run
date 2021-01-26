@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-if [[ ${REPO_NAME} = 'blog' ]]; then
+if [[ ${REPO_NAME} = 'blog' || ${REPO_NAME} = 'rcmd.space' ]]; then
     git clone git@git.rcmd.space:rcmd/${REPO_NAME}.git
 else
     git clone --depth 1 git@git.rcmd.space:rcmd/${REPO_NAME}.git
