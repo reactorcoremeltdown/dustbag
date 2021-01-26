@@ -12,6 +12,7 @@ laminar:
 	install -D -v -m 755 \
 		stages/services/files/usr/local/bin/laminar.run \
 		/usr/local/bin
+	chown -R git:git /var/lib/laminar
 	systemctl daemon-reload
 
 nginx_sites:
