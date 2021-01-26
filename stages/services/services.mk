@@ -12,8 +12,11 @@ laminar:
 	install -D -v -m 755 \
 		stages/services/files/usr/local/bin/laminar.run \
 		/usr/local/bin
+	install -D -v -m 644 \
+		stages/services/files/etc/laminar.conf /etc
 	chown -R git:git /var/lib/laminar
 	systemctl daemon-reload
+	systemctl restart laminar.service
 
 nginx_sites:
 	bash stages/services/templates/nginx/sites/api.sh
