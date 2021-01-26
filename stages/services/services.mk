@@ -9,6 +9,9 @@ laminar:
 	install -D -v -m 644 \
 		stages/services/files/etc/systemd/system/laminar.service.d/service.conf \
 		/etc/systemd/system/laminar.service.d
+	install -D -v -m 755 \
+		stages/services/files/usr/local/bin/laminar.run \
+		/usr/local/bin
 	systemctl daemon-reload
 
 nginx_sites:
