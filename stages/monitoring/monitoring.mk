@@ -8,6 +8,7 @@ wtfd_files:
 		stages/monitoring/files/bin/wtf /usr/local/bin
 	install -D -v -m 644 \
 		stages/monitoring/files/configs/wtfd.service /etc/systemd/system
+	systemctl daemon-reload
 	install -d /etc/monitoring && \
 		install -D -v -m 644 \
 		stages/monitoring/files/configs/config.ini /etc/monitoring

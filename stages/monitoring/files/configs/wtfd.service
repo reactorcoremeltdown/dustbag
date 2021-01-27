@@ -2,7 +2,8 @@
 Description=WTF just happened?
 
 [Service]
-ExecStart=/usr/local/bin/wtfd
+Environment="CONFIG_FILE=/etc/monitoring/config.ini"
+ExecStart=/opt/apps/dafuq/dafuq
 
 [Install]
 WantedBy=multi-user.target
