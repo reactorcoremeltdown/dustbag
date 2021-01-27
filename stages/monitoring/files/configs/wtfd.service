@@ -2,7 +2,7 @@
 Description=WTF just happened?
 
 [Service]
-Environment="CONFIG_FILE=/etc/monitoring/config.ini"
+Environment="CONFIG_PATH=/etc/monitoring/config.ini"
 ExecStart=/opt/apps/dafuq/dafuq
 
 [Install]
