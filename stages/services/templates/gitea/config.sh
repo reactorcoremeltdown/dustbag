@@ -46,6 +46,9 @@ PATH     = /var/lib/gitea/data/gitea.db
 [repository]
 ROOT = /home/git
 
+[ui]
+DEFAULT_THEME = arc-green
+
 [mailer]
 ENABLED = false
 
