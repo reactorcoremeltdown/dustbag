@@ -7,6 +7,6 @@ include stages/firewall/firewall.mk
 include stages/repos/repos.mk
 include stages/packages/packages.mk
 include stages/users/users.mk
-include stages/users/secrets.mk
+include stages/secrets/secrets.mk
 include stages/services/services.mk
 include stages/monitoring/monitoring.mk
