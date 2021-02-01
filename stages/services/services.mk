@@ -48,6 +48,6 @@ gitea_config: /etc/secrets/secrets.json
 	bash stages/services/templates/gitea/config.sh
 
 gitea_restart:
-	systemctl restart gitea.service
+	@echo "systemctl restart gitea.service"
 
 gitea: gitea_directory gitea_config gitea_restart
