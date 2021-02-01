@@ -48,6 +48,7 @@ ROOT = /home/git
 
 [ui]
 DEFAULT_THEME = arc-green
+THEMES = gitea,arc-green
 
 [mailer]
 ENABLED = false
