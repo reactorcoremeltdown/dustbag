@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-JWT_SECRET=$(jq '.secrets.gitea.oauth2.JWT_SECRET' /etc/secrets/secrets.json)
-INTERNAL_TOKEN=$(jq '.secrets.gitea.security.INTERNAL_TOKEN' /etc/secrets/secrets.json)
-SECRET_KEY=$(jq '.secrets.gitea.security.SECRET_KEY' /etc/secrets/secrets.json)
-LFS_JWT_SECRET=$(jq '.secrets.gitea.server.LFS_JWT_SECRET' /etc/secrets/secrets.json)
+JWT_SECRET=$(jq -r '.secrets.gitea.oauth2.JWT_SECRET' /etc/secrets/secrets.json)
+INTERNAL_TOKEN=$(jq -r '.secrets.gitea.security.INTERNAL_TOKEN' /etc/secrets/secrets.json)
+SECRET_KEY=$(jq -r '.secrets.gitea.security.SECRET_KEY' /etc/secrets/secrets.json)
+LFS_JWT_SECRET=$(jq -r '.secrets.gitea.server.LFS_JWT_SECRET' /etc/secrets/secrets.json)
 
 cat <<EOF > /etc/gitea/app.ini
 APP_NAME = RCMD Funkhaus
