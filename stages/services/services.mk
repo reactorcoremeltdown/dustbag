@@ -1,4 +1,4 @@
-services: users packages crons laminar nginx
+services: users packages crons laminar gitea nginx
 	@echo "Setting up services"
 
 crons:
@@ -40,3 +40,14 @@ nginx_reload: nginx_test
 	systemctl reload nginx.service
 
 nginx: nginx_reload
+
+gitea_directory:
+	install -d -m 770 --owner git --group git /etc/gitea
+
+gitea_config: /etc/secrets/secrets.json
+	bash stages/services/templates/gitea/config.sh
+
+gitea_restart:
+	systemctl restart gitea.service
+
+gitea: gitea_directory gitea_config gitea_restart
