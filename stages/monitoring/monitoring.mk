@@ -18,6 +18,9 @@ wtfd_files:
 	install -d /etc/monitoring/notifiers && \
 		install -D -v -m 755 \
 		stages/monitoring/files/handlers/* /etc/monitoring/notifiers
+	install -d /etc/monitoring/scripts && \
+		install -D -v -m 755 \
+		stages/monitoring/files/scripts/* /etc/monitoring/scripts
 	systemctl daemon-reload
 	systemctl enable wtfd.service
 
