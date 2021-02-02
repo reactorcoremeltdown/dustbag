@@ -4,8 +4,8 @@
 # HOW TO RESTORE:
 # duplicity restore file:///var/storage/wastebox/Backups/radicale/ ./test-collection/
 #
-0 5 * * 6 /etc/monit/scripts/backups.sh /var/lib/radicale/collections/ file:///var/storage/wastebox/Backups/radicale/
-10 5 * * 6 /etc/monit/scripts/backups.sh /home/git/rcmd/ file:///var/storage/wastebox/Backups/websites/
-20 5 * * 6 /etc/monit/scripts/backups.sh /home/ledger/ file:///var/storage/wastebox/Backups/ledger/
-30 5 * * 6 /etc/monit/scripts/backups.sh /opt/apps/kanboard/data/ file:///var/storage/wastebox/Backups/kanboard/
+0 5 * * 6 /etc/monitoring/scripts/backups.sh /var/lib/radicale/collections/ file:///var/storage/wastebox/Backups/radicale/
+10 5 * * 6 /etc/monitoring/scripts/backups.sh /home/git/rcmd/ file:///var/storage/wastebox/Backups/websites/
+20 5 * * 6 /etc/monitoring/scripts/backups.sh /home/ledger/ file:///var/storage/wastebox/Backups/ledger/
+30 5 * * 6 /etc/monitoring/scripts/backups.sh /opt/apps/kanboard/data/ file:///var/storage/wastebox/Backups/kanboard/
 40 5 * * 6 /etc/monitoring/scripts/backups.sh /var/lib/gotify/ file:///var/storage/wastebox/Backups/gotify/
