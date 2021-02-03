@@ -6,4 +6,4 @@ else
     git clone --depth 1 git@git.rcmd.space:rcmd/${REPO_NAME}.git
 fi
 
-cd ${REPO_NAME} && make
+cd ${REPO_NAME} && sudo /usr/bin/make
