@@ -13,5 +13,7 @@
 
 
 ### Docker cleanup
-
 0 3 * * * docker container prune --force && docker image prune --force
+
+### Podman cleanup
+10 3 * * * podman container prune --force && podman image prune --all --force
