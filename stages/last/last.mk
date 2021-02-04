@@ -1,5 +1,5 @@
 last: laminar_restart
-	@echo "Last stage completed"
+	@echo "$(ccgreen)Last stage completed$(ccend)"
 
 laminar_restart:
 	echo "sleep 10 && systemctl restart laminar.service" | at now

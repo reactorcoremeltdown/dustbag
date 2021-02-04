@@ -1,5 +1,5 @@
 secrets: directory unpack
-	@printf "`tput bold`Setting up secrets completed`tput sgr0`\n"
+	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
 
 directory:
 	install -d -m 500 /etc/secrets

@@ -1,5 +1,5 @@
 monitoring: wtfd netdata checks
-	@printf "`tput bold`Setting up monitoring completed`tput sgr0`\n"
+	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
 wtfd_files:
 	install -D -v -m 755 \
@@ -28,7 +28,7 @@ wtfd_restart:
 	systemctl restart wtfd.service
 
 wtfd: wtfd_files wtfd_restart
-	@printf "`tput bold`Installing wtfd complete`tput sgr0`\n"
+	@echo "$(ccgreen)Installing wtfd complete$(ccend)"
 
 netdata_files:
 	apt-get install -y netdata
@@ -37,10 +37,10 @@ netdata_restart:
 	systemctl restart netdata
 
 netdata: netdata_files
-	@printf "`tput bold`Partially implemented: installing netdata complete`tput sgr0`\n"
+	@echo "$(ccgreen)Installing netdata complete$(ccend)"
 
 checks_configs:
 	bash stages/monitoring/templates/checks.sh stages/monitoring/variables/checks.json
-	@printf "`tput bold`Partially implemented: installing monit checks complete`tput sgr0`\n"
+	@echo "$(ccgreen)Installing DAFUQ checks complete$(ccend)"
 
 checks: checks_configs wtfd_restart

@@ -1,5 +1,5 @@
 services: users packages crons laminar gitea nginx
-	@echo "Setting up services"
+	@echo "$(ccgreen)Setting up services complete$(ccend)"
 
 crons:
 	bash stages/services/templates/crons.sh stages/services/files/crons/
@@ -16,6 +16,7 @@ laminar:
 		stages/services/files/etc/laminar.conf /etc
 	chown -R git:git /var/lib/laminar
 	systemctl daemon-reload
+	@echo "$(ccgreen)Setting up laminar complete$(ccend)"
 
 nginx_sites:
 	bash stages/services/templates/nginx/sites/api.sh
@@ -39,6 +40,7 @@ nginx_reload: nginx_test
 	systemctl reload nginx.service
 
 nginx: nginx_reload
+	@echo "$(ccgreen)Setting up nginx complete$(ccend)"
 
 gitea_directory:
 	install -d -m 770 --owner git --group git /etc/gitea
@@ -50,3 +52,4 @@ gitea_restart:
 	systemctl restart gitea.service
 
 gitea: gitea_directory gitea_config gitea_restart
+	@echo "$(ccgreen)Setting up gitea complete$(ccend)"
