@@ -4,6 +4,9 @@ services: users packages crons laminar gitea nginx
 crons:
 	bash stages/services/templates/crons.sh stages/services/files/crons/
 
+laminar_restart:
+	systemctl restart laminar.service
+
 laminar:
 	install -d /etc/systemd/system/laminar.service.d
 	install -D -v -m 644 \
@@ -16,7 +19,6 @@ laminar:
 		stages/services/files/etc/laminar.conf /etc
 	chown -R git:git /var/lib/laminar
 	systemctl daemon-reload
-	systemctl restart laminar.service
 
 nginx_sites:
 	bash stages/services/templates/nginx/sites/api.sh
