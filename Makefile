@@ -1,4 +1,4 @@
-all: early firewall repos packages users secrets services monitoring
+all: early firewall repos packages users services monitoring
 
 lite: early repos packages_lite users
 
