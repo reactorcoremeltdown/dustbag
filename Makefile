@@ -2,6 +2,7 @@ all: early firewall repos packages users services monitoring last
 
 lite: early repos packages_lite users
 
+include variables/colors.mk
 include stages/early/early.mk
 include stages/firewall/firewall.mk
 include stages/repos/repos.mk

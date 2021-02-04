@@ -4,7 +4,7 @@ HOSTNAME := $(shell cat variables/main.json | jq -r .hostname)
 
 early: test shell_history apt_configs keygen earlystagepackages locales profiles
 	echo "provisioning done" > /etc/default/earlystageconfigs;
-	@printf "`tput bold`Early stage provisioning completed`tput sgr0`\n"
+	@echo "$(ccgreen)Early stage provisioning completed$(ccend)"
 
 test:
 ifeq ($(UNAME), Linux)
