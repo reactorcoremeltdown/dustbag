@@ -1,4 +1,4 @@
-last:
+last: laminar_restart
 	@echo "Last stage completed"
 
 laminar_restart:
