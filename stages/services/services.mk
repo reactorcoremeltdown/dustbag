@@ -60,4 +60,4 @@ davfs2:
 	systemctl daemon-reload
 	systemctl enable var-storage-wastebox.automount
 	systemctl start var-storage-wastebox.mount
-	@echo "$(ccgreen)Setting up davfs2 mounts complete"
+	@echo "$(ccgreen)Setting up davfs2 mounts complete$(ccend)"
