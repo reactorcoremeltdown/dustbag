@@ -59,3 +59,5 @@ davfs2:
 	install -D -m 644 stages/services/files/etc/systemd/system/davfs2-mounts/* /etc/systemd/system
 	systemctl daemon-reload
 	systemctl enable var-storage-wastebox.automount
+	systemctl start var-storage-wastebox.mount
+	@echo "$(ccgreen)Setting up davfs2 mounts complete"
