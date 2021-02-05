@@ -7,5 +7,5 @@ Kind of a config management
 
 + Packages
     + Podman
-    + Buildah
+    + ~Buildah~ _not needed_
     + Laminar
