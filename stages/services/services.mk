@@ -1,4 +1,4 @@
-services: users packages crons laminar gitea nginx
+services: users packages crons laminar gitea nginx davfs2
 	@echo "$(ccgreen)Setting up services complete$(ccend)"
 
 crons:
@@ -53,3 +53,9 @@ gitea_restart:
 
 gitea: gitea_directory gitea_config gitea_restart
 	@echo "$(ccgreen)Setting up gitea complete$(ccend)"
+
+davfs2:
+	bash stages/services/templates/davfs2/secrets.sh
+	install -D -m 644 stages/services/files/etc/systemd/system/davfs2-mounts/* /etc/systemd/system
+	systemctl daemon-reload
+	systemctl enable var-storage-wastebox.automount

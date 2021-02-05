@@ -1,0 +1,14 @@
+[Unit]
+Description=Hetzner StorageBox
+After=network-online.target
+Wants=network-online.target
+
+[Mount]
+What=https://u214397.your-storagebox.de
+Where=/var/storage/wastebox
+Options=rw,user,uid=syncthing,gid=syncthing,dir_mode=0775
+Type=davfs
+TimeoutSec=60
+
+[Install]
+WantedBy=remote-fs.target
