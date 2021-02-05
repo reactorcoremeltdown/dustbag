@@ -1,5 +1,5 @@
 firewall: early apply_rules
-	@echo "$(ccgreen)Firewall setup complete$(ccend)"
+	@echo "$(ccgreen)Firewall setup completed$(ccend)"
 
 template_rules:
 	bash stages/firewall/templates/input.sh stages/firewall/variables/firewall.json

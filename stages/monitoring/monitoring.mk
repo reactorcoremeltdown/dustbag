@@ -28,7 +28,7 @@ wtfd_restart:
 	systemctl restart wtfd.service
 
 wtfd: wtfd_files wtfd_restart
-	@echo "$(ccgreen)Installing wtfd complete$(ccend)"
+	@echo "$(ccgreen)Installing wtfd completed$(ccend)"
 
 netdata_files:
 	apt-get install -y netdata
@@ -37,10 +37,10 @@ netdata_restart:
 	systemctl restart netdata
 
 netdata: netdata_files
-	@echo "$(ccgreen)Installing netdata complete$(ccend)"
+	@echo "$(ccgreen)Installing netdata completed$(ccend)"
 
 checks_configs:
 	bash stages/monitoring/templates/checks.sh stages/monitoring/variables/checks.json
-	@echo "$(ccgreen)Installing DAFUQ checks complete$(ccend)"
+	@echo "$(ccgreen)Installing DAFUQ checks completed$(ccend)"
 
 checks: checks_configs wtfd_restart

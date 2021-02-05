@@ -1,5 +1,5 @@
 services: users packages crons laminar gitea nginx davfs2
-	@echo "$(ccgreen)Setting up services complete$(ccend)"
+	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 crons:
 	bash stages/services/templates/crons.sh stages/services/files/crons/
@@ -16,7 +16,7 @@ laminar:
 		stages/services/files/etc/laminar.conf /etc
 	chown -R git:git /var/lib/laminar
 	systemctl daemon-reload
-	@echo "$(ccgreen)Setting up laminar complete$(ccend)"
+	@echo "$(ccgreen)Setting up laminar completed$(ccend)"
 
 nginx_sites:
 	bash stages/services/templates/nginx/sites/api.sh
@@ -40,7 +40,7 @@ nginx_reload: nginx_test
 	systemctl reload nginx.service
 
 nginx: nginx_reload
-	@echo "$(ccgreen)Setting up nginx complete$(ccend)"
+	@echo "$(ccgreen)Setting up nginx completed$(ccend)"
 
 gitea_directory:
 	install -d -m 770 --owner git --group git /etc/gitea
@@ -52,7 +52,7 @@ gitea_restart:
 	systemctl restart gitea.service
 
 gitea: gitea_directory gitea_config gitea_restart
-	@echo "$(ccgreen)Setting up gitea complete$(ccend)"
+	@echo "$(ccgreen)Setting up gitea completed$(ccend)"
 
 davfs2:
 	bash stages/services/templates/davfs2/secrets.sh
@@ -60,4 +60,4 @@ davfs2:
 	systemctl daemon-reload
 	systemctl enable var-storage-wastebox.automount
 	systemctl start var-storage-wastebox.mount
-	@echo "$(ccgreen)Setting up davfs2 mounts complete$(ccend)"
+	@echo "$(ccgreen)Setting up davfs2 mounts completed$(ccend)"
