@@ -122,6 +122,17 @@
       "notify": "gotify"
     },
     {
+      "name": "ci_website",
+      "state": "present",
+      "plugin": "check_http_ping",
+      "type": "alert",
+      "argument": "https://ci.rcmd.space/badge/dummy.svg",
+      "interval": "1m",
+      "description": "CI engine",
+      "environment": "internal",
+      "notify": "gotify"
+    },
+    {
       "name": "api_https",
       "state": "present",
       "plugin": "check_https_certificate",

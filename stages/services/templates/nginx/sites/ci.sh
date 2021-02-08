@@ -69,6 +69,12 @@ server {
         proxy_send_timeout      7m;
         proxy_read_timeout      7m;
     }
+
+    location /badge {
+        proxy_pass http://127.0.0.1:28000;
+        proxy_http_version 1.1;
+        proxy_set_header   Host \$http_host;
+    }
 }
 
 EOF
