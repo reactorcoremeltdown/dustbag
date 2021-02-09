@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source /etc/monit/plugins/okfail.sh
+source /etc/monitoring/plugins/okfail.sh
 
 pubdate=`echo | openssl s_client -servername $1 -connect $1':443' 2>/dev/null | openssl x509 -noout -dates | grep notAfter | cut -f 2 -d '='`
 pubdate_unix=`date +%s -d "$pubdate"`

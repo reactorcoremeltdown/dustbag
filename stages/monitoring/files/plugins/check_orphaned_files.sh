@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source /etc/monit/plugins/okfail.sh
+source /etc/monitoring/plugins/okfail.sh
 
 count=`lsof +L1 | egrep -vc '/tmp/|/log/|COMMAND'`
 

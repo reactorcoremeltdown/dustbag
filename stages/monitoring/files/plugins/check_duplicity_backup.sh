@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source /etc/monit/plugins/okfail.sh
+source /etc/monitoring/plugins/okfail.sh
 
 backup_date=`duplicity collection-status ${1} | grep 'Last full backup date' | cut -f 2- -d ':'`
 timestamp=`date --date="${backup_date}" +%s`

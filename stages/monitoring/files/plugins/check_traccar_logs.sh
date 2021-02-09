@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source /etc/monit/plugins/okfail.sh
+source /etc/monitoring/plugins/okfail.sh
 
 log_json_line=`grep --no-filename ${1} /var/log/nginx/traccar_access.log.1 /var/log/nginx/traccar_access.log | tail -n 1`
 

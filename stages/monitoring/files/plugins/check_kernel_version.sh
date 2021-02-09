@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source /etc/monit/plugins/okfail.sh
+source /etc/monitoring/plugins/okfail.sh
 
 current_running=`uname -v | awk '{print $4}'`
 

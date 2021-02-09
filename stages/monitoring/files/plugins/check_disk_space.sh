@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source /etc/monit/plugins/okfail.sh
+source /etc/monitoring/plugins/okfail.sh
 
 usage=`df $1 | tail -n 1 | awk '{print $5}' | sed 's|%||'`
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source /etc/monit/plugins/okfail.sh
+source /etc/monitoring/plugins/okfail.sh
 
 eval mysqladmin -u ping -h localhost --password=ping ping > /dev/null 2>&1
 ret_code=$?

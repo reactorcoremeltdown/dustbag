@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source /etc/monit/plugins/okfail.sh
+source /etc/monitoring/plugins/okfail.sh
 
 status=`curl -A "monit-ping-check" -s -o /dev/null -w "%{http_code}" --connect-timeout 10 --max-time 10 $1`
 
