@@ -43,6 +43,7 @@
           "curl",
           "cryptsetup",
           "duplicity",
+          "docker-registry",
           "certbot",
           "davfs2",
           "git",
