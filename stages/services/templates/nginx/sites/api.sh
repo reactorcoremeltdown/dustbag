@@ -32,7 +32,7 @@ server {
     server_name api.rcmd.space;
 
     location / {
-        return 301 https://\$server_name/v5/version;
+        return 301 https://\$server_name/internal/version;
     }
     location /v5 {
         limit_req zone=api;
