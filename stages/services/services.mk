@@ -29,6 +29,7 @@ nginx_sites:
 	bash stages/services/templates/nginx/sites/netdata.sh
 	bash stages/services/templates/nginx/sites/notifications.sh
 	bash stages/services/templates/nginx/sites/podcasts.sh
+	bash stages/services/templates/nginx/sites/repo.sh
 	bash stages/services/templates/nginx/sites/site.sh
 	bash stages/services/templates/nginx/sites/sync.sh
 	bash stages/services/templates/nginx/sites/transmission.sh
