@@ -32,32 +32,7 @@ server {
     server_name api.rcmd.space;
 
     location / {
-        return 301 https://\$server_name/v4/version;
-    }
-    location /hooks {
-        limit_req zone=api;
-
-        proxy_pass http://127.0.0.1:25001;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \$scheme;
-        proxy_read_timeout 1d;
-    }
-    location /v4 {
-        limit_req zone=api;
-
-        proxy_pass http://127.0.0.1:25004;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \$scheme;
-        proxy_read_timeout 1d;
-    }
-    location /v4/healthcheck {
-        proxy_pass http://127.0.0.1:25004;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \$scheme;
-        proxy_read_timeout 1d;
+        return 301 https://\$server_name/v5/version;
     }
     location /v5 {
         limit_req zone=api;
