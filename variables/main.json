@@ -86,7 +86,8 @@
         { "name": "rcmd", "shell": "/bin/bash", "groups": "rcmd,apps,radicale,syncthing", "keygen": true, "authorized_keys": true },
         { "name": "git", "shell": "/bin/bash", "groups": "git,docker,syncthing,laminar", "keygen": true, "authorized_keys": false },
         { "name": "radicale", "shell": "/bin/bash", "groups": "radicale", "keygen": false, "authorized_keys": true },
-        { "name": "ledger", "shell": "/bin/bash", "groups": "ledger,apps", "keygen": false, "authorized_keys": true }
+        { "name": "ledger", "shell": "/bin/bash", "groups": "ledger,apps", "keygen": false, "authorized_keys": true },
+        { "name": "docker-registry", "shell": "/sbin/nologin", "groups": "docker-registry,www-data,syncthing", "keygen": false, "authorized_keys": true }
     ],
     "nginx": {
         "variables": {
