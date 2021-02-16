@@ -1,5 +1,5 @@
 users: early sudoers configs
-	bash stages/users/templates/users.sh variables/main.json
+	bash stages/users/templates/users.sh stages/users/variables/users.json
 	@echo "$(ccgreen)Setting up users completed$(ccend)"
 
 sudoers:
