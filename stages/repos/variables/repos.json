@@ -1,0 +1,17 @@
+{
+    "debian": {
+        "repositories": [
+            { "name": "docker",
+                "state": "present",
+                "key": "https://download.docker.com/linux/debian/gpg",
+                "url": "https://download.docker.com/linux/debian",
+                "section": "stable" },
+            { "name": "backports",
+                "state": "present",
+                "key": "",
+                "url": "http://deb.debian.org/debian",
+                "distro": "buster-backports",
+                "section": "main" }
+        ]
+    }
+}
