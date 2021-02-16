@@ -2,7 +2,7 @@
 
 IFACE=`ip route | grep default | awk '{print $5}'`
 WORLDV4=`jq -cr '.shortcuts.worldv4' ${1}`
-WORLDV6=`jq -cr '.shortcuts.WORLDV6' ${1}`
+WORLDV6=`jq -cr '.shortcuts.worldv6' ${1}`
 
 ### IPv4
 cat <<EOF > /etc/firewall/iptables-input
