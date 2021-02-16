@@ -6,6 +6,6 @@ Kind of a config management
 ### Debian 11 Bullseye roadmap
 
 + Packages
-    + Podman
-    + ~Buildah~ _not needed_
-    + Laminar
+    + [x] Podman
+    + [ ] ~Buildah~ _not needed_
+    + [x] Laminar
