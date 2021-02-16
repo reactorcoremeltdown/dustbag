@@ -1,5 +1,16 @@
-services: users packages crons laminar gitea nginx davfs2
+services: users packages sshd crons laminar gitea nginx davfs2
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
+
+sshd_config:
+	install -D -v -m 644 \
+		stages/services/files/etc/ssh/sshd_config \
+		/etc/ssh
+
+sshd_restart:
+	systemctl restart sshd.service
+
+sshd: sshd_config sshd_restart
+	@echo "$(ccgreen)Setting up sshd completed$(ccend)"
 
 crons:
 	bash stages/services/templates/crons.sh stages/services/files/crons/

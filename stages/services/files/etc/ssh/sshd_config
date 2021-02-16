@@ -1,0 +1,19 @@
+PermitRootLogin no
+
+ClientAliveInterval 360
+ClientAliveCountMax 0
+
+PermitEmptyPasswords no
+
+AllowUsers rcmd ledger git
+
+ChallengeResponseAuthentication no
+
+UsePAM yes
+
+X11Forwarding no
+PrintMotd no
+
+AcceptEnv LANG LC_*
+
+Subsystem       sftp    /usr/lib/openssh/sftp-server
