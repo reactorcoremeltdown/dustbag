@@ -2,6 +2,7 @@ firewall: early apply_rules
 	@echo "$(ccgreen)Firewall setup completed$(ccend)"
 
 template_rules:
+	install -d -m 755 /etc/firewall
 	bash stages/firewall/templates/input.sh stages/firewall/variables/firewall.json
 
 apply_rules: template_rules
