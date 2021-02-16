@@ -1,2 +1,1 @@
-* * * * * /opt/apps/ci/fetch
 40 5 * * * gitea dump --config /etc/gitea/app.ini --file /home/git/gitea-dump.zip --work-path /var/lib/gitea/ --skip-repository
