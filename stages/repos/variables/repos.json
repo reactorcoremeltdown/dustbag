@@ -2,7 +2,7 @@
     "debian": {
         "repositories": [
             { "name": "docker",
-                "state": "present",
+                "state": "absent",
                 "key": "https://download.docker.com/linux/debian/gpg",
                 "url": "https://download.docker.com/linux/debian",
                 "section": "stable" },
