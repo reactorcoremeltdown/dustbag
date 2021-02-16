@@ -5,6 +5,12 @@ sshd_config:
 	install -D -v -m 644 \
 		stages/services/files/etc/ssh/sshd_config \
 		/etc/ssh
+	install -D -v -m 755 \
+		stages/services/files/etc/ssh/login-notify.sh \
+		/etc/ssh
+	install -D -v -m 644 \
+		stages/services/files/etc/pam.d/sshd \
+		/etc/pam.d
 
 sshd_restart:
 	systemctl restart sshd.service
