@@ -7,8 +7,8 @@ if [ "$PAM_TYPE" != "close_session" ]; then
     text="SSH Login: $PAM_USER from $PAM_RHOST on $host"
 
     case ${PAM_RHOST} in
-    "46.88.65.90" | "2a02:2770:3:0:21a:4aff:fecb:2547" )
-        echo "${text}" | logger -t sshd-login
+    "46.88.65.90" | "2a02:2770:3:0:21a:4aff:fecb:2547" | "212.91.235.2" )
+        echo "${text}" | logger -t "sshd-login"
         ;;
     *)
         curl -s -XPOST \
