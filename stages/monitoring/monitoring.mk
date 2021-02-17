@@ -31,7 +31,7 @@ wtfd: wtfd_files wtfd_restart
 	@echo "$(ccgreen)Installing wtfd completed$(ccend)"
 
 netdata_files:
-	apt-get install -y netdata
+	dpkg-query -s netdata > /dev/null || apt-get install -y netdata
 
 netdata_restart:
 	systemctl restart netdata
