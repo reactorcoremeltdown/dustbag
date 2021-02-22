@@ -79,3 +79,9 @@ davfs2:
 	systemctl enable var-storage-wastebox.automount
 	systemctl start var-storage-wastebox.mount
 	@echo "$(ccgreen)Setting up davfs2 mounts completed$(ccend)"
+
+podsync:
+	install -d -m 750 --owner=syncthing --group=syncthing /etc/podsync
+	install -D -m 755 -v stages/services/files/etc/systemd/system/podsync.service /etc/systemd/system
+	systemctl daemon-reload
+	bash stages/services/templates/podsync/podsync.toml.sh stages/services/variables/services.json

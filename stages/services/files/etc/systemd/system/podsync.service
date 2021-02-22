@@ -1,0 +1,10 @@
+[Unit]
+Description=Podcast Synchronisation service
+
+[Service]
+User=syncthing
+Restart=on-failure
+ExecStart=/usr/local/bin/podsync --config /etc/podsync/podsync.toml
+
+[Install]
+WantedBy=multi-user.target

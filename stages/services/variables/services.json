@@ -1,0 +1,26 @@
+{
+    "services": {
+        "podsync": {
+            "feeds": [
+                {
+                    "name": "ID1",
+                    "url": "https://www.youtube.com/channel/UCpExuV8qJMfCaSQNL1YG6bQ",
+                    "quality": "low",
+                    "format": "audio"
+                },
+                {
+                    "name": "JMGODIER",
+                    "url": "https://www.youtube.com/channel/UCEszlI8-W79IsU8LSAiRbDg",
+                    "quality": "low",
+                    "format": "audio"
+                },
+                {
+                    "name": "odysseus",
+                    "url": "https://www.youtube.com/channel/UCwoTj-pZgZZ8DInOXSSLMmA",
+                    "quality": "high",
+                    "format": "audio"
+                }
+            ]
+        }
+    }
+}
