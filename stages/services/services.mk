@@ -1,4 +1,4 @@
-services: users packages sshd crons laminar gitea nginx davfs2
+services: users packages sshd crons laminar gitea nginx davfs2 podsync
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 sshd_config:
@@ -85,3 +85,4 @@ podsync:
 	install -D -m 755 -v stages/services/files/etc/systemd/system/podsync.service /etc/systemd/system
 	systemctl daemon-reload
 	bash stages/services/templates/podsync/podsync.toml.sh stages/services/variables/services.json
+	@echo "$(ccgreen)Setting up podsync completed$(ccend)"
