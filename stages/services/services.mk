@@ -85,4 +85,5 @@ podsync:
 	install -D -m 755 -v stages/services/files/etc/systemd/system/podsync.service /etc/systemd/system
 	systemctl daemon-reload
 	bash stages/services/templates/podsync/podsync.toml.sh stages/services/variables/services.json
+	systemctl restart podsync.service
 	@echo "$(ccgreen)Setting up podsync completed$(ccend)"
