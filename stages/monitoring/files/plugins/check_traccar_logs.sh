@@ -13,10 +13,10 @@ current_timestamp=`date +%s`
 
 let delta="current_timestamp - timestamp"
 
-if test $delta -gt 86400; then
-    warning "The owner of this channel has not reported location data for longer than one day."
-elif test $delta -gt 259200; then
+if test $delta -gt 259200; then
     fail "The owner of this channel has not reported location data for longer than three days. Last seen at https://maps.google.com/maps?q=${latitude},${longitude}"
+elif test $delta -gt 86400; then
+    warning "The owner of this channel has not reported location data for longer than one day."
 else
     ok "The owner is found and tracked."
 fi
