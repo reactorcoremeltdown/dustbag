@@ -8,7 +8,7 @@
                 "section": "stable" },
             { "name": "backports",
                 "state": "present",
-                "key": "",
+                "key": "https://deb.debian.org/debian/dists/buster-backports/Release.gpg",
                 "url": "http://deb.debian.org/debian",
                 "distro": "buster-backports",
                 "section": "main" }
