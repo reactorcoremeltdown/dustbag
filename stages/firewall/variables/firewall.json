@@ -14,6 +14,7 @@
         { "name": "https", "port": 443, "protocol": "tcp", "address_v4": "worldv4", "address_v6": "worldv6"},
         { "name": "https", "port": 443, "protocol": "tcp", "address_v4": "worldv4", "address_v6": "worldv6"},
         { "name": "openvpn", "port": 1194, "protocol": "udp", "address_v4": "worldv4", "address_v6": "worldv6"},
+        { "name": "openvpn_tcp", "port": 1194, "protocol": "tcp", "address_v4": "worldv4", "address_v6": "worldv6"},
         { "name": "mosh", "port": 60001, "protocol": "udp", "address_v4": "worldv4", "address_v6": "worldv6"},
         { "name": "mumble", "port": 64738, "protocol": "udp", "address_v4": "worldv4", "address_v6": "worldv6"},
         { "name": "transmission dht", "port": 51413, "protocol": "tcp", "address_v4": "worldv4", "address_v6": "worldv6"},
