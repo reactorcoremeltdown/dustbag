@@ -33,6 +33,7 @@
           "certbot",
           "davfs2",
           "git",
+          "imagemagick",
           "jq",
           "markdown",
           "mosh",
