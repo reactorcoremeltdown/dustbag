@@ -21,6 +21,12 @@
                     "format": "audio"
                 },
                 {
+                    "name": "ambient-techno",
+                    "url": "https://www.youtube.com/playlist?list=PLIWQnHTodlVdfIUET43Bw1CDljGLtoKFL",
+                    "quality": "high",
+                    "format": "audio"
+                },
+                {
                     "name": "virtuawaves",
                     "url": "https://www.youtube.com/channel/UC0DfwTgHp4k1ibbtDmEiSJg",
                     "quality": "high",
