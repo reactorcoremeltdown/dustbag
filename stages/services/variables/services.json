@@ -14,8 +14,9 @@
                     "quality": "low",
                     "format": "audio"
                 },
+                {
                     "name": "cryochamber",
-                    "url": "https://youtube.com/playlist?list=PL99czue-ivEs-qIB4CJTOI9eOqOta_uHd",
+                    "url": "https://www.youtube.com/playlist?list=PL99czue-ivEs-qIB4CJTOI9eOqOta_uHd",
                     "quality": "high",
                     "format": "audio"
                 },
