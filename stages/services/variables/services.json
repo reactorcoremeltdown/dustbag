@@ -14,6 +14,11 @@
                     "quality": "low",
                     "format": "audio"
                 },
+                    "name": "cryochamber",
+                    "url": "https://youtube.com/playlist?list=PL99czue-ivEs-qIB4CJTOI9eOqOta_uHd",
+                    "quality": "high",
+                    "format": "audio"
+                },
                 {
                     "name": "odysseus",
                     "url": "https://www.youtube.com/channel/UCwoTj-pZgZZ8DInOXSSLMmA",
