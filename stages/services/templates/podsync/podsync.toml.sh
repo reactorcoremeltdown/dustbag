@@ -32,6 +32,7 @@ cat <<EOF >>  /etc/podsync/podsync.toml
   badger = { truncate = true, file_io = true }
 
 [downloader]
+self_update = true
 timeout = 15
 
 [log]
