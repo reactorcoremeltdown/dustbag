@@ -25,7 +25,7 @@ for feed in $(jq -cr '.services.podsync.feeds[]' ${1}); do
     echo "  quality = \"${quality}\"" >> /etc/podsync/podsync.toml
     echo "  format = \"${format}\"" >> /etc/podsync/podsync.toml
     if [[ ${format} = 'audio' ]]; then
-        echo '  youtube_dl_args = [ "-x", "--audio-format", "m4a" ]' >> /etc/podsync/podsync.toml
+        echo '  youtube_dl_args = [ "--audio-quality", "192K" ]' >> /etc/podsync/podsync.toml
     fi
 done
 
