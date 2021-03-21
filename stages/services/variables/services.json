@@ -21,6 +21,12 @@
                     "format": "audio"
                 },
                 {
+                    "name": "virtuawaves",
+                    "url": "https://www.youtube.com/c/VirtuaWaves",
+                    "quality": "high",
+                    "format": "audio"
+                },
+                {
                     "name": "odysseus",
                     "url": "https://www.youtube.com/channel/UCwoTj-pZgZZ8DInOXSSLMmA",
                     "quality": "high",
