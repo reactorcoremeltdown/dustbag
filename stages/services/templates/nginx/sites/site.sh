@@ -108,7 +108,7 @@ server {
     server_name beta.rcmd.space;
 
     auth_basic "Protected area";
-    auth_basic_user_file /etc/datasources/htpasswd;
+    auth_basic_user_file /etc/nginx/htpasswd;
 
     location / {
         try_files /index.html =404;

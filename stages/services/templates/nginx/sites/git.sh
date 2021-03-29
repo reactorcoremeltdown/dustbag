@@ -45,7 +45,7 @@ server {
 
     location / {
         auth_basic "Protected area";
-        auth_basic_user_file /etc/datasources/htpasswd;
+        auth_basic_user_file /etc/nginx/htpasswd;
         proxy_pass http://127.0.0.1:25010;
     }
     location /healthcheck {

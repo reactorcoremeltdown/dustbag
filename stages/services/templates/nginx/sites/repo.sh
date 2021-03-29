@@ -48,7 +48,7 @@ server {
             return 404;
         }
         auth_basic "Protected area";
-        auth_basic_user_file /etc/datasources/htpasswd;
+        auth_basic_user_file /etc/nginx/htpasswd;
         proxy_pass http://127.0.0.1:5000;
         proxy_http_version 1.1;
         client_max_body_size 0;

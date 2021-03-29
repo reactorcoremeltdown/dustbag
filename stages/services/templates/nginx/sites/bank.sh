@@ -42,7 +42,7 @@ server {
     server_name bank.rcmd.space;
 
     auth_basic "Protected area";
-    auth_basic_user_file /etc/datasources/htpasswd;
+    auth_basic_user_file /etc/nginx/htpasswd;
 
     location / {
         proxy_pass http://127.0.0.1:55000;

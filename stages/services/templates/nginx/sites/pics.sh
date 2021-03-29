@@ -44,7 +44,7 @@ server {
     server_name ${SITE}.rcmd.space;
 
     auth_basic "Protected area";
-    auth_basic_user_file /etc/datasources/htpasswd;
+    auth_basic_user_file /etc/htpasswd/htpasswd;
 
     location / {
         proxy_pass http://127.0.0.1:27005;
