@@ -11,6 +11,7 @@ sudoers:
 configs:
 	install -D -v -m 640 \
 	stages/users/files/root/.gitconfig /root/
+	bash stages/users/templates/cloudflare.sh
 
 ledger_scripts:
 	install -d -m 755 --owner ledger --group ledger /home/ledger/.config
