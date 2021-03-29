@@ -55,6 +55,7 @@ nginx_sites:
 nginx_configs:
 	install -D -m 644 -v stages/services/files/etc/nginx/conf.d/log_format_json.conf /etc/nginx/conf.d
 	install -D -m 644 -v stages/services/files/etc/nginx/conf.d/traccar.conf /etc/nginx/conf.d
+	install -D -m 644 -v stages/services/files/etc/nginx/conf.d/limits.conf /etc/nginx/conf.d
 	
 nginx_test: nginx_configs nginx_sites
 	/sbin/nginx -t
