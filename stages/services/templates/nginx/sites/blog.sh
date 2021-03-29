@@ -12,47 +12,6 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-
-    access_log /var/log/nginx/blog.it-the-drote.tk_access.log json;
-    error_log /var/log/nginx/blog.it-the-drote.tk_error.log;
-
-    ### SSL cert files ###
-    ssl_certificate ${ssl_certificate};
-    ssl_certificate_key ${ssl_certificate_key};
-
-    ### Add SSL specific settings here ###
-    ssl_session_timeout 10m;
-
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers '${ssl_ciphers}';
-    ssl_prefer_server_ciphers on;
-
-    ### Compression
-    gzip on;
-    gzip_comp_level    5;
-    gzip_min_length    256;
-    gzip_proxied       any;
-    gzip_vary          on;
-    gzip_types
-    application/rss+xml
-    text/css;
-
-    root /opt/apps/blog;
-
-    server_name blog.it-the-drote.tk;
-
-    location / {
-        return 301 https://tiredsysadmin.cc\$request_uri;
-    }
-    location /rss.xml {
-        charset UTF-8;
-        try_files \$uri \$uri/ =404;
-    }
-}
-
-server {
     listen 80;
     listen [::]:80;
     server_name tiredsysadmin.cc;
