@@ -1,6 +1,8 @@
-users: early sudoers configs ledger_scripts
-	bash stages/users/templates/users.sh stages/users/variables/users.json
+users: early accounts sudoers configs ledger_scripts
 	@echo "$(ccgreen)Setting up users completed$(ccend)"
+
+accounts:
+	bash stages/users/templates/users.sh stages/users/variables/users.json
 
 sudoers:
 	install -D -v -m 440 \
