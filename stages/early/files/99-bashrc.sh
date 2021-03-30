@@ -53,13 +53,14 @@ function delimiter() {
 	fi
 }
 
+function usercolor() {
 if [[ $(whoami) = 'root' ]]; then
-    USERCOLOR='\[\e[31m\]'
+    printf '\[\e[31m\]'
 else
-    USERCOLOR='\[\e[36m\]'
-fi
+    printf '\[\e[36m\]'
+}
 
-export PS1="[${USERCOLOR}\A\[\e[m\]][\[\e[33m\]\h\[\e[m\]::\[\e[34m\]\W\[\e[m\]]\[\e[33m\]\`parse_git_branch\`\[\e[m\]\`delimiter\`"
+export PS1="[$(usercolor)\A\[\e[m\]][\[\e[33m\]\h\[\e[m\]::\[\e[34m\]\W\[\e[m\]]\[\e[33m\]\`parse_git_branch\`\[\e[m\]\`delimiter\`"
 
 
 alias ls='ls --color'
