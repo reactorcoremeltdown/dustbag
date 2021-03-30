@@ -1,0 +1,16 @@
+[auth]
+type = htpasswd
+htpasswd_filename = /etc/radicale/users
+# encryption method used in the htpasswd file
+htpasswd_encryption = bcrypt
+delay = 1
+
+[server]
+hosts = 127.0.0.1:5232
+max_connections = 20
+max_content_length = 100000000
+timeout = 30
+
+[storage]
+filesystem_folder = /var/lib/radicale/collections
+filesystem_fsync = True

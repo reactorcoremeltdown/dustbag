@@ -1,0 +1,11 @@
+# read access to root collection for all users
+[all-read-root-collection]
+user = .+
+collection =
+permission = r
+
+# write access to own files for each user
+[owner-write]
+user: .+
+collection: ^%(login)s(/.+)?$
+permission: rw

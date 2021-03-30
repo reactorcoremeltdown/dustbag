@@ -1,4 +1,4 @@
-services: users packages motd sshd crons laminar gitea nginx davfs2 podsync
+services: users packages motd sshd crons laminar gitea nginx davfs2 podsync radicale
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 motd:
@@ -100,3 +100,11 @@ podsync:
 	bash stages/services/templates/podsync/podsync.toml.sh stages/services/variables/services.json
 	systemctl restart podsync.service
 	@echo "$(ccgreen)Setting up podsync completed$(ccend)"
+
+radicale:
+	jq -cr '.secrets.radicale.users' /etc/secrets/secrets.json | base64 -d > /etc/radicale/users
+	chown radicale:radicale /etc/radicale/users && chmod 640 /etc/radicale/users
+	install -D -m 644 -v stages/services/files/etc/radicale/config /etc/radicale
+	install -D -m 644 -v stages/services/files/etc/radicale/logging /etc/radicale
+	install -D -m 644 -v stages/services/files/etc/radicale/rights /etc/radicale
+	systemctl daemon-reload && systemctl restart radicale
