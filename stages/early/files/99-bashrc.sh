@@ -54,10 +54,11 @@ function delimiter() {
 }
 
 function usercolor() {
-if [[ $(whoami) = 'root' ]]; then
-    printf '\[\e[31m\]'
-else
-    printf '\[\e[36m\]'
+    if [[ $(whoami) = 'root' ]]; then
+        printf '\[\e[31m\]'
+    else
+        printf '\[\e[36m\]'
+    fi
 }
 
 export PS1="[$(usercolor)\A\[\e[m\]][\[\e[33m\]\h\[\e[m\]::\[\e[34m\]\W\[\e[m\]]\[\e[33m\]\`parse_git_branch\`\[\e[m\]\`delimiter\`"
