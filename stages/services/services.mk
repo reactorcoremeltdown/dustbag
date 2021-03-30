@@ -1,5 +1,9 @@
-services: users packages sshd crons laminar gitea nginx davfs2 podsync
+services: users packages motd sshd crons laminar gitea nginx davfs2 podsync
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
+
+motd:
+	install -D -v -m 644 stages/services/files/etc/motd \
+		/etc/motd
 
 sshd_config:
 	install -D -v -m 644 \
