@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-bot_token=`cat /etc/datasources/gotify.json | jq -r .token`
+bot_token=` jq -r '.secrets.gotify.token' /etc/secrets/secrets.json `
 
 text=""
 tail="\\nHostname: $HOSTNAME\\nCheck name: $NAME\\nDescription: $MESSAGE"

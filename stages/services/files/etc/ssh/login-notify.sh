@@ -1,6 +1,6 @@
 #!/bin/sh
 
-bot_token=`cat /etc/datasources/gotify.json | jq -r .token`
+bot_token=`jq -r '.secrets.gotify.token' /etc/secrets/secrets.json`
 
 if [ "$PAM_TYPE" != "close_session" ]; then
     host="`hostname`"
