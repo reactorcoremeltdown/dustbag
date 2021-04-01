@@ -39,6 +39,11 @@ laminar:
 	systemctl daemon-reload
 	@echo "$(ccgreen)Setting up laminar completed$(ccend)"
 
+nginx_certificates:
+	bash stages/users/templates/cloudflare.sh
+	test -L /etc/letsencrypt/live/rcmd.space/fullchain.pem || certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.cloudflare.ini -d rcmd.space,*.rcmd.space --preferred-challenges dns-01
+	test -L /etc/letsencrypt/live/tiredsysadmin.cc/fullchain.pem || certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.cloudflare.ini -d tiredsysadmin.cc,*.tiredsysadmin.cc --preferred-challenges dns-01
+
 nginx_sites:
 	bash stages/services/templates/nginx/sites/api.sh
 	bash stages/services/templates/nginx/sites/bank.sh
@@ -62,7 +67,7 @@ nginx_configs:
 	install -D -m 644 -v stages/services/files/etc/nginx/conf.d/limits.conf /etc/nginx/conf.d
 	jq -cr '.secrets.nginx.htpasswd' /etc/secrets/secrets.json > /etc/nginx/htpasswd && chown root:www-data /etc/nginx/htpasswd && chmod 440 /etc/nginx/htpasswd
 	
-nginx_test: nginx_configs nginx_sites
+nginx_test: nginx_certificates nginx_configs nginx_sites
 	/sbin/nginx -t
 
 nginx_reload: nginx_test

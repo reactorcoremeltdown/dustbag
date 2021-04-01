@@ -11,9 +11,6 @@ sudoers:
 configs:
 	install -D -v -m 640 \
 	stages/users/files/root/.gitconfig /root/
-	bash stages/users/templates/cloudflare.sh
-	test -L /etc/letsencrypt/live/rcmd.space/fullchain.pem || certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.cloudflare.ini -d rcmd.space,*.rcmd.space --preferred-challenges dns-01
-	test -L /etc/letsencrypt/live/tiredsysadmin.cc/fullchain.pem || certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.cloudflare.ini -d tiredsysadmin.cc,*.tiredsysadmin.cc --preferred-challenges dns-01
 
 ledger_scripts:
 	install -d -m 755 --owner ledger --group ledger /home/ledger/.config
