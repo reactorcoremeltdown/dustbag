@@ -121,3 +121,9 @@ icecast:
 	systemctl enable icecast2.service
 	systemctl restart icecast2.service
 	@echo "$(ccgreen)Setting up icecast completed$(ccend)"
+
+mpd:
+	bash stages/services/templates/mpd/mpd.conf.sh
+	systemctl enable mpd.service
+	systemctl restart mpd.service
+	@echo "$(ccgreen)Setting up mpd completed$(ccend)"
