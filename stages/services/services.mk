@@ -116,7 +116,7 @@ radicale:
 	@echo "$(ccgreen)Setting up radicale completed$(ccend)"
 
 icecast:
-	bash stages/services/templates/icecast/config.xml.sh
+	bash stages/services/templates/icecast/icecast.xml.sh
 	systemctl enable icecast2.service
 	systemctl restart icecast2.service
 	@echo "$(ccgreen)Setting up icecast completed$(ccend)"
