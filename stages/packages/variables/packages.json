@@ -50,7 +50,7 @@
           "mariadb-server",
           "mpd",
           "mpc",
-          "ncpmcpp",
+          "ncmpcpp",
           "nginx",
           "openvpn",
           "percona-toolkit",
