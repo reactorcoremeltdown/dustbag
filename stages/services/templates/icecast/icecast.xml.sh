@@ -2,7 +2,9 @@
 
 set -e
 
-source <(jq -r '.secrets.icecast | to_entries[] | [.key,(.value|@sh)] | join("=")' /etc/secrets/secrets.json)
+source-password=$(jq -r '.secrets.icecast.source-password' /etc/secrets/secrets.json)
+relay-password=$(jq -r '.secrets.icecast.relay-password' /etc/secrets/secrets.json)
+admin-password=$(jq -r '.secrets.icecast.admin-password' /etc/secrets/secrets.json)
 
 cat <<EOF > /etc/icecast2/icecast.xml
 <icecast>
