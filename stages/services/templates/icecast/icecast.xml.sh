@@ -2,9 +2,9 @@
 
 set -e
 
-SOURCE_PASSWORD=$(jq -r '.secrets.icecast.source-password' /etc/secrets/secrets.json)
-RELAY_PASSWORD=$(jq -r '.secrets.icecast.relay-password' /etc/secrets/secrets.json)
-ADMIN_PASSWORD=$(jq -r '.secrets.icecast.admin-password' /etc/secrets/secrets.json)
+SOURCE_PASSWORD=$(jq -r '.secrets.icecast["source-password"]' /etc/secrets/secrets.json)
+RELAY_PASSWORD=$(jq -r '.secrets.icecast["relay-password"]' /etc/secrets/secrets.json)
+ADMIN_PASSWORD=$(jq -r '.secrets.icecast["admin-password"]' /etc/secrets/secrets.json)
 
 cat <<EOF > /etc/icecast2/icecast.xml
 <icecast>
