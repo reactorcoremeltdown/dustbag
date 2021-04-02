@@ -1,4 +1,4 @@
-services: users packages motd sshd crons laminar gitea nginx davfs2 podsync radicale
+services: users packages motd sshd crons laminar gitea nginx davfs2 podsync radicale icecast
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 motd:
@@ -113,3 +113,10 @@ radicale:
 	install -D -m 644 -v stages/services/files/etc/radicale/logging /etc/radicale
 	install -D -m 644 -v stages/services/files/etc/radicale/rights /etc/radicale
 	systemctl daemon-reload && systemctl restart radicale
+	@echo "$(ccgreen)Setting up radicale completed$(ccend)"
+
+icecast:
+	bash stages/services/templates/icecast/config.xml.sh
+	systemctl enable icecast2.service
+	systemctl restart icecast2.service
+	@echo "$(ccgreen)Setting up icecast completed$(ccend)"
