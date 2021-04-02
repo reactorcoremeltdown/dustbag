@@ -2,9 +2,9 @@
 
 set -e
 
-source-password=$(jq -r '.secrets.icecast.source-password' /etc/secrets/secrets.json)
-relay-password=$(jq -r '.secrets.icecast.relay-password' /etc/secrets/secrets.json)
-admin-password=$(jq -r '.secrets.icecast.admin-password' /etc/secrets/secrets.json)
+SOURCE_PASSWORD=$(jq -r '.secrets.icecast.source-password' /etc/secrets/secrets.json)
+RELAY_PASSWORD=$(jq -r '.secrets.icecast.relay-password' /etc/secrets/secrets.json)
+ADMIN_PASSWORD=$(jq -r '.secrets.icecast.admin-password' /etc/secrets/secrets.json)
 
 cat <<EOF > /etc/icecast2/icecast.xml
 <icecast>
@@ -22,10 +22,10 @@ cat <<EOF > /etc/icecast2/icecast.xml
     </limits>
 
     <authentication>
-        <source-password>${source-password}</source-password>
-        <relay-password>${relay-password}</relay-password>
+        <source-password>${SOURCE_PASSWORD}</source-password>
+        <relay-password>${RELAY_PASSWORD}</relay-password>
         <admin-user>admin</admin-user>
-        <admin-password>${admin-password}</admin-password>
+        <admin-password>${ADMIN_PASSWORD}</admin-password>
     </authentication>
 
 
