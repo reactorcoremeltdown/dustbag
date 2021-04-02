@@ -7,7 +7,7 @@ if [ "$PAM_TYPE" != "close_session" ]; then
     text="SSH Login: $PAM_USER from $PAM_RHOST on $host"
 
     case ${PAM_RHOST} in
-    "157.90.254.55" | "2a01:4f8:c010:730d::1" | "212.91.235.2" )
+    "157.90.254.55" | "2a01:4f8:c010:730d::1" | "46.88.65.90" )
         echo "${text}" | logger -t "sshd-login"
         ;;
     *)

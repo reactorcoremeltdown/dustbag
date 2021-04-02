@@ -8,6 +8,7 @@ for user in `jq -cr '.debian.users[]' ${1}`; do
     groups ${name} > /dev/null || /sbin/useradd -s ${shell} ${name}
     chsh -s ${shell} ${name}
     if [[ ${keygen} = 'true' ]]; then
+        install -d -m 700 --owner ${name} --group ${name} ${HOMEDIR}/.ssh
         test -f ${HOMEDIR}/.ssh/id_rsa || su ${name} -c "ssh-keygen -b 2048 -t rsa -f \"${HOMEDIR}/.ssh/id_rsa\" -q -N \"\""
     fi
     if [[ ${authorized_keys} = 'true' ]]; then
