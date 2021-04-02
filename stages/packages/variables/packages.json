@@ -61,6 +61,7 @@
           "podman",
           "python3-bcrypt",
           "python3-passlib",
+          "python3-pip",
           "sqlite3",
           "sshfs",
           "syncthing",

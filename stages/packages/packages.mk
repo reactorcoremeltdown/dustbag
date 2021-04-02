@@ -3,6 +3,7 @@ PACKAGES_LITE := $(shell jq -cr '.debian.packages_lite[]' stages/packages/variab
 
 packages: repos
 	dpkg-query -s $(PACKAGES) > /dev/null || apt-get install -y $(PACKAGES)
+	pip3 install --upgrade youtube-dl
 	@echo "$(ccgreen)Installing Debian packages completed$(ccend)"
 
 packages_lite: repos
