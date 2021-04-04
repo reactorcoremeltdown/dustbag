@@ -33,6 +33,12 @@
                     "format": "audio"
                 },
                 {
+                    "name": "stateazure",
+                    "url": "https://www.youtube.com/channel/UClKIjbgtWGzHtXhBDS_I0pg",
+                    "quality": "high",
+                    "format": "audio"
+                },
+                {
                     "name": "odysseus",
                     "url": "https://www.youtube.com/channel/UCwoTj-pZgZZ8DInOXSSLMmA",
                     "quality": "high",
