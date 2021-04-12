@@ -72,7 +72,7 @@ server {
         try_files \$uri \$uri/ =404;
     }
 
-    #include /opt/apps/site/configs/nginx/redirects.conf;
+    include /opt/apps/site/configs/nginx/redirects.conf;
 }
 
 server {
