@@ -8,7 +8,7 @@ ClientAliveCountMax 0
 
 PermitEmptyPasswords no
 
-AllowUsers rcmd ledger git
+AllowUsers rcmd ledger git radicale
 
 ChallengeResponseAuthentication no
 Protocol 2
