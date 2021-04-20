@@ -155,3 +155,5 @@ if [[ `uname -s` = 'Darwin' ]]; then
     # Minikube
     source "${HOME}/.kube/kube_zsh"
 fi
+
+source ${HOME}/.bashrc
