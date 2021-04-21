@@ -2,6 +2,8 @@
 
 bot_token=`jq -r '.secrets.gotify.token' /etc/secrets/secrets.json`
 
+env >> /tmp/ssh_env.log
+
 if [ "$PAM_TYPE" != "close_session" ]; then
     host="`hostname`"
     text="SSH Login: $PAM_USER from $PAM_RHOST on $host"
