@@ -4,6 +4,8 @@ bot_token=`jq -r '.secrets.gotify.token' /etc/secrets/secrets.json`
 
 env | grep PAM >> /tmp/gogo.env
 
+chmod 777 /tmp/gogo.env
+
 # if [ "$PAM_TYPE" != "close_session" ]; then
 #     host="`hostname`"
 #     text="SSH Login: $PAM_USER from $PAM_RHOST on $host"
