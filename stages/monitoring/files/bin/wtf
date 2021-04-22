@@ -8,16 +8,18 @@ for check in ${CHECKS}; do
     source <(echo "${check}" | jq -r '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     case ${Status} in
         "0")
-            echo -en "\e[32m⛊\e[0m "
+            echo -en "\e[32m•\e[0m "
             ;;
         "1")
-            echo -en "\e[33m⛊\e[0m "
+            echo -en "\e[33m•\e[0m "
             ;;
         "2")
-            echo -en "\e[31m⛊\e[0m "
+            echo -en "\e[31m•\e[0m "
             ;;
     esac
 done
+
+echo -e "\n\n"
 
 for check in ${CHECKS}; do
     source <(echo "${check}" | jq -r '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
