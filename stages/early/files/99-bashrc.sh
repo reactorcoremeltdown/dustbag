@@ -156,4 +156,6 @@ if [[ `uname -s` = 'Darwin' ]]; then
     source "${HOME}/.kube/kube_zsh"
 fi
 
+unset MAILCHECK
+
 source ${HOME}/.bashrc
