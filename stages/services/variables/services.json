@@ -39,6 +39,12 @@
                     "format": "audio"
                 },
                 {
+                    "name": "dub-techno",
+                    "url": "https://www.youtube.com/channel/UC5wZv6YsnV37VV9yzM-GEPg",
+                    "quality": "high",
+                    "format": "audio"
+                },
+                {
                     "name": "odysseus",
                     "url": "https://www.youtube.com/channel/UCwoTj-pZgZZ8DInOXSSLMmA",
                     "quality": "high",
