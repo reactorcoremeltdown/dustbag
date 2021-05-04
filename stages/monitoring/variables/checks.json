@@ -144,6 +144,17 @@
       "notify": "gotify"
     },
     {
+      "name": "ipv6",
+      "state": "present",
+      "plugin": "check_ipv6_connection",
+      "type": "alert",
+      "argument": "https://fast.com",
+      "interval": "1m",
+      "description": "Checking IPv6 availability",
+      "environment": "internal",
+      "notify": "gotify"
+    },
+    {
       "name": "api_https",
       "state": "present",
       "plugin": "check_https_certificate",
