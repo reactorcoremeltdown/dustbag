@@ -25,7 +25,7 @@ for check in ${CHECKS}; do
     source <(echo "${check}" | jq -r '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     case ${Status} in
         "1")
-            echo -e "\e[33m${Name}: WARNING  \e[0m\\e[90m${Output}\e[0mn\t${Description}\n"
+            echo -e "\e[33m${Name}: WARNING  \e[0m\e[90m${Output}\e[0m\n\t${Description}\n"
             ;;
         "2")
             echo -e "\e[31m${Name}: CRITICAL  \e[0m\e[31m${Output}\e[0m\n\t${Description}\n"
