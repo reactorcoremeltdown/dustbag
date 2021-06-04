@@ -55,7 +55,7 @@ server {
         expires 3d;
         try_files \$uri \$uri/ =404;
     }
-    location / {
+    location /media {
         expires 3d;
         try_files \$uri \$uri/ =404;
     }
