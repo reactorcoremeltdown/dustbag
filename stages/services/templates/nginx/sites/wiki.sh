@@ -46,7 +46,7 @@ server {
     server_name ${SITE}.rcmd.space;
 
     auth_basic "Protected area";
-    auth_basic_user_file /etc/secrets/htpasswd;
+    auth_basic_user_file /etc/nginx/htpasswd;
 
     location / {
         try_files /index.html =404;
