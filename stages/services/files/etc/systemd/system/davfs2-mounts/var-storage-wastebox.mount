@@ -6,7 +6,7 @@ Wants=network-online.target
 [Mount]
 What=https://u214397.your-storagebox.de
 Where=/var/storage/wastebox
-Options=rw,user,uid=syncthing,gid=syncthing,dir_mode=0775
+Options=rw,user,uid=syncthing,gid=syncthing,dir_mode=0775,file_mode=0664
 Type=davfs
 TimeoutSec=60
 
