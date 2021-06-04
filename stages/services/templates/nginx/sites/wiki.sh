@@ -41,7 +41,7 @@ server {
     application/rss+xml
     text/css;
 
-    root /opt/apps/blog;
+    root /opt/apps/wiki;
 
     server_name ${SITE}.rcmd.space;
 
