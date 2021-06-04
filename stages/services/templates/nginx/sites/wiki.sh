@@ -62,6 +62,9 @@ server {
     location /zettelkasten {
         try_files \$uri \$uri/ =404;
     }
+    location /records {
+        try_files \$uri \$uri/ =404;
+    }
 }
 
 EOF
