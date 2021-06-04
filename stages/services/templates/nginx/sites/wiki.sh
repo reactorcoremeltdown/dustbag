@@ -59,6 +59,9 @@ server {
         expires 3d;
         try_files \$uri \$uri/ =404;
     }
+    location /zettelkasten {
+        try_files \$uri \$uri/ =404;
+    }
 }
 
 EOF
