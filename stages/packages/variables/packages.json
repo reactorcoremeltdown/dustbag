@@ -54,6 +54,7 @@
           "ncmpcpp",
           "nginx",
           "openvpn",
+          "pandoc",
           "percona-toolkit",
           "postfix",
           "prosody",
