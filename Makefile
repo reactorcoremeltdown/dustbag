@@ -1,6 +1,6 @@
 all: early firewall repos packages users services monitoring last
 
-lite: early repos packages_lite users davfs2
+lite: early repos packages_lite users
 
 include variables/colors.mk
 include stages/early/early.mk
