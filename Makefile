@@ -1,6 +1,6 @@
 all: early firewall repos packages users services monitoring last
 
-lite: early repos packages_lite users
+lite: early repos packages_lite users_lite
 
 include variables/colors.mk
 include stages/early/early.mk
