@@ -192,7 +192,7 @@
       "state": "present",
       "description": "Gitea deployment on RCMD.SPACE",
       "plugin": "check_http_ping",
-      "argument": "https://git.rcmd.space/healthcheck",
+      "argument": "https://git.rcmd.space/rcmd/dummy/raw/branch/master/README.md",
       "interval": "1m",
       "notify": "telegram"
     },
