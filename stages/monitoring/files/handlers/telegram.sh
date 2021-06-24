@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-bot_token=`cat /etc/datasources/pisun.json | jq -r .token`
-chat_id=`cat /etc/datasources/pisun-default-chat`
+bot_token=`cat /etc/secrets/secrets.json | jq -r .secrets.telegram.bot_token`
+chat_id=`cat /etc/secrets/secrets.json | jq -r .secrets.telegram.chat_id`
 
 text=""
 tail="\\nHostname: $HOSTNAME\\nCheck name: $NAME\\nDescription: $MESSAGE"
