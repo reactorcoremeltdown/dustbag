@@ -21,7 +21,7 @@ EOF
 ### IPv6
 cat <<EOF > /etc/firewall/ip6tables-input
 /sbin/ip6tables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-/sbin/ip6tables -A INPUT -p icmp -j ACCEPT
+/sbin/ip6tables -A INPUT -p ipv6-icmp -j ACCEPT
 /sbin/ip6tables -A INPUT -i lo -j ACCEPT
 EOF
 
