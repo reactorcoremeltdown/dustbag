@@ -7,6 +7,7 @@ ClientAliveInterval 360
 ClientAliveCountMax 0
 
 PermitEmptyPasswords no
+PasswordAuthentication no
 
 AllowUsers rcmd ledger git radicale
 
