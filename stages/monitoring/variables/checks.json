@@ -9,7 +9,7 @@
       "interval": "10m",
       "description": "Radicale SSL certificate",
       "environment": "internal",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "provisioning",
@@ -20,7 +20,7 @@
       "interval": "15s",
       "description": "Provisioning file",
       "environment": "internal",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "site_https",
@@ -31,7 +31,7 @@
       "interval": "10m",
       "description": "Main Website SSL certificate",
       "environment": "internal",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "blog_https",
@@ -42,7 +42,7 @@
       "interval": "10m",
       "description": "Blog Website SSL certificate",
       "environment": "internal",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "transmission_https",
@@ -53,7 +53,7 @@
       "interval": "10m",
       "description": "Transmission SSL certificate",
       "environment": "internal",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "xmpp_server_ssl",
@@ -64,7 +64,7 @@
       "interval": "10m",
       "description": "XMPP server TLS certificate",
       "environment": "external",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "xmpp_server_alive",
@@ -75,7 +75,7 @@
       "interval": "1m",
       "description": "XMPP server",
       "environment": "external",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "podsync_service",
@@ -86,7 +86,7 @@
       "interval": "1m",
       "description": "Podcast sync service",
       "environment": "external",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "postfix_alive",
@@ -97,7 +97,7 @@
       "interval": "1m",
       "description": "Postfix",
       "environment": "internal",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "kernel_version",
@@ -108,7 +108,7 @@
       "interval": "48h",
       "description": "Linux Kernel Version",
       "environment": "internal",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "free_space",
@@ -119,7 +119,7 @@
       "interval": "3m",
       "description": "Free space on disk",
       "environment": "external",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "api_website",
@@ -130,7 +130,7 @@
       "interval": "1m",
       "description": "RCMD API website",
       "environment": "internal",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "ci_website",
@@ -141,7 +141,7 @@
       "interval": "1m",
       "description": "CI engine",
       "environment": "internal",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "ipv6",
@@ -152,7 +152,7 @@
       "interval": "1m",
       "description": "Checking IPv6 availability",
       "environment": "internal",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "api_https",
@@ -163,7 +163,7 @@
       "interval": "10m",
       "description": "API HTTPS certificate",
       "environment": "internal",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "traccar",
@@ -185,7 +185,7 @@
       "interval": "72h",
       "description": "CalDAV backups",
       "environment": "internal",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "gitea_website",
@@ -194,7 +194,7 @@
       "plugin": "check_http_ping",
       "argument": "https://git.rcmd.space/healthcheck",
       "interval": "1m",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "gitea_responsetime",
@@ -203,7 +203,7 @@
       "plugin": "check_site_response_time",
       "argument": "/var/log/nginx/git.rcmd.space_access.log",
       "interval": "10m",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "caldav_responsetime",
@@ -212,7 +212,7 @@
       "plugin": "check_site_response_time",
       "argument": "/var/log/nginx/dav.rcmd.space_access.log",
       "interval": "10m",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "site_responsetime",
@@ -221,7 +221,7 @@
       "plugin": "check_site_response_time",
       "argument": "/var/log/nginx/rcmd.space_access.log",
       "interval": "10m",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "api_responsetime",
@@ -230,7 +230,7 @@
       "plugin": "check_site_response_time",
       "argument": "/var/log/nginx/api.rcmd.space_access.log",
       "interval": "10m",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "blog_responsetime",
@@ -239,7 +239,7 @@
       "plugin": "check_site_response_time",
       "argument": "/var/log/nginx/tiredsysadmin.cc_access.log",
       "interval": "10m",
-      "notify": "gotify"
+      "notify": "telegram"
     },
     {
       "name": "website_backups",
@@ -250,7 +250,7 @@
       "interval": "72h",
       "description": "Website backups",
       "environment": "internal",
-      "notify": "gotify"
+      "notify": "telegram"
     }
   ]
 }
