@@ -48,7 +48,7 @@ server {
         auth_basic_user_file /etc/nginx/htpasswd;
         proxy_pass http://127.0.0.1:25010;
     }
-    location /healthcheck {
+    location /rcmd/dummy/raw/branch/master/README.md {
         proxy_pass http://127.0.0.1:25010;
     }
 }
