@@ -19,5 +19,5 @@ for user in `jq -cr '.debian.users[]' ${1}`; do
             -g ${name} -o ${name} \
             stages/users/files/authorized_keys ${HOMEDIR}/.ssh
     fi
-    usermod -G ${groups} ${name}
+    /sbin/usermod -G ${groups} ${name}
 done
