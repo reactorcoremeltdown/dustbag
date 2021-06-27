@@ -51,8 +51,8 @@ server {
 ##    auth_basic_user_file /etc/datasources/htpasswd;
 
     location / {
-        auth_basic "Protected area";
-        auth_basic_user_file /etc/nginx/htpasswd;
+##        auth_basic "Protected area";
+##        auth_basic_user_file /etc/nginx/htpasswd;
         proxy_set_header X-Forwarded-For \$remote_addr;
         proxy_set_header X-Forwarded-Proto \$scheme;
         proxy_set_header Host ${SITE}.rcmd.space;
