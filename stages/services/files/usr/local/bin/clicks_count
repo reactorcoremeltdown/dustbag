@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [[ "${1}" == "/var/log/nginx/rcmd.space_access.log" ]]; then
+    for i in $(cat ${1} | jq -c '. | select(.fields.status == "302")'); do
+        URI_FILTERED=$(echo "${i}" | jq -r .fields.request_uri | sed 's|/|_|g')
+        TIMESTAMP=$(echo "${i}" | jq -r ".@timestamp")
+        TIMESTAMP_UNIX=$(date --date="${TIMESTAMP}" +%s)
+        sqlite3 /var/spool/api/clicks.db "INSERT into clicks (name, timestamp) values (${URI_FILTERED}, ${TIMESTAMP_UNIX});"
+    done
+fi

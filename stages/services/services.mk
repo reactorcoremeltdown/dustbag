@@ -63,6 +63,8 @@ nginx_sites:
 	bash stages/services/templates/nginx/sites/transmission.sh
 
 nginx_configs:
+	install -D -m 644 -v stages/services/files/etc/logrotate.d/nginx /etc/logrotate.d
+	install -D -m 755 -v stages/services/files/usr/local/bin/clicks_count /usr/local/bin
 	install -D -m 644 -v stages/services/files/etc/nginx/conf.d/log_format_json.conf /etc/nginx/conf.d
 	install -D -m 644 -v stages/services/files/etc/nginx/conf.d/traccar.conf /etc/nginx/conf.d
 	install -D -m 644 -v stages/services/files/etc/nginx/conf.d/limits.conf /etc/nginx/conf.d
