@@ -56,7 +56,7 @@
           "nginx",
           "openvpn",
           "pandoc",
-          "pdflatex",
+          "texlive-latex-base",
           "percona-toolkit",
           "postfix",
           "prosody",
