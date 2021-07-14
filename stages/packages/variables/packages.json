@@ -57,6 +57,7 @@
           "openvpn",
           "pandoc",
           "texlive-latex-base",
+          "texlive-fonts-recommended",
           "lmodern",
           "percona-toolkit",
           "postfix",
