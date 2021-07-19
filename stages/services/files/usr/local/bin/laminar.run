@@ -7,3 +7,12 @@ else
 fi
 
 cd ${REPO_NAME} && sudo /usr/bin/make
+
+TELEGRAM_BOT_TOKEN=$(jq .secrets.telegram.bot_token /etc/secrets/secrets.json)
+TELEGRAM_CHAT_ID=$(jq .secrets.telegram.chat_id /etc/secrets/secrets.json)
+
+TEXT="📦 ${REPO_NAME} build completed"
+
+curl -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+    -H 'Content-Type: application/json' \
+    -d "{ \"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"${TEXT}\" }"
