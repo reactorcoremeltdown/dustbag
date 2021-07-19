@@ -1,1 +1,3 @@
 git ALL= NOPASSWD: /usr/bin/make
+git ALL= NOPASSWD: /usr/bin/jq .secrets.telegram.bot_token /etc/secrets/secrets.json
+git ALL= NOPASSWD: /usr/bin/jq .secrets.telegram.chat_id /etc/secrets/secrets.json
