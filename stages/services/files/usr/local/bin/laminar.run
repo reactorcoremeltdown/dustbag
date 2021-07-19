@@ -8,8 +8,8 @@ fi
 
 cd ${REPO_NAME} && sudo /usr/bin/make
 
-TELEGRAM_BOT_TOKEN=$(sudo /usr/bin/jq .secrets.telegram.bot_token /etc/secrets/secrets.json)
-TELEGRAM_CHAT_ID=$(sudo /usr/bin/jq .secrets.telegram.chat_id /etc/secrets/secrets.json)
+TELEGRAM_BOT_TOKEN=$(sudo /usr/bin/jq -r .secrets.telegram.bot_token /etc/secrets/secrets.json)
+TELEGRAM_CHAT_ID=$(sudo /usr/bin/jq -r .secrets.telegram.chat_id /etc/secrets/secrets.json)
 
 TEXT="📦 ${REPO_NAME} build completed"
 
