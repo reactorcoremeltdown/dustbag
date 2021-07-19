@@ -13,6 +13,6 @@ TELEGRAM_CHAT_ID=$(sudo /usr/bin/jq -r .secrets.telegram.chat_id /etc/secrets/se
 
 TEXT="📦 ${REPO_NAME} build completed"
 
-curl -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
     -H 'Content-Type: application/json' \
     -d "{ \"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"${TEXT}\" }"
