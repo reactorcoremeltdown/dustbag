@@ -20,7 +20,8 @@
         { "name": "transmission dht", "port": 51413, "protocol": "tcp", "address_v4": "worldv4", "address_v6": "worldv6"},
         { "name": "transmission dht udp", "port": 51413, "protocol": "udp", "address_v4": "worldv4", "address_v6": "worldv6"},
         { "name": "Syncthing TCP", "port": 22000, "protocol": "tcp", "address_v4": "worldv4", "address_v6": "worldv6"},
-        { "name": "Syncthing UDP", "port": 21027, "protocol": "udp", "address_v4": "worldv4", "address_v6": "worldv6"},
+        { "name": "Syncthing UDP 1", "port": 22000, "protocol": "udp", "address_v4": "worldv4", "address_v6": "worldv6"},
+        { "name": "Syncthing UDP 2", "port": 21027, "protocol": "udp", "address_v4": "worldv4", "address_v6": "worldv6"},
         { "name": "Mosh server", "port": "60000:61000", "protocol": "udp", "address_v4": "worldv4", "address_v6": "worldv6"}
     ]
 }
