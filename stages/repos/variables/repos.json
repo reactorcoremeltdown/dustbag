@@ -10,7 +10,14 @@
                 "state": "present",
                 "url": "http://deb.debian.org/debian",
                 "distro": "buster-backports",
-                "section": "main" }
+                "section": "main" },
+            { "name": "syncthing",
+                "state": "present",
+                "key": "https://syncthing.net/release-key.gpg",
+                "url": "https://apt.syncthing.net/",
+                "distro": "syncthing",
+                "section": "stable"
+            }
         ]
     }
 }
