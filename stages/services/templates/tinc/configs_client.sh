@@ -12,13 +12,13 @@ Interface = tun0
 ConnectTo = ${hostname}
 EOF
 
-machine_ip=`echo "obase=10; ibase=16; $(tail -c 6 /etc/machine-id | awk '{print toupper($0)}') % 100"`
+machine_ip=`echo "obase=10; ibase=16; $(tail -c 6 /etc/machine-id | awk '{print toupper($0)}') % 100" | bc`
 
-test -f /etc/tinc/${netname}/hosts/${hostname} || cat <<EOF > /etc/tinc/${netname}/hosts/${hostname}
+test -f /etc/tinc/${netname}/hosts/$(hostname) || cat <<EOF > /etc/tinc/${netname}/hosts/$(hostname)
 Subnet = ${cidr_prefix}${machine_ip}/32
 EOF
 
-grep -oq "BEGIN RSA PUBLIC KEY" /etc/tinc/${netname}/hosts/${hostname} || tincd -n ${netname} -K4096
+grep -oq "BEGIN RSA PUBLIC KEY" /etc/tinc/${netname}/hosts/$(hostname) || tincd -n ${netname} -K4096
 
 cat <<EOF > /etc/tinc/${netname}/tinc-up
 #!/bin/sh
