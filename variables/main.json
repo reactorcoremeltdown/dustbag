@@ -1,5 +1,5 @@
 {
-    "hostname": "buster.rcmd.space",
+    "hostname": "depot.rcmd.space",
     "nginx": {
         "variables": {
             "ssl_certificate": "/etc/letsencrypt/live/it-the-drote.tk/fullchain.pem",
