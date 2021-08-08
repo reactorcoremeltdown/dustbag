@@ -1,4 +1,4 @@
-services: users packages motd sshd crons laminar gitea nginx davfs2 podsync radicale icecast mpd
+services: users packages motd sshd crons laminar gitea nginx davfs2 podsync radicale icecast mpd tinc
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 motd:
@@ -130,3 +130,6 @@ mpd:
 	systemctl enable mpd.service
 	systemctl restart mpd.service
 	@echo "$(ccgreen)Setting up mpd completed$(ccend)"
+
+tinc:
+	bash stages/services/templates/tinc/configs.sh

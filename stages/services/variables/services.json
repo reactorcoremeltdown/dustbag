@@ -51,6 +51,12 @@
                     "format": "audio"
                 }
             ]
+        },
+        "tinc": {
+            "netname": "clusternet",
+            "fqdn": "depot.rcmd.space",
+            "hostname": "depot",
+            "ip": "10.8.0.1"
         }
     }
 }
