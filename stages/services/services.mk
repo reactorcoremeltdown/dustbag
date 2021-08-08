@@ -133,3 +133,8 @@ mpd:
 
 tinc:
 	bash stages/services/templates/tinc/configs.sh
+	@echo "$(ccgreen)Setting up tinc completed$(ccend)"
+
+tinc_client:
+	bash stages/services/templates/tinc/configs_client.sh
+	@echo "$(ccgreen)Setting up tinc completed$(ccend)"

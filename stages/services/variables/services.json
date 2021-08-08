@@ -56,7 +56,8 @@
             "netname": "clusternet",
             "fqdn": "depot.rcmd.space",
             "hostname": "depot",
-            "ip": "10.8.0.1"
+            "ip": "10.8.0.1",
+            "cidr_prefix": "10.8.0."
         }
     }
 }
