@@ -22,7 +22,7 @@ grep -oq "BEGIN RSA PUBLIC KEY" /etc/tinc/${netname}/hosts/$(hostname) || tincd 
 
 cat <<EOF > /etc/tinc/${netname}/tinc-up
 #!/bin/sh
-ifconfig \$INTERFACE ${machine_ip} netmask 255.255.255.0
+ifconfig \$INTERFACE ${cidr_prefix}${machine_ip} netmask 255.255.255.0
 EOF
 
 cat <<EOF > /etc/tinc/${netname}/tinc-down
