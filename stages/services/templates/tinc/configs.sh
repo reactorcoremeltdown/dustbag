@@ -16,7 +16,7 @@ Address = $(dig +short ${fqdn})
 Subnet = ${ip}/32
 EOF
 
-tincd -n ${netname} -K4096
+grep -oq "BEGIN RSA PUBLIC KEY" /etc/tinc/${netname}/hosts/${hostname} || tincd -n ${netname} -K4096
 
 cat <<EOF > /etc/tinc/${netname}/tinc-up
 #!/bin/sh
