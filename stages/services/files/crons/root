@@ -19,3 +19,6 @@
 
 ### Podman cleanup
 10 3 * * * podman container prune --force && podman image prune --all --force
+### Laminar cleanup
+20 3 * * * rm -fr /var/lib/laminar/run/*
+
