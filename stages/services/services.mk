@@ -137,3 +137,8 @@ tinc:
 tinc_client:
 	bash stages/services/templates/tinc/configs_client.sh
 	@echo "$(ccgreen)Setting up tinc completed$(ccend)"
+
+dnsmasq:
+	apt-get -y install dnsmasq
+	install -D -m 644 stages/services/files/etc/dnsmasq.d/distracting-websites.conf /etc/dnsmasq.d
+	systemctl restart dnsmasq
