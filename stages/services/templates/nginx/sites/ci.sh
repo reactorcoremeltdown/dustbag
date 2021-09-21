@@ -18,7 +18,7 @@ server {
     listen [::]:443 ssl http2;
 
     access_log /var/log/nginx/${SITE}.rcmd.space_access.log json;
-    error_log /var/log/nginx/${SITE}.rcmd.space_error.log debug;
+    error_log /var/log/nginx/${SITE}.rcmd.space_error.log;
 
     ### SSL cert files ###
     ssl_certificate ${new_ssl_certificate};
