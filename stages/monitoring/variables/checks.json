@@ -46,7 +46,7 @@
     },
     {
       "name": "transmission_https",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_https_certificate",
       "type": "alert",
       "argument": "transmission.tiredsysadmin.cc",
@@ -68,7 +68,7 @@
     },
     {
       "name": "xmpp_server_alive",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_systemd_service",
       "type": "alert",
       "argument": "prosody.service",
@@ -133,6 +133,17 @@
       "notify": "telegram"
     },
     {
+      "name": "api_internal_website",
+      "state": "present",
+      "plugin": "check_http_ping",
+      "type": "alert",
+      "argument": "https://api.rcmd.space/internal/healthcheck",
+      "interval": "1m",
+      "description": "RCMD Internal API website",
+      "environment": "internal",
+      "notify": "telegram"
+    },
+    {
       "name": "ci_website",
       "state": "present",
       "plugin": "check_http_ping",
@@ -193,7 +204,7 @@
       "description": "Gitea deployment on RCMD.SPACE",
       "plugin": "check_http_ping",
       "argument": "https://git.rcmd.space/rcmd/dummy/raw/branch/master/README.md",
-      "interval": "1m",
+      "interval": "10m",
       "notify": "telegram"
     },
     {

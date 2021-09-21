@@ -48,18 +48,18 @@ nginx_sites:
 	bash stages/services/templates/nginx/sites/api.sh
 	bash stages/services/templates/nginx/sites/bank.sh
 	bash stages/services/templates/nginx/sites/ci.sh
-	bash stages/services/templates/nginx/sites/drone.sh
 	bash stages/services/templates/nginx/sites/dav.sh
 	bash stages/services/templates/nginx/sites/default.sh
 	bash stages/services/templates/nginx/sites/git.sh
 	bash stages/services/templates/nginx/sites/netdata.sh
-	bash stages/services/templates/nginx/sites/notifications.sh
 	bash stages/services/templates/nginx/sites/podcasts.sh
-	bash stages/services/templates/nginx/sites/pics.sh
 	bash stages/services/templates/nginx/sites/repo.sh
 	bash stages/services/templates/nginx/sites/sync.sh
 	bash stages/services/templates/nginx/sites/wiki.sh
-	bash stages/services/templates/nginx/sites/transmission.sh
+	test -f /etc/nginx/sites-enabled/notifications.conf && rm -f /etc/nginx/sites-enabled/notifications.conf
+	test -f /etc/nginx/sites-enabled/drone.conf && rm -f /etc/nginx/sites-enabled/drone.conf
+	test -f /etc/nginx/sites-enabled/pics.conf && rm -f /etc/nginx/sites-enabled/pics.conf
+	test -f /etc/nginx/sites-enabled/transmission.conf && rm -f /etc/nginx/sites-enabled/transmission.conf
 
 nginx_configs:
 	install -D -m 644 -v stages/services/files/etc/logrotate.d/nginx /etc/logrotate.d
