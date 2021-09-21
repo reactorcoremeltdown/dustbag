@@ -24,7 +24,7 @@ server {
     ssl_certificate ${new_ssl_certificate};
     ssl_certificate_key ${new_ssl_certificate_key};
 
-    ssl_client_certificate /etc/nginx/ca.crt;
+    ssl_client_certificate /etc/nginx/ssl/ca.crt;
     ssl_verify_client optional;
     ssl_verify_depth 2;
 
