@@ -56,10 +56,10 @@ nginx_sites:
 	bash stages/services/templates/nginx/sites/repo.sh
 	bash stages/services/templates/nginx/sites/sync.sh
 	bash stages/services/templates/nginx/sites/wiki.sh
-	test -l /etc/nginx/sites-enabled/notifications.conf && rm -f /etc/nginx/sites-enabled/notifications.conf || true
-	test -l /etc/nginx/sites-enabled/drone.conf && rm -f /etc/nginx/sites-enabled/drone.conf || true
-	test -l /etc/nginx/sites-enabled/pics.conf && rm -f /etc/nginx/sites-enabled/pics.conf || true
-	test -l /etc/nginx/sites-enabled/transmission.conf && rm -f /etc/nginx/sites-enabled/transmission.conf || true
+	test -L /etc/nginx/sites-enabled/notifications.conf && rm -f /etc/nginx/sites-enabled/notifications.conf || true
+	test -L /etc/nginx/sites-enabled/drone.conf && rm -f /etc/nginx/sites-enabled/drone.conf || true
+	test -L /etc/nginx/sites-enabled/pics.conf && rm -f /etc/nginx/sites-enabled/pics.conf || true
+	test -L /etc/nginx/sites-enabled/transmission.conf && rm -f /etc/nginx/sites-enabled/transmission.conf || true
 
 nginx_configs:
 	install -D -m 644 -v stages/services/files/etc/logrotate.d/nginx /etc/logrotate.d
