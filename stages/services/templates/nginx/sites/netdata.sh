@@ -21,6 +21,9 @@ server {
     ### SSL cert files ###
     ssl_certificate ${new_ssl_certificate};
     ssl_certificate_key ${new_ssl_certificate_key};
+    ssl_client_certificate /etc/nginx/ssl/ca.crt;
+    ssl_verify_client optional;
+    ssl_verify_depth 2;
 
     ### Add SSL specific settings here ###
     ssl_session_timeout 10m;
@@ -41,10 +44,13 @@ server {
 
     server_name netdata.rcmd.space;
 
-    auth_basic "Protected area";
-    auth_basic_user_file /etc/nginx/htpasswd;
+    # auth_basic "Protected area";
+    # auth_basic_user_file /etc/nginx/htpasswd;
 
     location / {
+        if (\$ssl_client_verify != SUCCESS) {
+            return 403;
+        }
         proxy_pass http://127.0.0.1:19999;
     }
 }
