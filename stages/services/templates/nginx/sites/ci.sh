@@ -26,6 +26,7 @@ server {
 
     ssl_client_certificate /etc/nginx/ca.crt;
     ssl_verify_client optional;
+    ssl_verify_depth 2;
 
     ### Add SSL specific settings here ###
     ssl_session_timeout 10m;
