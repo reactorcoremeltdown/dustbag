@@ -23,6 +23,9 @@ server {
     ### SSL cert files ###
     ssl_certificate ${new_ssl_certificate};
     ssl_certificate_key ${new_ssl_certificate_key};
+    ssl_client_certificate /etc/nginx/ssl/ca.crt;
+    ssl_verify_client optional;
+    ssl_verify_depth 2;
 
     ### Add SSL specific settings here ###
     ssl_session_timeout 10m;
@@ -45,24 +48,39 @@ server {
 
     server_name ${SITE}.rcmd.space;
 
-    auth_basic "Protected area";
-    auth_basic_user_file /etc/nginx/htpasswd;
+    # auth_basic "Protected area";
+    # auth_basic_user_file /etc/nginx/htpasswd;
 
     location / {
+        if (\$ssl_client_verify != SUCCESS) {
+            return 403;
+        }
         try_files /index.html =404;
     }
     location /assets {
+        if (\$ssl_client_verify != SUCCESS) {
+            return 403;
+        }
         expires 3d;
         try_files \$uri \$uri/ =404;
     }
     location /media {
+        if (\$ssl_client_verify != SUCCESS) {
+            return 403;
+        }
         expires 3d;
         try_files \$uri \$uri/ =404;
     }
     location /zettelkasten {
+        if (\$ssl_client_verify != SUCCESS) {
+            return 403;
+        }
         try_files \$uri \$uri/ =404;
     }
     location /records {
+        if (\$ssl_client_verify != SUCCESS) {
+            return 403;
+        }
         try_files \$uri \$uri/ =404;
     }
 }
