@@ -115,6 +115,7 @@ radicale:
 	install -D -m 644 -v stages/services/files/etc/radicale/config /etc/radicale
 	install -D -m 644 -v stages/services/files/etc/radicale/logging /etc/radicale
 	install -D -m 644 -v stages/services/files/etc/radicale/rights /etc/radicale
+	install -D -m 644 -v stages/services/files/etc/systemd/system/radicale.service /etc/systemd/system
 	systemctl daemon-reload && systemctl restart radicale
 	@echo "$(ccgreen)Setting up radicale completed$(ccend)"
 
