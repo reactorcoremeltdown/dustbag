@@ -1,2 +1,3 @@
 */10 * * * * /home/rcmd/bin/get-bandcamp-album.sh
 0 9 * * * /home/rcmd/bin/cronjobs/daily_visits.sh
+
