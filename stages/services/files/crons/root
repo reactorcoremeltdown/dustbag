@@ -7,15 +7,9 @@
 0 5 * * 6 /etc/monitoring/scripts/backups.sh /var/lib/radicale/collections/ file:///var/storage/wastebox/Backups/radicale/
 10 5 * * 6 /etc/monitoring/scripts/backups.sh /home/git/rcmd/ file:///var/storage/wastebox/Backups/websites/
 20 5 * * 6 /etc/monitoring/scripts/backups.sh /home/ledger/ file:///var/storage/wastebox/Backups/ledger/
-30 5 * * 6 /etc/monitoring/scripts/backups.sh /opt/apps/kanboard/data/ file:///var/storage/wastebox/Backups/kanboard/
-40 5 * * 6 /etc/monitoring/scripts/backups.sh /var/lib/gotify/ file:///var/storage/wastebox/Backups/gotify/
 42 5 * * * rm -f /var/storage/wastebox/Backups/gitea-dump.zip
 43 5 * * * mv /home/git/gitea-dump.zip /var/storage/wastebox/Backups/
 50 5 * * 6 /etc/monitoring/scripts/backups.sh /var/spool/api/ file:///var/storage/wastebox/Backups/api/
-
-
-### Docker cleanup
-0 3 * * * docker container prune --force && docker image prune --force
 
 ### Podman cleanup
 10 3 * * * podman container prune --force && podman image prune --all --force
