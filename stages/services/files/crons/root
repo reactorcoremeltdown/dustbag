@@ -1,4 +1,5 @@
 * * * * * curl -s http://127.0.0.1:8881 > /var/www/healthchecks/status.json
+*/10 * * * * /usr/local/bin/blog-stats-daily
 
 # HOW TO RESTORE:
 # duplicity restore file:///var/storage/wastebox/Backups/radicale/ ./test-collection/
