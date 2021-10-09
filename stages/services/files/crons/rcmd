@@ -1,7 +1,2 @@
 */10 * * * * /home/rcmd/bin/get-bandcamp-album.sh
-* * * * * /home/rcmd/bin/cronjobs/track_habits.sh
-# */15 * * * * /usr/bin/vdirsyncer sync
-0 3 * * * /usr/bin/mpc --host 10.8.0.1 shuffle
-0 2 * * * /usr/bin/mpc --host 10.8.0.1 save radio
-* * * * * /usr/bin/mpc --host 10.8.0.1 -q repeat on
-* * * * * /usr/bin/mpc --host 10.8.0.1 status | grep -oq 'playing' || /usr/bin/mpc --host 10.8.0.1 play
+0 9 * * * /home/rcmd/bin/cronjobs/daily_visits.sh
