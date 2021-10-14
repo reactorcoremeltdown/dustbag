@@ -13,8 +13,8 @@ done
 
 RESULT=$(echo "scale=2; ${SPENT} / 20" | bc | awk '{printf "%f", $0}')
 
-if [[ $(echo "${RESULT} > 2" | bc) -lt 1 ]]; then
-    ok "site's response time is below 2 seconds"
+if [[ $(echo "${RESULT} > 10" | bc) -lt 1 ]]; then
+    ok "site's response time is below 10 seconds"
 else
-    fail "site's response time went above 2 seconds: ${RESULT}"
+    fail "site's response time went above 10 seconds: ${RESULT}"
 fi

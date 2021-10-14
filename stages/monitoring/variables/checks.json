@@ -145,7 +145,7 @@
     },
     {
       "name": "ci_website",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_http_ping",
       "type": "alert",
       "argument": "https://ci.rcmd.space/badge/dummy.svg",
