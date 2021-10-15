@@ -4,7 +4,7 @@ source <(jq -r '.nginx.variables | to_entries[] | [.key,(.value|@sh)] | join("="
 
 SITE="freshrss"
 
-cat <<EOF > /etc/nginx/sites-available/git.conf
+cat <<EOF > /etc/nginx/sites-available/${SITE}.conf
 server {
   listen 80;
   listen [::]:80;
