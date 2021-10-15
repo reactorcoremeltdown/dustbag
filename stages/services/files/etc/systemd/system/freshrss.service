@@ -1,0 +1,21 @@
+[Unit]
+Description=News reader
+
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/podman rm -f freshrss
+ExecStart=/usr/bin/podman run \
+  --name=freshrss \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Europe/Berlin \
+  -p 26007:80 \
+  -v /var/storage/wastebox/tiredsysadmin.cc/freshrss:/config \
+  --restart unless-stopped \
+  lscr.io/linuxserver/freshrss
+ExecStop=/usr/bin/podman stop -t 2 freshrss
+ExecStopPost=-/usr/bin/podman rm -f freshrss
+ExecStopPost=/bin/sleep 2
+
+[Install]
+WantedBy=default.target

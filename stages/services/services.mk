@@ -1,4 +1,4 @@
-services: users packages motd sshd crons laminar gitea nginx davfs2 podsync radicale icecast mpd tinc
+services: users packages motd sshd crons laminar gitea nginx davfs2 podsync freshrss radicale icecast mpd tinc
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 motd:
@@ -51,15 +51,12 @@ nginx_sites:
 	bash stages/services/templates/nginx/sites/dav.sh
 	bash stages/services/templates/nginx/sites/default.sh
 	bash stages/services/templates/nginx/sites/git.sh
+	bash stages/services/templates/nginx/sites/fresh.sh
 	bash stages/services/templates/nginx/sites/netdata.sh
 	bash stages/services/templates/nginx/sites/podcasts.sh
 	bash stages/services/templates/nginx/sites/repo.sh
 	bash stages/services/templates/nginx/sites/sync.sh
 	bash stages/services/templates/nginx/sites/wiki.sh
-	test -L /etc/nginx/sites-enabled/notifications.conf && rm -f /etc/nginx/sites-enabled/notifications.conf || true
-	test -L /etc/nginx/sites-enabled/drone.conf && rm -f /etc/nginx/sites-enabled/drone.conf || true
-	test -L /etc/nginx/sites-enabled/pics.conf && rm -f /etc/nginx/sites-enabled/pics.conf || true
-	test -L /etc/nginx/sites-enabled/transmission.conf && rm -f /etc/nginx/sites-enabled/transmission.conf || true
 
 nginx_configs:
 	install -D -m 644 -v stages/services/files/etc/logrotate.d/nginx /etc/logrotate.d
@@ -108,6 +105,13 @@ podsync:
 	bash stages/services/templates/podsync/podsync.toml.sh stages/services/variables/services.json
 	systemctl restart podsync.service
 	@echo "$(ccgreen)Setting up podsync completed$(ccend)"
+
+freshrss:
+	install -D -m 644 -v stages/services/files/etc/systemd/system/freshrss.service /etc/systemd/system
+	systemctl daemon-reload
+	systemctl enable freshrss.service
+	systemctl stop freshrss.service
+	systemctl restart freshrss.service
 
 radicale:
 	jq -cr '.secrets.radicale.users' /etc/secrets/secrets.json | base64 -d > /etc/radicale/users
