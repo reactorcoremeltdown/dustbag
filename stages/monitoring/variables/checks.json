@@ -145,7 +145,7 @@
     },
     {
       "name": "ci_website",
-      "state": "absent",
+      "state": "present",
       "plugin": "check_http_ping",
       "type": "alert",
       "argument": "https://ci.rcmd.space/badge/dummy.svg",
@@ -200,7 +200,7 @@
     },
     {
       "name": "gitea_website",
-      "state": "present",
+      "state": "absent",
       "description": "Gitea deployment on RCMD.SPACE",
       "plugin": "check_http_ping",
       "argument": "https://git.rcmd.space/rcmd/dummy/raw/branch/master/README.md",
