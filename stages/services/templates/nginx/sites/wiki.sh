@@ -51,6 +51,7 @@ server {
     # auth_basic "Protected area";
     # auth_basic_user_file /etc/nginx/htpasswd;
 
+    error_page 404 /404.html;
     location / {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
