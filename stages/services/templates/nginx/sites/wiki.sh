@@ -58,6 +58,12 @@ server {
         }
         try_files /index.html =404;
     }
+    location /404.html {
+        if (\$ssl_client_verify != SUCCESS) {
+            return 403;
+        }
+        try_files /404.html =404;
+    }
     location /assets {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
