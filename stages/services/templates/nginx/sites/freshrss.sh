@@ -23,9 +23,6 @@ server {
     ### SSL cert files ###
     ssl_certificate ${new_ssl_certificate};
     ssl_certificate_key ${new_ssl_certificate_key};
-    ssl_client_certificate /etc/nginx/ssl/ca.crt;
-    ssl_verify_client optional;
-    ssl_verify_depth 2;
 
     ### Add SSL specific settings here ###
     ssl_session_timeout 10m;
@@ -49,9 +46,14 @@ server {
     # Enabling authentication, just to be sure
 
     location / {
-        if (\$ssl_client_verify != SUCCESS) {
-            return 403;
-        }
+        proxy_set_header X-Forwarded-For \$remote_addr;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        proxy_set_header Host ${SITE}.rcmd.space;
+        proxy_pass http://drone;
+        proxy_redirect off;
+        proxy_http_version 1.1;
+        proxy_buffering off;
+        chunked_transfer_encoding off;
         proxy_pass http://127.0.0.1:26007;
     }
 }
