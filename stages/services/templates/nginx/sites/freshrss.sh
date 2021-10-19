@@ -49,7 +49,6 @@ server {
         proxy_set_header X-Forwarded-For \$remote_addr;
         proxy_set_header X-Forwarded-Proto \$scheme;
         proxy_set_header Host ${SITE}.rcmd.space;
-        proxy_pass http://drone;
         proxy_redirect off;
         proxy_http_version 1.1;
         proxy_buffering off;
