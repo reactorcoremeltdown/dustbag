@@ -93,6 +93,15 @@ server {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
         }
+        if (\$request_method = OPTIONS ) {
+            add_header Access-Control-Allow-Origin *;
+            add_header Access-Control-Allow-Methods "GET, OPTIONS";
+            add_header Access-Control-Allow-Headers "origin, authorization, accept, X-Progress-ID";
+            add_header Access-Control-Allow-Credentials "true";
+            add_header Content-Length 0;
+            add_header Content-Type text/plain;
+            return 204;
+        }
         add_header Access-Control-Allow-Origin *;
         try_files \$uri \$uri/ =404;
     }
