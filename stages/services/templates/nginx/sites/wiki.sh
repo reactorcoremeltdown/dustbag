@@ -56,18 +56,21 @@ server {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
         }
+        add_header Access-Control-Allow-Origin *;
         try_files /index.html =404;
     }
     location /404.html {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
         }
+        add_header Access-Control-Allow-Origin *;
         try_files /404.html =404;
     }
     location /assets {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
         }
+        add_header Access-Control-Allow-Origin *;
         expires 3d;
         try_files \$uri \$uri/ =404;
     }
@@ -75,6 +78,7 @@ server {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
         }
+        add_header Access-Control-Allow-Origin *;
         expires 3d;
         try_files \$uri \$uri/ =404;
     }
@@ -82,12 +86,14 @@ server {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
         }
+        add_header Access-Control-Allow-Origin *;
         try_files \$uri \$uri/ =404;
     }
     location /records {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
         }
+        add_header Access-Control-Allow-Origin *;
         try_files \$uri \$uri/ =404;
     }
 }
