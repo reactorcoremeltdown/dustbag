@@ -86,7 +86,7 @@ server {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
         }
-        root /var/storage/wastebox/tiredsysadmin.cc/wiki/pictures;
+        root /var/storage/wastebox/tiredsysadmin.cc/wiki;
         add_header Access-Control-Allow-Origin *;
         expires 3d;
         try_files \$uri \$uri/ =404;
