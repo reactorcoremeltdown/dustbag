@@ -82,6 +82,15 @@ server {
         expires 3d;
         try_files \$uri \$uri/ =404;
     }
+    location /pictures {
+        if (\$ssl_client_verify != SUCCESS) {
+            return 403;
+        }
+        root /var/storage/wastebox/tiredsysadmin.cc/wiki/pictures;
+        add_header Access-Control-Allow-Origin *;
+        expires 3d;
+        try_files \$uri \$uri/ =404;
+    }
     location /zettelkasten {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
