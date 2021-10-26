@@ -56,18 +56,21 @@ server {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
         }
+        add_header Access-Control-Allow-Origin *;
         try_files /index.html =404;
     }
     location /404.html {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
         }
+        add_header Access-Control-Allow-Origin *;
         try_files /404.html =404;
     }
     location /assets {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
         }
+        add_header Access-Control-Allow-Origin *;
         expires 3d;
         try_files \$uri \$uri/ =404;
     }
@@ -75,6 +78,16 @@ server {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
         }
+        add_header Access-Control-Allow-Origin *;
+        expires 3d;
+        try_files \$uri \$uri/ =404;
+    }
+    location /pictures {
+        if (\$ssl_client_verify != SUCCESS) {
+            return 403;
+        }
+        root /var/storage/wastebox/tiredsysadmin.cc/wiki;
+        add_header Access-Control-Allow-Origin *;
         expires 3d;
         try_files \$uri \$uri/ =404;
     }
@@ -82,12 +95,23 @@ server {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
         }
+        add_header Access-Control-Allow-Origin *;
         try_files \$uri \$uri/ =404;
     }
     location /records {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
         }
+        if (\$request_method = OPTIONS ) {
+            add_header Access-Control-Allow-Origin *;
+            add_header Access-Control-Allow-Methods "GET, OPTIONS";
+            add_header Access-Control-Allow-Headers "origin, authorization, accept, X-Progress-ID, URI";
+            add_header Access-Control-Allow-Credentials "true";
+            add_header Content-Length 0;
+            add_header Content-Type text/plain;
+            return 204;
+        }
+        add_header Access-Control-Allow-Origin *;
         try_files \$uri \$uri/ =404;
     }
 }
