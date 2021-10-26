@@ -5,7 +5,7 @@ FAILURE=0
 if [[ ${REPO_NAME} = 'blog' || ${REPO_NAME} = 'rcmd.space' ]]; then
     git clone git@git.rcmd.space:rcmd/${REPO_NAME}.git
 else
-    git clone --depth 1 git@git.rcmd.space:rcmd/${REPO_NAME}.git
+    git clone --depth 2 git@git.rcmd.space:rcmd/${REPO_NAME}.git
 fi
 
 cd ${REPO_NAME} && sudo /usr/bin/make || FAILURE=1
