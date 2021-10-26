@@ -15,32 +15,14 @@
                     "format": "audio"
                 },
                 {
-                    "name": "cryochamber",
-                    "url": "https://www.youtube.com/playlist?list=PL99czue-ivEs-qIB4CJTOI9eOqOta_uHd",
-                    "quality": "high",
-                    "format": "audio"
-                },
-                {
-                    "name": "ambient-techno",
-                    "url": "https://www.youtube.com/playlist?list=PLIWQnHTodlVdfIUET43Bw1CDljGLtoKFL",
-                    "quality": "high",
-                    "format": "audio"
-                },
-                {
-                    "name": "virtuawaves",
-                    "url": "https://www.youtube.com/channel/UC0DfwTgHp4k1ibbtDmEiSJg",
-                    "quality": "high",
-                    "format": "audio"
-                },
-                {
                     "name": "stateazure",
                     "url": "https://www.youtube.com/channel/UClKIjbgtWGzHtXhBDS_I0pg",
                     "quality": "high",
                     "format": "audio"
                 },
                 {
-                    "name": "dub-techno",
-                    "url": "https://www.youtube.com/channel/UC5wZv6YsnV37VV9yzM-GEPg",
+                    "name": "stateazure",
+                    "url": "https://www.youtube.com/channel/UClKIjbgtWGzHtXhBDS_I0pg",
                     "quality": "high",
                     "format": "audio"
                 },
