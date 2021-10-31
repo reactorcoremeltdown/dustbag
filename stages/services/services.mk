@@ -1,4 +1,4 @@
-services: users packages motd sshd crons davfs2 laminar gitea nginx podsync freshrss radicale icecast mpd tinc
+services: users packages motd sshd crons davfs2 registry laminar gitea nginx podsync freshrss radicale icecast mpd tinc
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 motd:
@@ -145,7 +145,7 @@ tinc_client:
 	bash stages/services/templates/tinc/configs_client.sh
 	@echo "$(ccgreen)Setting up tinc completed$(ccend)"
 
-dnsmasq:
-	apt-get -y install dnsmasq
-	install -D -m 644 stages/services/files/etc/dnsmasq.d/distracting-websites.conf /etc/dnsmasq.d
-	systemctl restart dnsmasq
+registry:
+	install -D -m 644 stages/services/files/etc/docker/registry/config.yml /etc/docker/registry
+	systemctl restart docker-registry
+	@echo "$(ccgreen)Setting up docker registry completed$(ccend)"
