@@ -41,8 +41,8 @@ laminar:
 
 nginx_certificates:
 	bash stages/users/templates/cloudflare.sh
-	test -L /etc/letsencrypt/live/rcmd.space/fullchain.pem || certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.cloudflare.ini -d rcmd.space,*.rcmd.space --preferred-challenges dns-01
-	test -L /etc/letsencrypt/live/tiredsysadmin.cc/fullchain.pem || certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.cloudflare.ini -d tiredsysadmin.cc,*.tiredsysadmin.cc --preferred-challenges dns-01
+	test -L /etc/letsencrypt/live/rcmd.space/fullchain.pem || yes | certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.cloudflare.ini -d rcmd.space,*.rcmd.space --preferred-challenges dns-01
+	test -L /etc/letsencrypt/live/tiredsysadmin.cc/fullchain.pem || yes | certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.cloudflare.ini -d tiredsysadmin.cc,*.tiredsysadmin.cc --preferred-challenges dns-01
 
 nginx_sites:
 	bash stages/services/templates/nginx/sites/api.sh
