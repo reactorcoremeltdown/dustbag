@@ -34,7 +34,7 @@ endif
 
 earlystagepackages:
 ifneq ($(RETRY), true)
-	apt update && apt install -y dirmngr \
+	apt update && DEBIAN_FRONTEND=noninteractive apt install -y dirmngr \
 		apt-transport-https \
 		certbot \
 		python3-certbot-dns-cloudflare \
