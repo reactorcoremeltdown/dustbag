@@ -1,5 +1,6 @@
 [Unit]
 Description=Hetzner StorageBox
+Before=nginx.service
 After=network-online.target
 Wants=network-online.target
 
