@@ -29,7 +29,7 @@ endif
 
 mirrors:
 ifneq ($(RETRY), true)
-	install -D -m 644 stages/early/files/sources.list /etc/apt/sources.list
+	install -D -m 644 stages/early/files/sources.list /etc/apt
 endif
 
 keygen:
