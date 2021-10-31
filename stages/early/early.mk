@@ -39,7 +39,7 @@ endif
 
 earlystagepackages:
 ifneq ($(RETRY), true)
-	apt update && DEBIAN_FRONTEND=noninteractive apt install -y dirmngr \
+	apt update && DEBIAN_FRONTEND=noninteractive apt -o Acquire::ForceIPv4=true install -y dirmngr \
 		apt-transport-https \
 		certbot \
 		python3-certbot-dns-cloudflare \
