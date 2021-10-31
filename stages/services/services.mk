@@ -146,6 +146,7 @@ tinc_client:
 	@echo "$(ccgreen)Setting up tinc completed$(ccend)"
 
 registry:
+	install -D -m 644 stages/services/files/etc/containers/registries.conf /etc/containers
 	install -D -m 644 stages/services/files/etc/docker/registry/config.yml /etc/docker/registry
 	systemctl restart docker-registry
 	@echo "$(ccgreen)Setting up docker registry completed$(ccend)"
