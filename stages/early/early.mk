@@ -27,6 +27,11 @@ ifneq ($(RETRY), true)
 	chown root:root /etc/apt/apt.conf.d/forceuserdefinedconfigs
 endif
 
+mirrors:
+ifneq ($(RETRY), true)
+	install -D -m 644 stages/early/files/sources.list /etc/apt/sources.list
+endif
+
 keygen:
 ifneq ($(RETRY), true)
 	test -f /root/.ssh/id_rsa || ssh-keygen -t rsa -N '' -f /root/.ssh/id_rsa
