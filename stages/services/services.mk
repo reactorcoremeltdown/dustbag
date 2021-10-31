@@ -41,8 +41,8 @@ laminar:
 
 nginx_certificates:
 	bash stages/users/templates/cloudflare.sh
-	test -L /etc/letsencrypt/live/rcmd.space/fullchain.pem || yes | certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.cloudflare.ini -d rcmd.space,*.rcmd.space --preferred-challenges dns-01
-	test -L /etc/letsencrypt/live/tiredsysadmin.cc/fullchain.pem || yes | certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.cloudflare.ini -d tiredsysadmin.cc,*.tiredsysadmin.cc --preferred-challenges dns-01
+	test -L /etc/letsencrypt/live/rcmd.space/fullchain.pem || certbot certonly --agree-tos --email azer.abdullaev.berlin@gmail.com --dns-cloudflare --dns-cloudflare-credentials /root/.cloudflare.ini -d rcmd.space,*.rcmd.space --preferred-challenges dns-01
+	test -L /etc/letsencrypt/live/tiredsysadmin.cc/fullchain.pem || certbot certonly --agree-tos --email azer.abdullaev.berlin@gmail.com --dns-cloudflare --dns-cloudflare-credentials /root/.cloudflare.ini -d tiredsysadmin.cc,*.tiredsysadmin.cc --preferred-challenges dns-01
 	test -d /etc/nginx/ssl || mkdir -p /etc/nginx/ssl
 	test -f /etc/nginx/ssl/ca.crt || openssl req  -nodes -newkey rsa:4096 -days 365 -x509 -keyout /etc/nginx/ssl/ca.key -out /etc/nginx/ssl/ca.crt -subj '/C=DE/ST=Berlin/L=Berlin/O=RCMD/OU=Funkhaus/CN=RCMD Server'
 
