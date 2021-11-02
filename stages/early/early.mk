@@ -2,7 +2,7 @@ UNAME := $(shell uname)
 RETRY := $(shell test -f /etc/default/earlystageconfigs && echo "true")
 HOSTNAME := $(shell cat variables/main.json | jq -r .hostname)
 
-early: test shell_history apt_configs keygen earlystagepackages locales profiles
+early: test shell_history mirrors apt_configs keygen earlystagepackages locales profiles
 	echo "provisioning done" > /etc/default/earlystageconfigs;
 	@echo "$(ccgreen)Early provisioning stage completed$(ccend)"
 
@@ -27,6 +27,11 @@ ifneq ($(RETRY), true)
 	chown root:root /etc/apt/apt.conf.d/forceuserdefinedconfigs
 endif
 
+mirrors:
+ifneq ($(RETRY), true)
+	install -D -m 644 stages/early/files/sources.list /etc/apt
+endif
+
 keygen:
 ifneq ($(RETRY), true)
 	test -f /root/.ssh/id_rsa || ssh-keygen -t rsa -N '' -f /root/.ssh/id_rsa
@@ -34,7 +39,7 @@ endif
 
 earlystagepackages:
 ifneq ($(RETRY), true)
-	apt update && apt install -y dirmngr \
+	apt update && DEBIAN_FRONTEND=noninteractive apt -o Acquire::ForceIPv4=true install -y dirmngr \
 		apt-transport-https \
 		certbot \
 		python3-certbot-dns-cloudflare \

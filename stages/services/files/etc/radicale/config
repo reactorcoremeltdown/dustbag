@@ -13,4 +13,3 @@ timeout = 30
 
 [storage]
 filesystem_folder = /var/lib/radicale/collections
-filesystem_fsync = True

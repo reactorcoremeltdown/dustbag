@@ -3,7 +3,7 @@
 
 PermitRootLogin no
 
-ClientAliveInterval 360
+ClientAliveInterval 3600
 ClientAliveCountMax 0
 
 PermitEmptyPasswords no
