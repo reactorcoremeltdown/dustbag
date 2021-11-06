@@ -8,7 +8,7 @@ cat <<EOF > /etc/nginx/sites-available/bank.conf
 server {
   listen 80;
   listen [::]:80;
-  server_name ${site}.rcmd.space;
+  server_name ${SITE}.rcmd.space;
 
   return 301 https://\$server_name\$request_uri;
 }
@@ -45,7 +45,7 @@ server {
     application/rss+xml
     text/css;
 
-    server_name ${site}.rcmd.space;
+    server_name ${SITE}.rcmd.space;
 
     # auth_basic "Protected area";
     # auth_basic_user_file /etc/nginx/htpasswd;
