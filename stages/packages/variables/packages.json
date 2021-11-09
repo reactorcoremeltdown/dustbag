@@ -48,6 +48,7 @@
           "hledger-ui",
           "nfs-common",
           "iptables-persistent",
+          "libimage-exiftool-perl",
           "lua-dbi-mysql",
           "laminar",
           "mariadb-server",

@@ -1,4 +1,4 @@
-services: users packages motd sshd crons davfs2 registry laminar gitea nginx podsync freshrss radicale icecast mpd tinc
+services: users packages motd sshd crons davfs2 registry laminar gitea nginx podsync freshrss radicale icecast mpd tinc phockup
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 motd:
@@ -150,3 +150,8 @@ registry:
 	install -D -m 644 stages/services/files/etc/docker/registry/config.yml /etc/docker/registry
 	systemctl restart docker-registry
 	@echo "$(ccgreen)Setting up docker registry completed$(ccend)"
+
+phockup:
+	test -d /opt/phockup || mkdir -p /opt/phockup
+	install -D stages/services/files/opt/phockup/* /opt/phockup
+	ln -sf /opt/phockup/phockup.py /usr/local/bin/phockup
