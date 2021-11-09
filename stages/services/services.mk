@@ -153,5 +153,5 @@ registry:
 
 phockup:
 	test -d /opt/phockup || mkdir -p /opt/phockup
-	install -D stages/services/files/opt/phockup/* /opt/phockup
+	rsync -av stages/services/files/opt/phockup/ /opt
 	ln -sf /opt/phockup/phockup.py /usr/local/bin/phockup
