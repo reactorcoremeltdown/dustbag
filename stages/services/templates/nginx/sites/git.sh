@@ -55,6 +55,14 @@ server {
     location /rcmd/dummy/raw/branch/master/README.md {
         proxy_pass http://127.0.0.1:25010;
     }
+    location /media {
+        if (\$ssl_client_verify != SUCCESS) {
+            return 403;
+        }
+        root /var/storage/wastebox/tiredsysadmin.cc/wiki;
+        expires 30d;
+        try_files \$uri \$uri/ =404;
+    }
 }
 EOF
 
