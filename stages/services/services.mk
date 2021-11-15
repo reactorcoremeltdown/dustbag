@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync freshrss radicale icecast mpd tinc
+=======
+services: users packages motd sshd crons davfs2 registry laminar gitea nginx podsync freshrss radicale icecast mpd tinc phockup
+>>>>>>> 1803e7fa7723d4f64814613817a5b940d18b20c9
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 motd:
@@ -145,7 +149,13 @@ tinc_client:
 	bash stages/services/templates/tinc/configs_client.sh
 	@echo "$(ccgreen)Setting up tinc completed$(ccend)"
 
-dnsmasq:
-	apt-get -y install dnsmasq
-	install -D -m 644 stages/services/files/etc/dnsmasq.d/distracting-websites.conf /etc/dnsmasq.d
-	systemctl restart dnsmasq
+registry:
+	install -D -m 644 stages/services/files/etc/containers/registries.conf /etc/containers
+	install -D -m 644 stages/services/files/etc/docker/registry/config.yml /etc/docker/registry
+	systemctl restart docker-registry
+	@echo "$(ccgreen)Setting up docker registry completed$(ccend)"
+
+phockup:
+	test -d /opt/phockup || mkdir -p /opt/phockup
+	rsync -av stages/services/files/opt/phockup/ /opt/phockup
+	ln -sf /opt/phockup/phockup.py /usr/local/bin/phockup

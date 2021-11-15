@@ -1,5 +1,5 @@
 {
-    "hostname": "depot.rcmd.space",
+    "hostname": "hangar.rcmd.space",
     "nginx": {
         "variables": {
             "ssl_certificate": "/etc/letsencrypt/live/it-the-drote.tk/fullchain.pem",
