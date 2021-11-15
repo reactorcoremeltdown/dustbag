@@ -39,6 +39,9 @@ laminar:
 	systemctl daemon-reload
 	@echo "$(ccgreen)Setting up laminar completed$(ccend)"
 
+nginx_packages:
+	dpkg-query -s nginx > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y nginx
+
 nginx_certificates:
 	bash stages/users/templates/cloudflare.sh
 	test -L /etc/letsencrypt/live/rcmd.space/fullchain.pem || yes | certbot certonly --agree-tos --email azer.abdullaev.berlin@gmail.com --dns-cloudflare --dns-cloudflare-credentials /root/.cloudflare.ini -d rcmd.space,*.rcmd.space --preferred-challenges dns-01
@@ -68,7 +71,7 @@ nginx_configs:
 	install -D -m 644 -v stages/services/files/etc/nginx/conf.d/limits.conf /etc/nginx/conf.d
 	jq -cr '.secrets.nginx.htpasswd' /etc/secrets/secrets.json > /etc/nginx/htpasswd && chown root:www-data /etc/nginx/htpasswd && chmod 440 /etc/nginx/htpasswd
 	
-nginx_test: nginx_certificates nginx_configs
+nginx_test: nginx_packages nginx_certificates nginx_configs
 	/sbin/nginx -t
 
 nginx_reload: nginx_test
