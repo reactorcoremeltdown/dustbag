@@ -54,6 +54,7 @@ server {
         proxy_set_header   X-Forwarded-For \$proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto http;
         proxy_redirect     http:// \$scheme://;
+        proxy_set_header   Host localhost;
 
         # The proxy must preserve the host because gotify verifies the host with the origin
         # for WebSocket connections
