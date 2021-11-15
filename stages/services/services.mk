@@ -63,6 +63,9 @@ nginx_sites:
 	bash stages/services/templates/nginx/sites/sync.sh
 	bash stages/services/templates/nginx/sites/wiki.sh
 
+nginx_printer:
+	bash stages/services/templates/nginx/sites/printer.sh
+
 nginx_configs:
 	install -D -m 644 -v stages/services/files/etc/logrotate.d/nginx /etc/logrotate.d
 	install -D -m 755 -v stages/services/files/usr/local/bin/clicks_count /usr/local/bin
