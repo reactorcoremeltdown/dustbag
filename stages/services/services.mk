@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync freshrss radicale icecast mpd tinc
-=======
-services: users packages motd sshd crons davfs2 registry laminar gitea nginx podsync freshrss radicale icecast mpd tinc phockup
->>>>>>> 1803e7fa7723d4f64814613817a5b940d18b20c9
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 motd:
