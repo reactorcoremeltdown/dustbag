@@ -2,7 +2,7 @@ all: early firewall repos packages users services monitoring last
 
 lite: early repos packages_lite users_lite tinc_client
 
-printserver: early packages_lite
+printserver: early packages_lite nginx
 
 include variables/colors.mk
 include stages/early/early.mk
