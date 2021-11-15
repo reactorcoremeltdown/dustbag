@@ -56,10 +56,6 @@ server {
         proxy_redirect     http:// \$scheme://;
         proxy_set_header   Host localhost;
 
-        # The proxy must preserve the host because gotify verifies the host with the origin
-        # for WebSocket connections
-        proxy_set_header   Host \$http_host;
-
         # These sets the timeout so that the websocket can stay alive
         proxy_connect_timeout   7m;
         proxy_send_timeout      7m;
