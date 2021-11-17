@@ -46,3 +46,18 @@ done
 gnuplot -p /home/ledger/plot.gnu < ${textdata_leisure}
 curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto" -F chat_id="${CHAT_ID}" -F "photo=@/home/ledger/out.png"
 rm ${textdata_leisure}
+
+textdata_service=$(mktemp)
+
+echo -e "category\tmonth_1\tmonth_2\tmonth_3\tmonth_4" >> ${textdata_service}
+
+for i in $(hledger -f /home/ledger/ledger.book balance -O json --depth 2 --monthly --begin=$(date --date="today - 4 months" "+%Y/%m/%d") service:vps service:domains | jq -cr '.prRows[]'); do
+        NAME=$(echo "${i}" | jq -cr '.prrName')
+        #echo ${i}
+        NUMBERS=$(echo "${i}" | jq -cr '.prrAmounts[][0].aquantity.floatingPoint' | sed "s|null|0|g" | tr "\n" "\t")
+        echo -e "${NAME}\t${NUMBERS}" >> ${textdata_service}
+done
+
+gnuplot -p /home/ledger/plot.gnu < ${textdata_service}
+curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto" -F chat_id="${CHAT_ID}" -F "photo=@/home/ledger/out.png"
+rm ${textdata_service}
