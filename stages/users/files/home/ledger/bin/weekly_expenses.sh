@@ -21,7 +21,7 @@ textdata_food=$(mktemp)
 
 echo -e "category\tweek_1\tweek_2\tweek_3\tweek_4" >> ${textdata_food}
 
-for i in $(hledger -f /home/ledger/ledger.book balance -O json --depth 2 --weekly --begin=$(date --date="today - 3 weeks" "+%Y/%m/%d") food | jq -cr '.prRows[]'); do
+for i in $(hledger -f /home/ledger/ledger.book balance -O json --depth 2 --weekly --begin=$(date --date="today - 3 weeks" "+%Y/%m/%d") food:cafe food:misc | jq -cr '.prRows[]'); do
         NAME=$(echo "${i}" | jq -cr '.prrName')
         #echo ${i}
         NUMBERS=$(echo "${i}" | jq -cr '.prrAmounts[][0].aquantity.floatingPoint' | sed "s|null|0|g" | tr "\n" "\t")
@@ -36,7 +36,7 @@ textdata_leisure=$(mktemp)
 
 echo -e "category\tweek_1\tweek_2\tweek_3\tweek_4" >> ${textdata_leisure}
 
-for i in $(hledger -f /home/ledger/ledger.book balance -O json --depth 2 --weekly --begin=$(date --date="today - 3 weeks" "+%Y/%m/%d") leisure | jq -cr '.prRows[]'); do
+for i in $(hledger -f /home/ledger/ledger.book balance -O json --depth 2 --weekly --begin=$(date --date="today - 3 weeks" "+%Y/%m/%d") leisure:misc leisure:gear leisure:music leisure:sponsorship | jq -cr '.prRows[]'); do
         NAME=$(echo "${i}" | jq -cr '.prrName')
         #echo ${i}
         NUMBERS=$(echo "${i}" | jq -cr '.prrAmounts[][0].aquantity.floatingPoint' | sed "s|null|0|g" | tr "\n" "\t")
