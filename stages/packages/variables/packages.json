@@ -36,6 +36,7 @@
           "certbot",
           "davfs2",
           "git",
+          "gnuplot",
           "html2text",
           "icecast2",
           "imagemagick",
