@@ -7,7 +7,7 @@ ExecStartPre=-/usr/bin/podman rm -f gollum-wiki
 ExecStart=/usr/bin/podman run \
   --name=gollum-wiki \
   -p 26008:4567 \
-  -v /var/storage/wastebox/tiredsysadmin.cc/wiki/repo:/wiki
+  -v /var/storage/wastebox/tiredsysadmin.cc/wiki/repo:/wiki \
   --restart unless-stopped \
   gollumwiki/gollum:latest
 ExecStop=/usr/bin/podman stop -t 2 gollum-wiki
