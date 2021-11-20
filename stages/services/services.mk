@@ -1,4 +1,4 @@
-services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync freshrss radicale icecast mpd tinc
+services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync gollum radicale icecast mpd tinc
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 motd:
@@ -114,12 +114,12 @@ podsync:
 	systemctl restart podsync.service
 	@echo "$(ccgreen)Setting up podsync completed$(ccend)"
 
-freshrss:
-	install -D -m 644 -v stages/services/files/etc/systemd/system/freshrss.service /etc/systemd/system
+gollum:
+	install -D -m 644 -v stages/services/files/etc/systemd/system/gollum-wiki.service /etc/systemd/system
 	systemctl daemon-reload
-	systemctl enable freshrss.service
-	systemctl stop freshrss.service
-	systemctl restart freshrss.service
+	systemctl enable gollum-wiki.service
+	systemctl stop gollum-wiki.service
+	systemctl restart gollum-wiki.service
 
 radicale:
 	jq -cr '.secrets.radicale.users' /etc/secrets/secrets.json | base64 -d > /etc/radicale/users
