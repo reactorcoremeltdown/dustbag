@@ -16,3 +16,6 @@
 ### Laminar cleanup
 20 3 * * * rm -fr /var/lib/laminar/run/*
 
+### wiki synchronization
+
+* * * * * cd /var/lib/wiki/kb && git pull && git push origin master
