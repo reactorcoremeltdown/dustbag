@@ -52,6 +52,7 @@ server {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
         }
+        client_max_body_size 0;
         proxy_pass http://127.0.0.1:26008;
     }
 }
