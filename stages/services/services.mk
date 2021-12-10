@@ -1,4 +1,4 @@
-services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale icecast mpd tinc
+services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale icecast mpd tinc nat_flush
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 motd:
@@ -166,3 +166,8 @@ phockup:
 	test -d /opt/phockup || mkdir -p /opt/phockup
 	rsync -av stages/services/files/opt/phockup/ /opt/phockup
 	ln -sf /opt/phockup/phockup.py /usr/local/bin/phockup
+
+nat_flush:
+	install -D -m 644 stages/services/files/etc/systemd/system/nat-flush.service /etc/systemd/system
+	systemctl daemon-reload
+	systemctl enable nat-flush.service

@@ -1,0 +1,10 @@
+[Unit]
+Description=Flush NAT at system start to help Podman's CNI
+Before=podman.service
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/iptables -t nat --flush
+
+[Install]
+WantedBy=network-online.target
