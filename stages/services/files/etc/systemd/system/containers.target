@@ -1,3 +1,5 @@
 [Unit]
 Description=A special target for container-based software
-After=multi-user.target
+
+[Install]
+WantedBy=multi-user.target
