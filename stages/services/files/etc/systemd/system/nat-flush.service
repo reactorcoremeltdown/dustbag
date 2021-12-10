@@ -1,5 +1,6 @@
 [Unit]
 Description=Flush NAT at system start to help Podman's CNI
+Before=containers.target
 
 [Service]
 Type=oneshot
