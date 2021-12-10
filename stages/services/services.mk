@@ -37,6 +37,7 @@ laminar:
 		stages/services/files/etc/laminar.conf /etc
 	chown -R git:git /var/lib/laminar
 	systemctl daemon-reload
+	systemctl enable laminar.service
 	@echo "$(ccgreen)Setting up laminar completed$(ccend)"
 
 nginx_packages:
@@ -89,6 +90,7 @@ gitea_directory:
 gitea_config: /etc/secrets/secrets.json
 	bash stages/services/templates/gitea/config.sh
 	install -D -m 644 -v stages/services/files/etc/systemd/system/gitea.service /etc/systemd/system
+	systemctl enable gitea.service
 	systemctl daemon-reload
 
 gitea_restart:
@@ -110,6 +112,7 @@ podsync:
 	install -d -m 750 --owner=syncthing --group=syncthing /var/log/podsync
 	install -D -m 644 -v stages/services/files/etc/systemd/system/podsync.service /etc/systemd/system
 	systemctl daemon-reload
+	systemctl enable podsync.service
 	bash stages/services/templates/podsync/podsync.toml.sh stages/services/variables/services.json
 	systemctl restart podsync.service
 	@echo "$(ccgreen)Setting up podsync completed$(ccend)"
@@ -128,7 +131,9 @@ radicale:
 	install -D -m 644 -v stages/services/files/etc/radicale/logging /etc/radicale
 	install -D -m 644 -v stages/services/files/etc/radicale/rights /etc/radicale
 	install -D -m 644 -v stages/services/files/etc/systemd/system/radicale.service /etc/systemd/system
-	systemctl daemon-reload && systemctl restart radicale
+	systemctl daemon-reload
+	systemctl enable radicale
+	systemctl restart radicale
 	@echo "$(ccgreen)Setting up radicale completed$(ccend)"
 
 icecast:
