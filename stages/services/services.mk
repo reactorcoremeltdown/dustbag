@@ -1,4 +1,4 @@
-services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale icecast mpd tinc nat_flush
+services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale icecast mpd tinc network_hacks
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 motd:
@@ -167,7 +167,10 @@ phockup:
 	rsync -av stages/services/files/opt/phockup/ /opt/phockup
 	ln -sf /opt/phockup/phockup.py /usr/local/bin/phockup
 
-nat_flush:
+network_hacks:
 	install -D -m 644 stages/services/files/etc/systemd/system/nat-flush.service /etc/systemd/system
+	install -D -m 644 stages/services/files/etc/systemd/system/containers.target /etc/systemd/system
 	systemctl daemon-reload
 	systemctl enable nat-flush.service
+	systemctl enable containers.target
+	@echo "$(ccgreen)Setting up network hacks completed$(ccend)"
