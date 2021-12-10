@@ -24,6 +24,9 @@ echo -e "\n\n"
 for check in ${CHECKS}; do
     source <(echo "${check}" | jq -r '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     case ${Status} in
+        "0")
+            echo -e "\e[32m${Name}: OK  \e[0m\e[90m${Output}\e[0m\n\t${Description}\n"
+            ;;
         "1")
             echo -e "\e[33m${Name}: WARNING  \e[0m\e[90m${Output}\e[0m\n\t${Description}\n"
             ;;
