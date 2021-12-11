@@ -1,11 +1,8 @@
 all: early firewall repos packages users services monitoring last
 
-lite: early repos packages_lite users_lite tinc_client
-ifneq ($(MAKECMDGOALS), "")
-	echo "LITE"
-endif
+lite: early repos packages users_lite tinc_client
 
-printserver: early packages_lite nginx_printer nginx
+printserver: early packages nginx_printer nginx
 
 include variables/colors.mk
 include stages/early/early.mk
