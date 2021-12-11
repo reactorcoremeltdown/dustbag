@@ -1,7 +1,7 @@
 all: early firewall repos packages users services monitoring last
 
 lite: early repos packages_lite users_lite tinc_client
-ifeq ($(MAKECMDGOALS), "")
+ifneq ($(MAKECMDGOALS), "")
 	echo "LITE"
 endif
 
