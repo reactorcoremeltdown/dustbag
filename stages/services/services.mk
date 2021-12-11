@@ -9,7 +9,7 @@ services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx 
 else ifeq ($(MAKECMDGOALS), fermium)
 CRONS := stages/services/files/crons/fermium
 
-services: users packages crons tinc_client
+services: users packages crons tinc_client mpd
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Printserver, the little Orange pi zero

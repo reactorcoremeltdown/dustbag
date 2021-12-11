@@ -2,10 +2,8 @@
 
 set -e
 
-SOURCE_PASSWORD=$(jq -r '.secrets.icecast["source-password"]' /etc/secrets/secrets.json)
-
 cat <<EOF > /etc/mpd.conf
-music_directory         "/var/storage/wastebox/tiredsysadmin.cc/radio"
+music_directory         "/home/syncthing/Music"
 playlist_directory              "/var/lib/mpd/playlists"
 db_file                 "/var/lib/mpd/tag_cache"
 log_file                        "/var/log/mpd/mpd.log"
@@ -14,31 +12,37 @@ state_file                      "/var/lib/mpd/state"
 sticker_file                   "/var/lib/mpd/sticker.sql"
 
 user                            "mpd"
-bind_to_address           "127.0.0.1"
+bind_to_address         "localhost"
+
+input {
+        plugin "curl"
+}
+
+input {
+        enabled    "no"
+        plugin     "qobuz"
+}
+
+input {
+        enabled      "no"
+        plugin       "tidal"
+}
+
 
 decoder {
         plugin                  "hybrid_dsd"
         enabled                 "no"
 }
 
+
 audio_output {
-        type            "shout"
-        encoder         "lame"          # optional
-        name            "Radio. For everyone."
-        host            "localhost"
-        port            "8000"
-        mount           "/play"
-        password        "${SOURCE_PASSWORD}"
-        bitrate         "128"
-        format          "44100:16:2"
-        protocol        "icecast2"              # optional
-        user            "source"                # optional
-        description     "A small single-format internet radio station. No talks. Music for workspaces." # optional
-        url         "https://radio.tiredsysadmin.cc"    # optional
-        genre           "dark ambient"                  # optional
-        public          "no"                    # optional
-        timeout         "2"                     # optional
-        mixer_type      "software"              # optional
+        type            "alsa"
+        name            "Default"
+        device          "hw:CARD=CODEC,DEV=0"   # optional
+        mixer_type      "hardware"      # optional
+        mixer_device    "default"       # optional
+        mixer_control   "PCM"           # optional
+        mixer_index     "0"             # optional
 }
 
 filesystem_charset              "UTF-8"
