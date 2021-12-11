@@ -1,11 +1,17 @@
+ifeq ($(MAKECMDGOALS),)
+USERSDB := stages/users/variables/users.json
+
 users: early accounts sudoers configs ledger_scripts
 	@echo "$(ccgreen)Setting up users completed$(ccend)"
+else
+USERSDB := stages/users/variables/users_lite.json
 
-users_lite: early accounts sudoers
+users: early accounts sudoers
 	@echo "$(ccgreen)Setting up users completed$(ccend)"
+endif
 
 accounts:
-	bash stages/users/templates/users.sh stages/users/variables/users.json
+	bash stages/users/templates/users.sh $(USERSDB)
 
 sudoers:
 	install -D -v -m 440 \
