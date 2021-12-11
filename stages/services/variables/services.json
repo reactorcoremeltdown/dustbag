@@ -36,9 +36,9 @@
         },
         "tinc": {
             "netname": "clusternet",
-            "fqdn": "depot.rcmd.space",
-            "hostname": "depot",
-            "ip": "10.8.0.1",
+            "fqdn": "hangar.rcmd.space",
+            "hostname": "hangar",
+            "ip": "10.8.0.5",
             "cidr_prefix": "10.8.0."
         }
     }
