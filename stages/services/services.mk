@@ -7,7 +7,7 @@ services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx 
 
 ## Fermium, the little Pi Zero W
 else ifeq ($(MAKECMDGOALS), fermium)
-CRONS := stages/services/files/crons/main
+CRONS := stages/services/files/crons/fermium
 
 services: users packages crons tinc_client
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
@@ -46,7 +46,7 @@ sshd: sshd_config sshd_restart
 	@echo "$(ccgreen)Setting up sshd completed$(ccend)"
 
 crons:
-	bash stages/services/templates/crons.sh stages/services/files/crons/
+	bash stages/services/templates/crons.sh $(CRONS)
 
 laminar:
 	install -d /etc/systemd/system/laminar.service.d
