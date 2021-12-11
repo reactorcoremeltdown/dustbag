@@ -4,6 +4,9 @@ services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx 
 else ifeq ($(MAKECMDGOALS), fermium)
 services: users packages tinc_client
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
+else ifeq ($(MAKECMDGOALS), printserver)
+services: users packages nginx_printer nginx
+	@echo "$(ccgreen)Setting up services completed$(ccend)"
 else
 services: users packages
 	@echo "$(ccgreen)Setting up services completed$(ccend)"

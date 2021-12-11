@@ -1,8 +1,8 @@
 all: early firewall repos packages users services monitoring last
 
-fermium: early repos packages users tinc_client
+fermium: early repos packages users services
 
-printserver: early packages nginx_printer nginx
+printserver: early packages services
 
 include variables/colors.mk
 include stages/early/early.mk
