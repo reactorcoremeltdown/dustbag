@@ -17,6 +17,8 @@
 20 3 * * * rm -fr /var/lib/laminar/run/*
 ### Netdata refresh
 30 3 * * * systemctl restart netdata
+### Upgrading youtube-dl
+40 3 * * * pip3 install --upgrade youtube-dl
 
 ### wiki synchronization
 
