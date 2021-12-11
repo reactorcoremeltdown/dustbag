@@ -27,6 +27,7 @@ endif
 motd:
 	install -D -v -m 644 stages/services/files/etc/motd \
 		/etc/motd
+	@echo "$(ccgreen)Setting up motd completed$(ccend)"
 
 sshd_config:
 	install -D -v -m 644 \
@@ -47,6 +48,7 @@ sshd: sshd_config sshd_restart
 
 crons:
 	bash stages/services/templates/crons.sh $(CRONS)
+	@echo "$(ccgreen)Setting up crons completed$(ccend)"
 
 laminar:
 	install -d /etc/systemd/system/laminar.service.d
@@ -203,3 +205,4 @@ diskplayer: mpd
 	install -D -m 644 stages/services/files/etc/udev/rules.d/100-floppy-change.rules /etc/udev/rules.d
 	install -D -m 755 stages/services/files/usr/local/bin/media_mount /usr/local/bin
 	systemctl restart udev.service
+	@echo "$(ccgreen)Setting up diskplayer completed$(ccend)"
