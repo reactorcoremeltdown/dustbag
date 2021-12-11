@@ -1,4 +1,4 @@
-services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale icecast mpd tinc network_hacks
+services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale tinc network_hacks
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 motd:
