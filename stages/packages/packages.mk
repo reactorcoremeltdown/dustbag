@@ -1,7 +1,9 @@
+PACKAGES := ""
+
 ifeq ($(MAKECMDGOALS),"")
-PACKAGES := $(shell jq -cr '.debian.packages[]' stages/packages/variables/packages.json | xargs)
+PACKAGES = $(shell jq -cr '.debian.packages[]' stages/packages/variables/packages.json | xargs)
 else
-PACKAGES := $(shell jq -cr '.debian.packages_lite[]' stages/packages/variables/packages.json | xargs)
+PACKAGES = $(shell jq -cr '.debian.packages_lite[]' stages/packages/variables/packages.json | xargs)
 endif
 
 packages: repos
