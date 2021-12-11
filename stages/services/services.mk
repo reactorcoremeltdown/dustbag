@@ -211,4 +211,5 @@ motion:
 	dpkg-query -s motion > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y motion
 	install -D -m 644 stages/services/files/etc/motion/motion.conf /etc/motion
 	install -D -m 755 stages/services/files/usr/local/bin/webcam.sh /usr/local/bin
+	systemctl restart motion.service
 	@echo "$(ccgreen)Setting up motion completed$(ccend)"
