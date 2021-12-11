@@ -1,5 +1,13 @@
+ifeq ($(MAKECMDGOALS),)
 services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale tinc network_hacks
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
+else ifeq ($(MAKECMDGOALS), fermium)
+services: users packages tinc_client
+	@echo "$(ccgreen)Setting up services completed$(ccend)"
+else
+services: users packages
+	@echo "$(ccgreen)Setting up services completed$(ccend)"
+endif
 
 motd:
 	install -D -v -m 644 stages/services/files/etc/motd \
