@@ -1,6 +1,9 @@
 all: early firewall repos packages users services monitoring last
 
 lite: early repos packages_lite users_lite tinc_client
+ifeq ($(MAKECMDGOALS), "")
+	echo "LITE"
+endif
 
 printserver: early packages_lite nginx_printer nginx
 
