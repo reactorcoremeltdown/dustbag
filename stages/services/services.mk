@@ -143,6 +143,7 @@ icecast:
 	@echo "$(ccgreen)Setting up icecast completed$(ccend)"
 
 mpd:
+	dpkg-query -s mpd mpc > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y mpd mpc
 	bash stages/services/templates/mpd/mpd.conf.sh
 	systemctl enable mpd.service
 	systemctl restart mpd.service
