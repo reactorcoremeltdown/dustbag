@@ -9,7 +9,7 @@ services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx 
 else ifeq ($(MAKECMDGOALS), fermium)
 CRONS := stages/services/files/crons/fermium
 
-services: users packages crons tinc_client mpd
+services: users packages crons tinc_client mpd diskplayer
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Printserver, the little Orange pi zero
@@ -198,3 +198,8 @@ network_hacks:
 	systemctl enable nat-flush.service
 	systemctl enable containers.target
 	@echo "$(ccgreen)Setting up network hacks completed$(ccend)"
+
+diskplayer: mpd
+	install -D -m 644 stages/services/files/etc/udev/rules.d/100-floppy-change.rules /etc/udev/rules.d
+	install -D -m 755 stages/services/files/usr/local/bin/media_mount /usr/local/bin
+	systemctl restart udev.service

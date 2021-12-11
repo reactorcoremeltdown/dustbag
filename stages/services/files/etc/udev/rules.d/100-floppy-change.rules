@@ -1,0 +1,1 @@
+ACTION=="change", ATTRS{idVendor}=="0644", ATTRS{idProduct}=="0000", ENV{DISK_MEDIA_CHANGE}=="1", RUN+="/usr/local/bin/media_mount $env{DEVNAME}"

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+echo "$(date) Start."
+echo "$(date) Media change detected on device $1"
+
+lsblk | grep $(echo ${1} | cut -f 3 -d '/')
+
+if [ $? -eq 0 ]; then
+    echo "$(date) Device exists on machine."
+    echo "$(date) Mounting device $1 to /mnt/floppy."
+    systemd-mount --fsck=off $1 /mnt/floppy
+    mpc stop
+    mpc clear
+    if [[ -f /mnt/floppy/media.m3u ]]; then
+            cat /mnt/floppy/media.m3u | mpc add
+            mpc play 1
+            systemd-mount --umount /mnt/floppy
+    fi
+else
+    echo "$(date) Device does not exist on machine."
+    mpc pause
+fi
+echo "$(date) End."
