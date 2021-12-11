@@ -1,6 +1,6 @@
 all: early firewall repos packages users services monitoring last
 
-lite: early repos packages users_lite tinc_client
+fermium: early repos packages users tinc_client
 
 printserver: early packages nginx_printer nginx
 
