@@ -38,7 +38,6 @@
           "git",
           "gnuplot",
           "html2text",
-          "icecast2",
           "imagemagick",
           "jq",
           "markdown",
@@ -53,8 +52,6 @@
           "lua-dbi-mysql",
           "laminar",
           "mariadb-server",
-          "mpd",
-          "mpc",
           "ncmpcpp",
           "nginx",
           "openvpn",
@@ -64,8 +61,6 @@
           "lmodern",
           "percona-toolkit",
           "postfix",
-          "prosody",
-          "prosody-modules",
           "radicale",
           "podman",
           "python3-bcrypt",
@@ -82,7 +77,6 @@
           "uuid-runtime",
           "khal",
           "todoman",
-          "kpcli",
           "vim"
         ]
     }
