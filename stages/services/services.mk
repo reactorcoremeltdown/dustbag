@@ -1,17 +1,29 @@
+## MAIN host (runs by default)
 ifeq ($(MAKECMDGOALS),)
+CRONS := stages/services/files/crons/main
+
 services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale tinc network_hacks
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
+
+## Fermium, the little Pi Zero W
 else ifeq ($(MAKECMDGOALS), fermium)
-services: users packages tinc_client
+CRONS := stages/services/files/crons/main
+
+services: users packages crons tinc_client
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
+
+## Printserver, the little Orange pi zero
 else ifeq ($(MAKECMDGOALS), printserver)
 services: users packages nginx_printer nginx
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
+
+## All other hosts
 else
 services: users packages
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 endif
 
+## Service targets
 motd:
 	install -D -v -m 644 stages/services/files/etc/motd \
 		/etc/motd

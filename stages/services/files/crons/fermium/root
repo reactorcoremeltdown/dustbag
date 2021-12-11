@@ -1,0 +1,2 @@
+*/20 * * * * cd /root/dustbag && git pull && make fermium
+0 3 * * * reboot
