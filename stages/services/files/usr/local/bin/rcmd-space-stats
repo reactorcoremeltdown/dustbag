@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+sqlite3 /var/spool/api/logging.db "select uri,count(*) from visits where url = 'https://rcmd.space/' and useragent not like '%GoogleBot%' and useragent not like '%Yandex%' and useragent not like '%Headless%' group by uri order by count(*) desc"

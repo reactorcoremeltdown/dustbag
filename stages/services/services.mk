@@ -2,7 +2,7 @@
 ifeq ($(MAKECMDGOALS),)
 CRONS := stages/services/files/crons/main
 
-services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale tinc network_hacks
+services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale tinc network_hacks misc
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium, the little Pi Zero W
@@ -213,3 +213,7 @@ motion:
 	install -D -m 755 stages/services/files/usr/local/bin/webcam.sh /usr/local/bin
 	systemctl start motion.service
 	@echo "$(ccgreen)Setting up motion completed$(ccend)"
+
+misc:
+	install -D -m 755 stages/services/files/usr/local/bin/rcmd-space-stats /usr/local/bin
+
