@@ -10,6 +10,7 @@
 42 5 * * * rm -f /var/storage/wastebox/Backups/gitea-dump.zip
 43 5 * * * mv /home/git/gitea-dump.zip /var/storage/wastebox/Backups/
 50 5 * * 6 /etc/monitoring/scripts/backups.sh /var/spool/api/ file:///var/storage/wastebox/Backups/api/
+0 6 * * 6 /etc/monitoring/scripts/backups.sh /var/lib/kanboard/ file:///var/storage/wastebox/Backups/kanboard/
 
 ### Podman cleanup
 10 3 * * * podman container prune --force && podman image prune --all --force
