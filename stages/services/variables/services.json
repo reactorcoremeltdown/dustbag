@@ -6,30 +6,35 @@
                     "name": "ID1",
                     "url": "https://www.youtube.com/channel/UCpExuV8qJMfCaSQNL1YG6bQ",
                     "quality": "low",
+                    "page_size": 10,
                     "format": "audio"
                 },
                 {
                     "name": "JMGODIER",
                     "url": "https://www.youtube.com/channel/UCEszlI8-W79IsU8LSAiRbDg",
                     "quality": "low",
+                    "page_size": 300,
                     "format": "audio"
                 },
                 {
                     "name": "stateazure",
                     "url": "https://www.youtube.com/channel/UClKIjbgtWGzHtXhBDS_I0pg",
                     "quality": "high",
+                    "page_size": 10,
                     "format": "audio"
                 },
                 {
-                    "name": "gelbar",
-                    "url": "https://www.youtube.com/channel/UCXlpb0edjg7WV_XXCcgx2uw",
+                    "name": "cryochamber",
+                    "url": "https://www.youtube.com/channel/UCVHOgH4XEyYx-ZEaya1XqCQ",
                     "quality": "high",
+                    "page_size": 10,
                     "format": "audio"
                 },
                 {
                     "name": "odysseus",
                     "url": "https://www.youtube.com/channel/UCwoTj-pZgZZ8DInOXSSLMmA",
                     "quality": "high",
+                    "page_size": 10,
                     "format": "audio"
                 }
             ]

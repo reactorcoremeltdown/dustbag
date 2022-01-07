@@ -20,7 +20,7 @@ for feed in $(jq -cr '.services.podsync.feeds[]' ${1}); do
     source <(echo "${feed}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     echo "  [feeds.${name}]" >> /etc/podsync/podsync.toml
     echo "  url = \"${url}\"" >>  /etc/podsync/podsync.toml
-    echo "  page_size = 50" >> /etc/podsync/podsync.toml
+    echo "  page_size = ${page_size}" >> /etc/podsync/podsync.toml
     echo "  update_period = \"12h\"" >> /etc/podsync/podsync.toml
     echo "  quality = \"${quality}\"" >> /etc/podsync/podsync.toml
     echo "  format = \"${format}\"" >> /etc/podsync/podsync.toml
