@@ -39,6 +39,7 @@
           "gnuplot",
           "html2text",
           "imagemagick",
+          "inotify-tools",
           "jq",
           "markdown",
           "mosh",
