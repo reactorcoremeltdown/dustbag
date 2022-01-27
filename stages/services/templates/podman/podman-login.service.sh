@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-
+USERNAME=$(jq '.secrets.containers.username' /etc/secrets/secrets.json)
+PASSWORD=$(jq '.secrets.containers.password' /etc/secrets/secrets.json)
+REPOSITORY=$(jq '.secrets.containers.hostname' /etc/secrets/secrets.json)
 
 cat <<EOF > /etc/systemd/system/podman-login.service.sh
 [Unit]
