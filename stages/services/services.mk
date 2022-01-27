@@ -219,6 +219,6 @@ misc:
 	install -D -m 755 stages/services/files/usr/local/bin/rcmd-space-stats /usr/local/bin
 
 prometheus:
-	install -D m 644 stages/services/files/etc/default/prometheus /etc/default
+	install -D -m 644 stages/services/files/etc/default/prometheus /etc/default
 	systemctl restart prometheus.service
 	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
