@@ -226,6 +226,6 @@ prometheus:
 	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
 
 podman:
-	bash stages/services/templates/podman/podman-login.services
+	bash stages/services/templates/podman/podman-login.service.sh
 	systemctl enable podman-login.service
 	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
