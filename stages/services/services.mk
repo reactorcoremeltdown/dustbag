@@ -217,6 +217,7 @@ motion:
 
 misc:
 	install -D -m 755 stages/services/files/usr/local/bin/rcmd-space-stats /usr/local/bin
+	@echo "$(ccgreen)Setting up misc scripts completed$(ccend)"
 
 prometheus:
 	bash stages/services/templates/prometheus/prometheus.yml.sh
