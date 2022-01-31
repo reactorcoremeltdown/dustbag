@@ -232,5 +232,8 @@ podman:
 
 fdroid:
 	test -d /var/lib/fdroid || mkdir /var/lib/fdroid
+	bash stages/services/templates/nginx/sites/fdroid.sh
+	nginx -t
+	systemctl reload nginx.service
 	@echo "$(ccgreen)Setting up fdroid completed$(ccend)"
 
