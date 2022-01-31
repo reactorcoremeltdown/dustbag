@@ -2,7 +2,7 @@
 ifeq ($(MAKECMDGOALS),)
 CRONS := stages/services/files/crons/main
 
-services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale tinc network_hacks misc
+services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale tinc network_hacks misc prometheus podman
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium, the little Pi Zero W
@@ -212,9 +212,20 @@ motion:
 	dpkg-query -s motion > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y motion
 	install -D -m 644 stages/services/files/etc/motion/motion.conf /etc/motion
 	install -D -m 755 stages/services/files/usr/local/bin/webcam.sh /usr/local/bin
-	systemctl start motion.service
+	systemctl stop motion.service
 	@echo "$(ccgreen)Setting up motion completed$(ccend)"
 
 misc:
 	install -D -m 755 stages/services/files/usr/local/bin/rcmd-space-stats /usr/local/bin
+	@echo "$(ccgreen)Setting up misc scripts completed$(ccend)"
 
+prometheus:
+	bash stages/services/templates/prometheus/prometheus.yml.sh
+	install -D -m 644 stages/services/files/etc/default/prometheus /etc/default
+	systemctl restart prometheus.service
+	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
+
+podman:
+	bash stages/services/templates/podman/podman-login.service.sh
+	systemctl enable podman-login.service
+	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
