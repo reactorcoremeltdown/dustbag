@@ -14,7 +14,9 @@ services: users packages crons tinc_client mpd diskplayer motion
 
 ## Printserver, the little Orange pi zero
 else ifeq ($(MAKECMDGOALS), printserver)
-services: users packages nginx_printer nginx
+CRONS := stages/services/files/crons/printserver
+
+services: users packages cups nginx_printer nginx
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## All other hosts
@@ -229,3 +231,6 @@ podman:
 	bash stages/services/templates/podman/podman-login.service.sh
 	systemctl enable podman-login.service
 	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
+
+cups:
+	apt-get -o Acquire::ForceIPv4=true install -y cups

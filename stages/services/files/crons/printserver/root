@@ -1,0 +1,2 @@
+*/20 * * * * cd /root/dustbag && git pull && make printserver
+0 3 * * * reboot
