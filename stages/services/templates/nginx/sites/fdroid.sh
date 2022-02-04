@@ -46,8 +46,8 @@ server {
     root /var/lib/fdroid;
 
     location / {
-        #auth_basic "Protected area";
-        #auth_basic_user_file /etc/nginx/htpasswd;
+        auth_basic "Protected area";
+        auth_basic_user_file /etc/nginx/htpasswd;
 
         autoindex on;
         try_files \$uri \$uri/ =404;
