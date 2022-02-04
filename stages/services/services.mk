@@ -2,7 +2,7 @@
 ifeq ($(MAKECMDGOALS),)
 CRONS := stages/services/files/crons/main
 
-services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale tinc network_hacks misc prometheus podman
+services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale tinc network_hacks misc prometheus podman fdroid
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium, the little Pi Zero W
@@ -234,3 +234,11 @@ podman:
 
 cups:
 	apt-get -o Acquire::ForceIPv4=true install -y cups
+	@echo "$(ccgreen)Setting up cups completed$(ccend)"
+
+fdroid:
+	test -d /var/lib/fdroid || mkdir /var/lib/fdroid
+	bash stages/services/templates/nginx/sites/fdroid.sh
+	nginx -t
+	systemctl reload nginx.service
+	@echo "$(ccgreen)Setting up fdroid completed$(ccend)"

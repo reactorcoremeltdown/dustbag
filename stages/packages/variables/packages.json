@@ -43,6 +43,7 @@
           "jq",
           "markdown",
           "mosh",
+          "fdroidserver",
           "ffmpeg",
           "hledger",
           "hledger-web",
