@@ -16,7 +16,7 @@ services: users packages crons tinc_client mpd diskplayer motion
 else ifeq ($(MAKECMDGOALS), printserver)
 CRONS := stages/services/files/crons/printserver
 
-services: users packages cups nginx_printer nginx
+services: users packages crons cups nginx_printer nginx
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## All other hosts
