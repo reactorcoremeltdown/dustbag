@@ -9,14 +9,14 @@ services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx 
 else ifeq ($(MAKECMDGOALS), fermium)
 CRONS := stages/services/files/crons/fermium
 
-services: users packages crons tinc_client mpd diskplayer motion
+services: users packages crons tinc_client mpd diskplayer motion deviceping
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Printserver, the little Orange pi zero
 else ifeq ($(MAKECMDGOALS), printserver)
 CRONS := stages/services/files/crons/printserver
 
-services: users packages crons cups nginx_printer nginx
+services: users packages crons cups nginx_printer nginx deviceping
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## All other hosts
@@ -242,3 +242,7 @@ fdroid:
 	nginx -t
 	systemctl reload nginx.service
 	@echo "$(ccgreen)Setting up fdroid completed$(ccend)"
+
+deviceping:
+	install -D -m 755 stages/services/files/usr/local/bin/deviceping /usr/local/bin
+	@echo "$(ccgreen)Setting up deviceping completed$(ccend)"

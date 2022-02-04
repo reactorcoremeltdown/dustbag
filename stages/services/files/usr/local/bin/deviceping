@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+DEVICEPING_TOKEN=`cat /root/.deviceping`
+
+REQUEST_TOKEN=`curl -s --data-urlencode "token=${DEVICEPING_TOKEN}" https://api.rcmd.space/v5/token/get`
+
+curl -s --data-urlencode "token=${REQUEST_TOKEN}" \
+    --data-urlencode "queue=deviceping" \
+    --data-urlencode "payload={ \"device\": \"$(hostname -f)\", \"uptime\": "$(date --date "`uptime -s`" '+%s')" }"
