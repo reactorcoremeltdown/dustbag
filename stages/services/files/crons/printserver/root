@@ -1,3 +1,2 @@
 10 * * * * cd /root/dustbag && git pull && make printserver
 20 3 * * * reboot
-*/10 * * * * curl -s -I --fail https://connectivitycheck.gstatic.com/generate_204 || reboot

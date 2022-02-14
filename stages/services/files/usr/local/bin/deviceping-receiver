@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+IFS=$'\n'
+
+MONITORING_API_TOKEN=`jq -cr '.secrets.monitoring.token' /etc/secrets/secrets.json`
+
+GET_JOB_TOKEN=$(curl -s -XPOST --data-urlencode "token=${MONITORING_API_TOKEN}" https://api.rcmd.space/v5/token/get)
+BATCH=$(curl -s -XPOST \
+            --data-urlencode "token=${GET_JOB_TOKEN}" \
+            --data-urlencode "queue=deviceping" \
+            "https://api.rcmd.space/v5/queue/get-batch")
+
+
+for ITEM in ${BATCH}; do
+    if [[ "${BATCH}" != 'EOQ' ]]; then
+        GET_ITEM_PAYLOAD_TOKEN=$(curl -s -XPOST --data-urlencode "token=${MONITORING_API_TOKEN}" https://api.rcmd.space/v5/token/get)
+        ITEM_PAYLOAD=$(curl -s -XPOST \
+                        --data-urlencode "token=${GET_ITEM_PAYLOAD_TOKEN}" \
+                        --data-urlencode "queue=deviceping" \
+                        --data-urlencode "job=${ITEM}" \
+                        "https://api.rcmd.space/v5/queue/get-job-payload")
+
+        ITEM_DEVICE_NAME=`echo "${ITEM_PAYLOAD}" | jq -cr '.device'`
+        ITEM_TIMESTAMP=`echo "${ITEM_PAYLOAD}" | jq -cr '.timestamp'`
+
+        echo $ITEM_TIMESTAMP > /var/spool/api/deviceping/${ITEM_DEVICE_NAME}
+
+        ACK_ITEM_TOKEN=$(curl -s -XPOST --data-urlencode "token=${MONITORING_API_TOKEN}" https://api.rcmd.space/v5/token/get)
+        curl -s -XPOST \
+            --data-urlencode "token=${ACK_ITEM_TOKEN}" \
+            --data-urlencode "queue=watchlater" \
+            --data-urlencode "job=${ITEM}" \
+            "https://api.rcmd.space/v5/queue/ack-job"
+    fi
+done

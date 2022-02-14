@@ -2,7 +2,7 @@
 ifeq ($(MAKECMDGOALS),)
 CRONS := stages/services/files/crons/main
 
-services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale tinc network_hacks misc prometheus podman fdroid
+services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale tinc network_hacks misc prometheus podman fdroid deviceping_receiver
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium, the little Pi Zero W
@@ -245,4 +245,9 @@ fdroid:
 
 deviceping:
 	install -D -m 755 stages/services/files/usr/local/bin/deviceping /usr/local/bin
+	@echo "$(ccgreen)Setting up deviceping completed$(ccend)"
+
+deviceping_receiver:
+	install -D -m 755 stages/services/files/usr/local/bin/deviceping-receiver /usr/local/bin
+	test -d /var/spool/api/deviceping || mkdir -p /var/spool/api/deviceping
 	@echo "$(ccgreen)Setting up deviceping completed$(ccend)"
