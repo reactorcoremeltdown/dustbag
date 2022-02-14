@@ -262,6 +262,17 @@
       "description": "Website backups",
       "environment": "internal",
       "notify": "telegram"
+    },
+    {
+      "name": "fermium_online",
+      "state": "present",
+      "plugin": "check_deviceping",
+      "type": "alert",
+      "argument": "fermium.speedport.ip",
+      "interval": "10m",
+      "description": "Device online test: fermium",
+      "environment": "internal",
+      "notify": "telegram"
     }
   ]
 }
