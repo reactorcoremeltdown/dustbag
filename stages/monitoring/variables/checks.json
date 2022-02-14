@@ -269,7 +269,7 @@
       "plugin": "check_deviceping",
       "type": "alert",
       "argument": "fermium.speedport.ip",
-      "interval": "10m",
+      "interval": "20m",
       "description": "Device online test: fermium",
       "environment": "internal",
       "notify": "telegram"
@@ -280,7 +280,7 @@
       "plugin": "check_deviceping",
       "type": "alert",
       "argument": "orangepizero",
-      "interval": "10m",
+      "interval": "20m",
       "description": "Device online test: printserver",
       "environment": "internal",
       "notify": "telegram"
