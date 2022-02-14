@@ -28,7 +28,7 @@ for ITEM in ${BATCH}; do
         ACK_ITEM_TOKEN=$(curl -s -XPOST --data-urlencode "token=${MONITORING_API_TOKEN}" https://api.rcmd.space/v5/token/get)
         curl -s -XPOST \
             --data-urlencode "token=${ACK_ITEM_TOKEN}" \
-            --data-urlencode "queue=watchlater" \
+            --data-urlencode "queue=deviceping" \
             --data-urlencode "job=${ITEM}" \
             "https://api.rcmd.space/v5/queue/ack-job"
     fi
