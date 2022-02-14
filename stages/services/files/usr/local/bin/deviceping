@@ -6,5 +6,5 @@ REQUEST_TOKEN=`curl -s --data-urlencode "token=${DEVICEPING_TOKEN}" https://api.
 
 curl -s --data-urlencode "token=${REQUEST_TOKEN}" \
     --data-urlencode "queue=deviceping" \
-    --data-urlencode "payload={ \"device\": \"$(hostname -f)\", \"uptime\": "$(date --date "`uptime -s`" '+%s')" }" \
+    --data-urlencode "payload={ \"device\": \"$(hostname -f)\", \"timestamp\": $(date '+%s') }" \
     https://api.rcmd.space/v5/queue/put-job
