@@ -84,6 +84,7 @@ nginx_sites:
 	bash stages/services/templates/nginx/sites/dav.sh
 	bash stages/services/templates/nginx/sites/default.sh
 	bash stages/services/templates/nginx/sites/git.sh
+	bash stages/services/templates/nginx/sites/graph.sh
 	bash stages/services/templates/nginx/sites/gollum-wiki.sh
 	bash stages/services/templates/nginx/sites/netdata.sh
 	bash stages/services/templates/nginx/sites/podcasts.sh
