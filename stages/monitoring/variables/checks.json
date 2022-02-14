@@ -273,6 +273,17 @@
       "description": "Device online test: fermium",
       "environment": "internal",
       "notify": "telegram"
+    },
+    {
+      "name": "printserver_online",
+      "state": "present",
+      "plugin": "check_deviceping",
+      "type": "alert",
+      "argument": "orangepizero",
+      "interval": "10m",
+      "description": "Device online test: printserver",
+      "environment": "internal",
+      "notify": "telegram"
     }
   ]
 }
