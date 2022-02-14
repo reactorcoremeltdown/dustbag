@@ -1,3 +1,3 @@
 */20 * * * * cd /root/dustbag && git pull && make fermium
 0 3 * * * reboot
-# */10 * * * * /usr/local/bin/deviceping
+*/10 * * * * /usr/local/bin/deviceping
