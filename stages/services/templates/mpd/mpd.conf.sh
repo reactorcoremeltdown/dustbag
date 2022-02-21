@@ -40,7 +40,7 @@ audio_output {
         name            "Default"
         device          "hw:CARD=CODEC,DEV=0"   # optional
         mixer_type      "hardware"      # optional
-        mixer_device    "default"       # optional
+        mixer_device    "hw:CARD=CODEC,DEV=0"       # optional
         mixer_control   "PCM"           # optional
         mixer_index     "0"             # optional
 }
