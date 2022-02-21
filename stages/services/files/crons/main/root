@@ -26,3 +26,4 @@
 
 ### deviceping
 */10 * * * * /usr/local/bin/deviceping-receiver
+
