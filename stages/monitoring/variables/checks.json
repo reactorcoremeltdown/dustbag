@@ -264,6 +264,17 @@
       "notify": "telegram"
     },
     {
+      "name": "website_backups",
+      "state": "present",
+      "plugin": "check_duplicity_backup",
+      "type": "alert",
+      "argument": "file:///var/storage/wastebox/Backups/kanboard/",
+      "interval": "72h",
+      "description": "Kanboard backups",
+      "environment": "internal",
+      "notify": "telegram"
+    },
+    {
       "name": "fermium_online",
       "state": "present",
       "plugin": "check_deviceping",
