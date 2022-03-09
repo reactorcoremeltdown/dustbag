@@ -31,6 +31,20 @@
                     "format": "audio"
                 },
                 {
+                    "name": "khodorkovsky",
+                    "url": "https://www.youtube.com/channel/UCAg74TJrwfpuCp1Jo3ZHMjA",
+                    "quality": "high",
+                    "page_size": 10,
+                    "format": "audio"
+                },
+                {
+                    "name": "nevzorov",
+                    "url": "https://www.youtube.com/channel/UC8kI2B-UUv7A5u3AOUnHNMQ",
+                    "quality": "high",
+                    "page_size": 10,
+                    "format": "audio"
+                },
+                {
                     "name": "odysseus",
                     "url": "https://www.youtube.com/channel/UCwoTj-pZgZZ8DInOXSSLMmA",
                     "quality": "high",
