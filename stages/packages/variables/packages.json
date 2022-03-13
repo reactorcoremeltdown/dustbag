@@ -60,6 +60,8 @@
           "pandoc",
           "texlive-latex-base",
           "texlive-fonts-recommended",
+          "texlive-latex-recommended",
+          "texlive-latex-extra",
           "lmodern",
           "percona-toolkit",
           "postfix",
