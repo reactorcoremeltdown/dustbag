@@ -62,6 +62,8 @@ laminar:
 		/usr/local/bin
 	install -D -v -m 644 \
 		stages/services/files/etc/laminar.conf /etc
+	install -D -v -m 644 \
+		stages/services/files/usr/local/src/rcmd-functions.mk /usr/local/src
 	chown -R git:git /var/lib/laminar
 	systemctl daemon-reload
 	systemctl enable laminar.service
