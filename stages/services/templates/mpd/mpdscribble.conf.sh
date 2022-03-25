@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -x
+set -e
 
 USERNAME=$(jq -r '.secrets.lastfm.username' /etc/secrets/secrets.json)
 PASSWORD=$(jq -r '.secrets.lastfm.password' /etc/secrets/secrets.json)
