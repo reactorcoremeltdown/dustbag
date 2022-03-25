@@ -173,10 +173,11 @@ icecast:
 	@echo "$(ccgreen)Setting up icecast completed$(ccend)"
 
 mpd:
-	dpkg-query -s mpd mpc > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y mpd mpc
+	dpkg-query -s mpd mpc mpdscribble > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y mpd mpc
 	bash stages/services/templates/mpd/mpd.conf.sh
-	systemctl enable mpd.service
-	mpc status | grep -oq playing || systemctl restart mpd.service
+	bash stages/services/templates/mpd/mpdscribble.conf.sh
+	systemctl enable mpd.service mpdscribble.service
+	mpc status | grep -oq playing || systemctl restart mpd.service mpdscribble.service
 	@echo "$(ccgreen)Setting up mpd completed$(ccend)"
 
 tinc:
