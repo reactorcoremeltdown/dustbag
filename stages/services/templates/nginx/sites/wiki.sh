@@ -2,7 +2,7 @@
 
 source <(jq -r '.nginx.variables | to_entries[] | [.key,(.value|@sh)] | join("=")' variables/main.json)
 
-SITE='wiki'
+SITE='mood'
 
 cat <<EOF > /etc/nginx/sites-available/${SITE}.conf
 server {
@@ -44,7 +44,7 @@ server {
     application/rss+xml
     text/css;
 
-    root /opt/apps/wiki;
+    root /opt/apps/${SITE};
 
     server_name ${SITE}.rcmd.space;
 
