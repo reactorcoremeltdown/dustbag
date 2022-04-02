@@ -12,6 +12,12 @@ CRONS := stages/services/files/crons/fermium
 services: users packages crons tinc_client mpd diskplayer motion bootconfig deviceping
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
+## Fermium, the little Pi Zero W
+else ifeq ($(MAKECMDGOALS), generic)
+
+services: users packages motion deviceping
+	@echo "$(ccgreen)Setting up services completed$(ccend)"
+
 ## Printserver, the little Orange pi zero
 else ifeq ($(MAKECMDGOALS), printserver)
 CRONS := stages/services/files/crons/printserver
