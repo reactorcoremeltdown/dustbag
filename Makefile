@@ -2,6 +2,8 @@ all: early firewall repos packages users services monitoring last
 
 fermium: early repos packages users services
 
+generic: early packages users services
+
 printserver: early packages services
 
 include variables/colors.mk
