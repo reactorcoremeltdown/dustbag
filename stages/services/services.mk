@@ -9,7 +9,7 @@ services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx 
 else ifeq ($(MAKECMDGOALS), fermium)
 CRONS := stages/services/files/crons/fermium
 
-services: users packages crons tinc_client mpd diskplayer motion deviceping
+services: users packages crons tinc_client mpd diskplayer motion bootconfig deviceping
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Printserver, the little Orange pi zero
@@ -255,3 +255,7 @@ deviceping_receiver:
 	install -D -m 755 stages/services/files/usr/local/bin/deviceping-receiver /usr/local/bin
 	test -d /var/spool/api/deviceping || mkdir -p /var/spool/api/deviceping
 	@echo "$(ccgreen)Setting up deviceping completed$(ccend)"
+
+bootconfig:
+	install -D -m 755 stages/services/files/boot/config.txt /boot
+	@echo "$(ccgreen)Setting up bootconfig completed$(ccend)"
