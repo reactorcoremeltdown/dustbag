@@ -115,7 +115,7 @@
       "state": "present",
       "plugin": "check_disk_space",
       "type": "alert",
-      "argument": "/dev/vda1",
+      "argument": "/dev/sda1",
       "interval": "3m",
       "description": "Free space on disk",
       "environment": "external",
