@@ -4,8 +4,6 @@ source /etc/monitoring/plugins/okfail.sh
 
 usage=`df $1 | tail -n 1 | awk '{print $5}' | sed 's|%||'`
 
-rrdtool update /var/storage/wastebox/operations/disk_space.rrd N:${usage}
-
 if [[ $usage -lt 95 ]]; then
     ok "${usage}% of free disk space"
 else
