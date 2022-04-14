@@ -1,0 +1,1 @@
+MOTION_SERVICE_STATE=start

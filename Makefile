@@ -7,6 +7,7 @@ generic: early packages users services
 printserver: early packages services
 
 include variables/colors.mk
+include variables/globalvars.mk
 include stages/early/early.mk
 include stages/firewall/firewall.mk
 include stages/repos/repos.mk
