@@ -27,3 +27,5 @@
 ### deviceping
 */10 * * * * /usr/local/bin/deviceping-receiver
 
+### Kanboard stats
+17 19 * * * /usr/local/bin/kanboard-stats
