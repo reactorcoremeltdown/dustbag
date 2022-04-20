@@ -13,5 +13,5 @@ if test $delta -lt 864000; then
 elif test $delta -lt 259200; then
     fail "The SSL cert of $1 will expire in $days days!" "$DESCRIPTION" "$ENVIRONMENT"
 else
-    ok "SSL cert is VALID." "$DESCRIPTION" "$ENVIRONMENT"
+    ok "SSL cert is VALID for ${days} days." "$DESCRIPTION" "$ENVIRONMENT"
 fi
