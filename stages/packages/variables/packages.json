@@ -19,6 +19,7 @@
           "syncthing",
           "tinc",
           "uuid-runtime",
+          "unattended-upgrades",
           "vim"
         ],
         "packages": [
@@ -84,6 +85,7 @@
           "uuid-runtime",
           "khal",
           "todoman",
+          "unattended-upgrades",
           "vim",
           "zip"
         ]
