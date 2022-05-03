@@ -9,7 +9,7 @@
             { "name": "backports",
                 "state": "present",
                 "url": "http://deb.debian.org/debian",
-                "key": "https://deb.debian.org/debian/dists/bullseye-backports/Release.gpg",
+                "key": "file:///usr/share/keyrings/debian-archive-bullseye-automatic.gpg",
                 "distro": "bullseye-backports",
                 "section": "main" },
             { "name": "syncthing",
