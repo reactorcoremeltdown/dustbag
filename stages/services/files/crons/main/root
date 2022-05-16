@@ -15,7 +15,7 @@
 ### Podman cleanup
 10 3 * * * podman container prune --force && podman image prune --all --force
 ### Laminar cleanup
-20 3 * * * rm -fr /var/lib/laminar/run/*
+20 3 * * 2,5 rm -fr /var/lib/laminar/run/*
 ### Netdata refresh
 30 3 * * * systemctl restart netdata
 ### Upgrading youtube-dl
