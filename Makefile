@@ -4,6 +4,8 @@ fermium: early repos packages users services
 
 generic: early packages users services
 
+seedbox: early packages users services
+
 printserver: early packages services
 
 include variables/colors.mk

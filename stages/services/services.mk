@@ -18,6 +18,12 @@ else ifeq ($(MAKECMDGOALS), generic)
 services: users packages motion deviceping
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
+## Fermium, the little Pi Zero W
+else ifeq ($(MAKECMDGOALS), seedbox)
+
+services: users packages
+	@echo "$(ccgreen)Setting up services completed$(ccend)"
+
 ## Printserver, the little Orange pi zero
 else ifeq ($(MAKECMDGOALS), printserver)
 CRONS := stages/services/files/crons/printserver
