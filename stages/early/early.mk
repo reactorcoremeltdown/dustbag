@@ -2,7 +2,7 @@ UNAME := $(shell uname)
 RETRY := $(shell test -f /etc/default/earlystageconfigs && echo "true")
 HOSTNAME := $(shell cat variables/main.json | jq -r .hostname)
 
-early: test shell_history mirrors apt_configs keygen earlystagepackages locales profiles
+early: test mirrors apt_configs keygen earlystagepackages locales profiles
 	echo "provisioning done" > /etc/default/earlystageconfigs;
 	@echo "$(ccgreen)Early provisioning stage completed$(ccend)"
 
@@ -14,12 +14,6 @@ else
 	exit 1
 endif
 
-shell_history:
-ifneq ($(RETRY), true)
-	test -L /root/.zsh_history || ln -s /dev/null /root/.zsh_history
-	test -L /root/.bash_history || ln -s /dev/null /root/.bash_history
-endif
-
 apt_configs:
 ifneq ($(RETRY), true)
 	cp stages/early/files/forceuserdefinedconfigs /etc/apt/apt.conf.d/forceuserdefinedconfigs
@@ -29,7 +23,7 @@ endif
 
 mirrors:
 ifneq ($(RETRY), true)
-	install -D -m 644 stages/early/files/sources.list /etc/apt
+	bash -x stages/early/templates/sources.list.sh
 endif
 
 keygen:
