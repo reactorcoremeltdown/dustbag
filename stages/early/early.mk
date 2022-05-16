@@ -36,6 +36,7 @@ ifneq ($(RETRY), true)
 	apt update && DEBIAN_FRONTEND=noninteractive apt -o Acquire::ForceIPv4=true install -y dirmngr \
 		apt-transport-https \
 		certbot \
+		lsb-release \
 		debian-keyring \
 		python3-certbot-dns-cloudflare \
 		locales
