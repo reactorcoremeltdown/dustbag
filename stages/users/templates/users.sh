@@ -4,7 +4,7 @@ IFS=$'\n'
 
 for user in `jq -cr '.debian.users[]' ${1}`; do
     source <(echo "${user}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
-    groups ${name} > /dev/null || /sbin/useradd -m -s ${shell} ${name}
+    groups ${name} > /dev/null || /sbin/useradd -m -s ${shell} ${name} || /usr/sbin/useradd -m -s ${shell} ${name}
     HOMEDIR=$(getent passwd ${name} | cut -f 6 -d ':')
     chsh -s ${shell} ${name}
     if [[ ${keygen} = 'true' ]]; then
