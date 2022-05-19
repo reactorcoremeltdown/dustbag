@@ -4,20 +4,20 @@ FAILURE=0
 
 case ${REPO_NAME} in
     'blog' | 'rcmd.space')
-        git clone git@git.rcmd.space:rcmd/${REPO_NAME}.git
+        git clone /home/rcmd/${REPO_NAME}.git
         ;;
     'mood-tracker')
-        CURRENT_HASH=`git ls-remote --quiet git@git.rcmd.space:rcmd/${REPO_NAME}.git origin HEAD | awk '{print $1}'`
-        STABLE_HASH=`git ls-remote --quiet git@git.rcmd.space:rcmd/${REPO_NAME}.git origin stable | awk '{print $1}'`
+        CURRENT_HASH=`git ls-remote --quiet /home/rcmd/${REPO_NAME}.git origin HEAD | awk '{print $1}'`
+        STABLE_HASH=`git ls-remote --quiet /homercmd/${REPO_NAME}.git origin stable | awk '{print $1}'`
 
         if [[ ${CURRENT_HASH} = ${STABLE_HASH} ]]; then
-            git clone git@git.rcmd.space:rcmd/${REPO_NAME}.git
+            git clone /home/rcmd/${REPO_NAME}.git
         else
-            git clone --depth 2 git@git.rcmd.space:rcmd/${REPO_NAME}.git
+            git clone --depth 2 /home/rcmd/${REPO_NAME}.git
         fi
         ;;
     *)
-        git clone --depth 2 git@git.rcmd.space:rcmd/${REPO_NAME}.git
+        git clone --depth 2 /home/rcmd/${REPO_NAME}.git
         ;;
 esac
 
