@@ -200,6 +200,7 @@ tinc:
 tinc_client:
 	bash stages/services/templates/tinc/configs_client.sh
 	@echo "$(ccgreen)Setting up tinc completed$(ccend)"
+	systemctl restart tinc@clusternet
 
 registry:
 	install -D -m 644 stages/services/files/etc/containers/registries.conf /etc/containers
