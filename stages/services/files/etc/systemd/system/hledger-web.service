@@ -3,6 +3,7 @@ Description=Hledger web ui
 
 [Service]
 ExecStart=/usr/bin/hledger-web \
+            --serve \
             --port 55000 \
             --host 127.0.0.1 \
             --base-url=https://bank.rcmd.space \
