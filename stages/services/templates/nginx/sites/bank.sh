@@ -31,10 +31,6 @@ server {
     ssl_ciphers '${ssl_ciphers}';
     ssl_prefer_server_ciphers on;
 
-    ssl_client_certificate /etc/nginx/ssl/ca.crt;
-    ssl_verify_client optional;
-    ssl_verify_depth 2;
-
     ### Compression
     gzip on;
     gzip_comp_level    5;
@@ -47,13 +43,10 @@ server {
 
     server_name ${SITE}.rcmd.space;
 
-    # auth_basic "Protected area";
-    # auth_basic_user_file /etc/nginx/htpasswd;
+    auth_basic "Protected area";
+    auth_basic_user_file /etc/nginx/htpasswd;
 
     location / {
-        if (\$ssl_client_verify != SUCCESS) {
-            return 403;
-        }
         proxy_pass http://127.0.0.1:55000;
     }
 }
