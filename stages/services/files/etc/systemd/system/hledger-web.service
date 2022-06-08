@@ -8,6 +8,7 @@ ExecStart=/usr/bin/hledger-web \
             --base-url=https://bank.rcmd.space \
             --file=/home/ledger/ledger.book
 User=ledger
+WorkingDirectory=/home/ledger
 
 [Install]
 WantedBy=multi-user.target
