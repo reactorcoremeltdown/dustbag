@@ -2,7 +2,7 @@
 ifeq ($(MAKECMDGOALS),)
 CRONS := stages/services/files/crons/main
 
-services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync radicale tinc network_hacks misc prometheus podman fdroid deviceping_receiver
+services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync hledger-web radicale tinc network_hacks misc prometheus podman fdroid deviceping_receiver
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium, the little Pi Zero W
@@ -178,6 +178,13 @@ radicale:
 	systemctl enable radicale
 	systemctl restart radicale
 	@echo "$(ccgreen)Setting up radicale completed$(ccend)"
+
+hledger-web:
+	install -D -m 644 -v stages/services/files/etc/systemd/system/hledger-web.service /etc/systemd/system
+	systemctl daemon-reload
+	systemctl enable hledger-web
+	systemctl restart hledger-web
+	@echo "$(ccgreen)Setting up hledger-web completed$(ccend)"
 
 icecast:
 	bash stages/services/templates/icecast/icecast.xml.sh
