@@ -4,7 +4,7 @@ source ${PLUGINSDIR}/okfail.sh
 
 IFS=$'\n'
 
-TIMESTAMP=`cat /var/spool/api/deviceping/${1}`
+TIMESTAMP=`jq .timestamp /var/spool/api/deviceping/${1}`
 CURRENT=`date '+%s'`
 DELTA=`echo "${CURRENT} - ${TIMESTAMP}" | bc`
 

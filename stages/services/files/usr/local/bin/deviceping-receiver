@@ -32,9 +32,8 @@ for ITEM in ${BATCH}; do
         sleep 1
 
         ITEM_DEVICE_NAME=`echo "${ITEM_PAYLOAD}" | jq -cr '.device'`
-        ITEM_TIMESTAMP=`echo "${ITEM_PAYLOAD}" | jq -cr '.timestamp'`
 
-        echo $ITEM_TIMESTAMP > /var/spool/api/deviceping/${ITEM_DEVICE_NAME}
+        echo "${ITEM_PAYLOAD}" > /var/spool/api/deviceping/${ITEM_DEVICE_NAME}
 
         ACK_ITEM_TOKEN=$(curl --fail -s -XPOST --data-urlencode "token=${MONITORING_API_TOKEN}" https://api.rcmd.space/v5/token/get)
 
