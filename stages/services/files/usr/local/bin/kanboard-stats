@@ -5,8 +5,8 @@ TELEGRAM_CHAT_ID=`jq -cr .secrets.telegram_second.chat_id /etc/secrets/secrets.j
 
 NUMBER_OF_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select count(*) from tasks where (is_active = 0 and date_completed > strftime('%s', 'now', '-24 hours') and project_id != 6) or (date_modification > strftime('%s', 'now', '-24 hours') and project_id = 6)"`
 
-NORMAL_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select '  ⛳️ ' || title from tasks where (is_active = 0 and date_completed > strftime('%s', 'now', '-24 hours') and project_id != 6) order by date_due"`
-REPEATING_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select '  ⛳️ ' || title from tasks where (date_modification > strftime('%s', 'now', '-24 hours') and project_id = 6) order by date_due"`
+NORMAL_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select '▫️ ' || title from tasks where (is_active = 0 and date_completed > strftime('%s', 'now', '-24 hours') and project_id != 6) order by date_due"`
+REPEATING_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select '▫️ ' || title from tasks where (date_modification > strftime('%s', 'now', '-24 hours') and project_id = 6) order by date_due"`
 
 TEXT="🎉🎉🎉 \\nСегодня я выполнил ${NUMBER_OF_TASKS} задач:\\n\\n🏆 Основные задачи:\\n${NORMAL_TASKS}\\n\\n⏰ Повторяющиеся задачи:\\n${REPEATING_TASKS}\\n\\nСегодня я молодец!"
 curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
