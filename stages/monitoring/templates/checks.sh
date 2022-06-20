@@ -13,6 +13,9 @@ description = ${description}
 plugin = ${plugin}.sh
 argument = ${argument}
 interval = ${interval}
+warningThreshold = ${warningThreshold}
+criticalThreshold = ${criticalThreshold}
+flowOperator = ${flowOperator}
 notify = ${notify}.sh
 EOF
     else
