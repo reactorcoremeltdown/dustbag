@@ -20,6 +20,9 @@
       "interval": "15s",
       "description": "Provisioning file",
       "environment": "internal",
+      "warningThreshold": "10",
+      "criticalThreshold": "5",
+      "flowOperator": "downwards",
       "notify": "telegram"
     },
     {
