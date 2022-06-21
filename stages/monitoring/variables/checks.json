@@ -92,6 +92,17 @@
       "notify": "telegram"
     },
     {
+      "name": "task-transformer",
+      "state": "present",
+      "plugin": "check_systemd_service",
+      "type": "alert",
+      "argument": "task-transformer.service",
+      "interval": "5m",
+      "description": "VTODO + VEVENT + Kanboard sync service",
+      "environment": "external",
+      "notify": "telegram"
+    },
+    {
       "name": "postfix_alive",
       "state": "absent",
       "plugin": "check_systemd_service",
