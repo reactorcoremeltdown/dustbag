@@ -11,13 +11,13 @@ case ${REPO_NAME} in
         STABLE_HASH=`git ls-remote --quiet /home/git/rcmd/${REPO_NAME}.git origin stable | awk '{print $1}'`
 
         if [[ ${CURRENT_HASH} = ${STABLE_HASH} ]]; then
-            git clone /home/git/rcmd/${REPO_NAME}.git
+            git clone file:///home/git/rcmd/${REPO_NAME}.git
         else
-            git clone --depth 2 /home/git/rcmd/${REPO_NAME}.git
+            git clone --depth 2 file:///home/git/rcmd/${REPO_NAME}.git
         fi
         ;;
     *)
-        git clone --depth 2 /home/git/rcmd/${REPO_NAME}.git
+        git clone --depth 2 file:///home/git/rcmd/${REPO_NAME}.git
         ;;
 esac
 
