@@ -139,6 +139,17 @@
       "notify": "telegram"
     },
     {
+      "name": "berliner_baeder",
+      "state": "present",
+      "plugin": "check_http_ping",
+      "type": "alert",
+      "argument": "https://shop.berlinerbaeder.de/de/bad51",
+      "interval": "5m",
+      "description": "RCMD API website",
+      "environment": "internal",
+      "notify": "telegram"
+    },
+    {
       "name": "api_website",
       "state": "present",
       "plugin": "check_http_ping",
