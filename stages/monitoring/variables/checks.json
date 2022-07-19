@@ -145,7 +145,7 @@
       "type": "alert",
       "argument": "https://shop.berlinerbaeder.de/de/bad51",
       "interval": "5m",
-      "description": "RCMD API website",
+      "description": "Berliner Bäder online shop",
       "environment": "internal",
       "notify": "telegram"
     },
