@@ -15,4 +15,4 @@ timeout = 30
 filesystem_folder = /var/lib/radicale/collections
 
 [logging]
-level = debug
+level = info
