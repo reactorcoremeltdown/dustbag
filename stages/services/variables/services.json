@@ -10,6 +10,13 @@
                     "format": "audio"
                 },
                 {
+                    "name": "ppnews",
+                    "url": "https://www.youtube.com/playlist?list=PL2GGJKocg5o5KqB5X4cczTMeik9NSBmto",
+                    "quality": "low",
+                    "page_size": 10,
+                    "format": "audio"
+                },
+                {
                     "name": "JMGODIER",
                     "url": "https://www.youtube.com/channel/UCEszlI8-W79IsU8LSAiRbDg",
                     "quality": "low",
