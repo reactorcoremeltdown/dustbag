@@ -21,7 +21,7 @@ for feed in $(jq -cr '.services.podsync.feeds[]' ${1}); do
     echo "  [feeds.${name}]" >> /etc/podsync/podsync.toml
     echo "  url = \"${url}\"" >>  /etc/podsync/podsync.toml
     echo "  page_size = ${page_size}" >> /etc/podsync/podsync.toml
-    echo "  update_period = \"12h\"" >> /etc/podsync/podsync.toml
+    echo "  update_period = \"${update_period}\"" >> /etc/podsync/podsync.toml
     echo "  quality = \"${quality}\"" >> /etc/podsync/podsync.toml
     echo "  format = \"${format}\"" >> /etc/podsync/podsync.toml
     if [[ ${format} = 'audio' ]]; then

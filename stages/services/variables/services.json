@@ -7,6 +7,7 @@
                     "url": "https://www.youtube.com/channel/UCpExuV8qJMfCaSQNL1YG6bQ",
                     "quality": "low",
                     "page_size": 10,
+                    "update_period": "12h",
                     "format": "audio"
                 },
                 {
@@ -14,6 +15,7 @@
                     "url": "https://www.youtube.com/playlist?list=PL2GGJKocg5o5KqB5X4cczTMeik9NSBmto",
                     "quality": "low",
                     "page_size": 10,
+                    "update_period": "1h",
                     "format": "audio"
                 },
                 {
@@ -21,6 +23,7 @@
                     "url": "https://www.youtube.com/channel/UCEszlI8-W79IsU8LSAiRbDg",
                     "quality": "low",
                     "page_size": 300,
+                    "update_period": "12h",
                     "format": "audio"
                 },
                 {
@@ -28,6 +31,7 @@
                     "url": "https://www.youtube.com/channel/UClKIjbgtWGzHtXhBDS_I0pg",
                     "quality": "high",
                     "page_size": 10,
+                    "update_period": "12h",
                     "format": "audio"
                 },
                 {
@@ -35,6 +39,7 @@
                     "url": "https://www.youtube.com/channel/UCVHOgH4XEyYx-ZEaya1XqCQ",
                     "quality": "high",
                     "page_size": 10,
+                    "update_period": "12h",
                     "format": "audio"
                 },
                 {
@@ -42,6 +47,7 @@
                     "url": "https://www.youtube.com/channel/UCwoTj-pZgZZ8DInOXSSLMmA",
                     "quality": "high",
                     "page_size": 10,
+                    "update_period": "12h",
                     "format": "audio"
                 }
             ]
