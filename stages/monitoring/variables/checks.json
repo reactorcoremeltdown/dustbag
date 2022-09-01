@@ -227,6 +227,17 @@
       "notify": "telegram"
     },
     {
+      "name": "kanboard",
+      "state": "present",
+      "plugin": "check_duplicity_backup",
+      "type": "alert",
+      "argument": "file:///var/storage/wastebox/Backups/kanboard/",
+      "interval": "72h",
+      "description": "Kanboard backups",
+      "environment": "internal",
+      "notify": "telegram"
+    },
+    {
       "name": "gitea_website",
       "state": "absent",
       "description": "Gitea deployment on RCMD.SPACE",
