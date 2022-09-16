@@ -161,6 +161,17 @@
       "notify": "telegram"
     },
     {
+      "name": "caldav_website",
+      "state": "present",
+      "plugin": "check_http_ping",
+      "type": "alert",
+      "argument": "https://dav.rcmd.space",
+      "interval": "1m",
+      "description": "RCMD CalDAV server",
+      "environment": "internal",
+      "notify": "telegram"
+    },
+    {
       "name": "api_internal_website",
       "state": "present",
       "plugin": "check_http_ping",
