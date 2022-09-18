@@ -19,6 +19,14 @@
                     "format": "audio"
                 },
                 {
+                    "name": "markfeygin",
+                    "url": "https://www.youtube.com/playlist?list=PLCvrKelokWEueLh64DQy5t2yqq3CkyOTx",
+                    "quality": "low",
+                    "page_size": 10,
+                    "update_period": "1h",
+                    "format": "audio"
+                },
+                {
                     "name": "JMGODIER",
                     "url": "https://www.youtube.com/channel/UCEszlI8-W79IsU8LSAiRbDg",
                     "quality": "low",
