@@ -219,6 +219,7 @@ phockup:
 	test -d /opt/phockup || mkdir -p /opt/phockup
 	rsync -av stages/services/files/opt/phockup/ /opt/phockup
 	ln -sf /opt/phockup/phockup.py /usr/local/bin/phockup
+	install -D -m 755 stages/services/files/usr/local/bin/phockup-wrapper /usr/local/bin
 
 network_hacks:
 	install -D -m 644 stages/services/files/etc/systemd/system/nat-flush.service /etc/systemd/system

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+export NAME="phockup"
+export STATUS="0"
+export MESSAGE="Photos backup completed"
+
+phockup --move --date YYYY/MM_M/DD --original-names /var/storage/wastebox/Camera /var/storage/wastebox/Photos/Sorted; /etc/monitoring/notifiers/telegram.sh
