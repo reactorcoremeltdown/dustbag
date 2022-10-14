@@ -1,0 +1,14 @@
+# [facebook]
+
+127.0.0.1 m.facebook.com
+127.0.0.1 www.facebook.com
+
+# [youtube]
+
+127.0.0.1 m.youtube.com
+127.0.0.1 www.youtube.com
+
+# [news]
+
+127.0.0.1 meduza.io
+127.0.0.1 unian.net
