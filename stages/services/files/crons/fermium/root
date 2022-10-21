@@ -1,4 +1,4 @@
-# */40 * * * * cd /root/dustbag && git pull && make fermium
+0 7 * * * cd /root/dustbag && git pull && make fermium
 0 3 * * * reboot
 */5 * * * * /usr/local/bin/deviceping
 0 4 * * * mpc volume 50
