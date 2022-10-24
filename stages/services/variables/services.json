@@ -27,6 +27,14 @@
                     "format": "audio"
                 },
                 {
+                    "name": "feygin24",
+                    "url": "https://www.youtube.com/playlist?list=PL9o6bQUWYNvKybb4-5fLqg-EbbTVD5Jg7",
+                    "quality": "low",
+                    "page_size": 10,
+                    "update_period": "1h",
+                    "format": "audio"
+                },
+                {
                     "name": "JMGODIER",
                     "url": "https://www.youtube.com/channel/UCEszlI8-W79IsU8LSAiRbDg",
                     "quality": "low",
