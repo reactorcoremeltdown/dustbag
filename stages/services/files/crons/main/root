@@ -18,6 +18,8 @@
 20 3 * * 2,5 rm -fr /var/lib/laminar/run/*
 ### Netdata refresh
 30 3 * * * systemctl restart netdata
+### Radicale refresh
+40 3 * * * systemctl restart radicale
 ### Upgrading youtube-dl
 40 3 * * * pip3 install --upgrade youtube-dl
 
