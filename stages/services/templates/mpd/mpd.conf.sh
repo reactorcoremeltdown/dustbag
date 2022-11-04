@@ -3,8 +3,8 @@
 set -e
 
 cat <<EOF > /etc/mpd.conf
-music_directory         "/home/syncthing/Music"
-playlist_directory              "/home/syncthing/Music/_playlists"
+music_directory         "/home/syncthing/Music/Library"
+playlist_directory              "/home/syncthing/Documents/Playlists"
 db_file                 "/var/lib/mpd/tag_cache"
 log_file                        "/var/log/mpd/mpd.log"
 pid_file                        "/run/mpd/pid"
