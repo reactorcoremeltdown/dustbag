@@ -18,6 +18,13 @@
                 "url": "https://apt.syncthing.net/",
                 "distro": "syncthing",
                 "section": "stable"
+            },
+            { "name": "kaliko-backports",
+                "state": "present",
+                "key": "https://kaliko.me/kaliko.gpg",
+                "url": "https://deb.kaliko.me/debian-backports/",
+                "distro": "bullseye-backports",
+                "section": "main"
             }
         ]
     }
