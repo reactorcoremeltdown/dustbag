@@ -168,7 +168,7 @@
     },
     {
       "name": "berliner_baeder",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_http_ping",
       "type": "alert",
       "argument": "https://shop.berlinerbaeder.de/de/bad51",
