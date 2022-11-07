@@ -153,6 +153,20 @@
       "notify": "telegram"
     },
     {
+      "name": "task_transformer_online",
+      "state": "present",
+      "plugin": "check_redis_timestamp",
+      "type": "alert",
+      "argument": "task-transformer-sync-timestamp",
+      "interval": "5m",
+      "description": "Task Transformer operational status",
+      "environment": "external",
+      "warningThreshold": "301",
+      "criticalThreshold": "500",
+      "flowOperator": "upwards",
+      "notify": "telegram"
+    },
+    {
       "name": "berliner_baeder",
       "state": "present",
       "plugin": "check_http_ping",
