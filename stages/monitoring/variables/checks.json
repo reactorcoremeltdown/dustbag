@@ -139,6 +139,20 @@
       "notify": "telegram"
     },
     {
+      "name": "container_volume_free_space",
+      "state": "present",
+      "plugin": "check_disk_space",
+      "type": "alert",
+      "argument": "/dev/sdb",
+      "interval": "3m",
+      "description": "Free space on disk",
+      "environment": "external",
+      "warningThreshold": "80",
+      "criticalThreshold": "90",
+      "flowOperator": "upwards",
+      "notify": "telegram"
+    },
+    {
       "name": "task_transformer_sync",
       "state": "present",
       "plugin": "check_redis_key",
