@@ -259,7 +259,7 @@ podman:
 	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
 
 cups:
-	apt-get -o Acquire::ForceIPv4=true install -y cups
+	apt-get -o Acquire::ForceIPv4=true install -y cups avahi-daemon hpijs-ppds printer-driver-hpijs
 	@echo "$(ccgreen)Setting up cups completed$(ccend)"
 
 fdroid:
