@@ -9,7 +9,7 @@
       "interval": "10m",
       "description": "Radicale SSL certificate",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "provisioning",
@@ -23,7 +23,7 @@
       "warningThreshold": "10",
       "criticalThreshold": "5",
       "flowOperator": "downwards",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "site_https",
@@ -34,7 +34,7 @@
       "interval": "10m",
       "description": "Main Website SSL certificate",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "blog_https",
@@ -45,7 +45,7 @@
       "interval": "10m",
       "description": "Blog Website SSL certificate",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "transmission_https",
@@ -56,7 +56,7 @@
       "interval": "10m",
       "description": "Transmission SSL certificate",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "xmpp_server_ssl",
@@ -67,7 +67,7 @@
       "interval": "10m",
       "description": "XMPP server TLS certificate",
       "environment": "external",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "xmpp_server_alive",
@@ -78,7 +78,7 @@
       "interval": "1m",
       "description": "XMPP server",
       "environment": "external",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "podsync_service",
@@ -89,7 +89,7 @@
       "interval": "1m",
       "description": "Podcast sync service",
       "environment": "external",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "task-transformer",
@@ -100,7 +100,7 @@
       "interval": "5m",
       "description": "VTODO + VEVENT + Kanboard sync service",
       "environment": "external",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "postfix_alive",
@@ -111,7 +111,7 @@
       "interval": "1m",
       "description": "Postfix",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "kernel_version",
@@ -122,7 +122,7 @@
       "interval": "48h",
       "description": "Linux Kernel Version",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "free_space",
@@ -136,7 +136,7 @@
       "warningThreshold": "90",
       "criticalThreshold": "95",
       "flowOperator": "upwards",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "container_volume_free_space",
@@ -150,7 +150,7 @@
       "warningThreshold": "80",
       "criticalThreshold": "90",
       "flowOperator": "upwards",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "task_transformer_sync",
@@ -164,7 +164,7 @@
       "warningThreshold": "3",
       "criticalThreshold": "5",
       "flowOperator": "upwards",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "task_transformer_online",
@@ -178,7 +178,7 @@
       "warningThreshold": "301",
       "criticalThreshold": "500",
       "flowOperator": "upwards",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "berliner_baeder",
@@ -189,7 +189,7 @@
       "interval": "5m",
       "description": "Berliner Bäder online shop",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "api_website",
@@ -200,7 +200,7 @@
       "interval": "1m",
       "description": "RCMD API website",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "caldav_website",
@@ -211,7 +211,7 @@
       "interval": "1m",
       "description": "RCMD CalDAV server",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "api_internal_website",
@@ -222,7 +222,7 @@
       "interval": "1m",
       "description": "RCMD Internal API website",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "ci_website",
@@ -233,7 +233,7 @@
       "interval": "1m",
       "description": "CI engine",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "ipv6",
@@ -244,7 +244,7 @@
       "interval": "1m",
       "description": "Checking IPv6 availability",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "api_https",
@@ -255,7 +255,7 @@
       "interval": "10m",
       "description": "API HTTPS certificate",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "traccar",
@@ -277,7 +277,7 @@
       "interval": "72h",
       "description": "CalDAV backups",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "kanboard",
@@ -288,7 +288,7 @@
       "interval": "72h",
       "description": "Kanboard backups",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "gitea_website",
@@ -297,7 +297,7 @@
       "plugin": "check_http_ping",
       "argument": "https://git.rcmd.space/rcmd/dummy/raw/branch/master/README.md",
       "interval": "10m",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "gitea_responsetime",
@@ -309,7 +309,7 @@
       "warningThreshold": "2",
       "criticalThreshold": "4",
       "flowOperator": "upwards",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "caldav_responsetime",
@@ -321,7 +321,7 @@
       "warningThreshold": "1",
       "criticalThreshold": "2",
       "flowOperator": "upwards",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "site_responsetime",
@@ -333,7 +333,7 @@
       "warningThreshold": "5",
       "criticalThreshold": "10",
       "flowOperator": "upwards",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "api_responsetime",
@@ -345,7 +345,7 @@
       "warningThreshold": "1",
       "criticalThreshold": "2",
       "flowOperator": "upwards",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "blog_responsetime",
@@ -357,7 +357,7 @@
       "warningThreshold": "5",
       "criticalThreshold": "10",
       "flowOperator": "upwards",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "website_backups",
@@ -368,7 +368,7 @@
       "interval": "72h",
       "description": "Website backups",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "website_backups",
@@ -379,7 +379,7 @@
       "interval": "72h",
       "description": "Kanboard backups",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "fermium_online",
@@ -390,7 +390,7 @@
       "interval": "20m",
       "description": "Device online test: fermium",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     },
     {
       "name": "printserver_online",
@@ -401,7 +401,7 @@
       "interval": "20m",
       "description": "Device online test: printserver",
       "environment": "internal",
-      "notify": "telegram"
+      "notify": "gotify"
     }
   ]
 }
