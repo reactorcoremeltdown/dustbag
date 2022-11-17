@@ -4,7 +4,7 @@ export NAME="phockup"
 export STATUS="0"
 export MESSAGE="Photos backup completed"
 
-if ${1} != ''; then
+if [[ ${1} != '' ]]; then
     SOURCE="${1}"
 else
     SOURCE="/var/storage/wastebox/Camera"
