@@ -4,4 +4,10 @@ export NAME="phockup"
 export STATUS="0"
 export MESSAGE="Photos backup completed"
 
-phockup --move --date YYYY/MM_M/DD --original-names /var/storage/wastebox/Camera /var/storage/wastebox/Photos/Sorted; /etc/monitoring/notifiers/telegram.sh
+if ${1} != ''; then
+    SOURCE="${1}"
+else
+    SOURCE="/var/storage/wastebox/Camera"
+fi
+
+phockup --move --date YYYY/MM_M/DD --original-names ${SOURCE} /var/storage/wastebox/Photos/Sorted; /etc/monitoring/notifiers/telegram.sh
