@@ -10,4 +10,4 @@ else
     SOURCE="/var/storage/wastebox/Camera"
 fi
 
-phockup --move --date YYYY/MM_M/DD --original-names ${SOURCE} /var/storage/wastebox/Photos/Sorted; /etc/monitoring/notifiers/gotify.sh
+phockup --move --date YYYY/MM_M/DD --original-names --progress ${SOURCE} /var/storage/wastebox/Photos/Sorted; /etc/monitoring/notifiers/gotify.sh
