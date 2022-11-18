@@ -4,7 +4,7 @@ source ${PLUGINSDIR}/okfail.sh
 
 IFS=$'\n'
 
-TIMESTAMP=`curl --fail --connection-timeout 1 http://localhost:7379/GET/${1} | jq -r .GET`
+TIMESTAMP=`curl --fail --connect-timeout 1 http://localhost:7379/GET/${1} | jq -r .GET`
 CURRENT=`date '+%s'`
 DELTA=`echo "${CURRENT} - ${TIMESTAMP}" | bc`
 
