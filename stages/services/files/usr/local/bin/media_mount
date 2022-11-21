@@ -18,6 +18,6 @@ if [ $? -eq 0 ]; then
     fi
 else
     echo "$(date) Device does not exist on machine."
-    mpc pause
+    #mpc pause
 fi
 echo "$(date) End."
