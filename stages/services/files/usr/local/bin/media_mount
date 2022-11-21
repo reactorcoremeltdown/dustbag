@@ -13,11 +13,14 @@ if [ $? -eq 0 ]; then
     mpc clear
     if [[ -f /mnt/floppy/media.m3u ]]; then
             cat /mnt/floppy/media.m3u | mpc add
+            mpc consume on
+            mpc random off
             mpc play 1
             systemd-mount --umount /mnt/floppy
     fi
 else
     echo "$(date) Device does not exist on machine."
     #mpc pause
+    mpc crop
 fi
 echo "$(date) End."
