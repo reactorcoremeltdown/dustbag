@@ -12,6 +12,7 @@
           "jq",
           "markdown",
           "iptables-persistent",
+          "python3-pip",
           "screen",
           "sudo",
           "sqlite3",
