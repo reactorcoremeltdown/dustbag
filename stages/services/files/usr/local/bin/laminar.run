@@ -21,8 +21,18 @@ case ${REPO_NAME} in
         ;;
 esac
 
+cd ${REPO_NAME}
 
-cd ${REPO_NAME} && sudo /usr/bin/make || FAILURE=1
+TAG=`git describe --exact-match HEAD || echo undefined`
+
+if [[ ${TAG} != 'undefined' ]]; then
+    export ${TAG}
+    sudo /usr/bin/make || FAILURE=1
+    sudo /usr/bin/make release || FAILURE=1
+else
+    sudo /usr/bin/make || FAILURE=1
+fi
+
 
 TELEGRAM_BOT_TOKEN=$(sudo /usr/bin/jq -r .secrets.telegram.bot_token /etc/secrets/secrets.json)
 TELEGRAM_CHAT_ID=$(sudo /usr/bin/jq -r .secrets.telegram.chat_id /etc/secrets/secrets.json)
