@@ -26,7 +26,7 @@ cd ${REPO_NAME}
 TAG=`git describe --exact-match HEAD || echo undefined`
 
 if [[ ${TAG} != 'undefined' ]]; then
-    export ${TAG}
+    export TAG=${TAG}
     sudo /usr/bin/make || FAILURE=1
     sudo /usr/bin/make release TAG=${TAG} || FAILURE=1
 else
