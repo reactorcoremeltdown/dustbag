@@ -28,7 +28,7 @@ TAG=`git describe --exact-match HEAD || echo undefined`
 if [[ ${TAG} != 'undefined' ]]; then
     export ${TAG}
     sudo /usr/bin/make || FAILURE=1
-    sudo /usr/bin/make release || FAILURE=1
+    sudo /usr/bin/make release TAG=${TAG} || FAILURE=1
 else
     sudo /usr/bin/make || FAILURE=1
 fi
