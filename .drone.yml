@@ -24,6 +24,29 @@ node:
 ---
 kind: pipeline
 type: exec
+name: sandbox
+
+platform:
+  os: linux
+  arch: amd64
+
+clone:
+  disable: true
+
+steps:
+- name: clone
+  commands:
+  - git clone $DRONE_GIT_SSH_URL
+- name: build
+  commands:
+  - cd $DRONE_REPO_NAME && sudo make seedbox
+
+node:
+  machine: kind-box
+
+---
+kind: pipeline
+type: exec
 name: fermium
 
 platform:
