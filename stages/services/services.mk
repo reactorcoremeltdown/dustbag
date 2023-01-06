@@ -292,6 +292,9 @@ drone_server:
 	@echo "$(ccgreen)Installed drone server$(ccend)"
 
 drone_runner_amd64:
+	mkdir -p /home/git/.drone-runner-exec || true
+	chown git:git /home/git/.drone-runner-exec
+	bash stages/services/templates/drone/runner.cfg.sh
 	install -D -m 755 stages/services/files/usr/local/bin/drone-runner-amd64 /usr/local/bin
 	install -D -m 644 stages/services/files/etc/systemd/system/drone-runner-amd64.service /etc/systemd/system
 	systemctl enable drone-runner-amd64.service
