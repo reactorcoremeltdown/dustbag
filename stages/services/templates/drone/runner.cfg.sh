@@ -3,7 +3,7 @@
 set -e
 IFS=$'\n'
 
-RPC_SECRET=$(jq -r .secrets.drone.rpc-secret /etc/secrets/secrets.json)
+RPC_SECRET=$(jq -r '.secrets.drone."rpc-secret"' /etc/secrets/secrets.json)
 
 cat <<EOF > /home/git/.drone-runner-exec/config
 DRONE_RPC_PROTO=https
