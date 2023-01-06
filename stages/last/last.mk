@@ -1,8 +1,5 @@
-last: laminar_restart drone_restart
+last: drone_restart
 	@echo "$(cccyan)Last stage completed$(ccend)"
 
-laminar_restart:
-	echo "sleep 10 && systemctl restart laminar.service" | at now
-
 drone_restart:
-	echo "sleep 10 && systemctl restart drone-server.service" | at now
+	bash stages/last/files/bin/prepare_drone_restart.sh
