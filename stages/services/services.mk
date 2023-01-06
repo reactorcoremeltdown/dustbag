@@ -9,7 +9,7 @@ services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx 
 else ifeq ($(MAKECMDGOALS), fermium)
 CRONS := stages/services/files/crons/fermium
 
-services: users packages crons tinc_client mpd diskplayer motion bootconfig deviceping
+services: users packages crons tinc_client mpd diskplayer motion bootconfig deviceping drone_runner_arm
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Generic machines
@@ -299,4 +299,14 @@ drone_runner_amd64:
 	install -D -m 644 stages/services/files/etc/systemd/system/drone-runner-amd64.service /etc/systemd/system
 	systemctl enable drone-runner-amd64.service
 	echo "sleep 15 && systemctl restart drone-runner-amd64.service" | at now
+	@echo "$(ccgreen)Installed drone runner$(ccend)"
+
+drone_runner_arm:
+	mkdir -p /home/git/.drone-runner-exec || true
+	chown git:git /home/git/.drone-runner-exec
+	bash stages/services/templates/drone/runner.cfg.sh
+	install -D -m 755 stages/services/files/usr/local/bin/drone-runner-arm /usr/local/bin
+	install -D -m 644 stages/services/files/etc/systemd/system/drone-runner-arm.service /etc/systemd/system
+	systemctl enable drone-runner-arm.service
+	echo "sleep 15 && systemctl restart drone-runner-arm.service" | at now
 	@echo "$(ccgreen)Installed drone runner$(ccend)"

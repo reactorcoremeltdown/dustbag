@@ -1,0 +1,11 @@
+[Unit]
+Description=Drone CI Runner (ARM version)
+
+[Service]
+User=git
+StartLimitInterval=5
+StartLimitBurst=10
+ExecStart=/usr/local/bin/drone-runner-arm service run --config /home/git/.drone-runner-exec/config
+
+[Install]
+WantedBy=multi-user.target
