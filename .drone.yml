@@ -20,3 +20,26 @@ steps:
 
 node:
   machine: hangar.rcmd.space
+
+---
+kind: pipeline
+type: exec
+name: fermium
+
+platform:
+  os: linux
+  arch: arm
+
+clone:
+  disable: true
+
+steps:
+- name: clone
+  commands:
+  - git clone $DRONE_GIT_SSH_URL
+- name: build
+  commands:
+  - cd $DRONE_REPO_NAME && sudo make fermium
+
+node:
+  machine: fermium
