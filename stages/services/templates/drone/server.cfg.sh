@@ -3,9 +3,9 @@
 set -e
 IFS=$'\n'
 
-RPC_SECRET=$(jq -r .secrets.drone."rpc-secret" /etc/secrets/secrets.json)
-CLIENT_ID=$(jq -r .secrets.drone."client-id" /etc/secrets/secrets.json)
-CLIENT_SECRET=$(jq -r .secrets.drone."client-secret" /etc/secrets/secrets.json)
+RPC_SECRET=$(jq -r '.secrets.drone."rpc-secret"' /etc/secrets/secrets.json)
+CLIENT_ID=$(jq -r '.secrets.drone."client-id"' /etc/secrets/secrets.json)
+CLIENT_SECRET=$(jq -r '.secrets.drone."client-secret"' /etc/secrets/secrets.json)
 
 cat <<EOF > /etc/drone/server.cfg
 DRONE_GITEA_SERVER=https://git.rcmd.space
