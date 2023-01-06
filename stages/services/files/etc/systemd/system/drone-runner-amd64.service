@@ -1,0 +1,9 @@
+[Unit]
+Description=Drone CI Runner
+
+[Service]
+User=git
+ExecStart=/usr/local/bin/drone-runner-amd64
+
+[Install]
+WantedBy=multi-user.target

@@ -2,7 +2,7 @@
 ifeq ($(MAKECMDGOALS),)
 CRONS := stages/services/files/crons/main
 
-services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync hledger-web radicale tinc network_hacks misc prometheus podman fdroid deviceping_receiver phockup drone_server
+services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync hledger-web radicale tinc network_hacks misc prometheus podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium, the little Pi Zero W
@@ -289,3 +289,11 @@ drone_server:
 	bash stages/services/templates/drone/server.cfg.sh
 	install -D -m 644 stages/services/files/etc/systemd/system/drone-server.service /etc/systemd/system
 	systemctl enable drone-server.service
+	@echo "$(ccgreen)Installed drone server$(ccend)"
+
+drone_runner_amd64:
+	install -D -m 755 stages/services/files/usr/local/bin/drone-runner-amd64 /usr/local/bin
+	install -D -m 644 stages/services/files/etc/systemd/system/drone-runner-amd64.service /etc/systemd/system
+	systemctl enable drone-runner-amd64.service
+	echo "sleep 15 && systemctl restart drone-runner-amd64.service" | at now
+	@echo "$(ccgreen)Installed drone runner$(ccend)"
