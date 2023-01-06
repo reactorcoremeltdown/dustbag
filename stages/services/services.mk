@@ -28,7 +28,7 @@ services: users packages drone_runner_amd64
 else ifeq ($(MAKECMDGOALS), printserver)
 CRONS := stages/services/files/crons/printserver
 
-services: users packages crons cups nginx_printer nginx deviceping
+services: users packages crons cups nginx_printer nginx deviceping drone_runner_arm
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## All other hosts
