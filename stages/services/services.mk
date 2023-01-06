@@ -12,13 +12,13 @@ CRONS := stages/services/files/crons/fermium
 services: users packages crons tinc_client mpd diskplayer motion bootconfig deviceping
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
-## Fermium, the little Pi Zero W
+## Generic machines
 else ifeq ($(MAKECMDGOALS), generic)
 
 services: users packages motion deviceping
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
-## Fermium, the little Pi Zero W
+## Seedbox
 else ifeq ($(MAKECMDGOALS), seedbox)
 
 services: users packages
@@ -282,3 +282,8 @@ deviceping_receiver:
 bootconfig:
 	install -D -m 755 stages/services/files/boot/config.txt /boot
 	@echo "$(ccgreen)Setting up bootconfig completed$(ccend)"
+
+drone_server:
+	bash stages/services/templates/drone/server.cfg.sh
+	install -D -m 644 stages/services/files/etc/systemd/system/drone-server.service /etc/systemd/system
+	systemctl enable drone-server.service
