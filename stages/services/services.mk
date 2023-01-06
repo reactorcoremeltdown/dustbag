@@ -21,7 +21,7 @@ services: users packages motion deviceping
 ## Seedbox
 else ifeq ($(MAKECMDGOALS), seedbox)
 
-services: users packages
+services: users packages drone_runner_amd64
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Printserver, the little Orange pi zero
