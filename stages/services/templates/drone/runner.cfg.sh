@@ -6,8 +6,8 @@ IFS=$'\n'
 RPC_SECRET=$(jq -r .secrets.drone.rpc-secret /etc/secrets/secrets.json)
 
 cat <<EOF > /home/git/.drone-runner-exec/config
-DRONE_RPC_PROTO=https
-DRONE_RPC_HOST=ci-beta.rcmd.space
+CLIENT_DRONE_RPC_PROTO=https
+CLIENT_DRONE_RPC_HOST=ci-beta.rcmd.space
 DRONE_RPC_SECRET=${RPC_SECRET}
 EOF
 
