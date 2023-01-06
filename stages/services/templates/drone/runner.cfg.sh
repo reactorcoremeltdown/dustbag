@@ -9,7 +9,7 @@ cat <<EOF > /home/git/.drone-runner-exec/config
 DRONE_RUNNER_NAME=${HOSTNAME}
 DRONE_RUNNER_LABELS=machine:${HOSTNAME}
 DRONE_RPC_PROTO=https
-DRONE_RPC_HOST=ci-beta.rcmd.space
+DRONE_RPC_HOST=ci.rcmd.space
 DRONE_RPC_SECRET=${RPC_SECRET}
 EOF
 
