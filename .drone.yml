@@ -1,7 +1,7 @@
 ---
 kind: pipeline
 type: exec
-name: default
+name: hangar
 
 platform:
   os: linux
