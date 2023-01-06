@@ -59,7 +59,7 @@ server {
     location /rcmd/vanilla-plus.git {
         proxy_pass http://127.0.0.1:25010;
     }
-    location /api {
+    location /login {
         proxy_pass http://127.0.0.1:25010;
     }
     location /media {
