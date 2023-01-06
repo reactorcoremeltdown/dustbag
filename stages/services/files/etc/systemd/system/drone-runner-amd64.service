@@ -3,7 +3,9 @@ Description=Drone CI Runner
 
 [Service]
 User=git
-ExecStart=/usr/local/bin/drone-runner-amd64
+StartLimitInterval=5
+StartLimitBurst=10
+ExecStart=/usr/local/bin/drone-runner-amd64 service run --config /home/git/.drone-runner-exec/config
 
 [Install]
 WantedBy=multi-user.target
