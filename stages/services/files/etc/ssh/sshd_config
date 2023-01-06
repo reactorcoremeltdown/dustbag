@@ -16,6 +16,7 @@ Protocol 2
 UsePAM yes
 X11Forwarding no
 PrintMotd no
+AllowTCPForwarding yes
 
 AcceptEnv LANG LC_*
 
