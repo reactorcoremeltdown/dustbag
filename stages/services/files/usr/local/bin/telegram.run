@@ -4,9 +4,9 @@ TELEGRAM_BOT_TOKEN=$(sudo /usr/bin/jq -r .secrets.telegram.bot_token /etc/secret
 TELEGRAM_CHAT_ID=$(sudo /usr/bin/jq -r .secrets.telegram.chat_id /etc/secrets/secrets.json)
 
 if [[ ${DRONE_BUILD_STATUS} = "success" ]]; then
-    TEXT="📦 ${DRONE_REPO_NAME} build completed\\nHostname: ${HOSTNAME}\\nDetails: ${DRONE_BUILD_LINK}"
+    TEXT="📦 ${DRONE_REPO_NAME} build completed\\n\\nDetails: ${DRONE_BUILD_LINK}"
 else
-    TEXT="⛔ ${DRONE_REPO_NAME} build failed\\nHostname: ${HOSTNAME}\\nDetails: ${DRONE_BUILD_LINK}"
+    TEXT="⛔ ${DRONE_REPO_NAME} build failed\\n\\nDetails: ${DRONE_BUILD_LINK}"
 fi
 
 curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
