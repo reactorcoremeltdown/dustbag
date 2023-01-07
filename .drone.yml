@@ -43,6 +43,9 @@ steps:
 - name: build
   commands:
   - cd $DRONE_REPO_NAME && sudo make seedbox
+- name: report
+  commands:
+  - /usr/local/bin/telegram.run
 
 node:
   machine: kind-box
@@ -66,6 +69,9 @@ steps:
 - name: build
   commands:
   - cd $DRONE_REPO_NAME && sudo make fermium
+- name: report
+  commands:
+  - /usr/local/bin/telegram.run
 
 node:
   machine: fermium
@@ -89,6 +95,9 @@ steps:
 - name: build
   commands:
   - cd $DRONE_REPO_NAME && sudo make printserver
+- name: report
+  commands:
+  - /usr/local/bin/telegram.run
 
 node:
   machine: orangepizero
