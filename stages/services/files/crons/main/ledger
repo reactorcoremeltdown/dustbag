@@ -1,3 +1,3 @@
 # * * * * * /home/ledger/bin/track_pocket_expenses.sh | logger -t ledger
 # * * * * * hledger -f /home/ledger/ledger.book b -N -O csv cash:pocket > /var/spool/api/ledger/cash.csv
-30 7 * * 2,4,6 /home/ledger/bin/weekly_expenses.sh
+#30 7 * * 2,4,6 /home/ledger/bin/weekly_expenses.sh
