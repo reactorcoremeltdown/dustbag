@@ -17,6 +17,9 @@ steps:
 - name: build
   commands:
   - cd $DRONE_REPO_NAME && sudo make
+- name: report
+  commands:
+  - /usr/local/bin/telegram.run
 
 node:
   machine: hangar.rcmd.space

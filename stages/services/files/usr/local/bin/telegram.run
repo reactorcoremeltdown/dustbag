@@ -1,0 +1,16 @@
+#!/bin/bash -e
+
+TELEGRAM_BOT_TOKEN=$(sudo /usr/bin/jq -r .secrets.telegram.bot_token /etc/secrets/secrets.json)
+TELEGRAM_CHAT_ID=$(sudo /usr/bin/jq -r .secrets.telegram.chat_id /etc/secrets/secrets.json)
+
+if [[ ${DRONE_BUILD_STATUS} = "success" ]]; then
+    TEXT="📦 ${DRONE_REPO_NAME} build completed\\nHostname: ${HOSTNAME}\\nDetails: ${DRONE_BUILD_LINK}"
+else
+    TEXT="⛔ ${DRONE_REPO_NAME} build failed\\nHostname: ${HOSTNAME}\\nDetails: ${DRONE_BUILD_LINK}"
+fi
+
+curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+    -H 'Content-Type: application/json' \
+    -d "{ \"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"${TEXT}\" }"
+
+exit ${FAILURE}

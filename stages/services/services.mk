@@ -293,6 +293,9 @@ drone_server:
 	@echo "$(ccgreen)Installed drone server$(ccend)"
 
 drone_runner_amd64:
+	install -D -v -m 755 \
+		stages/services/files/usr/local/bin/telegram.run \
+		/usr/local/bin
 	mkdir -p /home/git/.drone-runner-exec || true
 	chown git:git /home/git/.drone-runner-exec
 	bash stages/services/templates/drone/runner.cfg.sh
@@ -303,6 +306,9 @@ drone_runner_amd64:
 	@echo "$(ccgreen)Installed drone runner$(ccend)"
 
 drone_runner_arm:
+	install -D -v -m 755 \
+		stages/services/files/usr/local/bin/telegram.run \
+		/usr/local/bin
 	mkdir -p /home/git/.drone-runner-exec || true
 	chown git:git /home/git/.drone-runner-exec
 	bash stages/services/templates/drone/runner.cfg.sh
