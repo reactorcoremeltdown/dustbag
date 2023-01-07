@@ -117,3 +117,9 @@ trigger:
 
 node:
   machine: hangar.rcmd.space
+
+depends_on:
+- hangar
+- fermium
+- sandbox
+- printserver
