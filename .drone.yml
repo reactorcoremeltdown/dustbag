@@ -43,6 +43,9 @@ steps:
 - name: build
   commands:
   - cd $DRONE_REPO_NAME && sudo make seedbox
+- name: failure
+  commands:
+  - /bin/fail
 - name: report
   commands:
   - /usr/local/bin/telegram.run
