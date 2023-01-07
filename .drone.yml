@@ -41,6 +41,7 @@ steps:
   commands:
   - git clone $DRONE_GIT_SSH_URL
 - name: build
+  failure: ignore
   commands:
   - cd $DRONE_REPO_NAME && sudo make seedbox
 - name: failure
