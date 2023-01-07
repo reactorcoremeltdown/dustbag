@@ -45,6 +45,7 @@ steps:
   commands:
   - cd $DRONE_REPO_NAME && sudo make seedbox
 - name: failure
+  failure: ignore
   commands:
   - /bin/fail
 - name: report
