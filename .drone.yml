@@ -40,9 +40,6 @@ steps:
 - name: build
   commands:
   - cd $DRONE_REPO_NAME && sudo make seedbox
-- name: failure
-  commands:
-  - /bin/fail
 
 node:
   machine: kind-box
