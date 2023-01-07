@@ -70,7 +70,7 @@ clone:
 steps:
 - name: clone
   commands:
-  - git clone $DRONE_GIT_SSH_URL
+  - git clone --depth 1 $DRONE_GIT_SSH_URL
 - name: build
   commands:
   - cd $DRONE_REPO_NAME && sudo make fermium
@@ -96,7 +96,7 @@ clone:
 steps:
 - name: clone
   commands:
-  - git clone $DRONE_GIT_SSH_URL
+  - git clone --depth 1 $DRONE_GIT_SSH_URL
 - name: build
   commands:
   - cd $DRONE_REPO_NAME && sudo make printserver
