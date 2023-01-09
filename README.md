@@ -2,7 +2,7 @@
 
 Kind of a config management
 
-CI Status: ![](https://ci.rcmd.space/badge/dustbag.svg)
+CI Status: ![](https://ci.rcmd.space/api/badges/rcmd/dustbag/status.svg)
 
 ### Motivation
 
