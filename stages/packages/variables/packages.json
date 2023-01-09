@@ -1,6 +1,6 @@
 {
     "debian": {
-        "packages_lite": [
+        "essentials": [
           "at",
           "bc",
           "htop",
@@ -23,27 +23,20 @@
           "unattended-upgrades",
           "vim"
         ],
-        "packages": [
+        "sandbox": [
+          "helm"
+        ],
+        "server": [
           "cowsay",
-          "at",
           "aha",
-          "bc",
-          "htop",
-          "bash-completion",
-          "dnsutils",
-          "curl",
           "cryptsetup",
           "duplicity",
           "docker-registry",
           "certbot",
-          "davfs2",
-          "git",
           "gnuplot",
           "html2text",
           "imagemagick",
           "inotify-tools",
-          "jq",
-          "markdown",
           "mosh",
           "fdroidserver",
           "ffmpeg",
@@ -51,11 +44,9 @@
           "hledger-web",
           "hledger-ui",
           "nfs-common",
-          "iptables-persistent",
           "libimage-exiftool-perl",
           "lua-dbi-mysql",
           "laminar",
-          "mariadb-server",
           "ncmpcpp",
           "nginx",
           "openvpn",
@@ -72,25 +63,22 @@
           "prometheus",
           "python3-bcrypt",
           "python3-passlib",
-          "python3-pip",
           "pup",
           "id3v2",
-          "screen",
-          "sudo",
-          "sqlite3",
-          "sshfs",
-          "syncthing",
           "telnet",
           "tree",
-          "tinc",
-          "uuid-runtime",
           "khal",
           "todoman",
-          "unattended-upgrades",
-          "vim",
           "zip",
           "redis",
           "webdis"
         ]
+    },
+    "python": {
+      "server": [
+        "youtube-dl",
+        "tdqm==4.62.2"
+      ],
+      "noop": []
     }
 }
