@@ -77,7 +77,7 @@
     "python": {
       "server": [
         "youtube-dl",
-        "tdqm==4.62.2"
+        "tqdm==4.62.2"
       ],
       "noop": []
     }
