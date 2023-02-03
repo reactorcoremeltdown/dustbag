@@ -3,6 +3,8 @@
 echo "$(date) Start."
 echo "$(date) Media change detected on device $1"
 
+sleep 1
+
 lsblk | grep $(echo ${1} | cut -f 3 -d '/')
 
 if [ $? -eq 0 ]; then
