@@ -233,6 +233,8 @@ network_hacks:
 diskplayer: mpd
 	install -D -m 644 stages/services/files/etc/udev/rules.d/100-floppy-change.rules /etc/udev/rules.d
 	install -D -m 755 stages/services/files/usr/local/bin/media_mount /usr/local/bin
+	test -d /usr/local/share/diskplayer || mkdir -p /usr/local/share/diskplayer
+	install -D -m 644 stages/services/files/usr/local/share/diskplayer/bleep.mp3 /usr/local/share/diskplayer
 	systemctl restart udev.service
 	@echo "$(ccgreen)Setting up diskplayer completed$(ccend)"
 
