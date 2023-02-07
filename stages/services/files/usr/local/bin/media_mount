@@ -15,6 +15,7 @@ if [ $? -eq 0 ]; then
     mpc clear
     if [[ -f /mnt/floppy/media.m3u ]]; then
             cat /mnt/floppy/media.m3u | mpc add
+            mpc add file:///usr/local/share/diskplayer/bleep.mp3
             mpc consume on
             mpc random off
             mpc play 1
