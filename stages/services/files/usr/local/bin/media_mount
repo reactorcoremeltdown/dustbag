@@ -25,5 +25,6 @@ else
     echo "$(date) Device does not exist on machine."
     #mpc pause
     mpc crop
+    mpc add file:///usr/local/share/diskplayer/bleep.mp3
 fi
 echo "$(date) End."
