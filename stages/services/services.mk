@@ -28,7 +28,7 @@ services: users packages drone_runner_amd64
 else ifeq ($(MAKECMDGOALS), printserver)
 CRONS := stages/services/files/crons/printserver
 
-services: users packages crons cups nginx_printer nginx deviceping drone_runner_arm
+services: users packages crons cups deviceping drone_runner_arm
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## All other hosts
@@ -106,7 +106,7 @@ nginx_sites:
 	bash stages/services/templates/nginx/sites/sync.sh
 	bash stages/services/templates/nginx/sites/mood.sh
 
-nginx_printer:
+nginx_printer: nginx
 	bash stages/services/templates/nginx/sites/printer.sh
 
 nginx_configs:
@@ -261,7 +261,7 @@ podman:
 	systemctl enable podman-login.service
 	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
 
-cups:
+cups: nginx_printer
 	apt-get -o Acquire::ForceIPv4=true install -y cups avahi-daemon hpijs-ppds printer-driver-hpijs
 	@echo "$(ccgreen)Setting up cups completed$(ccend)"
 
