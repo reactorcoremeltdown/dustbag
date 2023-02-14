@@ -43,8 +43,9 @@ server {
 
     server_name ${SITE}.tiredsysadmin.cc;
 
-    location / {
-        proxy_pass http://127.0.0.1:631;
+    location ~ /cups/(.*) {
+        proxy_pass https://127.0.0.1:631/\$1;
+
         proxy_http_version 1.1;
         proxy_set_header Accept-Encoding "";
         proxy_set_header Upgrade \$http_upgrade;
@@ -54,10 +55,11 @@ server {
 
         proxy_set_header X-Real-IP \$remote_addr;
 
-        # These sets the timeout so that the websocket can stay alive
-        proxy_connect_timeout   7m;
-        proxy_send_timeout      7m;
-        proxy_read_timeout      7m;
+        sub_filter ' href="/' ' href="/cups/';
+        sub_filter ' action="/' ' action="/cups/';
+        sub_filter ' src="/' ' src="/cups/';
+        sub_filter_types *;
+        sub_filter_once off;
     }
 }
 
