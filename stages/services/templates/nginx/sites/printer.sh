@@ -43,6 +43,10 @@ server {
 
     server_name ${SITE}.tiredsysadmin.cc;
 
+    location / {
+        return 302 https://\$server_name/cups/\$request_uri;
+    }
+
     location ~ /cups/(.*) {
         proxy_pass https://127.0.0.1:631/\$1;
 
