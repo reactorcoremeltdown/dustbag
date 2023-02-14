@@ -264,6 +264,7 @@ podman:
 cups: nginx_printer
 	apt-get -o Acquire::ForceIPv4=true install -y cups avahi-daemon hpijs-ppds printer-driver-hpijs
 	install -D -m 644 stages/services/files/etc/cups/cupsd.conf /etc/cups
+	systemctl restart cups.service
 	@echo "$(ccgreen)Setting up cups completed$(ccend)"
 
 fdroid:
