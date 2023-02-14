@@ -23,7 +23,8 @@
           "tinc",
           "uuid-runtime",
           "unattended-upgrades",
-          "vim"
+          "vim",
+          "neovim"
         ],
         "sandbox": [
           "helm"
