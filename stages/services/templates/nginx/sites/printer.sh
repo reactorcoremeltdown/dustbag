@@ -14,8 +14,8 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
+    listen 443 ssl;
+    listen [::]:443 ssl;
 
     access_log /var/log/nginx/${SITE}.tiredsysadmin.cc_access.log json;
     error_log /var/log/nginx/${SITE}.tiredsysadmin.cc_error.log;
