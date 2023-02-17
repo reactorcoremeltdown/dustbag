@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 
-echo "$(date) Start."
-echo "$(date) Media change detected on device $1"
+LOG="/var/log/diskplayer.log"
+
+echo "$(date) Start." >> ${LOG}
+echo "$(date) Media change detected on device $1" >> ${LOG}
 
 sleep 1
 
 lsblk | grep $(echo ${1} | cut -f 3 -d '/')
 
 if [ $? -eq 0 ]; then
-    echo "$(date) Device exists on machine."
-    echo "$(date) Mounting device $1 to /mnt/floppy."
+    echo "$(date) Device exists on machine." >> ${LOG}
+    echo "$(date) Mounting device $1 to /mnt/floppy." >> ${LOG}
     systemd-mount --fsck=off $1 /mnt/floppy
     mpc stop
     mpc clear
@@ -20,12 +22,17 @@ if [ $? -eq 0 ]; then
             mpc random off
             mpc play 1
             systemd-mount --umount /mnt/floppy
+            echo "1" > /etc/diskplayer_status
     fi
 else
-    echo "$(date) Device does not exist on machine."
-    mpc pause
-    mpc clear
-    mpc add file:///usr/local/share/diskplayer/bleep.mp3
-    mpc play
+    echo "$(date) Device does not exist on machine." >> ${LOG}
+    STATUS=$(cat /etc/diskplayer_status)
+    if [[ ${STATUS} = '1' ]]; then
+        mpc pause
+        mpc clear
+        mpc add file:///usr/local/share/diskplayer/bleep.mp3
+        mpc play
+        echo "0" > /etc/diskplayer_status
+    fi
 fi
 echo "$(date) End."
