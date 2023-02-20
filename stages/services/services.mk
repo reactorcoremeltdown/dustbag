@@ -136,10 +136,7 @@ gitea_config: /etc/secrets/secrets.json
 	systemctl enable gitea.service
 	systemctl daemon-reload
 
-gitea_restart:
-	systemctl restart gitea.service
-
-gitea: gitea_directory gitea_config gitea_restart
+gitea: gitea_directory gitea_config
 	@echo "$(ccgreen)Setting up gitea completed$(ccend)"
 
 davfs2:
