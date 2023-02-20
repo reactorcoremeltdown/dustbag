@@ -148,6 +148,7 @@ davfs2:
 	@echo "$(ccgreen)Setting up davfs2 mounts completed$(ccend)"
 
 podsync:
+	test -L /usr/local/bin/youtube-dl || ln -s /usr/local/bin/yt-dlp /usr/local/bin/youtube-dl
 	install -d -m 750 --owner=syncthing --group=syncthing /etc/podsync
 	install -d -m 750 --owner=syncthing --group=syncthing /var/log/podsync
 	install -D -m 644 -v stages/services/files/etc/systemd/system/podsync.service /etc/systemd/system
