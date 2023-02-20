@@ -80,7 +80,7 @@
     },
     "python": {
       "server": [
-        "youtube-dl",
+        "yt-dlp",
         "tqdm==4.62.2"
       ],
       "noop": []

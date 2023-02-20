@@ -21,7 +21,7 @@
 ### Restart services
 40 3 * * * systemctl restart radicale redis webdis
 ### Upgrading youtube-dl
-40 3 * * * pip3 install --upgrade youtube-dl
+40 3 * * * pip3 install --upgrade yt-dlp
 
 ### wiki synchronization
 * * * * * cd /var/lib/wiki/kb && git pull && git push origin master
