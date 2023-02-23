@@ -59,6 +59,14 @@
                     "format": "audio"
                 },
                 {
+                    "name": "mixtapes",
+                    "url": "https://www.youtube.com/playlist?list=PLlxFzQuEAESwlfOMaj22MDQvqF8IrXi0j",
+                    "quality": "high",
+                    "page_size": 50,
+                    "update_period": "1h",
+                    "format": "audio"
+                },
+                {
                     "name": "odysseus",
                     "url": "https://www.youtube.com/channel/UCwoTj-pZgZZ8DInOXSSLMmA",
                     "quality": "high",
