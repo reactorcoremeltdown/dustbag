@@ -1,5 +1,11 @@
-## MAIN host (runs by default)
+## GENERIC host (runs by default)
 ifeq ($(MAKECMDGOALS),)
+
+services: users packages motion deviceping
+	@echo "$(ccgreen)Setting up services completed$(ccend)"
+
+## Production host
+else ifeq ($(MAKECMDGOALS), production)
 CRONS := stages/services/files/crons/main
 
 services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync hledger-web radicale tinc network_hacks misc prometheus podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64
@@ -10,12 +16,6 @@ else ifeq ($(MAKECMDGOALS), fermium)
 CRONS := stages/services/files/crons/fermium
 
 services: users packages crons tinc_client mpd diskplayer motion bootconfig deviceping drone_runner_arm
-	@echo "$(ccgreen)Setting up services completed$(ccend)"
-
-## Generic machines
-else ifeq ($(MAKECMDGOALS), generic)
-
-services: users packages motion deviceping
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Seedbox

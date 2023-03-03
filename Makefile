@@ -1,8 +1,8 @@
-all: early firewall repos packages users services monitoring last
+all: early packages users services
+
+production: early firewall repos packages users services monitoring last
 
 fermium: early repos packages users services
-
-generic: early packages users services
 
 seedbox: early packages users services
 
