@@ -81,7 +81,8 @@
     "python": {
       "server": [
         "yt-dlp",
-        "tqdm==4.62.2"
+        "tqdm==4.62.2",
+        "beets"
       ],
       "noop": []
     }
