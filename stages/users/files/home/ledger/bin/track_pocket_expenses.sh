@@ -32,12 +32,11 @@ if [[ ${JOB_ID} != 'EOQ' ]]; then
 
     echo "Payload: ${JOB_PAYLOAD}"
 
-    SOURCE_TOPIC=$(echo "${JOB_PAYLOAD}" | jq -r '.topic.source')
-    DESTINATION_TOPIC=$(echo "${JOB_PAYLOAD}" | jq -r '.topic.destination')
-    DESCRIPTION=$(echo "${JOB_PAYLOAD}" | jq -r '.description')
-    AMOUNT=$(echo "${JOB_PAYLOAD}" | jq -r '.amount' | sed 's|\.|,|')
+    CATEGORY=$(echo "${JOB_PAYLOAD}" | jq -r '.category')
+    AMOUNT=$(echo "${JOB_PAYLOAD}" | jq -r '.amount')
     if ! test -z ${AMOUNT}; then
-            echo -e "\n$(date '+%Y/%m/%d') ${DESCRIPTION}\n    ${DESTINATION_TOPIC}  ${AMOUNT}\n    ${SOURCE_TOPIC}  -${AMOUNT}\n" >> /home/ledger/ledger.book
+            sqlite3 /home/ledger/expenses.db "insert into expenses (category, amount) values (\"${CATEGORY}\", ${AMOUNT})"
+            # echo -e "\n$(date '+%Y/%m/%d') ${DESCRIPTION}\n    ${DESTINATION_TOPIC}  ${AMOUNT}\n    ${SOURCE_TOPIC}  -${AMOUNT}\n" >> /home/ledger/ledger.book
 
             echo "Unlocking job"
             UNLOCK_JOB_TOKEN=$(curl -s -XPOST --data-urlencode "token=${USER_TOKEN}" https://api.rcmd.space/v5/token/get)
