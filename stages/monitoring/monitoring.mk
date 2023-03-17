@@ -21,6 +21,7 @@ wtfd_files:
 	install -d /etc/monitoring/scripts && \
 		install -D -v -m 755 \
 		stages/monitoring/files/scripts/* /etc/monitoring/scripts
+	test -d /var/www/healthchecks || mkdir -p /var/www/healthchecks
 	systemctl daemon-reload
 	systemctl enable wtfd.service
 
