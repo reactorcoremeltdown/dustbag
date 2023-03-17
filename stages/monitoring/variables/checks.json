@@ -203,6 +203,17 @@
       "notify": "gotify"
     },
     {
+      "name": "grafana_web",
+      "state": "present",
+      "plugin": "check_http_ping",
+      "type": "alert",
+      "argument": "http://localhost:27105/api/health",
+      "interval": "10m",
+      "description": "Grafana Web interface",
+      "environment": "internal",
+      "notify": "gotify"
+    },
+    {
       "name": "caldav_website",
       "state": "present",
       "plugin": "check_http_ping",
