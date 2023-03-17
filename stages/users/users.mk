@@ -1,4 +1,4 @@
-ifeq ($(MAKECMDGOALS),)
+ifeq ($(MAKECMDGOALS), production)
 USERSDB := stages/users/variables/users.json
 
 users: early accounts sudoers configs ledger_scripts
