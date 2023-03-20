@@ -170,7 +170,7 @@ server {
     application/rss+xml
     text/css;
 
-    root /opt/apps/http2ssh;
+    root /opt/apps/http2ssh/src/static;
 
     server_name http2ssh.tiredsysadmin.cc;
 
