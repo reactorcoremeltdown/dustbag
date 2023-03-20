@@ -133,6 +133,51 @@ server {
         try_files \$uri \$uri/ =404;
     }
 }
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name http2ssh.tiredsysadmin.cc;
+
+    return 301 https://\$server_name\$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+
+    access_log /var/log/nginx/http2ssh.tiredsysadmin.cc_access.log json;
+    error_log /var/log/nginx/http2ssh.tiredsysadmin.cc_error.log;
+
+    ### SSL cert files ###
+    ssl_certificate ${blog_ssl_certificate};
+    ssl_certificate_key ${blog_ssl_certificate_key};
+
+    ### Add SSL specific settings here ###
+    ssl_session_timeout 10m;
+
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers ${ssl_ciphers};
+    ssl_prefer_server_ciphers on;
+
+    ### Compression
+    gzip on;
+    gzip_comp_level    5;
+    gzip_min_length    256;
+    gzip_proxied       any;
+    gzip_vary          on;
+    gzip_types
+    application/rss+xml
+    text/css;
+
+    root /opt/apps/http2ssh;
+
+    server_name http2ssh.tiredsysadmin.cc;
+
+    location / {
+        try_files /index.html =404;
+    }
+}
 EOF
 
 ln -sf /etc/nginx/sites-available/blog.conf /etc/nginx/sites-enabled/blog.conf
