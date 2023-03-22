@@ -21,7 +21,7 @@ criticalThreshold = ${criticalThreshold}
 flowOperator = ${flowOperator}
 EOF
         for i in `echo "${check}" | jq -cr '.notify[]'`; do
-            echo "notify = ${i}" >> /etc/monitoring/configs/${name}.ini
+            echo "notify = ${i}.sh" >> /etc/monitoring/configs/${name}.ini
         done
     else
         rm -frv /etc/monitoring/configs/${name}.ini
