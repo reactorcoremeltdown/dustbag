@@ -3,7 +3,7 @@ Description=WTF just happened?
 
 [Service]
 Environment="CONFIG_PATH=/etc/monitoring/config.ini"
-ExecStart=/opt/apps/dafuq/dafuq
+ExecStart=/opt/apps/dafuq/dafuq-linux_amd64
 
 [Install]
 WantedBy=multi-user.target
