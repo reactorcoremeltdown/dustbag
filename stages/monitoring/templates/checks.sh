@@ -5,7 +5,7 @@ IFS=$'\n'
 for check in $(jq -cr '.checks_templates[]' ${1}); do
     source <(echo "${check}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     echo "Check name: ${name}"
-    for i in `echo "${check}" | jq -cr '.notify'`; do
+    for i in `echo "${check}" | jq -cr '.notify[]'`; do
         echo "Notifier added: ${i}"
     done
     if [[ ${state} = 'present' ]]; then
@@ -19,8 +19,10 @@ interval = ${interval}
 warningThreshold = ${warningThreshold}
 criticalThreshold = ${criticalThreshold}
 flowOperator = ${flowOperator}
-notify = ${notify}.sh
 EOF
+        for i in `echo "${check}" | jq -cr '.notify[]'`; do
+            echo "notify = ${i}" >> /etc/monitoring/configs/${name}.ini
+        done
     else
         rm -frv /etc/monitoring/configs/${name}.ini
     fi
