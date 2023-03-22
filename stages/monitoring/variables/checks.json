@@ -23,7 +23,7 @@
       "warningThreshold": "10",
       "criticalThreshold": "5",
       "flowOperator": "downwards",
-      "notify": ["gotify"]
+      "notify": ["gotify", "telegram"]
     },
     {
       "name": "site_https",
