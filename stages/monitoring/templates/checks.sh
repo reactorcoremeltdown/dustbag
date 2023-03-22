@@ -5,6 +5,7 @@ IFS=$'\n'
 for check in $(jq -cr '.checks_templates[]' ${1}); do
     source <(echo "${check}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     echo "Check name: ${name}"
+    echo "Notify parameter: ${notify}"
     if [[ ${state} = 'present' ]]; then
         cat << EOF > /etc/monitoring/configs/${name}.ini
 [config]
