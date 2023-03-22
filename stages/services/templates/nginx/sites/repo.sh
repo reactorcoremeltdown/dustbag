@@ -68,6 +68,11 @@ server {
         proxy_send_timeout      7m;
         proxy_read_timeout      7m;
     }
+    location /binaries/dafuq {
+        root /opt/apps/dafuq;
+
+        try_files \$uri \$uri/ =404;
+    }
 }
 
 EOF
