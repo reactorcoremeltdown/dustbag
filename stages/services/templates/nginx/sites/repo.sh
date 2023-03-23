@@ -71,6 +71,7 @@ server {
     location /binaries/dafuq {
         root /opt/apps/dafuq;
 
+        autoindex on;
         try_files \$uri \$uri/ =404;
     }
 }
