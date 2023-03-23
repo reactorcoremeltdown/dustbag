@@ -5,7 +5,7 @@ IFS=$'\n'
 CHECKS=$(curl -s http://localhost:8881/ | jq -cr 'sort_by(.Plugin) | .[]')
 
 for check in ${CHECKS}; do
-    source <(echo "${check}" | jq -r '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
+    source <(echo "${check}" | jq -r '. | del(.Notify) | to_entries[] | [.key,(.value|@sh)] | join("=")')
     case ${Status} in
         "0")
             echo -en "\e[32m•\e[0m "
@@ -22,7 +22,7 @@ done
 echo -e "\n\n"
 
 for check in ${CHECKS}; do
-    source <(echo "${check}" | jq -r '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
+    source <(echo "${check}" | jq -r '. | del(.Notify) | to_entries[] | [.key,(.value|@sh)] | join("=")')
     case ${Status} in
         "0")
             echo -e "\e[32m${Name}: OK  \e[0m\e[90m${Output}\e[0m\n\t${Description}\n"
