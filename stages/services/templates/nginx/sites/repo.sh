@@ -72,7 +72,6 @@ server {
         root /opt/apps/dafuq;
 
         autoindex on;
-        try_files \$uri \$uri/ =404;
     }
 }
 
