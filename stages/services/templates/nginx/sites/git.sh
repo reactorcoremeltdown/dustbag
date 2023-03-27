@@ -65,6 +65,9 @@ server {
     location /api {
         proxy_pass http://127.0.0.1:25010;
     }
+    location /avatars {
+        proxy_pass http://127.0.0.1:25010;
+    }
     location /media {
         if (\$ssl_client_verify != SUCCESS) {
             return 403;
