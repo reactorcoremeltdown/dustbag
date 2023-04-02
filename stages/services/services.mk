@@ -149,6 +149,7 @@ davfs2:
 
 podsync:
 	test -L /usr/local/bin/youtube-dl || ln -s /usr/local/bin/yt-dlp /usr/local/bin/youtube-dl
+	install -D -m 755 -v stages/services/files/usr/local/bin/podsync /usr/local/bin
 	install -d -m 750 --owner=syncthing --group=syncthing /etc/podsync
 	install -d -m 750 --owner=syncthing --group=syncthing /var/log/podsync
 	install -D -m 644 -v stages/services/files/etc/systemd/system/podsync.service /etc/systemd/system
