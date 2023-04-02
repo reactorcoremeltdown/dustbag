@@ -69,9 +69,9 @@ server {
         proxy_read_timeout      7m;
     }
     location /binaries/dafuq {
-        root /opt/apps/dafuq;
+        root /opt/apps;
 
-        try_files \$uri \$uri/ =404;
+        autoindex on;
     }
 }
 
