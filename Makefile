@@ -19,3 +19,4 @@ include stages/secrets/secrets.mk
 include stages/services/services.mk
 include stages/monitoring/monitoring.mk
 include stages/last/last.mk
+include stages/superdistupgrade/superdistupgrade.mk
