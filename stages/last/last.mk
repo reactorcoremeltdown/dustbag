@@ -1,4 +1,5 @@
 last: drone_restart
+	@echo "Server location: $(shell curl -s https://ipinfo.io | jq -r .country)"
 	@echo "$(cccyan)Last stage completed$(ccend)"
 
 drone_restart:
