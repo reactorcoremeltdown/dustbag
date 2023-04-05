@@ -14,6 +14,7 @@ accounts:
 	bash stages/users/templates/users.sh $(USERSDB)
 
 sudoers:
+	apt install -y sudo
 	install -D -v -m 440 \
 	stages/users/files/etc/sudoers.d/* /etc/sudoers.d/
 
