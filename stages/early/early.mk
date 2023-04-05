@@ -8,7 +8,7 @@ early: test mirrors apt_configs keygen earlystagepackages locales profiles
 
 test:
 ifeq ($(UNAME), Linux)
-	jq --version || apt install -y jq git make curl
+	jq --version || apt -y update && apt install -y jq git make curl lsb-release
 else
 	@printf "`tput bold`This operating system is not supported`tput sgr0`\n"
 	exit 1
