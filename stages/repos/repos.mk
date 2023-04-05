@@ -5,4 +5,4 @@ setup_debian_repositories:
 	bash stages/repos/templates/repo.sh stages/repos/variables/repos.json
 
 update_debian_repositories:
-	apt update
+	apt -y update
