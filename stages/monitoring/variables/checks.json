@@ -364,6 +364,26 @@
       "description": "[relay] MPD server online test",
       "hostname": "fermium.rcmd.space",
       "notify": ["gotify", "telegram"]
+    },
+    {
+      "name": "home_syncthing",
+      "state": "present",
+      "plugin": "relay",
+      "argument": "http://fermium.rcmd.space:8881?check=home_syncthing",
+      "interval": "1m",
+      "description": "[relay] Syncthing at home",
+      "hostname": "fermium.rcmd.space",
+      "notify": ["gotify", "telegram"]
+    },
+    {
+      "name": "home_storage",
+      "state": "present",
+      "plugin": "relay",
+      "argument": "http://fermium.rcmd.space:8881?check=home_storage",
+      "interval": "1m",
+      "description": "[relay] Home storage status",
+      "hostname": "fermium.rcmd.space",
+      "notify": ["gotify", "telegram"]
     }
   ],
   "fermium": [
@@ -375,6 +395,27 @@
       "interval": "5m",
       "description": "MPD server online test",
       "hostname": "fermium.rcmd.space",
+      "notify": ["dummy"]
+    },
+    {
+      "name": "home_syncthing",
+      "state": "present",
+      "plugin": "check_http_ping",
+      "argument": "curl http://192.168.2.120:8384/rest/noauth/health",
+      "interval": "1m",
+      "description": "Syncthing at home",
+      "notify": ["dummy"]
+    },
+    {
+      "name": "home_storage",
+      "state": "present",
+      "plugin": "check_disk_space",
+      "argument": "/dev/root",
+      "interval": "3m",
+      "description": "Free space on disk",
+      "warningThreshold": "90",
+      "criticalThreshold": "95",
+      "flowOperator": "upwards",
       "notify": ["dummy"]
     }
   ]
