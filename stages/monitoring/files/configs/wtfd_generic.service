@@ -1,0 +1,10 @@
+[Unit]
+Description=WTF just happened?
+
+[Service]
+Environment="CONFIG_PATH=/etc/monitoring/config.ini"
+Environment="HOSTNAME=%H"
+ExecStart=/usr/local/bin/dafuq
+
+[Install]
+WantedBy=multi-user.target

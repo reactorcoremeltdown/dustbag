@@ -2,7 +2,7 @@
 
 IFS=$'\n'
 
-for check in $(jq -cr '.checks_templates[]' ${1}); do
+for check in $(jq -cr ".${2}[]" ${1}); do
     source <(echo "${check}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     echo "Check name: ${name}"
     check_hostname=$(echo "${check}" | jq -cr '.hostname')

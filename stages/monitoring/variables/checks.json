@@ -1,5 +1,5 @@
 {
-  "checks_templates": [
+  "production": [
     {
       "name": "dav_https",
       "state": "present",
@@ -415,5 +415,6 @@
       "environment": "internal",
       "notify": ["gotify"]
     }
-  ]
+  ],
+  "fermium": []
 }

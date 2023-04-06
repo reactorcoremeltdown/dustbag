@@ -2,7 +2,7 @@ all: early packages users services
 
 production: early firewall repos packages users services monitoring last
 
-fermium: early repos packages users services
+fermium: early repos packages users services monitoring
 
 seedbox: early users services
 
