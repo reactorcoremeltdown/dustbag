@@ -27,8 +27,6 @@ wtfd_armv6:
 
 wtfd_files:
 	install -D -v -m 755 \
-		stages/monitoring/files/bin/wtfd /usr/local/bin
-	install -D -v -m 755 \
 		stages/monitoring/files/bin/wtf /usr/local/bin
 	install -d /etc/monitoring && \
 		install -D -v -m 644 \
