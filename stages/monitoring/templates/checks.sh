@@ -24,7 +24,9 @@ EOF
         for i in `echo "${check}" | jq -cr '.notify[]'`; do
             echo "notify = ${i}.sh" >> /etc/monitoring/configs/${name}.ini
         done
-        test -z ${check_hostname} || echo "hostname = ${check_hostname}" >> /etc/monitoring/configs/${name}.ini
+        if [[ ${check_hostname} != 'null']]; then
+            echo "hostname = ${check_hostname}" >> /etc/monitoring/configs/${name}.ini
+        fi
     else
         rm -frv /etc/monitoring/configs/${name}.ini
     fi
