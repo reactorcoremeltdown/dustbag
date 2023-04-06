@@ -401,7 +401,7 @@
       "name": "home_syncthing",
       "state": "present",
       "plugin": "check_http_ping",
-      "argument": "curl http://192.168.2.120:8384/rest/noauth/health",
+      "argument": "http://192.168.2.120:8384/rest/noauth/health",
       "interval": "1m",
       "description": "Syncthing at home",
       "notify": ["dummy"]
