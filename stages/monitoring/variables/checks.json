@@ -362,6 +362,7 @@
       "argument": "http://fermium.rcmd.space:8881?check=home_stereo",
       "interval": "2m",
       "description": "[relay] MPD server online test",
+      "hostname": "fermium.rcmd.space",
       "notify": ["gotify", "telegram"]
     }
   ],
