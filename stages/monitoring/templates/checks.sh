@@ -5,6 +5,7 @@ IFS=$'\n'
 for check in $(jq -cr '.checks_templates[]' ${1}); do
     source <(echo "${check}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     echo "Check name: ${name}"
+    check_hostname=$(echo "${check}" | jq -cr '.hostname')
     for i in `echo "${check}" | jq -cr '.notify[]'`; do
         echo "Notifier added: ${i}"
     done
@@ -23,8 +24,7 @@ EOF
         for i in `echo "${check}" | jq -cr '.notify[]'`; do
             echo "notify = ${i}.sh" >> /etc/monitoring/configs/${name}.ini
         done
-        test -z ${hostname} || echo "hostname = ${hostname}" >> /etc/monitoring/configs/${name}.ini
-        unset ${hostname}
+        test -z ${check_hostname} || echo "hostname = ${check_hostname}" >> /etc/monitoring/configs/${name}.ini
     else
         rm -frv /etc/monitoring/configs/${name}.ini
     fi
