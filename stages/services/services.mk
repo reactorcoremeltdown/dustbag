@@ -305,7 +305,7 @@ drone_runner_amd64:
 	install -D -m 755 stages/services/files/usr/local/bin/drone-runner-amd64 /usr/local/bin
 	install -D -m 644 stages/services/files/etc/systemd/system/drone-runner-amd64.service /etc/systemd/system
 	systemctl enable drone-runner-amd64.service
-	echo "sleep 15 && systemctl restart drone-runner-amd64.service" | at now
+	echo "sleep 2 && systemctl start drone-runner-amd64.service" | at now
 	@echo "$(ccgreen)Installed drone runner$(ccend)"
 
 drone_runner_arm:
@@ -318,5 +318,5 @@ drone_runner_arm:
 	install -D -m 755 stages/services/files/usr/local/bin/drone-runner-arm /usr/local/bin
 	install -D -m 644 stages/services/files/etc/systemd/system/drone-runner-arm.service /etc/systemd/system
 	systemctl enable drone-runner-arm.service
-	echo "sleep 15 && systemctl restart drone-runner-arm.service" | at now
+	echo "sleep 2 && systemctl start drone-runner-arm.service" | at now
 	@echo "$(ccgreen)Installed drone runner$(ccend)"
