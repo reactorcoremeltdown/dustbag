@@ -3,6 +3,7 @@ Description=WTF just happened?
 
 [Service]
 Environment="CONFIG_PATH=/etc/monitoring/config.ini"
+Environment="HOSTNAME=%H"
 ExecStart=/opt/apps/dafuq/dafuq-linux_amd64
 
 [Install]
