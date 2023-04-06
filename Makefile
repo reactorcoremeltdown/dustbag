@@ -4,7 +4,7 @@ production: early firewall repos packages users services monitoring last
 
 fermium: early repos packages users services
 
-seedbox: early packages users services
+seedbox: early users services
 
 printserver: early packages services
 
