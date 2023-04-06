@@ -24,6 +24,7 @@ EOF
             echo "notify = ${i}.sh" >> /etc/monitoring/configs/${name}.ini
         done
         test -z ${hostname} || echo "hostname = ${hostname}" >> /etc/monitoring/configs/${name}.ini
+        unset ${hostname}
     else
         rm -frv /etc/monitoring/configs/${name}.ini
     fi
