@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-bot_token=` jq -r '.secrets.gotify.token' /etc/secrets/secrets.json `
 
 text=""
 tail="\\nHostname: $HOSTNAME\\nCheck name: $NAME\\nDescription: $MESSAGE"
@@ -9,12 +8,15 @@ tail_extended="\\nHostname: $HOSTNAME\\nCheck name: $NAME\\nDescription: $MESSAG
 case $STATUS in
   "0")
     text="✅✅✅\\n$tail"
+    bot_token=` jq -r '.secrets.gotify.token2' /etc/secrets/secrets.json `
     ;;
   "1")
     text="⚠️⚠️⚠️\\n$tail_extended"
+    bot_token=` jq -r '.secrets.gotify.token' /etc/secrets/secrets.json `
     ;;
   "2")
     text="❌❌❌\\n$tail_extended"
+    bot_token=` jq -r '.secrets.gotify.token' /etc/secrets/secrets.json `
     ;;
 esac
 
