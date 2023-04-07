@@ -46,10 +46,11 @@ wtfd_files:
 	systemctl enable wtfd.service
 
 wtfd_restart:
-	systemctl stop wtfd.service
-	rm -f /tmp/dafuq.state
-	sleep 3
-	systemctl start wtfd.service
+	systemctl restart wtfd.service
+	#systemctl stop wtfd.service
+	#rm -f /tmp/dafuq.state
+	#sleep 3
+	#systemctl start wtfd.service
 
 wtfd: wtfd_files wtfd_restart
 	@echo "$(ccgreen)Installing wtfd completed$(ccend)"
