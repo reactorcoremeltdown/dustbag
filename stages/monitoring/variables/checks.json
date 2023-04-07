@@ -376,6 +376,16 @@
       "notify": ["gotify", "telegram"]
     },
     {
+      "name": "home_printer",
+      "state": "present",
+      "plugin": "relay",
+      "argument": "http://fermium.rcmd.space:8881?check=home_printer",
+      "interval": "2m",
+      "description": "[relay] CUPS server online test",
+      "hostname": "fermium.rcmd.space",
+      "notify": ["dummy"]
+    },
+    {
       "name": "home_storage",
       "state": "present",
       "plugin": "relay",
