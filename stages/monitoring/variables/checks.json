@@ -419,6 +419,15 @@
       "notify": ["dummy"]
     },
     {
+      "name": "home_printer",
+      "state": "present",
+      "plugin": "relay",
+      "argument": "http://192.168.2.194:8881?check=home_printer",
+      "interval": "2m",
+      "description": "[relay] CUPS server online test",
+      "notify": ["dummy"]
+    },
+    {
       "name": "home_tinc_network",
       "state": "present",
       "plugin": "check_http_ping",
@@ -427,6 +436,17 @@
       "description": "TINC Mesh VPN Network",
       "hostname": "192.168.2.20",
       "notify": ["gotify", "telegram"]
+    }
+  ],
+  "printserver": [
+    {
+      "name": "home_printer",
+      "state": "present",
+      "plugin": "check_cups_online",
+      "argument": "",
+      "interval": "5m",
+      "description": "CUPS server online test",
+      "notify": ["dummy"]
     }
   ]
 }

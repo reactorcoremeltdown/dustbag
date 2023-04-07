@@ -13,6 +13,12 @@ MACHINE := fermium
 monitoring: wtfd_armv6 checks wtfd
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
+else ifeq ($(MAKECMDGOALS), printserver)
+MACHINE := printserver
+
+monitoring: wtfd_armv6 checks wtfd
+	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
+
 endif
 
 wtfd_amd64:
