@@ -6,7 +6,7 @@ fermium: early repos packages users services monitoring
 
 seedbox: early users services
 
-printserver: early packages services
+printserver: early packages services monitoring
 
 include variables/colors.mk
 include variables/globalvars.mk

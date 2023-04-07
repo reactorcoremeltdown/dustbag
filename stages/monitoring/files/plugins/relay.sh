@@ -11,7 +11,10 @@ case ${CurrentStatus} in
     "1")
         warning "${Output}"
         ;;
-    *)
+    "2")
         fail "${Output}"
+        ;;
+    *)
+        fail "No relay data"
         ;;
 esac
