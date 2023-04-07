@@ -3,14 +3,14 @@
 ifeq ($(MAKECMDGOALS), production)
 MACHINE := production
 
-monitoring: wtfd_amd64 wtfd netdata checks
+monitoring: wtfd_amd64 checks wtfd netdata
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
 ## Fermium, the little Pi Zero W
 else ifeq ($(MAKECMDGOALS), fermium)
 MACHINE := fermium
 
-monitoring: wtfd_armv6 wtfd checks
+monitoring: wtfd_armv6 checks wtfd
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
 endif
