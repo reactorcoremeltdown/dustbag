@@ -417,6 +417,16 @@
       "criticalThreshold": "95",
       "flowOperator": "upwards",
       "notify": ["dummy"]
+    },
+    {
+      "name": "home_tinc_network",
+      "state": "present",
+      "plugin": "check_http_ping",
+      "argument": "http://10.8.0.5",
+      "interval": "3m",
+      "description": "TINC Mesh VPN Network",
+      "hostname": "192.168.2.20",
+      "notify": ["gotify", "telegram"]
     }
   ]
 }
