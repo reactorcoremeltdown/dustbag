@@ -444,7 +444,7 @@
       "argument": "http://10.8.0.5",
       "interval": "3m",
       "description": "TINC Mesh VPN Network",
-      "hostname": "192.168.2.20",
+      "hostname": "192.168.2.120",
       "notify": ["gotify", "telegram"]
     }
   ],
