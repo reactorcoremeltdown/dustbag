@@ -1,0 +1,16 @@
+[Unit]
+Description=Hetzner Small StorageBox
+Before=nginx.service
+Before=docker-registry.service
+After=network-online.target
+Wants=network-online.target
+
+[Mount]
+What=https://u346154.your-storagebox.de
+Where=/var/storage/smallwastebox
+Options=rw,user,uid=root,gid=syncthing,dir_mode=0775,file_mode=0664
+Type=davfs
+TimeoutSec=60
+
+[Install]
+WantedBy=remote-fs.target

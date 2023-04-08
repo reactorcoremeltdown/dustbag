@@ -140,11 +140,12 @@ gitea: gitea_directory gitea_config
 	@echo "$(ccgreen)Setting up gitea completed$(ccend)"
 
 davfs2:
+	test -d /var/storage/smallwastebox || mkdir -p /var/storage/smallwastebox
 	bash stages/services/templates/davfs2/secrets.sh
 	install -D -m 644 stages/services/files/etc/systemd/system/davfs2-mounts/* /etc/systemd/system
 	systemctl daemon-reload
-	systemctl enable var-storage-wastebox.automount
-	systemctl start var-storage-wastebox.mount
+	systemctl enable var-storage-wastebox.automount var-storage-smallwastebox.automount
+	systemctl start var-storage-wastebox.mount var-storage-wastebox.mount
 	@echo "$(ccgreen)Setting up davfs2 mounts completed$(ccend)"
 
 podsync:
