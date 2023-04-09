@@ -182,6 +182,15 @@
       "notify": ["gotify"]
     },
     {
+      "name": "radicale",
+      "state": "present",
+      "plugin": "check_http_ping",
+      "argument": "https://dav.rcmd.space/radicale/.web/",
+      "interval": "1m",
+      "description": "Radicale CalDAV server",
+      "notify": ["gotify"]
+    },
+    {
       "name": "grafana_web",
       "state": "present",
       "plugin": "check_http_ping",
