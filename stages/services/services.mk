@@ -143,7 +143,7 @@ davfs2:
 	test -d /var/storage/smallwastebox || mkdir -p /var/storage/smallwastebox
 	bash stages/services/templates/davfs2/secrets.sh
 	install -D -m 644 stages/services/files/etc/systemd/system/davfs2-mounts/* /etc/systemd/system
-	jq '.secrets.gocryptfs.password' /etc/secrets/secrets.json > /etc/secrets/gocryptfs
+	jq -r '.secrets.gocryptfs.password' /etc/secrets/secrets.json > /etc/secrets/gocryptfs
 	chmod 400 /etc/secrets/gocryptfs
 	systemctl daemon-reload
 	systemctl enable var-storage-smallwastebox.automount
