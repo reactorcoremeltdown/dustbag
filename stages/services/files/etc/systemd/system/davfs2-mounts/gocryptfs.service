@@ -3,6 +3,7 @@ Before=containers.target
 After=var-storage-smallwastebox.mount
 
 [Service]
+Type=forking
 ExecStartPre=-/usr/bin/fusermount -u /var/storage/wastebox
 ExecStart=/usr/bin/gocryptfs -allow_other -passfile /etc/secrets/gocryptfs /var/storage/smallwastebox/encrypted /var/storage/wastebox
 ExecStop=/usr/bin/fusermount -u /var/storage/wastebox
