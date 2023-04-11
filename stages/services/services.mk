@@ -146,9 +146,9 @@ davfs2:
 	jq -r '.secrets.gocryptfs.password' /etc/secrets/secrets.json > /etc/secrets/gocryptfs
 	chmod 400 /etc/secrets/gocryptfs
 	systemctl daemon-reload
-	systemctl enable var-storage-smallwastebox.automount
+	systemctl enable var-storage-smallwastebox.automount gocryptfs.service
 	systemctl disable var-storage-wastebox.automount var-storage-wastebox.mount
-	systemctl start var-storage-smallwastebox.mount
+	systemctl start var-storage-smallwastebox.mount gocryptfs.service
 	@echo "$(ccgreen)Setting up davfs2 mounts completed$(ccend)"
 
 podsync:
