@@ -128,6 +128,18 @@
       "notify": ["gotify"]
     },
     {
+      "name": "hetzner_storagebox_v2",
+      "state": "present",
+      "plugin": "check_storagebox_space",
+      "argument": "u346154",
+      "interval": "2m",
+      "description": "Free space on STORAGEBOX V2",
+      "warningThreshold": "80",
+      "criticalThreshold": "95",
+      "flowOperator": "upwards",
+      "notify": ["gotify"]
+    },
+    {
       "name": "container_volume_free_space",
       "state": "present",
       "plugin": "check_disk_space",
