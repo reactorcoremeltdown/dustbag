@@ -146,7 +146,6 @@ davfs2:
 	jq '.secrets.gocryptfs.password' > /etc/secrets/gocryptfs
 	chmod 400 /etc/secrets/gocryptfs
 	systemctl daemon-reload
-	systemctl stop var-storage-wastebox.mount
 	systemctl enable var-storage-smallwastebox.automount
 	systemctl disable var-storage-wastebox.automount var-storage-wastebox.mount
 	systemctl start var-storage-smallwastebox.mount
