@@ -42,6 +42,47 @@ server {
         proxy_pass_header Authorization;
     }
 }
+server {
+    listen 80;
+    listen [::]:80;
+    server_name webdav.rcmd.space;
+
+    return 301 https://\$server_name\$request_uri;
+}
+
+server {
+    listen 443;
+    listen [::]:443;
+    access_log /var/log/nginx/webdav.rcmd.space_access.log json;
+    error_log /var/log/nginx/webdav.rcmd.space_error.log;
+
+    ### SSL cert files ###
+    ssl_certificate ${new_ssl_certificate};
+    ssl_certificate_key ${new_ssl_certificate_key};
+
+    ### Add SSL specific settings here ###
+    ssl_session_timeout 10m;
+
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers '${ssl_ciphers}';
+    ssl_prefer_server_ciphers on;
+
+    root /var/storage/wastebox;
+    index index.html index.htm index.nginx-debian.html;
+    server_name webdav.rcmd.space;
+
+    location / {
+        dav_methods PUT DELETE MKCOL COPY MOVE;
+        dav_ext_methods PROPFIND OPTIONS;
+        dav_access user:rw group:rw all:rw;
+
+        client_max_body_size 0;
+        create_full_put_path on;
+        client_body_temp_path /tmp/;
+        auth_basic "Protected area";
+        auth_basic_user_file /etc/nginx/htpasswd;
+    }
+}
 EOF
 
 ln -sf /etc/nginx/sites-available/dav.conf /etc/nginx/sites-enabled/dav.conf
