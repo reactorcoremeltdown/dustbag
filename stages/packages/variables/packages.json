@@ -52,7 +52,7 @@
           "lua-dbi-mysql",
           "laminar",
           "ncmpcpp",
-          "nginx",
+          "nginx-full",
           "openvpn",
           "pandoc",
           "texlive-latex-base",
