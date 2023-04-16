@@ -29,7 +29,7 @@ for feed in $(jq -cr '.services.podsync.feeds[]' ${1}); do
     fi
     if [[ ${filters} != "" ]]; then
         echo "  filters = ${filters}" >> /etc/podsync/podsync.toml
-        unset ${filters}
+        filters=""
     fi
 done
 
