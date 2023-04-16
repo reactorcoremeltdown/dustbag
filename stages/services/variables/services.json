@@ -40,7 +40,8 @@
                     "quality": "low",
                     "page_size": 10,
                     "update_period": "1h",
-                    "format": "audio"
+                    "format": "audio",
+                    "filters": "{ min_duration = 300 }"
                 },
                 {
                     "name": "feygin24",
