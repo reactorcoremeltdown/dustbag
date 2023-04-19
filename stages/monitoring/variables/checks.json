@@ -164,6 +164,18 @@
       "notify": ["gotify"]
     },
     {
+      "name": "task_transformer_update_due",
+      "state": "present",
+      "plugin": "check_redis_key",
+      "argument": "task-transformer-update-due",
+      "interval": "15m",
+      "description": "Task Transformer, updating due date of kanboard cards",
+      "warningThreshold": "3",
+      "criticalThreshold": "5",
+      "flowOperator": "upwards",
+      "notify": ["gotify"]
+    },
+    {
       "name": "task_transformer_online",
       "state": "present",
       "plugin": "check_redis_timestamp",
