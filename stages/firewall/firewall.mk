@@ -12,4 +12,4 @@ apply_rules: template_rules
 	iptables-save > /etc/iptables/rules.v4
 	ip6tables --flush INPUT
 	cat /etc/firewall/ip6tables-input | bash
-	iptables-save > /etc/iptables/rules.v6
+	ip6tables-save > /etc/iptables/rules.v6
