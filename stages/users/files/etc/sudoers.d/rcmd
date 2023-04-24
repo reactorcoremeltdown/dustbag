@@ -1,1 +1,1 @@
-rcmd ALL=(ALL) NOPASSWD:ALL
+rcmd ALL=(ALL) ALL
