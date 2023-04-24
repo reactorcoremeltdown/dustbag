@@ -17,6 +17,9 @@ steps:
 - name: build
   commands:
   - cd $DRONE_REPO_NAME && echo $GIT_SUDO | sudo -S make production
+  environment:
+    GIT_SUDO:
+      from_secret: git_sudo
 
 node:
   machine: hangar.rcmd.space
@@ -63,6 +66,9 @@ steps:
 - name: build
   commands:
   - cd $DRONE_REPO_NAME && echo $GIT_SUDO | sudo -S make fermium
+  environment:
+    GIT_SUDO:
+      from_secret: git_sudo
 
 node:
   machine: fermium
@@ -86,6 +92,9 @@ steps:
 - name: build
   commands:
   - cd $DRONE_REPO_NAME && echo $GIT_SUDO | sudo -S make printserver
+  environment:
+    GIT_SUDO:
+      from_secret: git_sudo
 
 node:
   machine: orangepizero
