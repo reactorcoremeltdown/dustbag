@@ -31,4 +31,5 @@ ledger_scripts:
 	install -d -m 775 --owner root --group apps /var/spool/api/ledger
 	install -d /home/ledger/bin
 	install -D -v -m 755 stages/users/files/home/ledger/bin/track_pocket_expenses.sh /home/ledger/bin
+	install -D -v -m 755 stages/users/files/home/ledger/bin/track_mood.sh /home/ledger/bin
 	install -D -v -m 755 stages/users/files/home/ledger/bin/weekly_expenses.sh /home/ledger/bin
