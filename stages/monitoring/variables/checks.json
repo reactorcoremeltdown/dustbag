@@ -405,7 +405,7 @@
       "state": "present",
       "plugin": "relay",
       "argument": "http://fermium.rcmd.space:8881?check=home_stereo",
-      "interval": "2m",
+      "interval": "30m",
       "description": "[relay] MPD server online test",
       "hostname": "fermium.rcmd.space",
       "notify": ["gotify", "telegram"]
@@ -415,7 +415,7 @@
       "state": "present",
       "plugin": "relay",
       "argument": "http://fermium.rcmd.space:8881?check=home_syncthing",
-      "interval": "1m",
+      "interval": "30m",
       "description": "[relay] Syncthing at home",
       "hostname": "fermium.rcmd.space",
       "notify": ["gotify", "telegram"]
@@ -425,7 +425,7 @@
       "state": "present",
       "plugin": "relay",
       "argument": "http://fermium.rcmd.space:8881?check=home_printer",
-      "interval": "2m",
+      "interval": "30m",
       "description": "[relay] CUPS server online test",
       "hostname": "fermium.rcmd.space",
       "notify": ["dummy"]
@@ -435,7 +435,7 @@
       "state": "present",
       "plugin": "relay",
       "argument": "http://fermium.rcmd.space:8881?check=home_storage",
-      "interval": "1m",
+      "interval": "30m",
       "description": "[relay] Home storage status",
       "hostname": "fermium.rcmd.space",
       "notify": ["gotify", "telegram"]
@@ -478,7 +478,7 @@
       "state": "present",
       "plugin": "relay",
       "argument": "http://192.168.2.194:8881?check=home_printer",
-      "interval": "2m",
+      "interval": "10m",
       "description": "[relay] CUPS server online test",
       "notify": ["dummy"]
     },
