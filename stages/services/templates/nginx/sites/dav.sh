@@ -51,8 +51,9 @@ server {
 }
 
 server {
-    listen 443;
-    listen [::]:443;
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+
     access_log /var/log/nginx/webdav.rcmd.space_access.log json;
     error_log /var/log/nginx/webdav.rcmd.space_error.log;
 
@@ -67,55 +68,16 @@ server {
     ssl_ciphers '${ssl_ciphers}';
     ssl_prefer_server_ciphers on;
 
-    root /var/storage/wastebox;
-    index index.html index.htm index.nginx-debian.html;
     server_name webdav.rcmd.space;
 
     location / {
-        dav_methods PUT DELETE MKCOL COPY MOVE;
-        dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
-        dav_access user:rw group:rw all:rw;
-
-        if (\$request_method = MKCOL) {
-            rewrite ^(.*[^/])$ \$1/ break;
-        }
-
-        if (-d \$request_filename) {
-            rewrite ^(.*[^/])$ \$1/ break;
-        }
-
-        set \$destination \$http_destination;
-        set \$parse "";
-        if (\$request_method = MOVE) {
-            set \$parse "\${parse}M";
-        }
-
-        if (\$request_method = COPY) {
-            set \$parse "\${parse}M";
-        }
-
-        if (-d \$request_filename) {
-            rewrite ^(.*[^/])$ \$1/ break;
-            set \$parse "\${parse}D";
-        }
-
-        if (\$destination ~ ^https://webdav.rcmd.space/(.*)$) {
-            set \$ob \$1;
-            set \$parse "\${parse}R\${ob}";
-        }
-
-        if (\$parse ~ ^MDR(.*[^/])$) {
-            set \$mvpath \$1;
-            set \$destination "https://webdav.rcmd.space/\${mvpath}/";
-            more_set_input_headers "Destination: \$destination";
-        }
-
-        client_max_body_size 0;
-        create_full_put_path on;
-        client_body_temp_path /tmp/;
         auth_basic "Protected area";
         auth_basic_user_file /etc/nginx/htpasswd;
-    }
+        proxy_pass http://127.0.0.1:38000; 
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+    } 
 }
 EOF
 
