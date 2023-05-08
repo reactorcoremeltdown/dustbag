@@ -73,8 +73,42 @@ server {
 
     location / {
         dav_methods PUT DELETE MKCOL COPY MOVE;
-        dav_ext_methods PROPFIND OPTIONS;
+        dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
         dav_access user:rw group:rw all:rw;
+
+        if (\$request_method = MKCOL) {
+            rewrite ^(.*[^/])$ \$1/ break;
+        }
+
+        if (-d \$request_filename) {
+            rewrite ^(.*[^/])$ \$1/ break;
+        }
+
+        set \$destination \$http_destination;
+        set \$parse "";
+        if (\$request_method = MOVE) {
+            set \$parse "\${parse}M";
+        }
+
+        if (\$request_method = COPY) {
+            set \$parse "\${parse}M";
+        }
+
+        if (-d \$request_filename) {
+            rewrite ^(.*[^/])$ \$1/ break;
+            set \$parse "\${parse}D";
+        }
+
+        if (\$destination ~ ^https://webdav.rcmd.space/(.*)$) {
+            set \$ob \$1;
+            set \$parse "\${parse}R\${ob}";
+        }
+
+        if (\$parse ~ ^MDR(.*[^/])$) {
+            set \$mvpath \$1;
+            set \$destination "https://webdav.rcmd.space/\${mvpath}/";
+            more_set_input_headers "Destination: \$destination";
+        }
 
         client_max_body_size 0;
         create_full_put_path on;
