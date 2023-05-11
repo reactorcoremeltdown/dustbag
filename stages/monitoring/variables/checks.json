@@ -206,6 +206,18 @@
       "notify": ["gotify"]
     },
     {
+      "name": "api_website_health",
+      "state": "present",
+      "plugin": "check_http_success_rate",
+      "argument": "https://api.rcmd.space/v5/healthcheck",
+      "interval": "5m",
+      "warningThreshold": "95",
+      "criticalThreshold": "90",
+      "flowOperator": "downwards",
+      "description": "RCMD API website",
+      "notify": ["telegram"]
+    },
+    {
       "name": "radicale",
       "state": "present",
       "plugin": "check_http_ping",
