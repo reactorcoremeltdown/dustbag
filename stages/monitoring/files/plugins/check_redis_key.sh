@@ -4,7 +4,7 @@ source ${PLUGINSDIR}/okfail.sh
 
 IFS=$'\n'
 
-VALUE=`curl --fail --max-time 1 http://localhost:7379/GET/${1} | jq -r '.GET'`
+VALUE=`curl --fail -s --max-time 1 http://localhost:7379/GET/${1} | jq -r '.GET'`
 
 if [[ ${VALUE} -gt ${CRITICAL_THRESHOLD} ]]; then
     fail "The check ${1} has failed more than ${CRITICAL_THRESHOLD} times in a row."
