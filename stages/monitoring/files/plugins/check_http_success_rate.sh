@@ -15,7 +15,7 @@ sqlite3 /var/lib/httpsuccessrate/timeseries.db "insert into ${PLUGIN_NAME} (stat
 PERCENTAGE=`sqlite3 /var/lib/httpsuccessrate/timeseries.db "select round(100.0 * count(*) / (select count(*) from ${PLUGIN_NAME} where time > ${YESTERDAY})) as percentage from ${PLUGIN_NAME} where status = '200' and time > ${YESTERDAY}"`
 
 if [[ $PERCENTAGE -lt ${WARNING_THRESHOLD} ]]; then
-    warning "The success rate of ${1} is below ${PERCENTAGE}%"
+    warning "The success rate of ${1} is ${PERCENTAGE}%"
 elif [[ ${PERCENTAGE} -lt ${CRITICAL_THRESHOLD} ]]; then
     fail "The success rate of ${1} is ${PERCENTAGE}%! Check the site health"
 else
