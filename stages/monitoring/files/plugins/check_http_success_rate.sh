@@ -12,7 +12,7 @@ status=`curl -A "monit-ping-check" -s -o /dev/null -w "%{http_code}" --connect-t
 
 sqlite3 /var/lib/httpsuccessrate/timeseries.db "insert into ${PLUGIN_NAME} (status) values (${status})"
 
-PERCENTAGE=`sqlite3 /var/lib/httpsuccessrate/timeseries.db "select round(100.0 * count(*) / (select count(*) from ${PLUGIN_NAME} where time > ${YESTERDAY})) as percentage from ${PLUGIN_NAME} where status = '200' and time > ${YESTERDAY}"`
+PERCENTAGE=`sqlite3 /var/lib/httpsuccessrate/timeseries.db "select round(100.0 * count(*) / (select count(*) from ${PLUGIN_NAME} where time > ${YESTERDAY})) as percentage from ${PLUGIN_NAME} where status = '200' and time > ${YESTERDAY}" | cut -f 1 -d '.'`
 
 if [[ $PERCENTAGE -lt ${WARNING_THRESHOLD} ]]; then
     warning "The success rate of ${1} is ${PERCENTAGE}%"
