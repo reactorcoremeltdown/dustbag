@@ -109,7 +109,7 @@
       "plugin": "check_disk_space",
       "argument": "/",
       "interval": "3m",
-      "description": "Free space on disk",
+      "descripMissing spacetion": "Free space on disk",
       "warningThreshold": "90",
       "criticalThreshold": "95",
       "flowOperator": "upwards",
@@ -207,7 +207,7 @@
     },
     {
       "name": "api_website_health",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_http_success_rate",
       "argument": "https://api.rcmd.space/v5/healthcheck",
       "interval": "5m",
@@ -219,7 +219,7 @@
     },
     {
       "name": "radicale",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_http_success_rate",
       "warningThreshold": "95",
       "criticalThreshold": "90",
@@ -231,7 +231,7 @@
     },
     {
       "name": "grafana_web",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_http_success_rate",
       "warningThreshold": "95",
       "criticalThreshold": "90",
@@ -243,7 +243,7 @@
     },
     {
       "name": "caldav_website",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_http_success_rate",
       "warningThreshold": "95",
       "criticalThreshold": "90",
@@ -255,7 +255,7 @@
     },
     {
       "name": "api_internal_website",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_http_success_rate",
       "warningThreshold": "95",
       "criticalThreshold": "90",
@@ -267,7 +267,7 @@
     },
     {
       "name": "ci_website",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_http_success_rate",
       "warningThreshold": "95",
       "criticalThreshold": "90",
@@ -481,7 +481,7 @@
     },
     {
       "name": "home_syncthing",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_http_success_rate",
       "warningThreshold": "95",
       "criticalThreshold": "90",
@@ -514,7 +514,7 @@
     },
     {
       "name": "home_tinc_network",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_http_success_rate",
       "warningThreshold": "95",
       "criticalThreshold": "90",
