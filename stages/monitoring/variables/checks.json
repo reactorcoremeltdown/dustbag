@@ -117,7 +117,7 @@
     },
     {
       "name": "hetzner_storagebox",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_storagebox_space",
       "argument": "u214397",
       "interval": "3m",
