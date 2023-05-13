@@ -60,6 +60,9 @@ server {
         proxy_read_timeout 1d;
     }
     location /internal/healthcheck {
+        if (\$http_user_agent ~ monit-ping-check) {
+            return 403;
+        }
         proxy_pass http://127.0.0.1:26005;
         proxy_set_header X-Real-IP \$remote_addr;
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
