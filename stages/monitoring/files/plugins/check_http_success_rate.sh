@@ -6,6 +6,19 @@ test -d /var/lib/httpsuccessrate/ || mkdir -p /var/lib/httpsuccessrate
 
 TIMEFRAME=$(date --date "now -3 hours" '+%s')
 
+TOTAL_COUNT=$(sqlite3 /var/lib/httpsuccessrate/timeseries.db <<EOF
+.timeout 3000
+select count(*) from ${PLUGIN_NAME};
+EOF
+)
+
+if [[ ${TOTAL_COUNT} -gt 1000 ]]; then
+    sqlite3 /var/lib/httpsuccessrate/timeseries.db <<EOF
+    .timeout 3000
+    delete from ${PLUGIN_NAME} where time < strftime('%s', 'now', '-2 days');
+EOF
+fi
+
 sqlite3 /var/lib/httpsuccessrate/timeseries.db <<EOF
 .timeout 3000
 CREATE TABLE IF NOT EXISTS ${PLUGIN_NAME} (time timestamp default (strftime('%s', 'now')), status text);
