@@ -26,7 +26,8 @@ wtfd_amd64:
 		stages/monitoring/files/configs/wtfd.service /etc/systemd/system
 
 wtfd_armv6:
-	wget -c https://repo.rcmd.space/binaries/dafuq/releases/v0.9.0/dafuq-linux_arm -O /tmp/dafuq
+	systemctl stop wtfd.service
+	wget -c https://repo.rcmd.space/binaries/dafuq/releases/v0.9.2/dafuq-linux_arm -O /tmp/dafuq
 	install -D -m 755 /tmp/dafuq /usr/local/bin
 	cp stages/monitoring/files/configs/wtfd_generic.service /etc/systemd/system/wtfd.service
 	chmod 644 /etc/systemd/system/wtfd.service
