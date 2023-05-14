@@ -178,11 +178,23 @@
       "notify": ["gotify"]
     },
     {
+      "name": "internal_wiki",
+      "state": "present",
+      "plugin": "check_http_success_rate",
+      "argument": "http://localhost:26008/pages/notes/sprints",
+      "interval": "5m",
+      "warningThreshold": "99",
+      "criticalThreshold": "97",
+      "flowOperator": "downwards",
+      "description": "RCMD API website",
+      "notify": ["telegram"]
+    },
+    {
       "name": "api_website_health",
       "state": "present",
       "plugin": "check_http_success_rate",
       "argument": "https://api.rcmd.space/v5/healthcheck",
-      "interval": "5m",
+      "interval": "1m",
       "warningThreshold": "99",
       "criticalThreshold": "97",
       "flowOperator": "downwards",
@@ -280,42 +292,6 @@
       "argument": "file:///var/storage/wastebox/Backups/kanboard/",
       "interval": "72h",
       "description": "Kanboard backups",
-      "notify": ["gotify"]
-    },
-    {
-      "name": "site_responsetime",
-      "state": "absent",
-      "description": "Response Time of rcmd.space",
-      "plugin": "check_site_response_time",
-      "argument": "/var/log/nginx/rcmd.space_access.log",
-      "interval": "10m",
-      "warningThreshold": "5",
-      "criticalThreshold": "10",
-      "flowOperator": "upwards",
-      "notify": ["gotify"]
-    },
-    {
-      "name": "api_responsetime",
-      "state": "absent",
-      "description": "Response Time of api.rcmd.space",
-      "plugin": "check_site_response_time",
-      "argument": "/var/log/nginx/api.rcmd.space_access.log",
-      "interval": "10m",
-      "warningThreshold": "1",
-      "criticalThreshold": "2",
-      "flowOperator": "upwards",
-      "notify": ["gotify"]
-    },
-    {
-      "name": "blog_responsetime",
-      "state": "absent",
-      "description": "Response Time of tiredsysadmin.cc",
-      "plugin": "check_site_response_time",
-      "argument": "/var/log/nginx/tiredsysadmin.cc_access.log",
-      "interval": "10m",
-      "warningThreshold": "5",
-      "criticalThreshold": "10",
-      "flowOperator": "upwards",
       "notify": ["gotify"]
     },
     {
