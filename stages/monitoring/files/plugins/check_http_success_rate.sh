@@ -4,7 +4,7 @@ source /etc/monitoring/plugins/okfail.sh
 
 test -d /var/lib/httpsuccessrate/ || mkdir -p /var/lib/httpsuccessrate
 
-YESTERDAY=$(date --date "now -24 hours" '+%s')
+TIMEFRAME=$(date --date "now -3 hours" '+%s')
 
 sqlite3 /var/lib/httpsuccessrate/timeseries.db <<EOF
 .timeout 3000
@@ -22,7 +22,7 @@ PERCENTAGE="0"
 
 PERCENTAGE_DEC=$(sqlite3 /var/lib/httpsuccessrate/timeseries.db <<EOF
 .timeout 3000
-select round(100.0 * count(*) / (select count(*) from ${PLUGIN_NAME} where time > ${YESTERDAY})) as percentage from ${PLUGIN_NAME} where status = '200' and time > ${YESTERDAY};
+select round(100.0 * count(*) / (select count(*) from ${PLUGIN_NAME} where time > ${TIMEFRAME})) as percentage from ${PLUGIN_NAME} where status = '200' and time > ${TIMEFRAME};
 EOF
 )
 
