@@ -23,6 +23,26 @@
       "notify": ["gotify", "telegram"]
     },
     {
+      "name": "webdav_filesystem",
+      "state": "present",
+      "plugin": "check_file",
+      "argument": "/var/storage/wastebox/tiredsysadmin.cc/podcasts/JMGODIER.xml",
+      "interval": "15s",
+      "description": "Enсrypted webdav mount",
+      "hostname": "rcmd.space",
+      "notify": ["gotify", "telegram"]
+    },
+    {
+      "name": "gocryptfs_config",
+      "state": "present",
+      "plugin": "check_file",
+      "argument": "/var/storage/smallwastebox/encrypted/gocryptfs.conf",
+      "interval": "15s",
+      "description": "Decrypted webdav mount",
+      "hostname": "rcmd.space",
+      "notify": ["gotify", "telegram"]
+    },
+    {
       "name": "site_https",
       "state": "present",
       "plugin": "check_https_certificate",
@@ -523,6 +543,18 @@
       "interval": "3m",
       "description": "TINC Mesh VPN Network",
       "hostname": "192.168.2.120",
+      "notify": ["gotify", "telegram"]
+    },
+    {
+      "name": "main_website",
+      "state": "present",
+      "plugin": "check_http_success_rate",
+      "warningThreshold": "100",
+      "criticalThreshold": "99",
+      "flowOperator": "downwards",
+      "argument": "https://rcmd.space",
+      "interval": "1m",
+      "description": "RCMD.space website",
       "notify": ["gotify", "telegram"]
     }
   ],
