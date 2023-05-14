@@ -186,8 +186,8 @@
       "warningThreshold": "99",
       "criticalThreshold": "97",
       "flowOperator": "downwards",
-      "description": "RCMD API website",
-      "notify": ["telegram"]
+      "description": "Internal wiki engine",
+      "notify": ["gotify"]
     },
     {
       "name": "api_website_health",
@@ -199,7 +199,7 @@
       "criticalThreshold": "97",
       "flowOperator": "downwards",
       "description": "RCMD API website",
-      "notify": ["telegram"]
+      "notify": ["gotify"]
     },
     {
       "name": "radicale",
@@ -223,7 +223,7 @@
       "argument": "http://localhost:27105/api/health",
       "interval": "10m",
       "description": "Grafana Web interface",
-      "notify": ["gotify"]
+      "notify": ["telegram"]
     },
     {
       "name": "api_internal_website",
@@ -247,7 +247,7 @@
       "argument": "https://ci.rcmd.space/badge/dummy.svg",
       "interval": "1m",
       "description": "CI engine",
-      "notify": ["gotify"]
+      "notify": ["telegram"]
     },
     {
       "name": "ipv6",
@@ -256,7 +256,7 @@
       "argument": "https://fast.com",
       "interval": "1m",
       "description": "Checking IPv6 availability",
-      "notify": ["gotify"]
+      "notify": ["telegram"]
     },
     {
       "name": "api_https",
@@ -283,25 +283,7 @@
       "argument": "file:///var/storage/wastebox/Backups/radicale/",
       "interval": "72h",
       "description": "CalDAV backups",
-      "notify": ["gotify"]
-    },
-    {
-      "name": "kanboard",
-      "state": "present",
-      "plugin": "check_duplicity_backup",
-      "argument": "file:///var/storage/wastebox/Backups/kanboard/",
-      "interval": "72h",
-      "description": "Kanboard backups",
-      "notify": ["gotify"]
-    },
-    {
-      "name": "website_backups",
-      "state": "present",
-      "plugin": "check_duplicity_backup",
-      "argument": "file:///var/storage/wastebox/Backups/websites/",
-      "interval": "72h",
-      "description": "Website backups",
-      "notify": ["gotify"]
+      "notify": ["telegram"]
     },
     {
       "name": "kanboard_backups",
@@ -310,7 +292,16 @@
       "argument": "file:///var/storage/wastebox/Backups/kanboard/",
       "interval": "72h",
       "description": "Kanboard backups",
-      "notify": ["gotify"]
+      "notify": ["telegram"]
+    },
+    {
+      "name": "website_backups",
+      "state": "present",
+      "plugin": "check_duplicity_backup",
+      "argument": "file:///var/storage/wastebox/Backups/websites/",
+      "interval": "72h",
+      "description": "Website backups",
+      "notify": ["telegram"]
     },
     {
       "name": "fermium_online",
@@ -328,7 +319,7 @@
       "argument": "orangepizero",
       "interval": "20m",
       "description": "Device online test: printserver",
-      "notify": ["gotify"]
+      "notify": ["telegram"]
     },
     {
       "name": "home_stereo",
@@ -358,7 +349,7 @@
       "interval": "30m",
       "description": "[relay] CUPS server online test",
       "hostname": "fermium.rcmd.space",
-      "notify": ["dummy"]
+      "notify": ["telegram"]
     },
     {
       "name": "home_storage",
@@ -368,7 +359,7 @@
       "interval": "30m",
       "description": "[relay] Home storage status",
       "hostname": "fermium.rcmd.space",
-      "notify": ["gotify", "telegram"]
+      "notify": ["telegram"]
     }
   ],
   "fermium": [
