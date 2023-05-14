@@ -7,7 +7,7 @@
                 "url": "https://download.docker.com/linux/debian",
                 "section": "stable" },
             { "name": "backports",
-                "state": "absent",
+                "state": "present",
                 "url": "http://deb.debian.org/debian",
                 "key": "file:///usr/share/keyrings/debian-keyring.gpg",
                 "distro": "bullseye-backports",
@@ -20,7 +20,7 @@
                 "section": "stable"
             },
             { "name": "kaliko-backports",
-                "state": "present",
+                "state": "absent",
                 "key": "https://kaliko.me/kaliko.gpg",
                 "url": "https://deb.kaliko.me/debian-backports/",
                 "distro": "bullseye-backports",
