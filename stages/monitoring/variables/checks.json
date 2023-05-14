@@ -263,7 +263,7 @@
     },
     {
       "name": "caldav_website",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_http_success_rate",
       "warningThreshold": "99",
       "criticalThreshold": "97",
