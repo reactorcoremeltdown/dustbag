@@ -284,7 +284,7 @@
     },
     {
       "name": "site_responsetime",
-      "state": "present",
+      "state": "absent",
       "description": "Response Time of rcmd.space",
       "plugin": "check_site_response_time",
       "argument": "/var/log/nginx/rcmd.space_access.log",
@@ -296,7 +296,7 @@
     },
     {
       "name": "api_responsetime",
-      "state": "present",
+      "state": "absent",
       "description": "Response Time of api.rcmd.space",
       "plugin": "check_site_response_time",
       "argument": "/var/log/nginx/api.rcmd.space_access.log",
@@ -308,7 +308,7 @@
     },
     {
       "name": "blog_responsetime",
-      "state": "present",
+      "state": "absent",
       "description": "Response Time of tiredsysadmin.cc",
       "plugin": "check_site_response_time",
       "argument": "/var/log/nginx/tiredsysadmin.cc_access.log",
