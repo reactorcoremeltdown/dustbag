@@ -97,6 +97,15 @@
       "notify": ["gotify"]
     },
     {
+      "name": "dave_service",
+      "state": "present",
+      "plugin": "check_systemd_service",
+      "argument": "dave.service",
+      "interval": "1m",
+      "description": "DAVE, a WebDAV server",
+      "notify": ["gotify"]
+    },
+    {
       "name": "task-transformer",
       "state": "present",
       "plugin": "check_systemd_service",
