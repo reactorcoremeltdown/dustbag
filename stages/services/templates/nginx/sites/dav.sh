@@ -36,6 +36,7 @@ server {
     }
 
     location /radicale/ {
+        proxy_read_timeout 300;
         proxy_pass        http://localhost:5232/; # The / is important!
         proxy_set_header  X-Script-Name /radicale;
         proxy_set_header  X-Forwarded-For \$proxy_add_x_forwarded_for;
