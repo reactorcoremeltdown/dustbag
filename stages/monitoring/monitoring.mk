@@ -76,4 +76,4 @@ checks_configs:
 	bash stages/monitoring/templates/checks.sh stages/monitoring/variables/checks.json $(MACHINE)
 	@echo "$(ccgreen)Installing DAFUQ checks completed$(ccend)"
 
-checks: checks_configs wtfd_restart
+checks: wtfd_files checks_configs wtfd_restart
