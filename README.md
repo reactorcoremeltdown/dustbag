@@ -18,4 +18,6 @@ Ansible appears to be too slow and bloated for simple operation like configure o
 ### Debian 12 Bookworm roadmap
 
 + [x] `E: The repository 'https://apt.syncthing.net syncthing InRelease' is not signed.`
-+ [ ] `gocryptfs.service: Failed at step EXEC spawning /usr/bin/gocryptfs: No such file or directory`
++ [x] `gocryptfs.service: Failed at step EXEC spawning /usr/bin/gocryptfs: No such file or directory`
++ [x] `E: Unable to locate package laminar`
++ [ ] Broken python packages, need to either use virtualenv, or change the install location
