@@ -12,5 +12,7 @@ endif
 
 packages: repos
 	dpkg-query -s $(PACKAGES) > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y $(PACKAGES)
-	pip3 install $(PYTHON_PACKAGES) || true
+	mkdir -p /opt/virtualenv || true
+	python3 -m venv /opt/virtualenv
+	/opt/virtualenv/bin/pip3 install $(PYTHON_PACKAGES) || true
 	@echo "$(ccgreen)Installing Packages completed$(ccend)"
