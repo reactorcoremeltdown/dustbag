@@ -8,7 +8,7 @@ services: users packages motion deviceping
 else ifeq ($(MAKECMDGOALS), production)
 CRONS := stages/services/files/crons/main
 
-services: users packages motd sshd crons davfs2 laminar gitea nginx_sites nginx podsync hledger-web radicale tinc network_hacks misc prometheus podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64
+services: users packages motd sshd crons davfs2 gitea nginx_sites nginx podsync hledger-web radicale tinc network_hacks misc prometheus podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium, the little Pi Zero W
@@ -63,23 +63,6 @@ sshd: sshd_config sshd_restart
 crons:
 	bash stages/services/templates/crons.sh $(CRONS)
 	@echo "$(ccgreen)Setting up crons completed$(ccend)"
-
-laminar:
-	install -d /etc/systemd/system/laminar.service.d
-	install -D -v -m 644 \
-		stages/services/files/etc/systemd/system/laminar.service.d/service.conf \
-		/etc/systemd/system/laminar.service.d
-	install -D -v -m 755 \
-		stages/services/files/usr/local/bin/laminar.run \
-		/usr/local/bin
-	install -D -v -m 644 \
-		stages/services/files/etc/laminar.conf /etc
-	install -D -v -m 644 \
-		stages/services/files/usr/local/src/rcmd-functions.mk /usr/local/src
-	chown -R git:git /var/lib/laminar
-	systemctl daemon-reload
-	systemctl enable laminar.service
-	@echo "$(ccgreen)Setting up laminar completed$(ccend)"
 
 nginx_packages:
 	dpkg-query -s nginx > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y nginx

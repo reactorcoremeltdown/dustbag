@@ -51,7 +51,6 @@
           "nfs-common",
           "libimage-exiftool-perl",
           "lua-dbi-mysql",
-          "laminar",
           "ncmpcpp",
           "nginx-full",
           "openvpn",
