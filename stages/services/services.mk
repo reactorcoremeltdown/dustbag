@@ -128,6 +128,7 @@ davfs2:
 	install -D -m 644 stages/services/files/etc/systemd/system/davfs2-mounts/* /etc/systemd/system
 	jq -r '.secrets.gocryptfs.password' /etc/secrets/secrets.json > /etc/secrets/gocryptfs
 	chmod 400 /etc/secrets/gocryptfs
+	test -d /var/storage/wastebox || mkdir -p /var/storage/wastebox
 	systemctl daemon-reload
 	systemctl enable var-storage-smallwastebox.automount gocryptfs.service
 	systemctl disable var-storage-wastebox.automount var-storage-wastebox.mount
