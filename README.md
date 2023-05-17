@@ -23,4 +23,5 @@ Ansible appears to be too slow and bloated for simple operation like configure o
 + [x] Broken python packages, need to either use virtualenv, or change the install location
 + [x] Fdroid server needs to be shipped as a containers
     + [ ] Package has been removed, now I need to add a container
-+ [ ] EasyRSA for nginx client certs is not automated
++ [x] EasyRSA for nginx client certs is not automated
++ [ ] Drone config fails
