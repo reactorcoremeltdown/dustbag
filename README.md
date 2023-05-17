@@ -20,4 +20,5 @@ Ansible appears to be too slow and bloated for simple operation like configure o
 + [x] `E: The repository 'https://apt.syncthing.net syncthing InRelease' is not signed.`
 + [x] `gocryptfs.service: Failed at step EXEC spawning /usr/bin/gocryptfs: No such file or directory`
 + [x] `E: Unable to locate package laminar`
-+ [ ] Broken python packages, need to either use virtualenv, or change the install location
++ [x] Broken python packages, need to either use virtualenv, or change the install location
++ [ ] Fdroid server needs to be shipped as a container
