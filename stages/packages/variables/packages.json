@@ -44,7 +44,6 @@
           "imagemagick",
           "inotify-tools",
           "mosh",
-          "fdroidserver",
           "ffmpeg",
           "hledger",
           "hledger-web",
