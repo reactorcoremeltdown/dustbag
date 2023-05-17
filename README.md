@@ -14,3 +14,7 @@ Ansible appears to be too slow and bloated for simple operation like configure o
     + [x] Podman
     + [ ] ~Buildah~ _not needed_
     + [x] Laminar
+
+### Debian 12 Bookworm roadmap
+
++ [ ] `E: The repository 'https://apt.syncthing.net syncthing InRelease' is not signed.`
