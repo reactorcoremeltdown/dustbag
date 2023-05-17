@@ -37,6 +37,7 @@
           "docker-registry",
           "certbot",
           "gnuplot",
+          "gocryptfs",
           "gridsite-clients",
           "html2text",
           "imagemagick",
