@@ -1,7 +1,7 @@
-ifeq($(MAKECMDGOALS), production)
+else ifeq ($(MAKECMDGOALS), production)
 	PACKAGES := $(shell jq -cr '.debian.essentials[], .debian.server[]' stages/packages/variables/packages.json | xargs)
 	PYTHON_PACKAGES := $(shell jq -cr '.python.server[]' stages/packages/variables/packages.json | xargs)
-else ifeq($(MAKECMDGOALS), seedbox)
+else ifeq ($(MAKECMDGOALS), seedbox)
 	PACKAGES := $(shell jq -cr '.debian.essentials[]' stages/packages/variables/packages.json | xargs)
 	PYTHON_PACKAGES := $(shell jq -cr '.python.noop[]' stages/packages/variables/packages.json | xargs)
 else
