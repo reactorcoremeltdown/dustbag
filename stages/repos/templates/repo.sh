@@ -19,6 +19,6 @@ for repo in `jq -c '.debian.repositories[]' ${1}`; do
             echo "${repo}" | jq -cr '. | "deb [signed-by=KEYRING] \(.url) DISTRO \(.section)"' | sed "s|DISTRO|${distro}|g;s|KEYRING|${KEYRING}|" > /etc/apt/sources.list.d/${name}.list
         fi
     else
-        rm -fv /etc/apt/sources.list.d/${name}.list ${KEYRING} || true
+        rm -fv /etc/apt/sources.list.d/${name}.list || true
     fi
 done
