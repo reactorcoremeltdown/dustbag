@@ -1,4 +1,4 @@
-else ifeq ($(MAKECMDGOALS), production)
+ifeq ($(MAKECMDGOALS), production)
 	PACKAGES := $(shell jq -cr '.debian.essentials[], .debian.server[]' stages/packages/variables/packages.json | xargs)
 	PYTHON_PACKAGES := $(shell jq -cr '.python.server[]' stages/packages/variables/packages.json | xargs)
 else ifeq ($(MAKECMDGOALS), seedbox)
