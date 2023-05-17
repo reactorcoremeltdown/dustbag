@@ -21,4 +21,6 @@ Ansible appears to be too slow and bloated for simple operation like configure o
 + [x] `gocryptfs.service: Failed at step EXEC spawning /usr/bin/gocryptfs: No such file or directory`
 + [x] `E: Unable to locate package laminar`
 + [x] Broken python packages, need to either use virtualenv, or change the install location
-+ [ ] Fdroid server needs to be shipped as a container
++ [x] Fdroid server needs to be shipped as a containers
+    + [ ] Package has been removed, now I need to add a container
++ [ ] EasyRSA for nginx client certs is not automated
