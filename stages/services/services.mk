@@ -73,6 +73,9 @@ nginx_certificates:
 	test -L /etc/letsencrypt/live/tiredsysadmin.cc/fullchain.pem || yes | certbot certonly --agree-tos --pre-hook "/bin/sleep 60" --non-interactive --email azer.abdullaev.berlin@gmail.com --dns-cloudflare --dns-cloudflare-credentials /root/.cloudflare.ini -d tiredsysadmin.cc,*.tiredsysadmin.cc --preferred-challenges dns-01
 	test -d /etc/nginx/ssl || mkdir -p /etc/nginx/ssl
 	test -f /etc/nginx/ssl/ca.crt || openssl req  -nodes -newkey rsa:4096 -days 365 -x509 -keyout /etc/nginx/ssl/ca.key -out /etc/nginx/ssl/ca.crt -subj '/C=DE/ST=Berlin/L=Berlin/O=RCMD/OU=Funkhaus/CN=RCMD Server'
+	test -d /etc/nginx/pki/pki || mkdir -p /etc/nginx/pki/pki
+	test -f /etc/nginx/pki/pki/ca.crt || install -D -m 644 -v stages/services/files/etc/nginx/pki/pki/ca.crt /etc/nginx/pki/pki
+	test -f /etc/nginx/pki/pki/crl.pem || install -D -m 644 -v stages/services/files/etc/nginx/pki/pki/crl.pem /etc/nginx/pki/pki
 
 nginx_sites:
 	bash stages/services/templates/nginx/sites/api.sh
