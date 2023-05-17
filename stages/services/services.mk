@@ -279,9 +279,9 @@ bootconfig:
 
 drone_server:
 	mkdir -p /etc/drone || true
+	bash stages/services/templates/drone/server.cfg.sh
 	test -f /etc/drone/server.cfg && md5sum /etc/drone/server.cfg > /etc/drone/checksum.txt
 	mkdir -p /var/lib/drone || true
-	bash stages/services/templates/drone/server.cfg.sh
 	install -D -m 644 stages/services/files/etc/systemd/system/drone-server.service /etc/systemd/system
 	systemctl enable drone-server.service
 	@echo "$(ccgreen)Installed drone server$(ccend)"
