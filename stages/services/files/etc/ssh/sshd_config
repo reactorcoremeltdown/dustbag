@@ -12,6 +12,8 @@ PasswordAuthentication no
 AuthorizedKeysFile .ssh/authorized_keys
 
 AllowUsers rcmd ledger git radicale
+SyslogFacility AUTH
+LogLevel INFO
 
 ChallengeResponseAuthentication no
 Protocol 2
