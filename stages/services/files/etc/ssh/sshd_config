@@ -9,6 +9,8 @@ ClientAliveCountMax 0
 PermitEmptyPasswords no
 PasswordAuthentication no
 
+AuthorizedKeysFile .ssh/authorized_keys
+
 AllowUsers rcmd ledger git radicale
 
 ChallengeResponseAuthentication no
