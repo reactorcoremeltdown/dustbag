@@ -190,6 +190,18 @@
       "notify": ["gotify"]
     },
     {
+      "name": "wiki_pictures",
+      "state": "present",
+      "plugin": "check_http_success_rate",
+      "argument": "https://tiredsysadmin.cc/media/pics/IMG_20230308_134654_494-4hlt6piqgba2xsypulrslb6eyhsz.jpg",
+      "interval": "1m",
+      "warningThreshold": "100",
+      "criticalThreshold": "99",
+      "flowOperator": "downwards",
+      "description": "Wiki picture storage",
+      "notify": ["gotify", "telegram"]
+    },
+    {
       "name": "api_website_health",
       "state": "present",
       "plugin": "check_http_success_rate",
@@ -429,7 +441,8 @@
       "argument": "https://rcmd.space",
       "interval": "1m",
       "description": "RCMD.space website",
-      "notify": ["gotify", "telegram"]
+      "hostname": "192.168.2.120",
+      "notify": ["telegram"]
     }
   ],
   "printserver": [
