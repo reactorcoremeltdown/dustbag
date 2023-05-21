@@ -27,10 +27,12 @@ ledger_scripts:
 	jq -cr '.secrets.ledger.token' /etc/secrets/secrets.json > /home/ledger/.token
 	jq -cr '.secrets.telegram.bot_token' /etc/secrets/secrets.json > /home/ledger/.config/telegram_token
 	jq -cr '.secrets.telegram.chat_id' /etc/secrets/secrets.json > /home/ledger/.config/telegram_chat_id
-	chmod 600 /home/ledger/.token && chown ledger:ledger /home/ledger/.token /home/ledger/.config/telegram_token /home/ledger/.config/telegram_chat_id
+	jq -cr '.secrets.kanboard.secret' /etc/secrets/secrets.json > /home/ledger/.config/kanboard_secret
+	chmod 600 /home/ledger/.token && chown ledger:ledger /home/ledger/.token /home/ledger/.config/telegram_token /home/ledger/.config/telegram_chat_id /home/ledger/.config/kanboard_secret
 	install -d -m 775 --owner root --group apps /var/spool/api/ledger
 	install -d /home/ledger/bin
 	install -D -v -m 755 stages/users/files/home/ledger/bin/track_pocket_expenses.sh /home/ledger/bin
 	install -D -v -m 755 stages/users/files/home/ledger/bin/track_mood.sh /home/ledger/bin
 	install -D -v -m 755 stages/users/files/home/ledger/bin/total_mood_score.sh /home/ledger/bin
 	install -D -v -m 755 stages/users/files/home/ledger/bin/weekly_expenses.sh /home/ledger/bin
+	install -D -v -m 755 stages/users/files/home/ledger/bin/track_sprint.sh /home/ledger/bin
