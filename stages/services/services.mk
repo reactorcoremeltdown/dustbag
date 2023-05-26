@@ -24,6 +24,12 @@ else ifeq ($(MAKECMDGOALS), seedbox)
 services: users packages drone_runner_amd64
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
+## Buildbox
+else ifeq ($(MAKECMDGOALS), builder)
+
+services: users packages podman drone_runner_amd64
+	@echo "$(ccgreen)Setting up services completed$(ccend)"
+
 ## Printserver, the little Orange pi zero
 else ifeq ($(MAKECMDGOALS), printserver)
 CRONS := stages/services/files/crons/printserver

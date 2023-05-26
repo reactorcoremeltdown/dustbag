@@ -30,6 +30,9 @@
         "sandbox": [
           "helm"
         ],
+        "builder": [
+          "podman"
+        ],
         "server": [
           "cowsay",
           "aha",
