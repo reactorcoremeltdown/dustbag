@@ -28,7 +28,7 @@ monitoring: wtfd_amd64 checks wtfd
 endif
 
 wtfd_amd64:
-	systemctl stop wtfd.service
+	systemctl stop wtfd.service || true
 	rm -f /tmp/dafuq
 	wget -c https://repo.rcmd.space/binaries/dafuq/releases/v0.9.2/dafuq-linux_amd64 -O /tmp/dafuq
 	install -D -m 755 /tmp/dafuq /usr/local/bin
@@ -36,7 +36,7 @@ wtfd_amd64:
 	chmod 644 /etc/systemd/system/wtfd.service
 
 wtfd_armv6:
-	systemctl stop wtfd.service
+	systemctl stop wtfd.service || true
 	rm -f /tmp/dafuq
 	wget -c https://repo.rcmd.space/binaries/dafuq/releases/v0.9.2/dafuq-linux_arm -O /tmp/dafuq
 	install -D -m 755 /tmp/dafuq /usr/local/bin
@@ -64,6 +64,7 @@ wtfd_files:
 	systemctl enable wtfd.service
 
 wtfd_restart:
+	systemctl enable wtfd.service
 	systemctl restart wtfd.service
 	#systemctl stop wtfd.service
 	#rm -f /tmp/dafuq.state
