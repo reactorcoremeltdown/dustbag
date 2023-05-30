@@ -1,0 +1,18 @@
+[Unit]
+Description=Notification server
+
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/podman rm -f gotify
+ExecStart=/usr/bin/podman run \
+            --name gotify \
+            -v /var/lib/gotify:/app/data \
+            -e TZ="Europe/Berlin" \
+            -p 127.0.0.1:27107:80 \
+            ghcr.io/gotify/server
+ExecStop=/usr/bin/podman stop -t 2 gotify
+ExecStopPost=-/usr/bin/podman rm -f gotify
+ExecStopPost=/bin/sleep 2
+
+[Install]
+WantedBy=containers.target

@@ -34,7 +34,7 @@ services: users packages podman drone_runner_amd64
 else ifeq ($(MAKECMDGOALS), outpost)
 
 ### TODO: bring in gotify here
-services: users packages podman drone_runner_amd64
+services: users packages podman drone_runner_amd64 nginx_packages nginx_certificates gotify
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Printserver, the little Orange pi zero
@@ -98,7 +98,6 @@ nginx_sites:
 	bash stages/services/templates/nginx/sites/default.sh
 	bash stages/services/templates/nginx/sites/git.sh
 	bash stages/services/templates/nginx/sites/graph.sh
-	bash stages/services/templates/nginx/sites/gotify.sh
 	bash stages/services/templates/nginx/sites/netdata.sh
 	bash stages/services/templates/nginx/sites/podcasts.sh
 	bash stages/services/templates/nginx/sites/repo.sh
@@ -259,7 +258,7 @@ prometheus:
 	systemctl restart prometheus.service
 	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
 
-podman:
+podman: network_hacks
 	bash stages/services/templates/podman/podman-login.service.sh
 	systemctl enable podman-login.service
 	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
@@ -324,3 +323,12 @@ drone_runner_arm:
 	systemctl enable drone-runner-arm.service
 	echo "sleep 2 && systemctl start drone-runner-arm.service" | at now
 	@echo "$(ccgreen)Installed drone runner$(ccend)"
+
+gotify:
+	test -d /var/lib/gotify || mkdir -p /var/lib/gotify
+	install -D -m 644 stages/services/files/etc/systemd/system/gotify.service /etc/systemd/system
+	systemctl enable gotify.service
+	systemctl restart gotify.service
+	bash stages/services/templates/nginx/sites/gotify.sh
+	nginx -t && systemctl reload nginx.service
+
