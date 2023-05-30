@@ -460,6 +460,19 @@
       "description": "RCMD.space website",
       "hostname": "outpost.rcmd.space",
       "notify": ["gotify"]
+    },
+    {
+      "name": "blog_website",
+      "state": "present",
+      "plugin": "check_http_success_rate",
+      "warningThreshold": "100",
+      "criticalThreshold": "99",
+      "flowOperator": "downwards",
+      "argument": "https://tiredsysadmin.cc",
+      "interval": "1m",
+      "description": "Blog website",
+      "hostname": "outpost.rcmd.space",
+      "notify": ["gotify"]
     }
   ]
 }
