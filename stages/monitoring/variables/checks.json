@@ -468,7 +468,7 @@
       "interval": "1m",
       "description": "RCMD.space website",
       "hostname": "192.168.2.120",
-      "notify": ["telegram"]
+      "notify": ["gotify"]
     }
   ]
 }
