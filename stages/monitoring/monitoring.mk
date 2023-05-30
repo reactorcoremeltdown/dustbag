@@ -19,11 +19,21 @@ MACHINE := printserver
 monitoring: wtfd_armv6 checks wtfd
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
+else ifeq ($(MAKECMDGOALS), outpost)
+MACHINE := outpost
+
+monitoring: wtfd_amd64 checks wtfd
+	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
+
 endif
 
 wtfd_amd64:
-	install -D -v -m 644 \
-		stages/monitoring/files/configs/wtfd.service /etc/systemd/system
+	systemctl stop wtfd.service
+	rm -f /tmp/dafuq
+	wget -c https://repo.rcmd.space/binaries/dafuq/releases/v0.9.2/dafuq-linux_amd64 -O /tmp/dafuq
+	install -D -m 755 /tmp/dafuq /usr/local/bin
+	cp stages/monitoring/files/configs/wtfd_generic.service /etc/systemd/system/wtfd.service
+	chmod 644 /etc/systemd/system/wtfd.service
 
 wtfd_armv6:
 	systemctl stop wtfd.service

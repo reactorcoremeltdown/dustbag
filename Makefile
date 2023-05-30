@@ -2,6 +2,8 @@ all: early packages users services
 
 builder: early packages users services
 
+outpost: early packages users services monitoring
+
 production: early firewall repos packages users services monitoring last
 
 fermium: early repos packages users services monitoring

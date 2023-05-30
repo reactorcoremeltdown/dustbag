@@ -455,5 +455,20 @@
       "description": "CUPS server online test",
       "notify": ["dummy"]
     }
+  ],
+  "outpost": [
+    {
+      "name": "main_website",
+      "state": "present",
+      "plugin": "check_http_success_rate",
+      "warningThreshold": "100",
+      "criticalThreshold": "99",
+      "flowOperator": "downwards",
+      "argument": "https://rcmd.space",
+      "interval": "1m",
+      "description": "RCMD.space website",
+      "hostname": "192.168.2.120",
+      "notify": ["telegram"]
+    }
   ]
 }

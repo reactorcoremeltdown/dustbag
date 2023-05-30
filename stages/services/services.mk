@@ -1,7 +1,7 @@
 ## GENERIC host (runs by default)
 ifeq ($(MAKECMDGOALS),)
 
-services: users packages motion deviceping
+services: users packages deviceping
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Production host
@@ -27,6 +27,13 @@ services: users packages drone_runner_amd64
 ## Buildbox
 else ifeq ($(MAKECMDGOALS), builder)
 
+services: users packages podman drone_runner_amd64
+	@echo "$(ccgreen)Setting up services completed$(ccend)"
+
+## Outpost
+else ifeq ($(MAKECMDGOALS), outpost)
+
+### TODO: bring in gotify here
 services: users packages podman drone_runner_amd64
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
