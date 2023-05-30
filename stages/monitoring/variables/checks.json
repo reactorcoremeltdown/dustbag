@@ -30,7 +30,7 @@
       "interval": "15s",
       "description": "Enсrypted webdav mount",
       "hostname": "rcmd.space",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify"]
     },
     {
       "name": "gocryptfs_config",
@@ -40,7 +40,7 @@
       "interval": "15s",
       "description": "Decrypted webdav mount",
       "hostname": "rcmd.space",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify"]
     },
     {
       "name": "site_https",
@@ -67,7 +67,7 @@
       "argument": "podsync.service",
       "interval": "1m",
       "description": "Podcast sync service",
-      "notify": ["gotify"]
+      "notify": ["telegram"]
     },
     {
       "name": "dave_service",
@@ -85,7 +85,7 @@
       "argument": "task-transformer.service",
       "interval": "5m",
       "description": "VTODO + VEVENT + Kanboard sync service",
-      "notify": ["gotify"]
+      "notify": ["telegram"]
     },
     {
       "name": "kernel_version",
@@ -94,7 +94,7 @@
       "argument": "",
       "interval": "48h",
       "description": "Linux Kernel Version",
-      "notify": ["gotify"]
+      "notify": ["telegram"]
     },
     {
       "name": "free_space",
@@ -142,7 +142,7 @@
       "warningThreshold": "3",
       "criticalThreshold": "5",
       "flowOperator": "upwards",
-      "notify": ["gotify"]
+      "notify": ["gotify", "telegram"]
     },
     {
       "name": "task_transformer_update_due",
@@ -154,7 +154,7 @@
       "warningThreshold": "3",
       "criticalThreshold": "5",
       "flowOperator": "upwards",
-      "notify": ["gotify"]
+      "notify": ["gotify", "telegram"]
     },
     {
       "name": "task_transformer_online",
@@ -166,16 +166,7 @@
       "warningThreshold": "301",
       "criticalThreshold": "500",
       "flowOperator": "upwards",
-      "notify": ["gotify"]
-    },
-    {
-      "name": "berliner_baeder",
-      "state": "absent",
-      "plugin": "check_http_ping",
-      "argument": "https://shop.berlinerbaeder.de/de/bad51",
-      "interval": "5m",
-      "description": "Berliner Bäder online shop",
-      "notify": ["gotify"]
+      "notify": ["gotify", "telegram"]
     },
     {
       "name": "internal_wiki",
@@ -187,7 +178,7 @@
       "criticalThreshold": "97",
       "flowOperator": "downwards",
       "description": "Internal wiki engine",
-      "notify": ["gotify"]
+      "notify": ["telegram"]
     },
     {
       "name": "wiki_pictures",
@@ -223,7 +214,7 @@
       "argument": "https://dav.rcmd.space/radicale/.web/",
       "interval": "1m",
       "description": "Radicale CalDAV server",
-      "notify": ["gotify"]
+      "notify": ["gotify", "telegram"]
     },
     {
       "name": "grafana_web",
@@ -247,7 +238,7 @@
       "argument": "https://api.rcmd.space/internal/healthcheck",
       "interval": "1m",
       "description": "RCMD Internal API website",
-      "notify": ["gotify"]
+      "notify": ["gotify", "telegram"]
     },
     {
       "name": "ci_website",
@@ -341,7 +332,7 @@
       "interval": "30m",
       "description": "[relay] MPD server online test",
       "hostname": "fermium.rcmd.space",
-      "notify": ["gotify", "telegram"]
+      "notify": ["telegram"]
     },
     {
       "name": "home_syncthing",
@@ -351,7 +342,7 @@
       "interval": "30m",
       "description": "[relay] Syncthing at home",
       "hostname": "fermium.rcmd.space",
-      "notify": ["gotify", "telegram"]
+      "notify": ["telegram"]
     },
     {
       "name": "home_printer",
@@ -442,7 +433,7 @@
       "interval": "1m",
       "description": "RCMD.space website",
       "hostname": "192.168.2.120",
-      "notify": ["telegram"]
+      "notify": ["gotify"]
     }
   ],
   "printserver": [
@@ -467,7 +458,7 @@
       "argument": "https://rcmd.space",
       "interval": "1m",
       "description": "RCMD.space website",
-      "hostname": "192.168.2.120",
+      "hostname": "outpost.rcmd.space",
       "notify": ["gotify"]
     }
   ]
