@@ -61,6 +61,15 @@
       "notify": ["gotify"]
     },
     {
+      "name": "crl",
+      "state": "present",
+      "plugin": "check_crl",
+      "argument": "/etc/nginx/pki/pki/crl.pem",
+      "interval": "12h",
+      "description": "Certificate revocation list",
+      "notify": ["gotify"]
+    },
+    {
       "name": "podsync_service",
       "state": "present",
       "plugin": "check_systemd_service",
