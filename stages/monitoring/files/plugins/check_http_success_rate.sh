@@ -14,8 +14,8 @@ EOF
 
 if [[ ${TOTAL_COUNT} -gt 1000 ]]; then
     sqlite3 /var/lib/httpsuccessrate/timeseries.db <<EOF
-    .timeout 3000
-    delete from ${PLUGIN_NAME} where time < strftime('%s', 'now', '-2 days');
+.timeout 3000
+delete from ${PLUGIN_NAME} where time < strftime('%s', 'now', '-2 days');
 EOF
 fi
 
