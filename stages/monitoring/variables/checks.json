@@ -65,7 +65,7 @@
       "state": "present",
       "plugin": "check_crl",
       "argument": "/etc/nginx/pki/pki/crl.pem",
-      "interval": "12h",
+      "interval": "3h",
       "description": "Certificate revocation list",
       "notify": ["gotify"]
     },
