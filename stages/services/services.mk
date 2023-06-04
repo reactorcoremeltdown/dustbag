@@ -196,8 +196,10 @@ icecast:
 
 mpd:
 	dpkg-query -s mpd mpc mpdscribble > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y mpd mpc
+	install -D -m 644 -v stages/services/files/etc/systemd/system/mpdscribble.service.d/restart.conf /etc/systemd/system/mpdscribble.service.d
 	bash stages/services/templates/mpd/mpd.conf.sh
 	bash stages/services/templates/mpd/mpdscribble.conf.sh
+	systemctl daemon-reload
 	systemctl enable mpd.service mpdscribble.service
 	mpc status | grep -oq playing || systemctl restart mpd.service mpdscribble.service
 	@echo "$(ccgreen)Setting up mpd completed$(ccend)"
