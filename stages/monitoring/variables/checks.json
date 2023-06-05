@@ -192,11 +192,9 @@
     {
       "name": "wiki_pictures",
       "state": "present",
-      "plugin": "check_http_success_rate",
-      "argument": "https://tiredsysadmin.cc/media/pics/IMG_20230308_134654_494-4hlt6piqgba2xsypulrslb6eyhsz.jpg",
+      "plugin": "check_file",
+      "argument": "/var/lib/wiki/kb/media/pics/IMG_20230308_134654_494-4hlt6piqgba2xsypulrslb6eyhsz.jpg",
       "interval": "1m",
-      "warningThreshold": "100",
-      "criticalThreshold": "99",
       "flowOperator": "downwards",
       "description": "Wiki picture storage",
       "notify": ["gotify", "telegram"]
