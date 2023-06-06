@@ -89,6 +89,7 @@ nginx_certificates:
 	test -d /etc/nginx/pki/pki || mkdir -p /etc/nginx/pki/pki
 	test -f /etc/nginx/pki/pki/ca.crt || install -D -m 644 -v stages/services/files/etc/nginx/pki/pki/ca.crt /etc/nginx/pki/pki
 	test -f /etc/nginx/pki/pki/crl.pem || install -D -m 644 -v stages/services/files/etc/nginx/pki/pki/crl.pem /etc/nginx/pki/pki
+	install -D -m 755 -v stages/services/files/usr/local/bin/genpfx /usr/local/bin
 
 nginx_sites:
 	bash stages/services/templates/nginx/sites/api.sh

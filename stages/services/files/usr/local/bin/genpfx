@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+openssl pkcs12 -export -out /var/storage/wastebox/Backups/${1}.pfx -inkey /etc/nginx/pki/pki/private/${1}.key -in /etc/nginx/pki/pki/issued/${1}.crt -certfile /etc/nginx/pki/etc/nginx/pki/pki/ca.crt
