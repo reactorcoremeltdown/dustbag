@@ -10,7 +10,6 @@ else ifeq ($(MAKECMDGOALS), builder)
 else
 	PACKAGES := $(shell jq -cr '.debian.essentials[]' stages/packages/variables/packages.json | xargs)
 	PYTHON_PACKAGES := $(shell jq -cr '.python.noop[]' stages/packages/variables/packages.json | xargs)
-PYTHON_PACKAGES := /bin/true
 endif
 
 packages: repos
