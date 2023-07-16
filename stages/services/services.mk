@@ -215,7 +215,6 @@ tinc_client:
 	systemctl restart tinc@clusternet
 
 registry:
-	install -D -m 644 stages/services/files/etc/containers/registries.conf /etc/containers
 	install -D -m 644 stages/services/files/etc/containers/containers.conf /etc/containers
 	install -D -m 644 stages/services/files/etc/docker/registry/config.yml /etc/docker/registry
 	systemctl restart docker-registry
@@ -262,7 +261,7 @@ prometheus:
 	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
 
 podman: network_hacks
-	install -D -m 644 stages/services/files/etc/container/registries.conf /etc/containers
+	install -D -m 644 stages/services/files/etc/containers/registries.conf /etc/containers
 	bash stages/services/templates/podman/podman-login.service.sh
 	systemctl enable podman-login.service
 	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
