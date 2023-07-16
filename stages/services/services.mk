@@ -262,6 +262,7 @@ prometheus:
 	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
 
 podman: network_hacks
+	install -D -m 644 stages/services/files/etc/container/registries.conf /etc/containers
 	bash stages/services/templates/podman/podman-login.service.sh
 	systemctl enable podman-login.service
 	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
