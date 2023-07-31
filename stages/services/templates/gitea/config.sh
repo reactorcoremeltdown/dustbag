@@ -20,6 +20,7 @@ SECRET_KEY        = ${SECRET_KEY}
 DISABLE_GIT_HOOKS = false
 
 [server]
+APP_DATA_PATH    = /var/lib/gitea/data
 LOCAL_ROOT_URL   = http://localhost:25010/
 SSH_DOMAIN       = git.rcmd.space
 DOMAIN           = git.rcmd.space
