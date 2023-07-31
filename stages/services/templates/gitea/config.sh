@@ -28,9 +28,11 @@ ROOT_URL         = https://git.rcmd.space/
 DISABLE_SSH      = false
 SSH_PORT         = 22
 LFS_START_SERVER = true
-LFS_CONTENT_PATH = /var/lib/gitea/data/lfs
 LFS_JWT_SECRET   = ${LFS_JWT_SECRET}
 OFFLINE_MODE     = true
+
+[lfs]
+PATH = /var/lib/gitea/data/lfs
 
 [database]
 DB_TYPE  = sqlite3
