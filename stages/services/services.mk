@@ -252,6 +252,7 @@ motion:
 misc:
 	install -D -m 755 stages/services/files/usr/local/bin/rcmd-space-stats /usr/local/bin
 	install -D -m 755 stages/services/files/usr/local/bin/kanboard-stats /usr/local/bin
+	install -D -m 755 stages/services/files/usr/local/src/rcmd-functions.mk /usr/local/src
 	@echo "$(ccgreen)Setting up misc scripts completed$(ccend)"
 
 prometheus:
