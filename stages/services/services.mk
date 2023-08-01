@@ -167,7 +167,7 @@ dave: davfs2
 	install -D -m 755 stages/services/files/usr/local/bin/dave /usr/local/bin
 	install -D -m 644 -v stages/services/files/etc/systemd/system/dave.service /etc/systemd/system
 	install -d -m 750 --owner=www-data --group=www-data /var/www/.dave
-	install -D -m 644 -v stages/services/files/var/www/dave/config /var/www/.dave
+	install -D -m 644 -v stages/services/files/var/www/dave/config.yaml /var/www/.dave
 	systemctl daemon-reload
 	systemctl enable dave.service
 	systemctl restart dave.service

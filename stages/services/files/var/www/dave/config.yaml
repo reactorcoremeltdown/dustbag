@@ -1,0 +1,9 @@
+address: "127.0.0.1"
+port: "38000"
+dir: "/var/storage/wastebox"
+log:
+  error: true
+  create: true
+  read: false
+  update: true
+  delete: false
