@@ -8,7 +8,7 @@ services: users packages deviceping
 else ifeq ($(MAKECMDGOALS), production)
 CRONS := stages/services/files/crons/main
 
-services: users packages motd sshd crons davfs2 gitea nginx_sites nginx podsync hledger-web radicale tinc network_hacks misc prometheus podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64
+services: users packages motd sshd crons dave gitea nginx_sites nginx podsync hledger-web radicale tinc network_hacks misc prometheus podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium, the little Pi Zero W
@@ -162,6 +162,15 @@ podsync:
 	bash stages/services/templates/podsync/podsync.toml.sh stages/services/variables/services.json
 	systemctl restart podsync.service
 	@echo "$(ccgreen)Setting up podsync completed$(ccend)"
+
+dave: davfs2
+	install -D -m 755 stages/services/files/usr/local/bin/dave /usr/local/bin
+	install -D -m 644 -v stages/services/files/etc/systemd/system/dave.service /etc/systemd/system
+	install -D -m 600 -v stages/services/files/etc/dave.yaml /etc
+	systemctl daemon-reload
+	systemctl enable dave.service
+	systemctl restart dave.service
+	@echo "$(ccgreen)Setting up dave completed$(ccend)"
 
 gollum:
 	install -D -m 644 -v stages/services/files/etc/systemd/system/gollum-wiki.service /etc/systemd/system

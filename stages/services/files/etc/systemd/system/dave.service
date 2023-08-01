@@ -1,0 +1,10 @@
+[Unit]
+Description=Dave, a WebDAV server
+
+[Service]
+Type=simple
+User=www-data
+ExecStart=/usr/local/bin/dave
+
+[Install]
+WantedBy=multi-user.target
