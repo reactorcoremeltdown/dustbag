@@ -4,7 +4,7 @@ Description=Dave, a WebDAV server
 [Service]
 Type=simple
 User=www-data
-ExecStart=/usr/local/bin/dave
+ExecStart=/usr/local/bin/dave --config /etc/dave.yaml
 
 [Install]
 WantedBy=multi-user.target
