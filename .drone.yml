@@ -22,7 +22,7 @@ steps:
       from_secret: git_sudo
 
 node:
-  machine: hangar.rcmd.space
+  machine: garage
 
 ---
 kind: pipeline
@@ -125,7 +125,7 @@ trigger:
   - failure
 
 node:
-  machine: hangar.rcmd.space
+  machine: garage
 
 depends_on:
 - hangar
