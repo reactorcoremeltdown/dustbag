@@ -95,9 +95,9 @@
         },
         "tinc": {
             "netname": "clusternet",
-            "fqdn": "hangar.rcmd.space",
-            "hostname": "hangar",
-            "ip": "10.8.0.5",
+            "fqdn": "garage.rcmd.space",
+            "hostname": "garage",
+            "ip": "10.8.0.6",
             "cidr_prefix": "10.8.0."
         }
     }

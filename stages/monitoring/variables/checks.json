@@ -423,7 +423,7 @@
       "warningThreshold": "96",
       "criticalThreshold": "93",
       "flowOperator": "downwards",
-      "argument": "http://10.8.0.5",
+      "argument": "http://10.8.0.6",
       "interval": "3m",
       "description": "TINC Mesh VPN Network",
       "hostname": "192.168.2.120",
