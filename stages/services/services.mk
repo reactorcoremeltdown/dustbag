@@ -15,7 +15,7 @@ services: users packages motd sshd crons dave gitea nginx_sites nginx podsync hl
 else ifeq ($(MAKECMDGOALS), fermium)
 CRONS := stages/services/files/crons/fermium
 
-services: users packages crons tinc_client mpd diskplayer motion bootconfig deviceping drone_runner_arm
+services: users packages crons tinc_client mpd diskplayer motion bootconfig deviceping drone_runner_arm pki
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Seedbox
@@ -77,6 +77,9 @@ crons:
 	bash stages/services/templates/crons.sh $(CRONS)
 	@echo "$(ccgreen)Setting up crons completed$(ccend)"
 
+pki:
+	install -D -m 755 -v stages/services/files/usr/local/bin/genpfx /usr/local/bin
+
 nginx_packages:
 	dpkg-query -s nginx > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y nginx
 
@@ -89,7 +92,6 @@ nginx_certificates:
 	test -d /etc/nginx/pki/pki || mkdir -p /etc/nginx/pki/pki
 	test -f /etc/nginx/pki/pki/ca.crt || install -D -m 644 -v stages/services/files/etc/nginx/pki/pki/ca.crt /etc/nginx/pki/pki
 	test -f /etc/nginx/pki/pki/crl.pem || install -D -m 644 -v stages/services/files/etc/nginx/pki/pki/crl.pem /etc/nginx/pki/pki
-	install -D -m 755 -v stages/services/files/usr/local/bin/genpfx /usr/local/bin
 
 nginx_sites:
 	bash stages/services/templates/nginx/sites/api.sh
