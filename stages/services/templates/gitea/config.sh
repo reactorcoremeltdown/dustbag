@@ -78,6 +78,7 @@ ENABLE_OPENID_SIGNUP = false
 
 [session]
 PROVIDER = file
+SESSION_LIFE_TIME = 604800
 
 [log]
 MODE      = file
