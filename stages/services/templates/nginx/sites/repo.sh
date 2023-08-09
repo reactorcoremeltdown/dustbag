@@ -73,6 +73,11 @@ server {
 
         autoindex on;
     }
+    location /helm {
+        root /opt/apps;
+
+        autoindex on;
+    }
 }
 
 EOF
