@@ -6,10 +6,14 @@ source /etc/monitoring/plugins/okfail.sh
 
 DATA=`curl -s https://api.alerts.in.ua/v3/stats/duration/today.json | jq -r ".data[] | select(.luid==${1}) | .ex"`
 
-sqlite3 /home/ledger/expenses.db "insert into ua_explosions (location, score) values (${1}, ${DATA})"
+if [[ "${DATA}" != 'null' ]]; then
+        sqlite3 /home/ledger/expenses.db "insert into ua_explosions (location, score) values (${1}, ${DATA})"
+else
+        sqlite3 /home/ledger/expenses.db "insert into ua_explosions (location, score) values (${1}, 0)"
+fi
 
-CURRENT_SCORE=`sqlite3 /home/ledger/expenses.db "select score from ua_explosions order by time desc limit 1"`
-PREVIOUS_SCORE=`sqlite3 /home/ledger/expenses.db "select score from ua_explosions order by time desc limit 1 offset 1"`
+CURRENT_SCORE=`sqlite3 /home/ledger/expenses.db "select score from ua_explosions where location = ${1} order by time desc limit 1"`
+PREVIOUS_SCORE=`sqlite3 /home/ledger/expenses.db "select score from ua_explosions where location = ${1} order by time desc limit 1 offset 1"`
 
 LOCATION="No Data"
 
@@ -22,7 +26,7 @@ case $1 in
                 ;;
 esac
 
-if [[ ${CURRENT_SCORE} != ${PREVIOUS_SCORE} ]]; then
+if [[ ${CURRENT_SCORE} -gt ${PREVIOUS_SCORE} ]]; then
         fail "The number of explosions at location ${LOCATION} has increased to ${CURRENT_SCORE}! Check reports here: https://alerts.in.ua/en"
 else
         ok "There are no new reported explosions at location ${LOCATION}"
