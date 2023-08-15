@@ -287,6 +287,15 @@
       "notify": ["traccar"]
     },
     {
+      "name": "explosions_zp",
+      "state": "present",
+      "plugin": "check_ua_explosions",
+      "argument": "12",
+      "interval": "15m",
+      "description": "Check for reported explosions in Zaporizhzhia",
+      "notify": ["telegram", "gotify" ]
+    },
+    {
       "name": "caldav_backups",
       "state": "present",
       "plugin": "check_duplicity_backup",
