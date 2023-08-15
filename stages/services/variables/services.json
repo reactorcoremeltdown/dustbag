@@ -3,27 +3,11 @@
         "podsync": {
             "feeds": [
                 {
-                    "name": "ID1",
-                    "url": "https://www.youtube.com/channel/UCpExuV8qJMfCaSQNL1YG6bQ",
-                    "quality": "low",
-                    "page_size": 10,
-                    "update_period": "12h",
-                    "format": "audio"
-                },
-                {
-                    "name": "ppnews",
-                    "url": "https://www.youtube.com/playlist?list=PL2GGJKocg5o5KqB5X4cczTMeik9NSBmto",
-                    "quality": "low",
-                    "page_size": 10,
-                    "update_period": "1h",
-                    "format": "audio"
-                },
-                {
                     "name": "markfeygin",
                     "url": "https://www.youtube.com/playlist?list=PLCvrKelokWEueLh64DQy5t2yqq3CkyOTx",
                     "quality": "low",
                     "page_size": 10,
-                    "update_period": "1h",
+                    "update_period": "48h",
                     "format": "audio"
                 },
                 {
@@ -31,7 +15,7 @@
                     "url": "https://www.youtube.com/channel/UC7FEBULCrgaFxH05t6mYeHA",
                     "quality": "low",
                     "page_size": 10,
-                    "update_period": "1h",
+                    "update_period": "48h",
                     "format": "audio"
                 },
                 {
@@ -39,17 +23,9 @@
                     "url": "https://www.youtube.com/channel/UCgpSieplNxXxLXYAzJLLpng",
                     "quality": "low",
                     "page_size": 10,
-                    "update_period": "1h",
+                    "update_period": "48h",
                     "format": "audio",
                     "filters": "{ min_duration = 300 }"
-                },
-                {
-                    "name": "feygin24",
-                    "url": "https://www.youtube.com/playlist?list=PL9o6bQUWYNvKybb4-5fLqg-EbbTVD5Jg7",
-                    "quality": "low",
-                    "page_size": 10,
-                    "update_period": "1h",
-                    "format": "audio"
                 },
                 {
                     "name": "JMGODIER",
@@ -60,35 +36,11 @@
                     "format": "audio"
                 },
                 {
-                    "name": "stateazure",
-                    "url": "https://www.youtube.com/channel/UClKIjbgtWGzHtXhBDS_I0pg",
-                    "quality": "high",
-                    "page_size": 10,
-                    "update_period": "12h",
-                    "format": "audio"
-                },
-                {
-                    "name": "cryochamber",
-                    "url": "https://www.youtube.com/channel/UCVHOgH4XEyYx-ZEaya1XqCQ",
-                    "quality": "high",
-                    "page_size": 10,
-                    "update_period": "12h",
-                    "format": "audio"
-                },
-                {
                     "name": "mixtapes",
                     "url": "https://www.youtube.com/playlist?list=PLlxFzQuEAESwlfOMaj22MDQvqF8IrXi0j",
                     "quality": "high",
                     "page_size": 50,
                     "update_period": "1h",
-                    "format": "audio"
-                },
-                {
-                    "name": "odysseus",
-                    "url": "https://www.youtube.com/channel/UCwoTj-pZgZZ8DInOXSSLMmA",
-                    "quality": "high",
-                    "page_size": 10,
-                    "update_period": "12h",
                     "format": "audio"
                 }
             ]
