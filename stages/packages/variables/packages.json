@@ -72,6 +72,7 @@
           "python3-full",
           "python3-bcrypt",
           "python3-passlib",
+          "python3-tqdm",
           "pup",
           "id3v2",
           "telnet",
