@@ -29,5 +29,5 @@ esac
 if [[ ${CURRENT_SCORE} -gt ${PREVIOUS_SCORE} ]]; then
         fail "The number of explosions at location ${LOCATION} has increased to ${CURRENT_SCORE}! Check reports here: https://alerts.in.ua/en"
 else
-        ok "There are no new reported explosions at location ${LOCATION}"
+        ok "There are no new reported explosions at location ${LOCATION}; the current number of cases is ${CURRENT_SCORE}"
 fi
