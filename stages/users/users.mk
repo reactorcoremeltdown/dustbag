@@ -36,3 +36,4 @@ ledger_scripts:
 	install -D -v -m 755 stages/users/files/home/ledger/bin/total_mood_score.sh /home/ledger/bin
 	install -D -v -m 755 stages/users/files/home/ledger/bin/weekly_expenses.sh /home/ledger/bin
 	install -D -v -m 755 stages/users/files/home/ledger/bin/track_sprint.sh /home/ledger/bin
+	install -D -v -m 755 stages/users/files/home/ledger/bin/track_weight.sh /home/ledger/bin
