@@ -8,7 +8,7 @@ services: users packages deviceping
 else ifeq ($(MAKECMDGOALS), production)
 CRONS := stages/services/files/crons/main
 
-services: users packages motd sshd crons dave gitea nginx_sites nginx podsync hledger-web radicale tinc network_hacks misc prometheus podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64
+services: users packages motd sshd crons dave gitea exported_graphs nginx_sites nginx podsync hledger-web radicale tinc network_hacks misc  prometheus podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium, the little Pi Zero W
@@ -300,6 +300,11 @@ deviceping_receiver:
 	install -D -m 755 stages/services/files/usr/local/bin/deviceping-receiver /usr/local/bin
 	test -d /var/spool/api/deviceping || mkdir -p /var/spool/api/deviceping
 	@echo "$(ccgreen)Setting up deviceping completed$(ccend)"
+
+exported_graphs:
+	test -d /opt/apps/graphs || mkdir -p /opt/apps/graphs
+	install -D -m 755 stages/services/files/usr/local/bin/grafana_pictures.sh /usr/local/bin
+	@echo "$(ccgreen)Setting up graphs completed$(ccend)"
 
 bootconfig:
 	install -D -m 755 stages/services/files/boot/config.txt /boot
