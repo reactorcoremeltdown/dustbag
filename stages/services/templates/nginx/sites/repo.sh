@@ -78,6 +78,11 @@ server {
 
         autoindex on;
     }
+    location /graphs {
+        auth_basic "Protected area";
+        auth_basic_user_file /etc/nginx/htpasswd;
+        root /opt/apps;
+    }
 }
 
 EOF
