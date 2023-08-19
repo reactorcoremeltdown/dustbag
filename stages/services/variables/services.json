@@ -7,7 +7,7 @@
                     "url": "https://www.youtube.com/playlist?list=PLCvrKelokWEueLh64DQy5t2yqq3CkyOTx",
                     "quality": "low",
                     "page_size": 10,
-                    "update_period": "7d",
+                    "update_period": "168h",
                     "format": "audio"
                 },
                 {
@@ -15,7 +15,7 @@
                     "url": "https://www.youtube.com/channel/UC7FEBULCrgaFxH05t6mYeHA",
                     "quality": "low",
                     "page_size": 10,
-                    "update_period": "7d",
+                    "update_period": "168h",
                     "format": "audio"
                 },
                 {
@@ -23,7 +23,7 @@
                     "url": "https://www.youtube.com/channel/UCgpSieplNxXxLXYAzJLLpng",
                     "quality": "low",
                     "page_size": 10,
-                    "update_period": "7d",
+                    "update_period": "168h",
                     "format": "audio",
                     "filters": "{ min_duration = 300 }"
                 },
