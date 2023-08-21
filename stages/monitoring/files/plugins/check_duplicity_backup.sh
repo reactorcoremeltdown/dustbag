@@ -6,12 +6,12 @@ backup_date=`duplicity collection-status ${1} | grep 'Last full backup date' | c
 timestamp=`date --date="${backup_date}" +%s`
 current_timestamp=`date +%s`
 
-let delta="current_timestamp - timestamp"
+delta=`echo "(${current_timestamp} - ${timestamp})/86400"`
 
-if test $delta -gt 612000; then
-    warning "Last full backup of ${1} was performed a week ago"
+if test ${delta} -gt 6; then
+    warning "Last full backup of ${1} was performed ${delta} days ago"
 elif test $delta -gt 1209600; then
-    fail "Last full backup of ${1} was performed two weeks ago!"
+    fail "Last full backup of ${1} was performed ${days} ago!"
 else
-    ok "Last full backup of ${1} was performed within a week"
+    ok "Last full backup of ${1} was performed ${days} ago"
 fi
