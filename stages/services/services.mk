@@ -94,7 +94,6 @@ nginx_certificates:
 	test -f /etc/nginx/pki/pki/crl.pem || install -D -m 644 -v stages/services/files/etc/nginx/pki/pki/crl.pem /etc/nginx/pki/pki
 
 nginx_sites:
-	bash stages/services/templates/nginx/sites/api.sh
 	bash stages/services/templates/nginx/sites/bank.sh
 	bash stages/services/templates/nginx/sites/ci.sh
 	bash stages/services/templates/nginx/sites/dav.sh
