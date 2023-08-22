@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+TOKEN=`cat /home/git/.config/drone_api_key`
+
+case ${1} in
+    "pre")
+        curl -s -H "${TOKEN}" -XPOST "https://ci.rcmd.space/api/user/repos" | jq '. | length'
+
+        sleep 1
+        curl -s -H "${TOKEN}" -XPOST "https://ci.rcmd.space/api/repos/${GITEA_REPO_USER_NAME}/${GITEA_REPO_NAME}" | jq '.slug'
+        ;;
+    "post")
+        curl -s -H "${TOKEN}" -XPOST "https://ci.rcmd.space/api/repos/${GITEA_REPO_USER_NAME}/${GITEA_REPO_NAME}"
+
+        sleep 3
+        JOB_ID=$(curl -s -H "${TOKEN}" https://ci.rcmd.space/api/repos/${GITEA_REPO_USER_NAME}/${GITEA_REPO_NAME}/builds | jq '.[0].number')
+
+        echo "Check your job status at https://ci.rcmd.space/${GITEA_REPO_USER_NAME}/${GITEA_REPO_NAME}/${JOB_ID}"
+        ;;
+esac
