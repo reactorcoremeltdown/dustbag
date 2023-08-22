@@ -6,14 +6,15 @@ outpost: early packages users services monitoring
 
 production: early firewall repos packages users services monitoring last
 
-fermium: early repos packages users services monitoring
+fermium: lock early repos packages users services monitoring unlock
 
 seedbox: early users services
 
-printserver: early packages services monitoring
+printserver: lock early packages services monitoring unlock
 
 include variables/colors.mk
 include variables/globalvars.mk
+include stages/lock/lock.mk
 include stages/early/early.mk
 include stages/firewall/firewall.mk
 include stages/repos/repos.mk
