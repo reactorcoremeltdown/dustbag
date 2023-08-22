@@ -25,3 +25,7 @@ Ansible appears to be too slow and bloated for simple operation like configure o
     + [ ] Package has been removed, now I need to add a container
 + [x] EasyRSA for nginx client certs is not automated
 + [ ] Drone config fails
+
+### Debian 13 Trixie roadmap
+
++ [ ] TBD
