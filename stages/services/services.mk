@@ -137,7 +137,7 @@ gitea_config: /etc/secrets/secrets.json
 	test -d /home/git/.config || mkdir -p /home/git/.config && chown git:git /home/git/.config
 	bash stages/services/templates/gitea/config.sh
 	install -D -m 644 -v stages/services/files/etc/systemd/system/gitea.service /etc/systemd/system
-	jq -cr ".secrets.gitea.server.DRONE_API_KEY" > /home/git/.config/drone_api_key
+	jq -cr ".secrets.gitea.server.DRONE_API_KEY" /etc/secrets/secrets.json > /home/git/.config/drone_api_key
 	chmod 400 /home/git/.config/drone_api_key && chown git:git /home/git/.config/drone_api_key
 	install -D -m 755 -v stages/services/files/usr/local/bin/gitea-common-hook /usr/local/bin	
 	systemctl enable gitea.service
