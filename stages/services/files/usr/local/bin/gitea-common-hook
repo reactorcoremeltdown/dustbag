@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TOKEN="Authentication: Bearer `cat /home/git/.config/drone_api_key`"
+TOKEN="Authorization: Bearer `cat /home/git/.config/drone_api_key`"
 
 case ${1} in
     "pre")
