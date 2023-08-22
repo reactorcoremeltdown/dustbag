@@ -5,6 +5,7 @@ Description=Drone CI Runner (ARM version)
 User=git
 StartLimitInterval=5
 StartLimitBurst=10
+Environment=DRONE_RUNNER_MAX_PROCS=1
 ExecStart=/usr/local/bin/drone-runner-arm service run --config /home/git/.drone-runner-exec/config
 
 [Install]
