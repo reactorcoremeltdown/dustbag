@@ -15,7 +15,7 @@ services: users packages motd sshd crons dave gitea exported_graphs nginx_sites 
 else ifeq ($(MAKECMDGOALS), fermium)
 CRONS := stages/services/files/crons/fermium
 
-services: users packages crons nginx tinc_client mpd diskplayer motion bootconfig deviceping drone_runner_arm pki
+services: users packages crons nginx_proxies nginx tinc_client mpd diskplayer motion bootconfig deviceping drone_runner_arm pki
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Seedbox
@@ -92,6 +92,9 @@ nginx_certificates:
 	test -d /etc/nginx/pki/pki || mkdir -p /etc/nginx/pki/pki
 	test -f /etc/nginx/pki/pki/ca.crt || install -D -m 644 -v stages/services/files/etc/nginx/pki/pki/ca.crt /etc/nginx/pki/pki
 	test -f /etc/nginx/pki/pki/crl.pem || install -D -m 644 -v stages/services/files/etc/nginx/pki/pki/crl.pem /etc/nginx/pki/pki
+
+nginx_proxies:
+	bash stages/services/templates/nginx/sites/proxies.sh
 
 nginx_sites:
 	bash stages/services/templates/nginx/sites/bank.sh
