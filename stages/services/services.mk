@@ -134,6 +134,7 @@ gitea_directory:
 	install -d -m 770 --owner git --group git /etc/gitea
 
 gitea_config: /etc/secrets/secrets.json
+	test -d /home/git/.config || mkdir -p /home/git/.config && chown git:git /home/git/.config
 	bash stages/services/templates/gitea/config.sh
 	install -D -m 644 -v stages/services/files/etc/systemd/system/gitea.service /etc/systemd/system
 	jq -cr ".secrets.gitea.server.DRONE_API_KEY" > /home/git/.config/drone_api_key
