@@ -15,7 +15,7 @@ services: users packages motd sshd crons dave gitea exported_graphs nginx_sites 
 else ifeq ($(MAKECMDGOALS), fermium)
 CRONS := stages/services/files/crons/fermium
 
-services: users packages crons tinc_client mpd diskplayer motion bootconfig deviceping drone_runner_arm pki
+services: users packages crons nginx tinc_client mpd diskplayer motion bootconfig deviceping drone_runner_arm pki
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Seedbox
