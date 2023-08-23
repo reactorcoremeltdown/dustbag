@@ -2,38 +2,60 @@
 
 IFS=$'\n'
 
-CHECKS=$(curl -s http://localhost:8881/ | jq -cr 'sort_by(.Plugin) | .[]')
+function get_lights() {
+    CHECKS=$(curl -s http://localhost:8881/ | jq -cr 'sort_by(.Plugin) | .[]')
 
-for check in ${CHECKS}; do
-    source <(echo "${check}" | jq -r '. | del(.Notify) | to_entries[] | [.key,(.value|@sh)] | join("=")')
-    case ${Status} in
-        "0")
-            echo -en "\e[32m•\e[0m "
-            ;;
-        "1")
-            echo -en "\e[33m•\e[0m "
-            ;;
-        "2")
-            echo -en "\e[31m•\e[0m "
-            ;;
-    esac
-done
+    for check in ${CHECKS}; do
+        source <(echo "${check}" | jq -r '. | del(.Notify) | to_entries[] | [.key,(.value|@sh)] | join("=")')
+        case ${Status} in
+            "0")
+                echo -en "\e[32m•\e[0m "
+                ;;
+            "1")
+                echo -en "\e[33m•\e[0m "
+                ;;
+            "2")
+                echo -en "\e[31m•\e[0m "
+                ;;
+        esac
+    done
+    echo -e "\n\n"
+}
 
-echo -e "\n\n"
+function get_descriptions() {
+    if [[ "${1}" != "" ]]; then
+        CHECKS=$(curl -s "http://localhost:8881/?check=${1}")
 
-for check in ${CHECKS}; do
-    source <(echo "${check}" | jq -r '. | del(.Notify) | to_entries[] | [.key,(.value|@sh)] | join("=")')
-    case ${Status} in
-        "0")
-            echo -e "\e[32m${Name}: OK  \e[0m\e[90m${Output}\e[0m\n\t${Description}\n"
-            ;;
-        "1")
-            echo -e "\e[33m${Name}: WARNING  \e[0m\e[90m${Output}\e[0m\n\t${Description}\n"
-            ;;
-        "2")
-            echo -e "\e[31m${Name}: CRITICAL  \e[0m\e[31m${Output}\e[0m\n\t${Description}\n"
-            ;;
-    esac
-done
+    else
+        CHECKS=$(curl -s http://localhost:8881/ | jq -cr 'sort_by(.Plugin) | .[]')
 
-echo ""
+    fi
+    for check in ${CHECKS}; do
+        source <(echo "${check}" | jq -r '. | del(.Notify) | to_entries[] | [.key,(.value|@sh)] | join("=")')
+        case ${Status} in
+            "0")
+                echo -e "\e[32m${Name}: OK  \e[0m\e[90m${Output}\e[0m\n\t${Description}\n"
+                ;;
+            "1")
+                echo -e "\e[33m${Name}: WARNING  \e[0m\e[90m${Output}\e[0m\n\t${Description}\n"
+                ;;
+            "2")
+                echo -e "\e[31m${Name}: CRITICAL  \e[0m\e[31m${Output}\e[0m\n\t${Description}\n"
+                ;;
+        esac
+    done
+
+    echo ""
+}
+
+case ${1} in
+    "launch")
+        RESPONSE=$(curl -s -XPOST "http://localhost:8881/?check=${2}&counter=3000000")
+        sleep 1
+        get_descriptions "${2}"
+        ;;
+    *)
+        get_lights
+        get_descriptions
+        ;;
+esac
