@@ -74,6 +74,7 @@ sshd: sshd_config sshd_restart
 	@echo "$(ccgreen)Setting up sshd completed$(ccend)"
 
 crons:
+	timedatectl set-timezone "Europe/Berlin"
 	bash stages/services/templates/crons.sh $(CRONS)
 	@echo "$(ccgreen)Setting up crons completed$(ccend)"
 
