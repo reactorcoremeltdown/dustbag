@@ -31,9 +31,4 @@ ledger_scripts:
 	chmod 600 /home/ledger/.token /home/ledger/.config/* && chown ledger:ledger /home/ledger/.token /home/ledger/.config/*
 	install -d -m 775 --owner root --group apps /var/spool/api/ledger
 	install -d /home/ledger/bin
-	install -D -v -m 755 stages/users/files/home/ledger/bin/track_pocket_expenses.sh /home/ledger/bin
-	install -D -v -m 755 stages/users/files/home/ledger/bin/track_mood.sh /home/ledger/bin
-	install -D -v -m 755 stages/users/files/home/ledger/bin/total_mood_score.sh /home/ledger/bin
-	install -D -v -m 755 stages/users/files/home/ledger/bin/weekly_expenses.sh /home/ledger/bin
-	install -D -v -m 755 stages/users/files/home/ledger/bin/track_sprint.sh /home/ledger/bin
-	install -D -v -m 755 stages/users/files/home/ledger/bin/track_weight.sh /home/ledger/bin
+	install -D -v -m 755 stages/users/files/home/ledger/bin/* /home/ledger/bin
