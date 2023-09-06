@@ -92,7 +92,7 @@ nginx_certificates:
 	test -f /etc/nginx/ssl/ca.crt || openssl req  -nodes -newkey rsa:4096 -days 365 -x509 -keyout /etc/nginx/ssl/ca.key -out /etc/nginx/ssl/ca.crt -subj '/C=DE/ST=Berlin/L=Berlin/O=RCMD/OU=Funkhaus/CN=RCMD Server'
 	test -d /etc/nginx/pki/pki || mkdir -p /etc/nginx/pki/pki
 	test -f /etc/nginx/pki/pki/ca.crt || install -D -m 644 -v stages/services/files/etc/nginx/pki/pki/ca.crt /etc/nginx/pki/pki
-	test -f /etc/nginx/pki/pki/crl.pem || install -D -m 644 -v stages/services/files/etc/nginx/pki/pki/crl.pem /etc/nginx/pki/pki
+	install -D -m 644 -v stages/services/files/etc/nginx/pki/pki/crl.pem /etc/nginx/pki/pki
 
 nginx_proxies:
 	bash stages/services/templates/nginx/sites/proxies.sh
