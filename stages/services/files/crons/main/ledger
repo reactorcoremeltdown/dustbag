@@ -2,6 +2,7 @@
 * * * * * /home/ledger/bin/track_mood.sh | logger -t ledger
 * * * * * /home/ledger/bin/track_snacks.sh | logger -t ledger
 58 23 * * * /home/ledger/bin/total_mood_score.sh | logger -t ledger
+59 23 * * * /home/ledger/bin/total_snacks_score.sh | logger -t ledger
 30 0,6,12,18 * * * /home/ledger/bin/track_sprint.sh | logger -t ledger
 30 8 * * * /home/ledger/bin/track_weight.sh | logger -t ledger
 # * * * * * hledger -f /home/ledger/ledger.book b -N -O csv cash:pocket > /var/spool/api/ledger/cash.csv
