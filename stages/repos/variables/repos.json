@@ -19,6 +19,13 @@
                 "distro": "syncthing",
                 "section": "stable"
             },
+            { "name": "elasticstack",
+                "state": "present",
+                "key": "https://artifacts.elastic.co/GPG-KEY-elasticsearch",
+                "url": "https://artifacts.elastic.co/packages/8.x/apt",
+                "distro": "stable",
+                "section": "main"
+            },
             { "name": "kaliko-backports",
                 "state": "absent",
                 "key": "https://kaliko.me/kaliko.gpg",
