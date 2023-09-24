@@ -7,6 +7,7 @@ IFS=$'\n'
 for check in $(jq -cr ".${2}[]" ${1}); do
     # source <(echo "${check}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     name=`echo "${check}" | jq -cr '.name'`
+    state=`echo "${check}" | jq -cr '.state'`
     description=`echo "${check}" | jq -cr '.description'`
     plugin=`echo "${check}" | jq -cr '.plugin'`
     argument=`echo "${check}" | jq -cr '.argument'`
