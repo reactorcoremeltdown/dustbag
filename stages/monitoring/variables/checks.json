@@ -1,6 +1,18 @@
 {
   "production": [
     {
+      "name": "prod_syncthing",
+      "state": "present",
+      "plugin": "check_http_success_rate",
+      "warningThreshold": "99",
+      "criticalThreshold": "97",
+      "flowOperator": "downwards",
+      "argument": "http://127.0.0.1:8384/rest/noauth/health",
+      "interval": "1m",
+      "description": "Syncthing: production",
+      "notify": ["telegram", "gotify"]
+    },
+    {
       "name": "dav_https",
       "state": "present",
       "plugin": "check_https_certificate",
