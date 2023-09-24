@@ -1,6 +1,15 @@
 {
   "production": [
     {
+      "name": "prod_syncthing_service",
+      "state": "present",
+      "plugin": "check_systemd_service",
+      "argument": "syncthing@syncthing.service",
+      "interval": "1m",
+      "description": "Syncthing: production (systemd service)",
+      "notify": ["telegram"]
+    },
+    {
       "name": "prod_syncthing",
       "state": "present",
       "plugin": "check_http_success_rate",
@@ -11,6 +20,7 @@
       "interval": "1m",
       "description": "Syncthing: production",
       "notify": ["telegram", "gotify"]
+      "suppressedBy": ["prod_syncthing_service"]
     },
     {
       "name": "dav_https",
