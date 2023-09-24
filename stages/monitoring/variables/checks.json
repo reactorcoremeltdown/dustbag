@@ -52,6 +52,7 @@
       "interval": "15s",
       "description": "Enсrypted webdav mount",
       "hostname": "rcmd.space",
+      "suppressedBy": ["gocryptfs_config"],
       "notify": ["gotify"]
     },
     {
@@ -182,6 +183,7 @@
       "warningThreshold": "3",
       "criticalThreshold": "5",
       "flowOperator": "upwards",
+      "suppressedBy": ["task-transformer"],
       "notify": ["gotify", "telegram"]
     },
     {
@@ -206,6 +208,7 @@
       "warningThreshold": "301",
       "criticalThreshold": "500",
       "flowOperator": "upwards",
+      "suppressedBy": ["task-transformer"],
       "notify": ["gotify", "telegram"]
     },
     {
@@ -333,6 +336,7 @@
       "argument": "file:///var/storage/wastebox/Backups/radicale/",
       "interval": "6h",
       "description": "CalDAV backups",
+      "suppressedBy": ["webdav_filesystem"],
       "notify": ["telegram"]
     },
     {
@@ -342,6 +346,7 @@
       "argument": "file:///var/storage/wastebox/Backups/kanboard/",
       "interval": "6h",
       "description": "Kanboard backups",
+      "suppressedBy": ["webdav_filesystem"],
       "notify": ["telegram"]
     },
     {
@@ -351,6 +356,7 @@
       "argument": "file:///var/storage/wastebox/Backups/websites/",
       "interval": "6h",
       "description": "Website backups",
+      "suppressedBy": ["webdav_filesystem"],
       "notify": ["telegram"]
     },
     {
