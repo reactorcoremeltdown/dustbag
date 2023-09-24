@@ -19,7 +19,7 @@
       "argument": "http://127.0.0.1:8384/rest/noauth/health",
       "interval": "1m",
       "description": "Syncthing: production",
-      "notify": ["telegram", "gotify"]
+      "notify": ["telegram", "gotify"],
       "suppressedBy": ["prod_syncthing_service"]
     },
     {
