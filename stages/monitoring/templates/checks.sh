@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 IFS=$'\n'
 
 for check in $(jq -cr ".${2}[]" ${1}); do
