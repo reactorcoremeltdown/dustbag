@@ -7,7 +7,7 @@
       "argument": "syncthing@syncthing.service",
       "interval": "1m",
       "description": "Syncthing: production (systemd service)",
-      "notify": ["telegram"]
+      "notify": ["telegram", "gotify"]
     },
     {
       "name": "prod_syncthing",
@@ -379,6 +379,7 @@
       "interval": "30m",
       "description": "[relay] MPD server online test",
       "hostname": "fermium.rcmd.space",
+      "suppressedBy": ["tinc_host"],
       "notify": ["telegram"]
     },
     {
@@ -389,6 +390,7 @@
       "interval": "30m",
       "description": "[relay] Syncthing at home",
       "hostname": "fermium.rcmd.space",
+      "suppressedBy": ["tinc_host"],
       "notify": ["telegram"]
     },
     {
@@ -397,6 +399,7 @@
       "plugin": "relay",
       "argument": "http://fermium.rcmd.space:8881?check=home_printer",
       "interval": "30m",
+      "suppressedBy": ["tinc_host"],
       "description": "[relay] CUPS server online test",
       "hostname": "fermium.rcmd.space",
       "notify": ["telegram"]
@@ -409,6 +412,7 @@
       "interval": "30m",
       "description": "[relay] Home storage status",
       "hostname": "fermium.rcmd.space",
+      "suppressedBy": ["tinc_host"],
       "notify": ["telegram"]
     }
   ],
