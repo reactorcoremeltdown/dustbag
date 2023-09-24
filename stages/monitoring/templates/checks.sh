@@ -5,7 +5,16 @@ set -e
 IFS=$'\n'
 
 for check in $(jq -cr ".${2}[]" ${1}); do
-    source <(echo "${check}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
+    # source <(echo "${check}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
+    name=`echo "${check}" | jq -cr '.name'`
+    description=`echo "${check}" | jq -cr '.description'`
+    plugin=`echo "${check}" | jq -cr '.plugin'`
+    argument=`echo "${check}" | jq -cr '.argument'`
+    interval=`echo "${check}" | jq -cr '.interval'`
+    warningThreshold=`echo "${check}" | jq -cr '.warningThreshold'`
+    criticalThreshold=`echo "${check}" | jq -cr '.criticalThreshold'`
+    flowOperator=`echo "${check}" | jq -cr '.flowOperator'`
+
     echo "Check name: ${name}"
     check_hostname=$(echo "${check}" | jq -cr '.hostname')
     for i in `echo "${check}" | jq -cr '.notify[]'`; do
