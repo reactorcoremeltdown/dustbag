@@ -24,6 +24,9 @@ EOF
         for i in `echo "${check}" | jq -cr '.notify[]'`; do
             echo "notify = ${i}.sh" >> /etc/monitoring/configs/${name}.ini
         done
+        for i in `echo "${check}" | jq -cr '.suppressedBy[]'`; do
+            echo "suppressedBy = ${i}" >> /etc/monitoring/configs/${name}.ini
+        done
         if [[ ${check_hostname} != 'null' ]]; then
             echo "hostname = ${check_hostname}" >> /etc/monitoring/configs/${name}.ini
         fi
