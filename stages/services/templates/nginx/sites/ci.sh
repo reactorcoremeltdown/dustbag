@@ -114,6 +114,7 @@ server {
     server_name ${SITE}.rcmd.space;
 
     location / {
+        limit_req zone=api;
 
         # auth_basic "Protected area";
         # auth_basic_user_file /etc/nginx/htpasswd;
