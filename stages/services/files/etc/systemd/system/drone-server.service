@@ -4,7 +4,13 @@ Description=CI Server
 [Service]
 Restart=always
 ExecStartPre=-/usr/bin/podman rm -f drone-server
-ExecStart=/usr/bin/podman run --name drone-server -p 127.0.0.1:28002:80 --env-file /etc/drone/server.cfg --mount type=bind,source=/var/lib/drone,target=/data drone/drone:2
+ExecStart=/usr/bin/podman run \
+    --name drone-server \
+    -p 127.0.0.1:28002:80 \
+    --cpus=0.6 \
+    --env-file /etc/drone/server.cfg \
+    --mount type=bind,source=/var/lib/drone,target=/data \
+    drone/drone:2
 ExecStop=/usr/bin/podman stop -t 2 drone-server
 ExecStopPost=-/usr/bin/podman rm -f drone-server
 ExecStopPost=/bin/sleep 2
