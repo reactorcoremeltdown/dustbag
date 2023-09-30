@@ -24,6 +24,11 @@ steps:
 node:
   machine: garage
 
+trigger:
+  target:
+    exclude:
+    - arm
+
 ---
 kind: pipeline
 type: exec
@@ -49,6 +54,11 @@ steps:
 
 node:
   machine: outpost
+
+trigger:
+  target:
+    exclude:
+    - arm
 
 ---
 kind: pipeline
@@ -139,4 +149,4 @@ depends_on:
 - hangar
 - fermium
 - outpost
-  #- printserver
+- printserver
