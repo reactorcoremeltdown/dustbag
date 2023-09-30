@@ -114,10 +114,6 @@ server {
     server_name ${SITE}.rcmd.space;
 
     location / {
-        limit_req zone=api;
-
-        # auth_basic "Protected area";
-        # auth_basic_user_file /etc/nginx/htpasswd;
         proxy_pass http://127.0.0.1:28002;
         proxy_http_version 1.1;
 
@@ -129,14 +125,33 @@ server {
         proxy_set_header   X-Forwarded-Proto http;
         proxy_redirect     http:// \$scheme://;
 
-        # The proxy must preserve the host because gotify verifies the host with the origin
-        # for WebSocket connections
         proxy_set_header   Host \$http_host;
 
         # These sets the timeout so that the websocket can stay alive
         proxy_connect_timeout   7m;
         proxy_send_timeout      7m;
         proxy_read_timeout      7m;
+    }
+    location /rpc/v2/stage {
+        limit_req zone=api;
+
+        proxy_pass http://127.0.0.1:28002;
+        proxy_http_version 1.1;
+
+        # Ensuring it can use websockets
+        proxy_set_header   Upgrade \$http_upgrade;
+        proxy_set_header   Connection "upgrade";
+        proxy_set_header   X-Real-IP \$remote_addr;
+        proxy_set_header   X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto http;
+        proxy_redirect     http:// \$scheme://;
+
+        proxy_set_header   Host \$http_host;
+
+        # These sets the timeout so that the websocket can stay alive
+        proxy_connect_timeout   5s;
+        proxy_send_timeout      5s;
+        proxy_read_timeout      5s;
     }
 }
 
