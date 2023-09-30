@@ -76,31 +76,39 @@ steps:
 node:
   machine: fermium
 
-    #---
-    #kind: pipeline
-    #type: exec
-    #name: printserver
-    #
-    #platform:
-    #  os: linux
-    #  arch: arm
-    #
-    #clone:
-    #  disable: true
-    #
-    #steps:
-    #- name: clone
-    #  commands:
-    #  - git clone --depth 1 $DRONE_GIT_SSH_URL
-    #- name: build
-    #  commands:
-    #  - cd $DRONE_REPO_NAME && echo $GIT_SUDO | sudo -S make printserver
-    #  environment:
-    #    GIT_SUDO:
-    #      from_secret: git_sudo
-    #
-    #node:
-    #  machine: orangepizero
+trigger:
+  target:
+  - arm
+
+---
+kind: pipeline
+type: exec
+name: printserver
+
+platform:
+  os: linux
+  arch: arm
+
+clone:
+  disable: true
+
+steps:
+- name: clone
+  commands:
+  - git clone --depth 1 $DRONE_GIT_SSH_URL
+- name: build
+  commands:
+  - cd $DRONE_REPO_NAME && echo $GIT_SUDO | sudo -S make printserver
+  environment:
+    GIT_SUDO:
+      from_secret: git_sudo
+
+node:
+  machine: orangepizero
+
+trigger:
+  target:
+  - arm
 
 ---
 kind: pipeline
