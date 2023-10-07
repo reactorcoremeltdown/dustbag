@@ -42,3 +42,7 @@
 
 ### Sorting photos
 20 2 * * 7 /usr/local/bin/phockup-wrapper
+
+# restart podsync to get fresh episodes
+#
+190 0 * * 6 systemctl restart podsync.service
