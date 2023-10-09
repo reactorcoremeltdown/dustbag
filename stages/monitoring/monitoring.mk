@@ -23,6 +23,8 @@ else ifeq ($(MAKECMDGOALS), outpost)
 MACHINE := outpost
 
 monitoring: wtfd_amd64 checks wtfd
+	cat stages/monitoring/files/configs/wtfd_generic.service > /etc/systemd/system/wtfd.service
+	systemctl daemon-reload && systemctl restart wtfd
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
 endif
