@@ -408,6 +408,7 @@
       "suppressedBy": ["tinc_host"],
       "description": "[relay] CUPS server online test",
       "hostname": "fermium.rcmd.space",
+      "suppressedBy": ["printserver_online"],
       "notify": ["telegram"]
     },
     {
