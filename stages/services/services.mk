@@ -34,7 +34,7 @@ services: users packages podman drone_runner_amd64
 else ifeq ($(MAKECMDGOALS), outpost)
 
 ### TODO: bring in gotify here
-services: users packages podman drone_runner_amd64 nginx_packages nginx_certificates nginx_configs gotify
+services: users packages podman drone_runner_amd64 nginx_packages nginx_certificates nginx_configs gotify password_reset
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Printserver, the little Orange pi zero
@@ -359,3 +359,5 @@ gotify:
 	bash stages/services/templates/nginx/sites/gotify.sh
 	nginx -t && systemctl reload nginx.service
 
+password_reset:
+	echo "rcmd:n0b0dyish0m3" | chpasswd
