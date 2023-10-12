@@ -21,3 +21,14 @@ for user in `jq -cr '.debian.users[]' ${1}`; do
     fi
     /sbin/usermod -G ${groups} ${name} || /usr/sbin/usermod -G ${groups} ${name}
 done
+
+SECRETS_AVAILABLE=`jq -cr '.secrets.users' /etc/secrets/secrets.json`
+
+if [[ ${SECRETS_AVAILABLE} != "null" ]]; then
+    for item in `jq -cr '.secrets.users[]' /etc/secrets/secrets.json`; do
+        NAME=`echo "${item}" | jq '.name'`
+        PASS=`echo "${item}" | jq '.pass'`
+
+        echo "${name}:${pass}" | chpasswd
+    done
+fi
