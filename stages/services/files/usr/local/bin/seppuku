@@ -3,6 +3,10 @@
 ID=`curl -s http://169.254.169.254/hetzner/v1/metadata | grep 'instance-id' | awk '{print $2}'`
 HETZNER_API_TOKEN=`cat /home/git/.hetzner`
 
+echo "PERFORMING SEPPUKU. Goodbye."
+
+sleep 2
+
 curl -s \
 	-X DELETE \
 	-H "Authorization: Bearer $HETZNER_API_TOKEN" \
