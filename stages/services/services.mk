@@ -27,7 +27,7 @@ services: users packages drone_runner_amd64
 ## Buildbox
 else ifeq ($(MAKECMDGOALS), builder)
 
-services: users packages podman drone_runner_amd64
+services: users packages podman drone_runner_amd64 seppuku
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Outpost
@@ -361,3 +361,10 @@ gotify:
 
 password_reset:
 	echo "rcmd:n0b0dyish0m3" | chpasswd
+
+seppuku:
+	install -D -m 755 stages/services/files/usr/local/bin/seppuku /usr/local/bin
+	atq | cut -f 1 | xargs atrm
+	echo '/usr/local/bin/seppuku' | at now + 5 hours
+	@echo "$(ccgreen)Installed seppuku$(ccend)"
+

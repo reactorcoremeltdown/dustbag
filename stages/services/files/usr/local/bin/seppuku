@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+ID=`curl -s http://169.254.169.254/hetzner/v1/metadata | grep 'instance-id' | awk '{print $2}'`
+HETZNER_API_TOKEN=`cat /etc/secrets/hetzner`
+
+curl -s \
+	-X DELETE \
+	-H "Authorization: Bearer $HETZNER_API_TOKEN" \
+	"https://api.hetzner.cloud/v1/servers/${ID}"
