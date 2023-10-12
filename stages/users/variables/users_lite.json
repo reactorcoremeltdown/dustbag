@@ -3,6 +3,7 @@
         "users": [
             { "name": "rcmd", "shell": "/bin/bash", "groups": "rcmd,apps,radicale,syncthing,audio", "keygen": true, "authorized_keys": true },
             { "name": "git", "shell": "/bin/bash", "groups": "git,docker,syncthing,laminar", "keygen": true, "authorized_keys": false },
+            { "name": "root", "shell": "/bin/bash", "groups": "root", "keygen": false, "authorized_keys": true },
             { "name": "syncthing", "shell": "/bin/bash", "groups": "syncthing", "keygen": false, "authorized_keys": false }
         ]
     }
