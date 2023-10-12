@@ -7,7 +7,7 @@ case ${1} in
 		;;
 	"cooldown")
 		atq | cut -f 1 | xargs atrm
-		cd /root && echo '/usr/local/bin/seppuku' | at now + 5 minutes
+		cd /root && echo '/usr/local/bin/seppuku' | at now + 60 minutes
 		;;
 	*)
 		ID=`curl -s http://169.254.169.254/hetzner/v1/metadata | grep 'instance-id' | awk '{print $2}'`
