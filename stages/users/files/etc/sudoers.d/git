@@ -3,3 +3,5 @@ git ALL= /usr/bin/git pull
 git ALL= /usr/bin/git push origin master
 git ALL= NOPASSWD: /usr/bin/jq -r .secrets.telegram.bot_token /etc/secrets/secrets.json
 git ALL= NOPASSWD: /usr/bin/jq -r .secrets.telegram.chat_id /etc/secrets/secrets.json
+git ALL= NOPASSWD: /usr/local/bin/seppuku delay
+git ALL= NOPASSWD: /usr/local/bin/seppuku cooldown

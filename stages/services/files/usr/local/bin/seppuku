@@ -1,13 +1,25 @@
 #!/usr/bin/env bash
+#
+case ${1} in
+	"delay")
+		atq | cut -f 1 | xargs atrm || true
+		echo '/usr/local/bin/seppuku' | at now + 2 hours
+		;;
+	"cooldown")
+		atq | cut -f 1 | xargs atrm
+		echo '/usr/local/bin/seppuku' | at now + 5 minutes
+		;;
+	*)
+		ID=`curl -s http://169.254.169.254/hetzner/v1/metadata | grep 'instance-id' | awk '{print $2}'`
+		HETZNER_API_TOKEN=`cat /home/git/.hetzner`
 
-ID=`curl -s http://169.254.169.254/hetzner/v1/metadata | grep 'instance-id' | awk '{print $2}'`
-HETZNER_API_TOKEN=`cat /home/git/.hetzner`
+		echo "PERFORMING SEPPUKU. Goodbye."
 
-echo "PERFORMING SEPPUKU. Goodbye."
+		sleep 2
 
-sleep 2
-
-curl -s \
-	-X DELETE \
-	-H "Authorization: Bearer $HETZNER_API_TOKEN" \
-	"https://api.hetzner.cloud/v1/servers/${ID}"
+		curl -s \
+			-X DELETE \
+			-H "Authorization: Bearer $HETZNER_API_TOKEN" \
+			"https://api.hetzner.cloud/v1/servers/${ID}"
+		;;
+esac

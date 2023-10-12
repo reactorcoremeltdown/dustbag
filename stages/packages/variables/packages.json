@@ -32,7 +32,8 @@
           "helm"
         ],
         "builder": [
-          "podman"
+          "podman",
+          "mailutils"
         ],
         "server": [
           "cowsay",
