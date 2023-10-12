@@ -33,6 +33,7 @@
         ],
         "builder": [
           "podman",
+          "postfix",
           "mailutils"
         ],
         "server": [
