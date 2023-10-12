@@ -26,9 +26,9 @@ SECRETS_AVAILABLE=`jq -cr '.secrets.users' /etc/secrets/secrets.json`
 
 if [[ ${SECRETS_AVAILABLE} != "null" ]]; then
     for item in `jq -cr '.secrets.users[]' /etc/secrets/secrets.json`; do
-        NAME=`echo "${item}" | jq '.name'`
-        PASS=`echo "${item}" | jq '.pass'`
+        NAME=`echo "${item}" | jq -r '.name'`
+        PASS=`echo "${item}" | jq -r '.pass'`
 
-        echo "${name}:${pass}" | chpasswd
+        echo "${NAME}:${PASS}" | chpasswd
     done
 fi
