@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ID=`curl -s http://169.254.169.254/hetzner/v1/metadata | grep 'instance-id' | awk '{print $2}'`
-HETZNER_API_TOKEN=`cat /etc/secrets/hetzner`
+HETZNER_API_TOKEN=`cat /home/git/.hetzner`
 
 curl -s \
 	-X DELETE \
