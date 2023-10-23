@@ -324,15 +324,6 @@
       "notify": ["gotify"]
     },
     {
-      "name": "traccar",
-      "state": "absent",
-      "plugin": "check_traccar_logs",
-      "argument": "TRACCAR_DEVICE_ID",
-      "interval": "10m",
-      "description": "Check traccar reported location",
-      "notify": ["traccar"]
-    },
-    {
       "name": "explosions_zp",
       "state": "present",
       "plugin": "check_ua_explosions",
