@@ -45,6 +45,18 @@
       "notify": ["gotify", "telegram"]
     },
     {
+      "name": "traccar",
+      "state": "present",
+      "plugin": "check_traccar_logs",
+      "argument": "",
+      "interval": "15s",
+      "description": "Traccar location tracker",
+      "hostname": "rcmd.space",
+      "criticalThreshold": "1800",
+      "flowOperator": "upwards",
+      "notify": ["telegram"]
+    },
+    {
       "name": "webdav_filesystem",
       "state": "present",
       "plugin": "check_file",
