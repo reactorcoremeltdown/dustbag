@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-bot_token=`cat /etc/datasources/pisun.json | jq -r .token`
+bot_token=`cat /etc/secrets/secrets.json | jq -r .secrets.telegram.bot_token`
 chat_id="@tiredsysadmin"
 
 text="$MONIT_DESCRIPTION"

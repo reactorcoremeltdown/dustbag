@@ -52,7 +52,7 @@
       "interval": "15s",
       "description": "Traccar location tracker",
       "hostname": "rcmd.space",
-      "criticalThreshold": "1800",
+      "criticalThreshold": "7200",
       "flowOperator": "upwards",
       "notify": ["telegram"]
     },
