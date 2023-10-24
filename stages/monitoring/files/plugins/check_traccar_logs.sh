@@ -13,5 +13,5 @@ DELTA=`echo "${CURRENT} - ${TIMESTAMP}" | bc`
 if [[ ${DELTA} -lt ${CRITICAL_THRESHOLD} ]]; then
     ok "Passed a test"
 else
-    fail "Failed a test"
+    fail "last known location https://maps.google.com/maps?q=${LATITUDE},${LONGITUDE}"
 fi
