@@ -4,9 +4,9 @@ source ${PLUGINSDIR}/okfail.sh
 
 IFS=$'\n'
 
-TIMESTAMP=`jq .timestamp /var/spool/api/deviceping/traccar`
-LATITUDE=`jq .appendix.latitude /var/spool/api/deviceping/traccar`
-LONGITUDE=`jq .appendix.longitude /var/spool/api/deviceping/traccar`
+TIMESTAMP=`jq -r .timestamp /var/spool/api/deviceping/traccar`
+LATITUDE=`jq -r .appendix.latitude /var/spool/api/deviceping/traccar`
+LONGITUDE=`jq -r .appendix.longitude /var/spool/api/deviceping/traccar`
 CURRENT=`date '+%s'`
 DELTA=`echo "${CURRENT} - ${TIMESTAMP}" | bc`
 
