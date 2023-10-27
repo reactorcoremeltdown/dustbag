@@ -175,7 +175,7 @@
     },
     {
       "name": "container_volume_free_space",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_disk_space",
       "argument": "/var/lib/containers",
       "interval": "3m",
