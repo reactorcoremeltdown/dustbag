@@ -524,7 +524,7 @@
     },
     {
       "name": "ipv6",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_ipv6_connection",
       "argument": "https://rcmd.space",
       "interval": "5m",
