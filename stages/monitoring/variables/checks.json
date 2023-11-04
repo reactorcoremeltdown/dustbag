@@ -45,6 +45,18 @@
       "notify": ["gotify", "telegram"]
     },
     {
+      "name": "traccar",
+      "state": "present",
+      "plugin": "check_traccar_logs",
+      "argument": "",
+      "interval": "15s",
+      "description": "Traccar location tracker",
+      "hostname": "rcmd.space",
+      "criticalThreshold": "1814000",
+      "flowOperator": "upwards",
+      "notify": ["telegram"]
+    },
+    {
       "name": "webdav_filesystem",
       "state": "present",
       "plugin": "check_file",
@@ -163,7 +175,7 @@
     },
     {
       "name": "container_volume_free_space",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_disk_space",
       "argument": "/var/lib/containers",
       "interval": "3m",
@@ -310,15 +322,6 @@
       "interval": "10m",
       "description": "API HTTPS certificate",
       "notify": ["gotify"]
-    },
-    {
-      "name": "traccar",
-      "state": "absent",
-      "plugin": "check_traccar_logs",
-      "argument": "TRACCAR_DEVICE_ID",
-      "interval": "10m",
-      "description": "Check traccar reported location",
-      "notify": ["traccar"]
     },
     {
       "name": "explosions_zp",
@@ -484,8 +487,8 @@
       "name": "main_website",
       "state": "present",
       "plugin": "check_http_success_rate",
-      "warningThreshold": "100",
-      "criticalThreshold": "99",
+      "warningThreshold": "98",
+      "criticalThreshold": "97",
       "flowOperator": "downwards",
       "argument": "https://rcmd.space",
       "interval": "1m",
@@ -510,8 +513,8 @@
       "name": "main_website",
       "state": "present",
       "plugin": "check_http_success_rate",
-      "warningThreshold": "99",
-      "criticalThreshold": "98",
+      "warningThreshold": "98",
+      "criticalThreshold": "97",
       "flowOperator": "downwards",
       "argument": "https://rcmd.space",
       "interval": "3m",
@@ -533,8 +536,8 @@
       "name": "blog_website",
       "state": "present",
       "plugin": "check_http_success_rate",
-      "warningThreshold": "99",
-      "criticalThreshold": "98",
+      "warningThreshold": "98",
+      "criticalThreshold": "97",
       "flowOperator": "downwards",
       "argument": "https://tiredsysadmin.cc",
       "interval": "3m",
