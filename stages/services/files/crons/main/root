@@ -45,5 +45,5 @@
 
 # restart podsync to get fresh episodes
 #
-10 0 * * 6 systemctl restart podsync.service
+10 0 * * 5 systemctl restart podsync.service
 
