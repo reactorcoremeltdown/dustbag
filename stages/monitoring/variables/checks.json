@@ -415,6 +415,17 @@
       "notify": ["telegram"]
     },
     {
+      "name": "home_printer_device",
+      "state": "present",
+      "plugin": "relay",
+      "argument": "http://fermium.rcmd.space:8881?check=home_printer_device",
+      "suppressedBy": ["tinc_host"],
+      "interval": "10m",
+      "hostname": "fermium.rcmd.space",
+      "description": "[relay] Checking printer status, Brother Industries, Ltd HL-2140 series",
+      "notify": ["telegram"]
+    },
+    {
       "name": "home_storage",
       "state": "present",
       "plugin": "relay",
@@ -471,6 +482,15 @@
       "notify": ["dummy"]
     },
     {
+      "name": "home_printer_device",
+      "state": "present",
+      "plugin": "relay",
+      "argument": "http://192.168.2.194:8881?check=home_printer_device",
+      "interval": "5m",
+      "description": "[relay] Checking printer status, Brother Industries, Ltd HL-2140 series",
+      "notify": ["dummy"]
+    },
+    {
       "name": "home_tinc_network",
       "state": "present",
       "plugin": "check_http_success_rate",
@@ -505,6 +525,15 @@
       "argument": "",
       "interval": "5m",
       "description": "CUPS server online test",
+      "notify": ["dummy"]
+    },
+    {
+      "name": "home_printer_device",
+      "state": "present",
+      "plugin": "check_usb_device",
+      "argument": "04f9:0033",
+      "interval": "3m",
+      "description": "Checking printer status, Brother Industries, Ltd HL-2140 series",
       "notify": ["dummy"]
     }
   ],
