@@ -12,7 +12,7 @@ lsblk | grep $(echo ${1} | cut -f 3 -d '/')
 if [ $? -eq 0 ]; then
     echo "$(date) Device exists on machine." >> ${LOG}
     echo "$(date) Mounting device $1 to /mnt/floppy." >> ${LOG}
-    systemd-mount --fsck=off $1 /mnt/floppy
+    mount $1 /mnt/floppy 2>&1 >> ${LOG}
     mpc stop
     mpc clear
     if [[ -f /mnt/floppy/media.m3u ]]; then
