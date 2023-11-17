@@ -249,7 +249,7 @@
       "name": "api_website_health",
       "state": "present",
       "plugin": "check_http_success_rate",
-      "argument": "https://api.rcmd.space/v5/healthcheck",
+      "argument": "https://api.rcmd.space/v6/healthcheck",
       "interval": "1m",
       "warningThreshold": "99",
       "criticalThreshold": "97",

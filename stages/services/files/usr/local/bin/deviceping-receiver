@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
 
+API_URL="https://api.rcmd.space/v6"
+UA="User-Agent: monitoring/deviceping-0.2"
+
 set -e
 
 IFS=$'\n'
 
 MONITORING_API_TOKEN=`jq -cr '.secrets.monitoring.token' /etc/secrets/secrets.json`
 
-GET_JOB_TOKEN=$(curl --fail -s -XPOST --data-urlencode "token=${MONITORING_API_TOKEN}" https://api.rcmd.space/v5/token/get)
+GET_JOB_TOKEN=$(curl --fail -s -H "${UA}" -XPOST --data-urlencode "token=${MONITORING_API_TOKEN}" https://api.rcmd.space/v5/token/get)
 
 sleep 1
 
-BATCH=$(curl --fail -s -XPOST \
+BATCH=$(curl --fail -s -XPOST -H "${UA}" \
             --data-urlencode "token=${GET_JOB_TOKEN}" \
             --data-urlencode "queue=deviceping" \
             "https://api.rcmd.space/v5/queue/get-batch")
@@ -19,11 +22,11 @@ sleep 1
 
 for ITEM in ${BATCH}; do
     if [[ "${BATCH}" != 'EOQ' ]]; then
-        GET_ITEM_PAYLOAD_TOKEN=$(curl --fail -s -XPOST --data-urlencode "token=${MONITORING_API_TOKEN}" https://api.rcmd.space/v5/token/get)
+        GET_ITEM_PAYLOAD_TOKEN=$(curl --fail -s -XPOST -H "${UA}" --data-urlencode "token=${MONITORING_API_TOKEN}" https://api.rcmd.space/v5/token/get)
 
         sleep 1
 
-        ITEM_PAYLOAD=$(curl --fail -s -XPOST \
+        ITEM_PAYLOAD=$(curl --fail -s -XPOST -H "${UA}" \
                         --data-urlencode "token=${GET_ITEM_PAYLOAD_TOKEN}" \
                         --data-urlencode "queue=deviceping" \
                         --data-urlencode "job=${ITEM}" \
@@ -35,11 +38,11 @@ for ITEM in ${BATCH}; do
 
         echo "${ITEM_PAYLOAD}" > /var/spool/api/deviceping/${ITEM_DEVICE_NAME}
 
-        ACK_ITEM_TOKEN=$(curl --fail -s -XPOST --data-urlencode "token=${MONITORING_API_TOKEN}" https://api.rcmd.space/v5/token/get)
+        ACK_ITEM_TOKEN=$(curl --fail -s -XPOST -H "${UA}" --data-urlencode "token=${MONITORING_API_TOKEN}" https://api.rcmd.space/v5/token/get)
 
         sleep 1
 
-        curl --fail -s -XPOST \
+        curl --fail -s -XPOST -H "${UA}" \
             --data-urlencode "token=${ACK_ITEM_TOKEN}" \
             --data-urlencode "queue=deviceping" \
             --data-urlencode "job=${ITEM}" \

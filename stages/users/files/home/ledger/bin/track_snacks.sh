@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
+API_URL="https://api.rcmd.space/v6"
+UA="User-Agent: ledger/snacks-tracker-0.2"
+
 # Getting a job token
 USER_TOKEN=$(cat /home/ledger/.token)
 QUEUE="snacks"
-GET_JOB_TOKEN=$(curl -s -XPOST --data-urlencode "token=${USER_TOKEN}" "https://api.rcmd.space/v5/token/get")
-JOB_ID=$(curl -s -XPOST \
+GET_JOB_TOKEN=$(curl -s -XPOST -H "${UA}" --data-urlencode "token=${USER_TOKEN}" "https://api.rcmd.space/v5/token/get")
+JOB_ID=$(curl -s -XPOST -H "${UA}" \
     --data-urlencode "token=${GET_JOB_TOKEN}" \
     --data-urlencode "queue=${QUEUE}" \
     "https://api.rcmd.space/v5/queue/get-job")
@@ -12,8 +15,8 @@ JOB_ID=$(curl -s -XPOST \
 if [[ ${JOB_ID} != 'EOQ' ]]; then
     sleep 1
     echo "Getting job Payload"
-    GET_JOB_PAYLOAD_TOKEN=$(curl -s -XPOST --data-urlencode "token=${USER_TOKEN}" https://api.rcmd.space/v5/token/get)
-    JOB_PAYLOAD=$(curl -s -XPOST \
+    GET_JOB_PAYLOAD_TOKEN=$(curl -s -XPOST -H "${UA}" --data-urlencode "token=${USER_TOKEN}" https://api.rcmd.space/v5/token/get)
+    JOB_PAYLOAD=$(curl -s -XPOST -H "${UA}" \
                 --data-urlencode "token=${GET_JOB_PAYLOAD_TOKEN}" \
                 --data-urlencode "queue=${QUEUE}" \
                 --data-urlencode "job=${JOB_ID}" \
@@ -21,8 +24,8 @@ if [[ ${JOB_ID} != 'EOQ' ]]; then
     sleep 1
 
     echo "Locking job"
-    LOCK_JOB_TOKEN=$(curl -s -XPOST --data-urlencode "token=${USER_TOKEN}" https://api.rcmd.space/v5/token/get)
-    curl -s -XPOST \
+    LOCK_JOB_TOKEN=$(curl -s -XPOST -H "${UA}" --data-urlencode "token=${USER_TOKEN}" https://api.rcmd.space/v5/token/get)
+    curl -s -XPOST -H "${UA}" \
         --data-urlencode "token=${LOCK_JOB_TOKEN}" \
         --data-urlencode "queue=${QUEUE}" \
         --data-urlencode "job=${JOB_ID}" \
@@ -38,8 +41,8 @@ if [[ ${JOB_ID} != 'EOQ' ]]; then
             # echo -e "\n$(date '+%Y/%m/%d') ${DESCRIPTION}\n    ${DESTINATION_TOPIC}  ${AMOUNT}\n    ${SOURCE_TOPIC}  -${AMOUNT}\n" >> /home/ledger/ledger.book
 
             echo "Unlocking job"
-            UNLOCK_JOB_TOKEN=$(curl -s -XPOST --data-urlencode "token=${USER_TOKEN}" https://api.rcmd.space/v5/token/get)
-            curl -s -XPOST \
+            UNLOCK_JOB_TOKEN=$(curl -s -XPOST -H "${UA}" --data-urlencode "token=${USER_TOKEN}" https://api.rcmd.space/v5/token/get)
+            curl -s -XPOST -H "${UA}" \
                 --data-urlencode "token=${UNLOCK_JOB_TOKEN}" \
                 --data-urlencode "queue=${QUEUE}" \
                 --data-urlencode "job=${JOB_ID}" \
@@ -48,8 +51,8 @@ if [[ ${JOB_ID} != 'EOQ' ]]; then
             sleep 1
 
             echo "Acknowledging job"
-            ACK_JOB_TOKEN=$(curl -s -XPOST --data-urlencode "token=${USER_TOKEN}" https://api.rcmd.space/v5/token/get)
-            curl -s -XPOST \
+            ACK_JOB_TOKEN=$(curl -s -XPOST -H "${UA}" --data-urlencode "token=${USER_TOKEN}" https://api.rcmd.space/v5/token/get)
+            curl -s -XPOST -H "${UA}" \
                 --data-urlencode "token=${ACK_JOB_TOKEN}" \
                 --data-urlencode "queue=${QUEUE}" \
                 --data-urlencode "job=${JOB_ID}" \
@@ -57,8 +60,8 @@ if [[ ${JOB_ID} != 'EOQ' ]]; then
 
     else
             echo "Failed to parse transaction amount, unlocking job"
-            UNLOCK_JOB_TOKEN=$(curl -s -XPOST --data-urlencode "token=${USER_TOKEN}" https://api.rcmd.space/v5/token/get)
-            curl -s -XPOST \
+            UNLOCK_JOB_TOKEN=$(curl -s -XPOST -H "${UA}" --data-urlencode "token=${USER_TOKEN}" https://api.rcmd.space/v5/token/get)
+            curl -s -XPOST -H "${UA}" \
                 --data-urlencode "token=${UNLOCK_JOB_TOKEN}" \
                 --data-urlencode "queue=${QUEUE}" \
                 --data-urlencode "job=${JOB_ID}" \

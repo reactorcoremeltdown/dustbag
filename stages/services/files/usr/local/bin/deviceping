@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
+API_URL="https://api.rcmd.space/v6"
+UA="User-Agent: monitoring/deviceping-0.2"
+
 DEVICEPING_TOKEN=`cat /root/.deviceping`
 
-REQUEST_TOKEN=`curl -s --data-urlencode "token=${DEVICEPING_TOKEN}" https://api.rcmd.space/v5/token/get`
+REQUEST_TOKEN=`curl -s -H "${UA}" --data-urlencode "token=${DEVICEPING_TOKEN}" https://api.rcmd.space/v5/token/get`
 
-curl -s --data-urlencode "token=${REQUEST_TOKEN}" \
+curl -s -H "${UA}" --data-urlencode "token=${REQUEST_TOKEN}" \
     --data-urlencode "queue=deviceping" \
     --data-urlencode "payload={ \"device\": \"$(hostname -f)\", \"timestamp\": $(date '+%s') }" \
     https://api.rcmd.space/v5/queue/put-job
