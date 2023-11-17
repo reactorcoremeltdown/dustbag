@@ -27,7 +27,6 @@ function retry_mount() {
         echo "$(date) Waiting for 2 seconds before next try"
         sleep 2
     done
-    echo "$(date) Giving up :(" >> ${LOG}
 }
 
 echo "$(date) Start." >> ${LOG}
