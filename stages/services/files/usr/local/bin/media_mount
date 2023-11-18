@@ -39,7 +39,7 @@ LENGTH=$(lsblk -A --json ${1} | jq '.blockdevices | length')
 if [ ${LENGTH} -gt 0 ]; then
     echo "$(date) Device exists on machine." >> ${LOG}
     echo "$(date) Mounting device $1 to /mnt/floppy." >> ${LOG}
-    retry_mount
+    retry_mount ${1}
     echo "$(date) We've made it here" >> ${LOG}
     if [[ -f /mnt/floppy/media.m3u ]]; then
         play
