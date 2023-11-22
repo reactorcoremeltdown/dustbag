@@ -186,6 +186,19 @@
       "notify": ["gotify"]
     },
     {
+      "name": "task_transformer_edit",
+      "state": "present",
+      "plugin": "check_redis_key",
+      "argument": "task-transformer-edit-error",
+      "interval": "15m",
+      "description": "Task Transformer edit command errors",
+      "warningThreshold": "3",
+      "criticalThreshold": "5",
+      "flowOperator": "upwards",
+      "suppressedBy": ["task-transformer"],
+      "notify": ["gotify", "telegram"]
+    },
+    {
       "name": "task_transformer_sync",
       "state": "present",
       "plugin": "check_redis_key",
