@@ -21,10 +21,6 @@ server {
     ### SSL cert files ###
     ssl_certificate ${new_ssl_certificate};
     ssl_certificate_key ${new_ssl_certificate_key};
-    ssl_client_certificate /etc/nginx/pki/pki/ca.crt;
-    ssl_crl /etc/nginx/pki/pki/crl.pem;
-    ssl_verify_client optional;
-    ssl_verify_depth 2;
 
     ### Add SSL specific settings here ###
     ssl_session_timeout 10m;
@@ -45,36 +41,8 @@ server {
 
     server_name git.rcmd.space;
 
-    # Enabling authentication, just to be sure
-
     location / {
-        if (\$ssl_client_verify != SUCCESS) {
-            return 403;
-        }
         proxy_pass http://127.0.0.1:25010;
-    }
-    location /rcmd/dummy/raw/branch/master/README.md {
-        proxy_pass http://127.0.0.1:25010;
-    }
-    location /rcmd/vanilla-plus.git {
-        proxy_pass http://127.0.0.1:25010;
-    }
-    location /login {
-        proxy_pass http://127.0.0.1:25010;
-    }
-    location /api {
-        proxy_pass http://127.0.0.1:25010;
-    }
-    location /avatars {
-        proxy_pass http://127.0.0.1:25010;
-    }
-    location /media {
-        if (\$ssl_client_verify != SUCCESS) {
-            return 403;
-        }
-        root /var/storage/wastebox/tiredsysadmin.cc/wiki;
-        expires 30d;
-        try_files \$uri \$uri/ =404;
     }
 }
 EOF
