@@ -23,10 +23,6 @@ server {
     ### SSL cert files ###
     ssl_certificate ${new_ssl_certificate};
     ssl_certificate_key ${new_ssl_certificate_key};
-    ssl_client_certificate /etc/nginx/pki/pki/ca.crt;
-    ssl_crl /etc/nginx/pki/pki/crl.pem;
-    ssl_verify_client optional;
-    ssl_verify_depth 2;
 
     ### Add SSL specific settings here ###
     ssl_session_timeout 10m;
@@ -49,60 +45,58 @@ server {
 
     server_name ${SITE}.rcmd.space;
 
-    # auth_basic "Protected area";
-    # auth_basic_user_file /etc/nginx/htpasswd;
-
+    auth_request /validate;
+    location = /validate {
+        proxy_pass http://127.0.0.1:29090/validate;
+        proxy_set_header Host \$http_host;
+        proxy_pass_request_body off;
+        proxy_set_header Content-Length "";
+        auth_request_set \$auth_resp_x_vouch_user \$upstream_http_x_vouch_user;
+        auth_request_set \$auth_resp_jwt \$upstream_http_x_vouch_jwt;
+        auth_request_set \$auth_resp_err \$upstream_http_x_vouch_err;
+        auth_request_set \$auth_resp_failcount \$upstream_http_x_vouch_failcount;
+    }
+    error_page 401 = @error401;
+    location @error401 {
+        return 302 https://auth.rcmd.space/login?url=\$scheme://\$http_host\$request_uri&vouch-failcount=\$auth_resp_failcount&X-Vouch-Token=\$auth_resp_jwt&error=\$auth_resp_err;
+    }
     error_page 404 /404.html;
     location / {
-        if (\$ssl_client_verify != SUCCESS) {
-            return 403;
-        }
+        proxy_set_header X-Vouch-User \$auth_resp_x_vouch_user;
         add_header Access-Control-Allow-Origin *;
         try_files /index.html =404;
     }
     location /404.html {
-        if (\$ssl_client_verify != SUCCESS) {
-            return 403;
-        }
+        proxy_set_header X-Vouch-User \$auth_resp_x_vouch_user;
         add_header Access-Control-Allow-Origin *;
         try_files /404.html =404;
     }
     location /assets {
-        if (\$ssl_client_verify != SUCCESS) {
-            return 403;
-        }
+        proxy_set_header X-Vouch-User \$auth_resp_x_vouch_user;
         add_header Access-Control-Allow-Origin *;
         expires 3d;
         try_files \$uri \$uri/ =404;
     }
     location /media {
-        if (\$ssl_client_verify != SUCCESS) {
-            return 403;
-        }
+        proxy_set_header X-Vouch-User \$auth_resp_x_vouch_user;
         add_header Access-Control-Allow-Origin *;
         expires 3d;
         try_files \$uri \$uri/ =404;
     }
     location /pictures {
-        if (\$ssl_client_verify != SUCCESS) {
-            return 403;
-        }
+        proxy_set_header X-Vouch-User \$auth_resp_x_vouch_user;
         root /var/storage/wastebox/tiredsysadmin.cc/wiki;
         add_header Access-Control-Allow-Origin *;
         expires 3d;
         try_files \$uri \$uri/ =404;
     }
     location /zettelkasten {
-        if (\$ssl_client_verify != SUCCESS) {
-            return 403;
-        }
+        proxy_set_header X-Vouch-User \$auth_resp_x_vouch_user;
         add_header Access-Control-Allow-Origin *;
         try_files \$uri \$uri/ =404;
     }
     location /records {
-        if (\$ssl_client_verify != SUCCESS) {
-            return 403;
-        }
+        proxy_set_header X-Vouch-User \$auth_resp_x_vouch_user;
         if (\$request_method = OPTIONS ) {
             add_header Access-Control-Allow-Origin *;
             add_header Access-Control-Allow-Methods "GET, OPTIONS";
