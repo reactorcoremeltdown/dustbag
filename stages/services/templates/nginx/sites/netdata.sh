@@ -21,10 +21,6 @@ server {
     ### SSL cert files ###
     ssl_certificate ${new_ssl_certificate};
     ssl_certificate_key ${new_ssl_certificate_key};
-    ssl_client_certificate /etc/nginx/pki/pki/ca.crt;
-    ssl_crl /etc/nginx/pki/pki/crl.pem;
-    ssl_verify_client optional;
-    ssl_verify_depth 2;
 
     ### Add SSL specific settings here ###
     ssl_session_timeout 10m;
@@ -45,13 +41,24 @@ server {
 
     server_name netdata.rcmd.space;
 
-    # auth_basic "Protected area";
-    # auth_basic_user_file /etc/nginx/htpasswd;
 
+    auth_request /validate;
+    location = /validate {
+        proxy_pass http://127.0.0.1:29090/validate;
+        proxy_set_header Host \$http_host;
+        proxy_pass_request_body off;
+        proxy_set_header Content-Length "";
+        auth_request_set \$auth_resp_x_vouch_user \$upstream_http_x_vouch_user;
+        auth_request_set \$auth_resp_jwt \$upstream_http_x_vouch_jwt;
+        auth_request_set \$auth_resp_err \$upstream_http_x_vouch_err;
+        auth_request_set \$auth_resp_failcount \$upstream_http_x_vouch_failcount;
+    }
+    error_page 401 = @error401;
+    location @error401 {
+        return 302 https://auth.rcmd.space/login?url=\$scheme://\$http_host\$request_uri&vouch-failcount=\$auth_resp_failcount&X-Vouch-Token=\$auth_resp_jwt&error=\$auth_resp_err;
+    }
     location / {
-        if (\$ssl_client_verify != SUCCESS) {
-            return 403;
-        }
+        proxy_set_header X-Vouch-User \$auth_resp_x_vouch_user;
         proxy_pass http://127.0.0.1:19999;
     }
 }
