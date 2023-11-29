@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-#
+
+COOLDOWN="60 minutes"
+
+if ![ -z ${2} ]; then
+	COOLDOWN=${2}
+fi
+
 case ${1} in
 	"delay")
 		atq | cut -f 1 | xargs atrm || true
@@ -7,7 +13,7 @@ case ${1} in
 		;;
 	"cooldown")
 		atq | cut -f 1 | xargs atrm
-		cd /root && echo '/usr/local/bin/seppuku' | at now + 60 minutes
+		cd /root && echo '/usr/local/bin/seppuku' | at now + ${COOLDOWN}
 		;;
 	*)
 		ID=`curl -s http://169.254.169.254/hetzner/v1/metadata | grep 'instance-id' | awk '{print $2}'`
