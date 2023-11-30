@@ -1,6 +1,6 @@
 * * * * * curl -s http://127.0.0.1:8881 > /var/www/healthchecks/status.json
 */10 * * * * /usr/local/bin/blog-stats-daily
-*/30 * * * * /usr/local/bin/grafana_pictures.sh
+*/4 * * * * /usr/local/bin/grafana_pictures.sh
 
 # HOW TO RESTORE:
 # duplicity restore file:///var/storage/wastebox/Backups/radicale/ ./test-collection/
