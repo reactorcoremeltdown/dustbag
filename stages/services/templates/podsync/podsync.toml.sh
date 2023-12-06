@@ -40,7 +40,7 @@ cat <<EOF >>  /etc/podsync/podsync.toml
 
 [downloader]
 self_update = true
-timeout = 15
+timeout = 45
 
 [log]
 filename = "/var/log/podsync/podsync.log"
