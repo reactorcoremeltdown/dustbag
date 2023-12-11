@@ -38,7 +38,7 @@ server {
     location /radicale/ {
         mirror /ingest;
         proxy_read_timeout 300;
-        proxy_pass        http://localhost:5232/; # The / is important!
+        proxy_pass        http://127.0.0.1:5232/; # The / is important!
         proxy_set_header  X-Script-Name /radicale;
         proxy_set_header  X-Forwarded-For \$proxy_add_x_forwarded_for;
         proxy_pass_header Authorization;
@@ -46,7 +46,7 @@ server {
     location /ingest {
         internal;
         proxy_read_timeout 300;
-        proxy_pass        http://localhost:25232\$request_uri; # The / is important!
+        proxy_pass        http://127.0.0.1:25232\$request_uri; # The / is important!
         proxy_set_header  X-Script-Name /radicale;
         proxy_set_header  X-Forwarded-For \$proxy_add_x_forwarded_for;
         proxy_pass_header Authorization;
