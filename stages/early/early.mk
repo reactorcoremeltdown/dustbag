@@ -2,7 +2,7 @@ UNAME := $(shell uname)
 RETRY := $(shell test -f /etc/default/earlystageconfigs && echo "true")
 HOSTNAME := $(shell cat variables/main.json | jq -r .hostname)
 
-early: test mirrors apt_configs keygen earlystagepackages locales profiles
+early: test vault_unseal mirrors apt_configs keygen earlystagepackages locales profiles
 	echo "provisioning done" > /etc/default/earlystageconfigs;
 	@echo "$(ccgreen)Early provisioning stage completed$(ccend)"
 
@@ -13,6 +13,9 @@ else
 	@printf "`tput bold`This operating system is not supported`tput sgr0`\n"
 	exit 1
 endif
+
+vault_unseal:
+	/usr/local/bin/request-rbw-login
 
 apt_configs:
 ifneq ($(RETRY), true)

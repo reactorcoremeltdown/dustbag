@@ -4,3 +4,7 @@ last: drone_restart
 
 drone_restart:
 	bash stages/last/files/bin/prepare_drone_restart.sh
+
+vault_seal:
+	/usr/local/bin/rbw lock
+	/usr/local/bin/rbw stop-agent

@@ -3,7 +3,7 @@
 set -e
 IFS=$'\n'
 
-YOUTUBE_API_KEY=$(jq -r '.secrets.podsync.youtube_api_key' /etc/secrets/secrets.json)
+YOUTUBE_API_KEY=$(/usr/local/bin/rbw get --folder podsync youtube_api_key)
 
 cat <<EOF > /etc/podsync/podsync.toml
 [server]
