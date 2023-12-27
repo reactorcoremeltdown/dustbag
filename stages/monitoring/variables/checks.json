@@ -1,6 +1,24 @@
 {
   "production": [
     {
+      "name": "main_domain_expiry",
+      "state": "present",
+      "plugin": "check_domain_expiry",
+      "argument": "rcmd.space",
+      "interval": "24h",
+      "description": "rcmd.space domain expiry check",
+      "notify": ["gotify", "telegram"]
+    },
+    {
+      "name": "blog_domain_expiry",
+      "state": "present",
+      "plugin": "check_domain_expiry",
+      "argument": "tiredsysadmin.cc",
+      "interval": "24h",
+      "description": "tiredsysadmin.cc domain expiry check",
+      "notify": ["gotify", "telegram"]
+    },
+    {
       "name": "prod_syncthing_service",
       "state": "present",
       "plugin": "check_systemd_service",
