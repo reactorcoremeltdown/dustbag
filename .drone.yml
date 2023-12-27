@@ -44,6 +44,7 @@ clone:
 steps:
 - name: clone
   commands:
+  - sleep 5
   - git clone https://github.com/reactorcoremeltdown/dustbag.git
 - name: build
   commands:
