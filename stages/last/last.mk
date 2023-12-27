@@ -7,4 +7,3 @@ drone_restart:
 
 vault_seal:
 	/usr/local/bin/rbw lock
-	/usr/local/bin/rbw stop-agent
