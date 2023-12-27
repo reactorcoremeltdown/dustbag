@@ -8,10 +8,10 @@ current_timestamp=`date +%s`
 
 delta=`echo "(${current_timestamp} - ${timestamp})/86400" | bc`
 
-if [ "${delta}" -gt 6 ]; then
-    warning "Last full backup of ${1} was performed ${delta} days ago"
-elif test $delta -gt 15; then
+if test "${delta}" -gt 15; then
     fail "Last full backup of ${1} was performed ${days} ago!"
+elif test "${delta}" -gt 6; then
+    warning "Last full backup of ${1} was performed ${delta} days ago"
 else
     ok "Last full backup of ${1} was performed ${days} ago"
 fi
