@@ -15,6 +15,7 @@ else
 endif
 
 vault_unseal:
+	install -D -m 755 stages/early/files/request-rbw-login /usr/local/bin
 	/usr/local/bin/request-rbw-login
 
 apt_configs:
