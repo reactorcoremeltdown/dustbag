@@ -34,7 +34,7 @@ services: users packages podman drone_runner_amd64 seppuku
 else ifeq ($(MAKECMDGOALS), outpost)
 
 ### TODO: bring in gotify here
-services: users packages podman drone_runner_amd64 tinc nginx_packages nginx_certificates nginx_configs gotify
+services: users packages podman drone_runner_amd64 tinc_client nginx_packages nginx_certificates nginx_configs gotify
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Printserver, the little Orange pi zero
