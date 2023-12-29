@@ -16,6 +16,11 @@ endif
 
 vault_unseal:
 	install -D -m 755 stages/early/files/request-rbw-login /usr/local/bin
+	install -D -m 755 stages/early/files/rbw-proxy /usr/local/bin
+	install -D -m 644 stages/early/files/rbw-proxy.service /etc/systemd/system
+	systemctl daemon-reload
+	systemctl enable rbw-proxy.service
+	systemctl start rbw-proxy.service
 	/usr/local/bin/request-rbw-login
 
 apt_configs:

@@ -1,0 +1,9 @@
+[Unit]
+Description=A proxy for executing RBW on host machine from containers
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/rbw-proxy
+
+[Install]
+WantedBy=multi-user.target
