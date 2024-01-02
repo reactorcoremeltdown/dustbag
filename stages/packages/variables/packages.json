@@ -37,6 +37,11 @@
           "postfix",
           "mailutils"
         ],
+        "fermium": [
+          "libncurses-dev",
+          "libportmidi-dev",
+          "libasound2-dev"
+        ],
         "server": [
           "cowsay",
           "aha",
