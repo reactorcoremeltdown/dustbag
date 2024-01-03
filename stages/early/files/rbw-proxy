@@ -9,7 +9,8 @@ mkfifo ${FIFO}
 
 while true; do
     INPUT=$(cat ${FIFO})
-    case ${INPUT} in
+    COMMAND=$(echo "${INPUT}" | cut -f 1 -d ';')
+    case ${COMMAND} in
         "status")
             echo "Checking Vaultwarden status"
             rbw unlocked
@@ -28,6 +29,17 @@ while true; do
                         https://api.rcmd.space/internal/vault/resolve-status
                     ;;
             esac
+            ;;
+        "lock")
+            echo "Locking vaultwarden by request"
+            rbw lock
+            ;;
+        "request")
+            VARS=$(echo "${INPUT}" | cut -f 2- -d ';')
+            eval "${VARS}"
+
+            rbw get "${key}" --folder "${folder}" > "/run/rbw-proxy/${fname}"
+            echo "Requested key: ${key}"
             ;;
     esac
 done
