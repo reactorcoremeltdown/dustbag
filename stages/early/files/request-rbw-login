@@ -1,26 +1,32 @@
 #!/usr/bin/env bash
+#
+set -x
 
 counter=0
 
+function request_status() {
+	API_TOKEN=`jq '.secrets.ledger.token' /etc/secrets/secrets.json`
+
+	REQUEST_TOKEN=`curl -s -XPOST --data-urlencode "token=${API_TOKEN}" https://api.rcmd.space/internal/token/get`
+	MACHINE_ID=`cat /etc/machine-id`
+	STATUS=`curl -s -XPOST --data-urlencode "token=${REQUEST_TOKEN}" --data-urlencode "machine-id=${MACHINE_ID}" -o /dev/null -w "%{http_code}" https://api.rcmd.space/internal/vault/request-unlock`
+	echo "${STATUS}"
+}
+
 echo "Validating Vaultwarden login status"
-
-if ! `rbw unlocked 2>/dev/null`; then
-	echo "Requesting Vaultwarden login"
-	export STATUS="1"
-	export NAME="Vaultwarden"
-	export MESSAGE="Please login"
-
-	/etc/monitoring/notifiers/gotify.sh
-
-	until `rbw unlocked 2>/dev/null`; do
+	VAULT_STATUS=`request_status`
+	if [ ${VAULT_STATUS} = "404" ]; then
+		STATUS=1 HOSTNAME="garage.rcmd.space" NAME="Vault" MESSAGE="Please login" /etc/monitoring/notifiers/gotify.sh
+	fi
+	until [ ${VAULT_STATUS} = "200" ]; do
 		if test "$counter" -gt 300; then
 			echo "Timed out waiting for Vaultwarden login"
 			exit 1
 		fi
 		((counter++))
+		VAULT_STATUS=`request_status`
 		sleep 1
 	done
 fi
 
 echo "Vaultwarden successfully unlocked!"
-rbw sync
