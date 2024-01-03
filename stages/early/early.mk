@@ -15,8 +15,8 @@ else
 endif
 
 vault_unseal:
-	install -D -m 755 stages/early/files/request-rbw-login /usr/local/bin
-	/usr/local/bin/request-rbw-login
+	install -D -m 755 stages/early/files/vault-* /usr/local/bin
+	/usr/local/bin/vault-request-unlock
 
 apt_configs:
 ifneq ($(RETRY), true)

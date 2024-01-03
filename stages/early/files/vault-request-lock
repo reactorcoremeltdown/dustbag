@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+function request_status() {
+	API_TOKEN=`jq -r '.secrets.ledger.token' /etc/secrets/secrets.json`
+
+	REQUEST_TOKEN=`curl -s -XPOST --data-urlencode "token=${API_TOKEN}" https://api.rcmd.space/internal/token/get`
+	MACHINE_ID=`cat /etc/machine-id`
+	STATUS=`curl -s -XPOST --data-urlencode "token=${REQUEST_TOKEN}" --data-urlencode "machine-id=${MACHINE_ID}" -o /dev/null -w "%{http_code}" https://api.rcmd.space/internal/vault/request-lock`
+	echo "${STATUS}"
+}
+
+echo "Requesting Vaultwarden lock"
+VAULT_STATUS=`request_status`
+until [ ${VAULT_STATUS} = "200" ]; do
+	if test "$counter" -gt 300; then
+		echo "Timed out waiting for Vaultwarden lock"
+		exit 1
+	fi
+	((counter++))
+	VAULT_STATUS=`request_status`
+	sleep 1
+done
+
+echo "Vaultwarden successfully locked!"

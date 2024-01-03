@@ -1,52 +1,52 @@
 ## GENERIC host (runs by default)
 ifeq ($(MAKECMDGOALS),)
 
-services: users packages deviceping
+services: users packages deviceping vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Production host
 else ifeq ($(MAKECMDGOALS), production)
 CRONS := stages/services/files/crons/main
 
-services: users packages motd sshd crons dave gitea exported_graphs nginx_sites nginx podsync hledger-web radicale tinc network_hacks misc  prometheus podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64
+services: users packages motd sshd crons dave gitea exported_graphs nginx_sites nginx podsync hledger-web radicale tinc network_hacks misc  prometheus podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64 vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium, the little Pi Zero W
 else ifeq ($(MAKECMDGOALS), fermium)
 CRONS := stages/services/files/crons/fermium
 
-services: users packages crons nginx_proxies nginx tinc_client mpd diskplayer motion bootconfig deviceping drone_runner_arm pki
+services: users packages crons nginx_proxies nginx tinc_client mpd diskplayer motion bootconfig deviceping drone_runner_arm pki vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Seedbox
 else ifeq ($(MAKECMDGOALS), seedbox)
 
-services: users packages drone_runner_amd64
+services: users packages drone_runner_amd64 vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Buildbox
 else ifeq ($(MAKECMDGOALS), builder)
 
-services: users packages podman drone_runner_amd64 seppuku
+services: users packages podman drone_runner_amd64 seppuku vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Outpost
 else ifeq ($(MAKECMDGOALS), outpost)
 
 ### TODO: bring in gotify here
-services: users packages podman drone_runner_amd64 tinc_client nginx_packages nginx_certificates nginx_configs gotify
+services: users packages podman drone_runner_amd64 tinc_client nginx_packages nginx_certificates nginx_configs gotify vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Printserver, the little Orange pi zero
 else ifeq ($(MAKECMDGOALS), printserver)
 CRONS := stages/services/files/crons/printserver
 
-services: users packages crons cups deviceping drone_runner_arm
+services: users packages crons cups deviceping drone_runner_arm vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## All other hosts
 else
-services: users packages
+services: users packages vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 endif
 
@@ -370,3 +370,5 @@ seppuku:
 	echo '/usr/local/bin/seppuku' | at now + 5 hours
 	@echo "$(ccgreen)Installed seppuku$(ccend)"
 
+vault_seal:
+	/usr/local/bin/vault-request-lock

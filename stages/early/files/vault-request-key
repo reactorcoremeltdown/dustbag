@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+function request_key() {
+	API_TOKEN=`jq -r '.secrets.ledger.token' /etc/secrets/secrets.json`
+
+	REQUEST_TOKEN=`curl -s -XPOST --data-urlencode "token=${API_TOKEN}" https://api.rcmd.space/internal/token/get`
+	KEY=${1}
+	DIRECTORY=${2}
+	OUTPUT=`curl -s -XPOST --data-urlencode "token=${REQUEST_TOKEN}" --data-urlencode "key=${KEY}" --data-urlencode "directory=${DIRECTORY}" https://api.rcmd.space/internal/vault/request-key`
+	echo "${OUTPUT}"
+}
+
+request_key ${1} ${2}
