@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+counter=0
+
 function request_status() {
 	API_TOKEN=`jq -r '.secrets.ledger.token' /etc/secrets/secrets.json`
 
