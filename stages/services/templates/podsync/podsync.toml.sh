@@ -3,7 +3,7 @@
 set -e
 IFS=$'\n'
 
-YOUTUBE_API_KEY=$(/usr/local/bin/rbw get --folder podsync youtube_api_key)
+YOUTUBE_API_KEY=$(vault-request-key youtube_api_key podsync)
 
 cat <<EOF > /etc/podsync/podsync.toml
 [server]
