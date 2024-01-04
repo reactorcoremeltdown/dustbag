@@ -10,6 +10,14 @@
                     "update_period": "168h",
                     "format": "audio"
                 },
+                                {
+                    "name": "feygin24",
+                    "url": "https://www.youtube.com/playlist?list=PL9o6bQUWYNvKybb4-5fLqg-EbbTVD5Jg7",
+                    "quality": "low",
+                    "page_size": 10,
+                    "update_period": "72h",
+                    "format": "audio"
+                },
                 {
                     "name": "tarasberezovets",
                     "url": "https://www.youtube.com/channel/UC7FEBULCrgaFxH05t6mYeHA",
