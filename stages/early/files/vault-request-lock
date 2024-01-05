@@ -17,5 +17,5 @@ if [ ${VAULT_STATUS} = "200" ]; then
 	echo "Vaultwarden successfully locked!"
 else
 	echo "Vaultwarden lock requested, but received API status is ${VAULT_STATUS}"
-done
+fi
 
