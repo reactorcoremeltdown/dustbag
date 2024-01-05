@@ -1,6 +1,6 @@
 ## GENERIC host (runs by default)
 ifeq ($(MAKECMDGOALS),)
-
+DEVICEPING_ID := untrusted-third-party
 services: users packages deviceping vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
@@ -11,9 +11,10 @@ CRONS := stages/services/files/crons/main
 services: users packages motd sshd crons dave gitea exported_graphs nginx_sites nginx podsync hledger-web radicale tinc network_hacks misc  prometheus podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64 vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
-## Fermium, the little Pi Zero W
+## Fermium V2, the Pi 4 at home
 else ifeq ($(MAKECMDGOALS), fermium)
 CRONS := stages/services/files/crons/fermium
+DEVICEPING_ID := deviceping_fermium
 
 services: users packages crons nginx_proxies nginx tinc_client mpd diskplayer motion bootconfig deviceping drone_runner_arm pki vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
@@ -37,9 +38,10 @@ else ifeq ($(MAKECMDGOALS), outpost)
 services: users packages podman drone_runner_amd64 tinc_client nginx_packages nginx_certificates nginx_configs gotify vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
-## Printserver, the little Orange pi zero
+## Printserver V2, the Pi Zero W edition
 else ifeq ($(MAKECMDGOALS), printserver)
 CRONS := stages/services/files/crons/printserver
+DEVICEPING_ID := deviceping_printserver
 
 services: users packages crons cups deviceping drone_runner_arm vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
@@ -301,6 +303,8 @@ fdroid:
 	@echo "$(ccgreen)Setting up fdroid completed$(ccend)"
 
 deviceping:
+	vault-request-key users api/main | yq -r ".[] | select(.username == \"$(DEVICEPING_ID)\") | .key" > /root/.deviceping
+	chmod 400 /root/.deviceping
 	install -D -m 755 stages/services/files/usr/local/bin/deviceping /usr/local/bin
 	@echo "$(ccgreen)Setting up deviceping completed$(ccend)"
 
