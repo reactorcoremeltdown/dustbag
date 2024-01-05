@@ -3,14 +3,15 @@
 IFS=$'\n'
 DISTRO=`lsb_release -cs`
 DEBIAN_VERSION=`lsb_release -sr`
+MIRROR="https://deb.debian.org"
 
 cat <<EOF > /etc/apt/sources.list
-deb http://debian.mirror.iphh.net/debian ${DISTRO} main
-deb-src http://debian.mirror.iphh.net/debian ${DISTRO} main
-deb http://debian.mirror.iphh.net/debian ${DISTRO}-updates main
-deb-src http://debian.mirror.iphh.net/debian ${DISTRO}-updates main
-deb http://debian.mirror.iphh.net/debian ${DISTRO}-backports main
-deb-src http://debian.mirror.iphh.net/debian ${DISTRO}-backports main
+deb ${MIRROR}/debian ${DISTRO} main
+deb-src ${MIRROR}/debian ${DISTRO} main
+deb ${MIRROR}/debian ${DISTRO}-updates main
+deb-src ${MIRROR}/debian ${DISTRO}-updates main
+deb ${MIRROR}/debian ${DISTRO}-backports main
+deb-src ${MIRROR}/debian ${DISTRO}-backports main
 EOF
 
 if [[ ${DEBIAN_VERSION} = '11' ]]; then
