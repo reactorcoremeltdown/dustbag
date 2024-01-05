@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+counter=0
+
 function request_status() {
 	API_TOKEN=`jq -r '.secrets.ledger.token' /etc/secrets/secrets.json`
 
@@ -11,14 +13,9 @@ function request_status() {
 
 echo "Requesting Vaultwarden lock"
 VAULT_STATUS=`request_status`
-until [ ${VAULT_STATUS} = "200" ]; do
-	if test "$counter" -gt 300; then
-		echo "Timed out waiting for Vaultwarden lock"
-		exit 1
-	fi
-	((counter++))
-	VAULT_STATUS=`request_status`
-	sleep 1
-done
+if [ ${VAULT_STATUS} = "200" ]; then
+	echo "Vaultwarden successfully locked!"
+else
+	echo "Vaultwarden lock requested, but received API status is ${VAULT_STATUS}"
+fi
 
-echo "Vaultwarden successfully locked!"
