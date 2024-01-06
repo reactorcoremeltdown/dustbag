@@ -36,7 +36,6 @@ services: users packages podman drone_runner_amd64 seppuku vault_seal
 ## Outpost
 else ifeq ($(MAKECMDGOALS), outpost)
 
-### TODO: bring in gotify here
 services: users packages podman drone_runner_amd64 tinc_client nginx_packages nginx_certificates nginx_configs gotify vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
