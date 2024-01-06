@@ -379,7 +379,7 @@
       "name": "fermium_online",
       "state": "present",
       "plugin": "check_deviceping",
-      "argument": "fermium.speedport.ip",
+      "argument": "fermium.rcmd.space",
       "interval": "20m",
       "description": "Device online test: fermium",
       "notify": ["gotify"]
@@ -388,7 +388,7 @@
       "name": "printserver_online",
       "state": "present",
       "plugin": "check_deviceping",
-      "argument": "orangepizero",
+      "argument": "printer.tiredsysadmin.cc",
       "interval": "20m",
       "description": "Device online test: printserver",
       "notify": ["telegram"]
