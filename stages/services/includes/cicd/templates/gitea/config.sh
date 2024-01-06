@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-JWT_SECRET=$(rbw get --folder 'gitea/oauth2' JWT_SECRET)
-INTERNAL_TOKEN=$(rbw get --folder 'gitea/security' INTERNAL_TOKEN)
-SECRET_KEY=$(rbw get --folder 'gitea/security' SECRET_KEY)
-LFS_JWT_SECRET=$(rbw get --folder 'gitea/server' LFS_JWT_SECRET)
+JWT_SECRET=$(vault-request-key JWT_SECRET 'gitea/oauth2')
+INTERNAL_TOKEN=$(vault-request-key INTERNAL_TOKEN 'gitea/security')
+SECRET_KEY=$(vault-request-key SECRET_KEY 'gitea/security')
+LFS_JWT_SECRET=$(vault-request-key LFS_JWT_SECRET 'gitea/server')
 
 cat <<EOF > /etc/gitea/app.ini
 APP_NAME = RCMD Funkhaus
