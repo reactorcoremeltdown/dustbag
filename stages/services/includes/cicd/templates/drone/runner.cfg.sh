@@ -3,11 +3,11 @@
 set -e
 IFS=$'\n'
 
-RPC_SECRET=$(jq -r '.secrets.drone."rpc-secret"' /etc/secrets/secrets.json)
+RPC_SECRET=$(vault-request-key rpc-secret drone)
 
 cat <<EOF > /home/git/.drone-runner-exec/config
 DRONE_RUNNER_NAME=${HOSTNAME}
-DRONE_RUNNER_LABELS=machine:${HOSTNAME}
+DRONE_RUNNER_LABELS=role:${1}
 DRONE_RPC_PROTO=https
 DRONE_RPC_HOST=ci.rcmd.space
 DRONE_RPC_SECRET=${RPC_SECRET}

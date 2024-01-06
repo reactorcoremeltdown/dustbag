@@ -9,6 +9,7 @@ services: users packages deviceping vault_seal
 ## Production host
 else ifeq ($(MAKECMDGOALS), production)
 CRONS := stages/services/files/crons/main
+ROLE := production
 
 services: users packages motd sshd crons dave gitea exported_graphs nginx_sites nginx podsync radicale tinc network_hacks misc podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64 vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
@@ -17,6 +18,7 @@ services: users packages motd sshd crons dave gitea exported_graphs nginx_sites 
 else ifeq ($(MAKECMDGOALS), fermium)
 CRONS := stages/services/files/crons/fermium
 DEVICEPING_ID := deviceping_fermium
+ROLE := homeserver
 
 services: users packages crons nginx_proxies nginx tinc_client mpd diskplayer motion bootconfig deviceping drone_runner_arm pki vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
@@ -35,6 +37,7 @@ services: users packages podman drone_runner_amd64 seppuku vault_seal
 
 ## Outpost
 else ifeq ($(MAKECMDGOALS), outpost)
+ROLE := outpost
 
 services: users packages podman drone_runner_amd64 tinc_client nginx_packages nginx_certificates nginx_configs gotify vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
@@ -43,6 +46,7 @@ services: users packages podman drone_runner_amd64 tinc_client nginx_packages ng
 else ifeq ($(MAKECMDGOALS), printserver)
 CRONS := stages/services/files/crons/printserver
 DEVICEPING_ID := deviceping_printserver
+ROLE := printer
 
 services: users packages crons cups deviceping drone_runner_arm vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
