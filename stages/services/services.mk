@@ -369,4 +369,4 @@ seppuku:
 vault_seal:
 	/usr/local/bin/vault-request-lock
 
-include $(ROOT_DIR)/include/mpd/mpd.mk
+include $(ROOT_DIR)/includes/mpd/mpd.mk
