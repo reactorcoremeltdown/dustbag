@@ -1,0 +1,38 @@
+feeds:
+  - name: markfeygin
+    url: 'https://www.youtube.com/playlist?list=PLCvrKelokWEueLh64DQy5t2yqq3CkyOTx'
+    quality: low
+    page_size: 10
+    update_period: 168h
+    format: audio
+  - name: feygin24
+    url: 'https://www.youtube.com/playlist?list=PL9o6bQUWYNvKybb4-5fLqg-EbbTVD5Jg7'
+    quality: low
+    page_size: 10
+    update_period: 72h
+    format: audio
+  - name: tarasberezovets
+    url: 'https://www.youtube.com/channel/UC7FEBULCrgaFxH05t6mYeHA'
+    quality: low
+    page_size: 10
+    update_period: 168h
+    format: audio
+  - name: macknack
+    url: 'https://www.youtube.com/channel/UCgpSieplNxXxLXYAzJLLpng'
+    quality: low
+    page_size: 10
+    update_period: 168h
+    format: audio
+    filters: '{ min_duration = 300 }'
+  - name: JMGODIER
+    url: 'https://www.youtube.com/channel/UCEszlI8-W79IsU8LSAiRbDg'
+    quality: low
+    page_size: 300
+    update_period: 12h
+    format: audio
+  - name: mixtapes
+    url: 'https://www.youtube.com/playlist?list=PLlxFzQuEAESwlfOMaj22MDQvqF8IrXi0j'
+    quality: high
+    page_size: 50
+    update_period: 1h
+    format: audio
