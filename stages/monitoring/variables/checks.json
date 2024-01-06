@@ -468,7 +468,7 @@
       "warningThreshold": "99",
       "criticalThreshold": "97",
       "flowOperator": "downwards",
-      "argument": "http://192.168.2.120:8384/rest/noauth/health",
+      "argument": "http://127.0.0.1:8384/rest/noauth/health",
       "interval": "1m",
       "description": "Syncthing at home",
       "notify": ["dummy"]
@@ -489,7 +489,7 @@
       "name": "home_printer",
       "state": "present",
       "plugin": "relay",
-      "argument": "http://192.168.2.194:8881?check=home_printer",
+      "argument": "http://printer.tiredsysadmin.cc:8881?check=home_printer",
       "interval": "10m",
       "description": "[relay] CUPS server online test",
       "notify": ["dummy"]
@@ -498,7 +498,7 @@
       "name": "home_printer_device",
       "state": "present",
       "plugin": "relay",
-      "argument": "http://192.168.2.194:8881?check=home_printer_device",
+      "argument": "http://printer.tiredsysadmin.cc:8881?check=home_printer_device",
       "interval": "5m",
       "description": "[relay] Checking printer status, Brother Industries, Ltd HL-2140 series",
       "notify": ["dummy"]
@@ -513,7 +513,7 @@
       "argument": "http://10.8.0.6",
       "interval": "3m",
       "description": "TINC Mesh VPN Network",
-      "hostname": "192.168.2.120",
+      "hostname": "192.168.2.221",
       "notify": ["gotify", "telegram"]
     },
     {
