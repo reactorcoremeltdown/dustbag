@@ -1,3 +1,5 @@
+ROOT_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
+
 ## GENERIC host (runs by default)
 ifeq ($(MAKECMDGOALS),)
 DEVICEPING_ID := untrusted-third-party
@@ -216,16 +218,6 @@ icecast:
 	systemctl restart icecast2.service
 	@echo "$(ccgreen)Setting up icecast completed$(ccend)"
 
-mpd:
-	dpkg-query -s mpd mpc mpdscribble > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y mpd mpc mpdscribble
-	install -D -m 644 -v stages/services/files/etc/systemd/system/mpdscribble.service.d/service.conf /etc/systemd/system/mpdscribble.service.d/service.conf
-	bash stages/services/templates/mpd/mpd.conf.sh
-	bash stages/services/templates/mpd/mpdscribble.conf.sh
-	systemctl daemon-reload
-	systemctl enable mpd.service mpdscribble.service
-	mpc status | grep -oq playing || systemctl restart mpd.service mpdscribble.service
-	@echo "$(ccgreen)Setting up mpd completed$(ccend)"
-
 tinc:
 	bash stages/services/templates/tinc/configs.sh
 	@echo "$(ccgreen)Setting up tinc completed$(ccend)"
@@ -376,3 +368,5 @@ seppuku:
 
 vault_seal:
 	/usr/local/bin/vault-request-lock
+
+include $(ROOT_DIR)/include/mpd/mpd.mk
