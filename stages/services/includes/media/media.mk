@@ -2,7 +2,7 @@ davfs2:
 	timeout 5 test -d /var/storage/smallwastebox || mkdir -p /var/storage/smallwastebox
 	bash stages/services/includes/media/templates/davfs2/secrets.sh
 	install -D -m 644 stages/services/includes/media/files/etc/systemd/system/davfs2-mounts/* /etc/systemd/system
-	jq -r '.secrets.gocryptfs.password' /etc/secrets/secrets.json > /etc/secrets/gocryptfs
+	vault-request-key password system/gocryptfs > /etc/secrets/gocryptfs
 	chmod 400 /etc/secrets/gocryptfs
 	test -d /var/storage/wastebox || mkdir -p /var/storage/wastebox
 	systemctl daemon-reload
