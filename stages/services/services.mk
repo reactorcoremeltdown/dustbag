@@ -10,7 +10,7 @@ services: users packages deviceping vault_seal
 else ifeq ($(MAKECMDGOALS), production)
 CRONS := stages/services/files/crons/main
 
-services: users packages motd sshd crons dave gitea exported_graphs nginx_sites nginx podsync hledger-web radicale tinc network_hacks misc  prometheus podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64 vault_seal
+services: users packages motd sshd crons dave gitea exported_graphs nginx_sites nginx podsync radicale tinc network_hacks misc  prometheus podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64 vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium V2, the Pi 4 at home
@@ -54,164 +54,9 @@ services: users packages vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 endif
 
+##################
 ## Service targets
-motd:
-	install -D -v -m 644 stages/services/files/etc/motd \
-		/etc/motd
-	@echo "$(ccgreen)Setting up motd completed$(ccend)"
-
-sshd_config:
-	install -D -v -m 644 \
-		stages/services/files/etc/ssh/sshd_config \
-		/etc/ssh
-	install -D -v -m 755 \
-		stages/services/files/etc/ssh/login-notify.sh \
-		/etc/ssh
-	install -D -v -m 644 \
-		stages/services/files/etc/pam.d/sshd \
-		/etc/pam.d
-
-sshd_restart:
-	systemctl restart sshd.service
-
-sshd: sshd_config sshd_restart
-	@echo "$(ccgreen)Setting up sshd completed$(ccend)"
-
-crons:
-	timedatectl set-timezone "Europe/Berlin"
-	bash stages/services/templates/crons.sh $(CRONS)
-	@echo "$(ccgreen)Setting up crons completed$(ccend)"
-
-pki:
-	install -D -m 755 -v stages/services/files/usr/local/bin/genpfx /usr/local/bin
-
-gitea_directory:
-	install -d -m 770 --owner git --group git /etc/gitea
-
-gitea_config: /etc/secrets/secrets.json
-	test -d /home/git/.config || mkdir -p /home/git/.config && chown git:git /home/git/.config
-	bash stages/services/templates/gitea/config.sh
-	install -D -m 644 -v stages/services/files/etc/systemd/system/gitea.service /etc/systemd/system
-	rbw get --folder 'gitea/server' DRONE_API_KEY > /home/git/.config/drone_api_key
-	chmod 400 /home/git/.config/drone_api_key && chown git:git /home/git/.config/drone_api_key
-	install -D -m 755 -v stages/services/files/usr/local/bin/gitea-common-hook /usr/local/bin	
-	systemctl enable gitea.service
-	systemctl daemon-reload
-
-gitea: gitea_directory gitea_config
-	@echo "$(ccgreen)Setting up gitea completed$(ccend)"
-
-davfs2:
-	timeout 5 test -d /var/storage/smallwastebox || mkdir -p /var/storage/smallwastebox
-	bash stages/services/templates/davfs2/secrets.sh
-	install -D -m 644 stages/services/files/etc/systemd/system/davfs2-mounts/* /etc/systemd/system
-	jq -r '.secrets.gocryptfs.password' /etc/secrets/secrets.json > /etc/secrets/gocryptfs
-	chmod 400 /etc/secrets/gocryptfs
-	test -d /var/storage/wastebox || mkdir -p /var/storage/wastebox
-	systemctl daemon-reload
-	systemctl enable var-storage-smallwastebox.automount gocryptfs.service
-	systemctl disable var-storage-wastebox.automount var-storage-wastebox.mount
-	systemctl start var-storage-smallwastebox.mount gocryptfs.service
-	@echo "$(ccgreen)Setting up davfs2 mounts completed$(ccend)"
-
-podsync:
-	test -L /usr/local/bin/youtube-dl || ln -s /opt/virtualenv/bin/yt-dlp /usr/local/bin/youtube-dl
-	install -D -m 755 -v stages/services/files/usr/local/bin/podsync /usr/local/bin
-	install -d -m 750 --owner=syncthing --group=syncthing /etc/podsync
-	install -d -m 750 --owner=syncthing --group=syncthing /var/log/podsync
-	install -D -m 644 -v stages/services/files/etc/systemd/system/podsync.service /etc/systemd/system
-	systemctl daemon-reload
-	systemctl enable podsync.service
-	bash stages/services/templates/podsync/podsync.toml.sh stages/services/variables/services.json
-	systemctl restart podsync.service
-	@echo "$(ccgreen)Setting up podsync completed$(ccend)"
-
-dave: davfs2
-	install -D -m 755 stages/services/files/usr/local/bin/dave /usr/local/bin
-	install -D -m 644 -v stages/services/files/etc/systemd/system/dave.service /etc/systemd/system
-	install -d -m 750 --owner=www-data --group=www-data /var/www/.dave
-	install -D -m 644 -v stages/services/files/var/www/dave/config.yaml /var/www/.dave
-	systemctl daemon-reload
-	systemctl enable dave.service
-	systemctl restart dave.service
-	@echo "$(ccgreen)Setting up dave completed$(ccend)"
-
-gollum:
-	install -D -m 644 -v stages/services/files/etc/systemd/system/gollum-wiki.service /etc/systemd/system
-	systemctl daemon-reload
-	systemctl enable gollum-wiki.service
-	systemctl stop gollum-wiki.service
-	systemctl restart gollum-wiki.service
-
-radicale:
-	jq -cr '.secrets.radicale.users' /etc/secrets/secrets.json | base64 -d > /etc/radicale/users
-	chown radicale:radicale /etc/radicale/users && chmod 640 /etc/radicale/users
-	install -D -m 644 -v stages/services/files/etc/radicale/config /etc/radicale
-	install -D -m 644 -v stages/services/files/etc/radicale/logging /etc/radicale
-	install -D -m 644 -v stages/services/files/etc/radicale/rights /etc/radicale
-	install -D -m 644 -v stages/services/files/etc/systemd/system/radicale.service /etc/systemd/system
-	systemctl daemon-reload
-	systemctl enable radicale
-	systemctl restart radicale
-	@echo "$(ccgreen)Setting up radicale completed$(ccend)"
-
-hledger-web:
-	install -D -m 644 -v stages/services/files/etc/systemd/system/hledger-web.service /etc/systemd/system
-	systemctl daemon-reload
-	systemctl enable hledger-web
-	systemctl restart hledger-web
-	@echo "$(ccgreen)Setting up hledger-web completed$(ccend)"
-
-icecast:
-	bash stages/services/templates/icecast/icecast.xml.sh
-	systemctl enable icecast2.service
-	systemctl restart icecast2.service
-	@echo "$(ccgreen)Setting up icecast completed$(ccend)"
-
-tinc:
-	bash stages/services/templates/tinc/configs.sh
-	@echo "$(ccgreen)Setting up tinc completed$(ccend)"
-
-tinc_client:
-	bash stages/services/templates/tinc/configs_client.sh
-	@echo "$(ccgreen)Setting up tinc completed$(ccend)"
-	systemctl restart tinc@clusternet
-
-registry:
-	install -D -m 644 stages/services/files/etc/containers/containers.conf /etc/containers
-	install -D -m 644 stages/services/files/etc/docker/registry/config.yml /etc/docker/registry
-	systemctl restart docker-registry
-	@echo "$(ccgreen)Setting up docker registry completed$(ccend)"
-
-phockup:
-	test -d /opt/phockup || mkdir -p /opt/phockup
-	rsync -av stages/services/files/opt/phockup/ /opt/phockup
-	ln -sf /opt/phockup/phockup.py /usr/local/bin/phockup
-	install -D -m 755 stages/services/files/usr/local/bin/phockup-wrapper /usr/local/bin
-
-network_hacks:
-	install -D -m 644 stages/services/files/etc/systemd/system/nat-flush.service /etc/systemd/system
-	install -D -m 644 stages/services/files/etc/systemd/system/containers.target /etc/systemd/system
-	systemctl daemon-reload
-	systemctl enable nat-flush.service
-	systemctl enable containers.target
-	@echo "$(ccgreen)Setting up network hacks completed$(ccend)"
-
-diskplayer: mpd
-	install -D -m 644 stages/services/files/etc/udev/rules.d/100-floppy-change.rules /etc/udev/rules.d
-	install -D -m 755 stages/services/files/usr/local/bin/media_mount /usr/local/bin
-	test -d /mnt/floppy || mkdir -p /mnt/floppy
-	test -d /usr/local/share/diskplayer || mkdir -p /usr/local/share/diskplayer
-	install -D -m 644 stages/services/files/usr/local/share/diskplayer/bleep.mp3 /usr/local/share/diskplayer
-	systemctl restart udev.service
-	@echo "$(ccgreen)Setting up diskplayer completed$(ccend)"
-
-motion:
-	dpkg-query -s motion > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y motion
-	install -D -m 644 stages/services/files/etc/motion/motion.conf /etc/motion
-	install -D -m 755 stages/services/files/usr/local/bin/webcam.sh /usr/local/bin
-	systemctl $(MOTION_SERVICE_STATE) motion.service
-	@echo "$(ccgreen)Setting up motion completed$(ccend)"
+##################
 
 misc:
 	install -D -m 755 stages/services/files/usr/local/bin/rcmd-space-stats /usr/local/bin
@@ -219,105 +64,11 @@ misc:
 	install -D -m 755 stages/services/files/usr/local/src/rcmd-functions.mk /usr/local/src
 	@echo "$(ccgreen)Setting up misc scripts completed$(ccend)"
 
-prometheus:
-	bash stages/services/templates/prometheus/prometheus.yml.sh
-	install -D -m 644 stages/services/files/etc/default/prometheus /etc/default
-	systemctl restart prometheus.service
-	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
-
-podman: network_hacks
-	install -D -m 644 stages/services/files/etc/containers/registries.conf /etc/containers
-	bash stages/services/templates/podman/podman-login.service.sh
-	systemctl enable podman-login.service
-	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
-
-cups: nginx_printer
-	apt-get -o Acquire::ForceIPv4=true install -y cups avahi-daemon hpijs-ppds printer-driver-hpijs
-	install -D -m 644 stages/services/files/etc/cups/cupsd.conf /etc/cups
-	systemctl restart cups.service
-	@echo "$(ccgreen)Setting up cups completed$(ccend)"
-
-fdroid:
-	test -d /var/lib/fdroid || mkdir /var/lib/fdroid
-	bash stages/services/templates/nginx/sites/fdroid.sh
-	nginx -t
-	systemctl reload nginx.service
-	@echo "$(ccgreen)Setting up fdroid completed$(ccend)"
-
-deviceping:
-	vault-request-key users api/main | yq -r ".[] | select(.username == \"$(DEVICEPING_ID)\") | .key" > /root/.deviceping
-	chmod 400 /root/.deviceping
-	install -D -m 755 stages/services/files/usr/local/bin/deviceping /usr/local/bin
-	@echo "$(ccgreen)Setting up deviceping completed$(ccend)"
-
-deviceping_receiver:
-	install -D -m 755 stages/services/files/usr/local/bin/deviceping-receiver /usr/local/bin
-	test -d /var/spool/api/deviceping || mkdir -p /var/spool/api/deviceping
-	@echo "$(ccgreen)Setting up deviceping completed$(ccend)"
-
-exported_graphs:
-	test -d /opt/apps/graphs || mkdir -p /opt/apps/graphs
-	install -D -m 755 stages/services/files/usr/local/bin/grafana_pictures.sh /usr/local/bin
-	@echo "$(ccgreen)Setting up graphs completed$(ccend)"
-
-bootconfig:
-	install -D -m 755 stages/services/files/boot/config.txt /boot
-	@echo "$(ccgreen)Setting up bootconfig completed$(ccend)"
-
-drone_server:
-	mkdir -p /etc/drone || true
-	bash stages/services/templates/drone/server.cfg.sh
-	test -f /etc/drone/server.cfg && md5sum /etc/drone/server.cfg > /etc/drone/checksum.txt
-	mkdir -p /var/lib/drone || true
-	install -D -m 644 stages/services/files/etc/systemd/system/drone-server.service /etc/systemd/system
-	systemctl enable drone-server.service
-	@echo "$(ccgreen)Installed drone server$(ccend)"
-
-drone_runner_amd64:
-	install -D -v -m 755 \
-		stages/services/files/usr/local/bin/telegram.run \
-		/usr/local/bin
-	mkdir -p /home/git/.drone-runner-exec || true
-	chown git:git /home/git/.drone-runner-exec
-	bash stages/services/templates/drone/runner.cfg.sh
-	install -D -m 755 stages/services/files/usr/local/bin/drone-runner-amd64 /usr/local/bin
-	install -D -m 644 stages/services/files/etc/systemd/system/drone-runner-amd64.service /etc/systemd/system
-	systemctl enable drone-runner-amd64.service
-	echo "sleep 2 && systemctl start drone-runner-amd64.service" | at now
-	@echo "$(ccgreen)Installed drone runner$(ccend)"
-
-drone_runner_arm:
-	install -D -v -m 755 \
-		stages/services/files/usr/local/bin/telegram.run \
-		/usr/local/bin
-	mkdir -p /home/git/.drone-runner-exec || true
-	chown git:git /home/git/.drone-runner-exec
-	bash stages/services/templates/drone/runner.cfg.sh
-	install -D -m 755 stages/services/files/usr/local/bin/drone-runner-arm /usr/local/bin
-	install -D -m 644 stages/services/files/etc/systemd/system/drone-runner-arm.service /etc/systemd/system
-	systemctl enable drone-runner-arm.service
-	echo "sleep 2 && systemctl start drone-runner-arm.service" | at now
-	@echo "$(ccgreen)Installed drone runner$(ccend)"
-
-gotify:
-	test -d /var/lib/gotify || mkdir -p /var/lib/gotify
-	install -D -m 644 stages/services/files/etc/systemd/system/gotify.service /etc/systemd/system
-	systemctl enable gotify.service
-	systemctl restart gotify.service
-	bash stages/services/templates/nginx/sites/gotify.sh
-	nginx -t && systemctl reload nginx.service
-
-password_reset:
-	echo "rcmd:n0b0dyish0m3" | chpasswd
-
-seppuku:
-	install -D -m 755 stages/services/files/usr/local/bin/seppuku /usr/local/bin
-	atq | cut -f 1 | xargs atrm
-	echo '/usr/local/bin/seppuku' | at now + 5 hours
-	@echo "$(ccgreen)Installed seppuku$(ccend)"
-
 vault_seal:
 	/usr/local/bin/vault-request-lock
 
-include stages/services/includes/mpd/mpd.mk
 include stages/services/includes/nginx/nginx.mk
+include stages/services/includes/system/system.mk
+include stages/services/includes/monitoring/monitoring.mk
+include stages/services/includes/cicd/cicd.mk
+include stages/services/includes/media/media.mk
