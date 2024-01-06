@@ -1,7 +1,7 @@
 ---
 kind: pipeline
 type: exec
-name: hangar
+name: production
 
 platform:
   os: linux
@@ -22,7 +22,7 @@ steps:
       from_secret: git_sudo
 
 node:
-  machine: garage
+  role: production
 
 trigger:
   target:
@@ -54,7 +54,7 @@ steps:
       from_secret: git_sudo
 
 node:
-  machine: outpost
+  role: outpost
 
 trigger:
   target:
@@ -85,7 +85,7 @@ steps:
       from_secret: git_sudo
 
 node:
-  machine: fermium
+  role: homeserver
 
 trigger:
   target:
@@ -115,7 +115,7 @@ steps:
       from_secret: git_sudo
 
 node:
-  machine: orangepizero
+  role: printer
 
 trigger:
   target:
