@@ -319,5 +319,5 @@ seppuku:
 vault_seal:
 	/usr/local/bin/vault-request-lock
 
-include $(ROOT_DIR)/includes/mpd/mpd.mk
-include $(ROOT_DIR)/includes/nginx/nginx.mk
+include stages/services/includes/mpd/mpd.mk
+include stages/services/includes/nginx/nginx.mk
