@@ -10,7 +10,7 @@ services: users packages deviceping vault_seal
 else ifeq ($(MAKECMDGOALS), production)
 CRONS := stages/services/files/crons/main
 
-services: users packages motd sshd crons dave gitea exported_graphs nginx_sites nginx podsync radicale tinc network_hacks misc  prometheus podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64 vault_seal
+services: users packages motd sshd crons dave gitea exported_graphs nginx_sites nginx podsync radicale tinc network_hacks misc podman fdroid deviceping_receiver phockup drone_server drone_runner_amd64 vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium V2, the Pi 4 at home
