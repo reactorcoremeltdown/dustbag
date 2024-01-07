@@ -5,8 +5,8 @@ function request_key() {
 
 	REQUEST_TOKEN=`curl -s -XPOST --data-urlencode "token=${API_TOKEN}" https://api.rcmd.space/internal/token/get`
 	KEY=${1}
-	DIRECTORY=${2}
-	OUTPUT=`curl -s -XPOST --data-urlencode "token=${REQUEST_TOKEN}" --data-urlencode "key=${KEY}" --data-urlencode "directory=${DIRECTORY}" https://api.rcmd.space/internal/vault/request-key`
+	FOLDER=${2}
+	OUTPUT=`curl -s -XPOST --data-urlencode "token=${REQUEST_TOKEN}" --data-urlencode "key=${KEY}" --data-urlencode "folder=${FOLDER}" https://api.rcmd.space/internal/vault/request-key`
 	echo "${OUTPUT}"
 }
 
