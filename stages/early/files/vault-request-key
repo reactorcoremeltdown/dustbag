@@ -18,6 +18,7 @@ if [ $STATUS = "200" ]; then
 	echo "${DATA}" | jq -r '.data' | base64 -d
 	exit 0
 else
-	echo "Failed to request a key"
+	ERROR=$(echo "${DATA}" | jq -r .data)
+	echo "Failed to request a key: ${ERROR}"
 	exit 1
 fi
