@@ -10,7 +10,7 @@ ExecStart=/usr/bin/podman run \
     --cpus=0.6 \
     --env-file /etc/drone/server.cfg \
     --mount type=bind,source=/var/lib/drone,target=/data \
-    drone/drone:2.21
+    drone/drone:2.22
 ExecStop=/usr/bin/podman stop -t 2 drone-server
 ExecStopPost=-/usr/bin/podman rm -f drone-server
 ExecStopPost=/bin/sleep 2
