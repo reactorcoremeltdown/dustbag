@@ -14,7 +14,7 @@ DATA=$(request_key ${1} ${2})
 
 STATUS=$(echo "${DATA}" | jq -r '.status')
 
-if [ $STATUS = "200"]; then
+if [ $STATUS = "200" ]; then
 	echo "${DATA}" | jq -r '.data' | base64 -d
 	exit 0
 else
