@@ -29,7 +29,10 @@ network_hacks:
 	@echo "$(ccgreen)Setting up network hacks completed$(ccend)"
 
 podman: network_hacks
+	test -d /etc/containers/containers.conf.d || mkdir -p /etc/containers/containers.conf.d
+	install -D -m 644 stages/services/includes/cicd/files/etc/containers/containers.conf.d/secrets.conf /etc/containers/containers.conf.d
 	install -D -m 644 stages/services/includes/cicd/files/etc/containers/registries.conf /etc/containers
+	install -D -m 755 stages/services/includes/cicd/files/usr/local/bin/podman-secret-* /usr/local/bin
 	bash stages/services/includes/cicd/templates/podman/podman-login.service.sh
 	systemctl enable podman-login.service
 	@echo "$(ccgreen)Setting up prometheus completed$(ccend)"
