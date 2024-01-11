@@ -561,6 +561,78 @@
       "notify": ["gotify", "telegram"]
     },
     {
+      "name": "blog_beta_protected",
+      "state": "present",
+      "plugin": "check_protected_url",
+      "argument": "https://beta.tiredsysadmin.cc",
+      "interval": "62s",
+      "description": "Blog beta protection check",
+      "notify": ["gotify", "telegram"]
+    },
+    {
+      "name": "site_beta_protected",
+      "state": "present",
+      "plugin": "check_protected_url",
+      "argument": "https://beta.rcmd.space",
+      "interval": "62s",
+      "description": "Site beta protection check",
+      "notify": ["gotify", "telegram"]
+    },
+    {
+      "name": "kanboard_protected",
+      "state": "present",
+      "plugin": "check_protected_url",
+      "argument": "https://board.rcmd.space",
+      "interval": "62s",
+      "description": "Kanboard protection check",
+      "notify": ["gotify", "telegram"]
+    },
+    {
+      "name": "grafana_protected",
+      "state": "present",
+      "plugin": "check_protected_url",
+      "argument": "https://graph.rcmd.space",
+      "interval": "62s",
+      "description": "Grafana protection check",
+      "notify": ["gotify", "telegram"]
+    },
+    {
+      "name": "mixtape_protected",
+      "state": "present",
+      "plugin": "check_protected_url",
+      "argument": "https://mixtape.tiredsysadmin.cc",
+      "interval": "62s",
+      "description": "Mixtape protection check",
+      "notify": ["gotify", "telegram"]
+    },
+    {
+      "name": "mood_protected",
+      "state": "present",
+      "plugin": "check_protected_url",
+      "argument": "https://mood.rcmd.space",
+      "interval": "62s",
+      "description": "Mood journal protection check",
+      "notify": ["gotify", "telegram"]
+    },
+    {
+      "name": "netdata_protected",
+      "state": "present",
+      "plugin": "check_protected_url",
+      "argument": "https://netdata.rcmd.space",
+      "interval": "62s",
+      "description": "Netdata protection check",
+      "notify": ["gotify", "telegram"]
+    },
+    {
+      "name": "reader_protected",
+      "state": "present",
+      "plugin": "check_protected_url",
+      "argument": "https://reader.tiredsysadmin.cc",
+      "interval": "62s",
+      "description": "RSS reader protection check",
+      "notify": ["gotify", "telegram"]
+    },
+    {
       "name": "main_domain_expiry",
       "state": "present",
       "plugin": "check_domain_expiry",
