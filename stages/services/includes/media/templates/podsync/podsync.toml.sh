@@ -4,6 +4,7 @@ set -e
 IFS=$'\n'
 
 YOUTUBE_API_KEY=$(vault-request-key youtube_api_key podsync)
+FEEDS=$(vault-request-key feeds podsync)
 
 cat <<EOF > /etc/podsync/podsync.toml
 [server]
@@ -16,7 +17,7 @@ youtube = "${YOUTUBE_API_KEY}"
 [feeds]
 EOF
 
-for feed in $(yq -cr '.feeds[]' ${1}); do
+for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
     source <(echo "${feed}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     echo "  [feeds.${name}]" >> /etc/podsync/podsync.toml
     echo "  url = \"${url}\"" >>  /etc/podsync/podsync.toml
