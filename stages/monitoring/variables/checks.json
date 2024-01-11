@@ -552,6 +552,15 @@
   ],
   "outpost": [
     {
+      "name": "wiki_protected",
+      "state": "present",
+      "plugin": "check_protected_url",
+      "argument": "https://wiki.rcmd.space",
+      "interval": "62s",
+      "description": "Wiki protection check",
+      "notify": ["gotify", "telegram"]
+    },
+    {
       "name": "main_domain_expiry",
       "state": "present",
       "plugin": "check_domain_expiry",
