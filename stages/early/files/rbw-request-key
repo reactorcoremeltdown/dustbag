@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+function request_key() {
+	KEY=${1}
+	FOLDER=${2}
+	OUTPUT=`curl -s -XPOST --data-urlencode "key=${KEY}" --data-urlencode "folder=${FOLDER}" http://10.88.0.1:26105/vault/request-key`
+	echo "${OUTPUT}"
+}
+
+DATA=$(request_key ${1} ${2})
+
+STATUS=$(echo "${DATA}" | jq -r '.status')
+
+if [ $STATUS = "200" ]; then
+	echo "${DATA}" | jq -r '.data' | base64 -d
+	exit 0
+else
+	ERROR=$(echo "${DATA}" | jq -r .data)
+	echo "Failed to request a key: ${ERROR}"
+	exit 1
+fi

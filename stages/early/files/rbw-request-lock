@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+counter=0
+
+function request_status() {
+	STATUS=`curl -s -XPOST -o /dev/null -w "%{http_code}" http://10.88.0.1:26105/vault/lock`
+	echo "${STATUS}"
+}
+
+echo "Requesting Vaultwarden lock"
+VAULT_STATUS=`request_status`
+if [ ${VAULT_STATUS} = "200" ]; then
+	echo "Vaultwarden successfully locked!"
+else
+	echo "Vaultwarden lock requested, but received API status is ${VAULT_STATUS}"
+fi
+

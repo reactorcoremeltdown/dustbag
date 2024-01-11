@@ -16,6 +16,7 @@ endif
 
 vault_unseal:
 	install -D -m 755 stages/early/files/vault-* /usr/local/bin
+	install -D -m 755 stages/early/files/rbw-* /usr/local/bin
 	/usr/local/bin/vault-request-unlock
 
 apt_configs:

@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+counter=0
+
+function request_status() {
+	STATUS=`curl -s -XPOST -o /dev/null -w "%{http_code}" http://10.88.0.1:26105/vault/status`
+	echo "${STATUS}"
+}
+
+echo "Validating Vaultwarden login status"
+VAULT_STATUS=`request_status`
+if [ ${VAULT_STATUS} = "503" ]; then
+	STATUS=1 HOSTNAME="garage.rcmd.space" NAME="Vault" MESSAGE="Please login" /etc/monitoring/notifiers/gotify.sh
+fi
+until [ ${VAULT_STATUS} = "200" ]; do
+	if test "$counter" -gt 300; then
+		echo "Timed out waiting for Vaultwarden login"
+		exit 1
+	fi
+	((counter++))
+	VAULT_STATUS=`request_status`
+	sleep 1
+done
+
+echo "Vaultwarden successfully unlocked!"
