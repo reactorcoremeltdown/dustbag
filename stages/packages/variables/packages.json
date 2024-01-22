@@ -38,6 +38,7 @@
           "mailutils"
         ],
         "fermium": [
+          "helm",
           "libncurses-dev",
           "libportmidi-dev",
           "libasound2-dev"
