@@ -26,6 +26,13 @@
                 "distro": "stable",
                 "section": "main"
             },
+            { "name": "helm",
+                "state": "present",
+                "key": "https://tiredsysadmin.cc/media/files/helm.gpg",
+                "url": "https://baltocdn.com/helm/stable/debian/",
+                "distro": "all",
+                "section": "main"
+            },
             { "name": "kaliko-backports",
                 "state": "absent",
                 "key": "https://kaliko.me/kaliko.gpg",
