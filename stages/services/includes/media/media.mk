@@ -74,11 +74,9 @@ cups: nginx_printer
 	@echo "$(ccgreen)Setting up cups completed$(ccend)"
 
 mpd:
-	dpkg-query -s mpd mpc mpdscribble > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y mpd mpc mpdscribble
-	install -D -m 644 -v stages/services/includes/media/files/etc/systemd/system/mpdscribble.service.d/service.conf /etc/systemd/system/mpdscribble.service.d/service.conf
 	bash stages/services/includes/media/templates/mpd/mpd.conf.sh
-	bash stages/services/includes/media/templates/mpd/mpdscribble.conf.sh
 	systemctl daemon-reload
-	systemctl enable mpd.service mpdscribble.service
-	mpc status | grep -oq playing || systemctl restart mpd.service mpdscribble.service
+	systemctl enable mpd.service
+	systemctl stop mpdscribble.service && systemctl disable mpdscribble.service
+	mpc status | grep -oq playing || systemctl restart mpd.service
 	@echo "$(ccgreen)Setting up mpd completed$(ccend)"
