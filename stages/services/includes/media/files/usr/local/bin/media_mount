@@ -11,7 +11,7 @@ function play() {
     mpc random off
     mpc volume 30
     mpc play 1 2>&1 >> ${LOG}
-    systemd-mount --umount /mnt/floppy 2>&1 >> ${LOG}
+    mount --umount /mnt/floppy 2>&1 >> ${LOG}
     echo "1" > /etc/diskplayer_status
 }
 
@@ -22,7 +22,7 @@ function retry_mount() {
             break
         else
             echo "$(date) Trying to mount ${1} to /mnt/floppy, attempt ${i}..." >> ${LOG}
-            systemd-mount $1 /mnt/floppy 2>&1 >> ${LOG}
+            mount $1 /mnt/floppy 2>&1 >> ${LOG}
         fi
         echo "$(date) Waiting for 2 seconds before next try"
         sleep 2
