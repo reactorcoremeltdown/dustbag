@@ -1,1 +1,1 @@
-ACTION=="change", ATTRS{idVendor}=="0644", ATTRS{idProduct}=="0000", ENV{DISK_MEDIA_CHANGE}=="1", RUN+="/usr/local/bin/media_mount $env{DEVNAME}"
+ACTION=="change", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="002c", ENV{DISK_MEDIA_CHANGE}=="1", RUN+="/usr/local/bin/media_mount $env{DEVNAME}"
