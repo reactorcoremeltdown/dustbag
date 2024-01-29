@@ -31,6 +31,7 @@ services: users packages drone_runner_amd64 vault_seal
 
 ## Buildbox
 else ifeq ($(MAKECMDGOALS), builder)
+ROLE := builder
 
 services: users packages podman drone_runner_amd64 seppuku vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
