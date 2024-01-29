@@ -1,60 +1,71 @@
 #!/usr/bin/env bash
 
-LOG="/var/log/diskplayer.log"
+LOGFILE="/var/log/diskplayer.log"
+
+function log() {
+    echo "$(date) ${1}" >> ${LOGFILE}
+}
 
 function play() {
-    mpc stop 2>&1 >> ${LOG}
-    mpc clear 2>&1 >> ${LOG}
-    cat /mnt/floppy/media.m3u | mpc add 2>&1 >> ${LOG}
-    mpc add file:///usr/local/share/diskplayer/bleep.mp3 2>&1 >> ${LOG}
+    mpc stop && log "Stopped current playback"
+    mpc clear && log "Cleaned the queue"
+    cat /mnt/floppy/media.m3u | mpc add && log "Queued an album"
+    log "Last status: $?"
+    mpc add file:///usr/local/share/diskplayer/bleep.mp3 && log "Queued the bleep"
     mpc consume on
     mpc random off
     mpc volume 30
-    mpc play 1 2>&1 >> ${LOG}
-    mount --umount /mnt/floppy 2>&1 >> ${LOG}
+    mpc play 1 && log "Starting playback"
+    /ust/bin/umount --verbose /mnt/floppy && log "Unmounting floppy"
     echo "1" > /etc/diskplayer_status
 }
 
 function retry_mount() {
     for i in `seq 1 5`; do
-        if [[ -f /mnt/floppy/media.m3u ]]; then
-            echo "$(date) Successfully mounted a drive" >> ${LOG}
+        if grep -qs "/mnt/floppy" /proc/mounts; then
+            log "Successfully mounted a drive"
+	    sync
+	    sleep 1
             break
         else
-            echo "$(date) Trying to mount ${1} to /mnt/floppy, attempt ${i}..." >> ${LOG}
-            mount $1 /mnt/floppy 2>&1 >> ${LOG}
+            log "Trying to mount ${1} to /mnt/floppy, attempt ${i}..."
+            /usr/bin/mount --verbose $1 /mnt/floppy && log "Mounted ${1} successfully"
         fi
-        echo "$(date) Waiting for 2 seconds before next try"
+        log "Waiting for 2 seconds before next try"
         sleep 2
     done
 }
 
-echo "$(date) Start." >> ${LOG}
-echo "$(date) Media change detected on device $1" >> ${LOG}
+log "Start."
+log "Media change detected on device ${1}"
 
 sleep 1
 
 LENGTH=$(lsblk -A --json ${1} | jq '.blockdevices | length')
 
 if [ ${LENGTH} -gt 0 ]; then
-    echo "$(date) Device exists on machine." >> ${LOG}
-    echo "$(date) Mounting device $1 to /mnt/floppy." >> ${LOG}
+    log "Device exists on machine."
+    log "Mounting device $1 to /mnt/floppy."
     retry_mount ${1}
-    echo "$(date) We've made it here" >> ${LOG}
+    log "We've made it here"
     if [[ -f /mnt/floppy/media.m3u ]]; then
         play
     else
-        echo "$(date) seems like mounting has failed, not doing anything :("
+        log "seems like mounting has failed, not doing anything :("
     fi
 else
-    echo "$(date) Device does not exist on machine." >> ${LOG}
+    log "Device does not exist on machine."
+    /ust/bin/umount --verbose /mnt/floppy 2>&1 && log "Unmounted floppy successfully"
     STATUS=$(cat /etc/diskplayer_status)
     if [[ ${STATUS} = '1' ]]; then
+	log "Stopping playback..."
         mpc pause
         mpc clear
         mpc add file:///usr/local/share/diskplayer/bleep.mp3
         mpc play
         echo "0" > /etc/diskplayer_status
+    else
+	log "Playback status unchanged"
     fi
 fi
-echo "$(date) End."
+log "End."
