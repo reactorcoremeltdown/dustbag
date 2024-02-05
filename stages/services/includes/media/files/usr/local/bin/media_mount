@@ -16,7 +16,7 @@ function play() {
     mpc random off
     mpc volume 30
     mpc play 1 && log "Starting playback"
-    /ust/bin/umount --verbose /mnt/floppy && log "Unmounting floppy"
+    /usr/bin/umount --verbose /mnt/floppy && log "Unmounting floppy"
     echo "1" > /etc/diskplayer_status
 }
 
