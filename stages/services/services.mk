@@ -20,7 +20,7 @@ CRONS := stages/services/files/crons/fermium
 DEVICEPING_ID := deviceping_fermium
 ROLE := homeserver
 
-services: users packages crons nginx_proxies nginx tinc_client mpd diskplayer motion bootconfig deviceping drone_runner_arm pki vault_seal
+services: users packages crons nginx_proxies nginx tinc_client mpd motion bootconfig deviceping drone_runner_arm pki vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Seedbox
