@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-COOLDOWN="60 minutes"
 
-if ![ -z ${2} ]; then
+if [ -z ${2} ]; then
+	COOLDOWN="60 minutes"
+else
 	COOLDOWN=${2}
 fi
 
