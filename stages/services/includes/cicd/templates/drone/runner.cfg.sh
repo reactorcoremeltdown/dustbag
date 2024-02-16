@@ -8,7 +8,7 @@ ROLE="${1}"
 if [[ ${ROLE} != "builder" ]]; then
     RPC_SECRET=$(vault-request-key rpc-secret drone)
 else
-    RPC_SECRET=$(jq -cr '.secrets.drone.rpc-secret' /etc/secrets/secrets.json)
+    RPC_SECRET=$(jq -cr '.secrets.drone."rpc-secret"' /etc/secrets/secrets.json)
 fi
 
 cat <<EOF > /home/git/.drone-runner-exec/config
