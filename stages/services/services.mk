@@ -33,7 +33,7 @@ services: users packages drone_runner_amd64 vault_seal
 else ifeq ($(MAKECMDGOALS), builder)
 ROLE := builder
 
-services: users packages podman drone_runner_amd64 seppuku vault_seal
+services: users packages podman drone_runner_amd64 seppuku
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Outpost
