@@ -39,7 +39,7 @@
 */10 * * * * /usr/local/bin/deviceping-receiver
 
 ### Kanboard stats
-30 21 * * * /usr/local/bin/kanboard-stats
+30 8,20 * * * /usr/local/bin/kanboard-stats
 
 ### Sorting photos
 20 2 * * 7 /usr/local/bin/phockup-wrapper

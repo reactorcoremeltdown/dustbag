@@ -3,12 +3,13 @@
 TELEGRAM_BOT_TOKEN=`jq -cr .secrets.telegram_second.bot_token /etc/secrets/secrets.json`
 TELEGRAM_CHAT_ID=`jq -cr .secrets.telegram_second.chat_id /etc/secrets/secrets.json`
 
-NUMBER_OF_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select count(*) from tasks where (is_active = 0 and date_completed > strftime('%s', 'now', '-21 hours') and project_id != 6) or (date_modification > strftime('%s', 'now', '-24 hours') and project_id = 6)"`
+NUMBER_OF_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select count(*) from tasks where (is_active = 0 and date_completed > strftime('%s', 'now', 'start of day') and project_id != 6) or (date_modification > strftime('%s', 'now', 'start of day') and project_id = 6)"`
 
-NORMAL_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select '⋅ ' || title from tasks where (is_active = 0 and date_completed > strftime('%s', 'now', '-21 hours') and project_id != 6) order by date_due"`
-REPEATING_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select '⋅ ' || title from tasks where (date_modification > strftime('%s', 'now', '-21 hours') and project_id = 6) order by date_due"`
+NORMAL_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select '⋅ ' || title from tasks where (is_active = 0 and date_completed > strftime('%s', 'now', 'start of day', 'localtime') and project_id != 6) order by date_due"`
+REPEATING_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select '⋅ ' || title from tasks where (date_modification > strftime('%s', 'now', 'start of day', 'localtime') and project_id = 6 and title not like '💊%') order by date_due"`
+OUTSTANDING_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select '⋅ ' || strftime('%Y-%m-%d %H:%M', datetime(date_due, 'unixepoch'), 'localtime') || '\\n    ' || title || '\n' from tasks where (date_due < strftime('%s', 'now', '+72 hours') and project_id = 1 and is_active = 1) order by date_due"`
 
-TEXT="🎉🎉🎉 \\nСегодня я выполнил ${NUMBER_OF_TASKS} задач:\\n\\n🏆 Основные задачи:\\n${NORMAL_TASKS}\\n\\n⏰ Повторяющиеся задачи:\\n${REPEATING_TASKS}\\n\\nСегодня я молодец!"
+TEXT="🎉🎉🎉 \\nСегодня я выполнил ${NUMBER_OF_TASKS} задач:\\n\\n🏆 Основные задачи:\\n\\n${NORMAL_TASKS}\\n\\n⏰ Повторяющиеся задачи:\\n\\n${REPEATING_TASKS}\\n\\n📅 Предстоящие задачи:\\n\\n${OUTSTANDING_TASKS}\\n\\nСегодня я молодец!"
 curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
     -H 'Content-Type: application/json' \
     -d "{ \"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"${TEXT}\" }"
