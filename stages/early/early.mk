@@ -2,9 +2,15 @@ UNAME := $(shell uname)
 RETRY := $(shell test -f /etc/default/earlystageconfigs && echo "true")
 HOSTNAME := $(shell cat variables/main.json | jq -r .hostname)
 
-early: test vault_unseal mirrors apt_configs keygen earlystagepackages locales profiles
+ifeq ($(MAKECMDGOALS), builder)
+early: test mirrors apt_configs keygen earlystagepackages locales profiles
 	echo "provisioning done" > /etc/default/earlystageconfigs;
 	@echo "$(ccgreen)Early provisioning stage completed$(ccend)"
+else
+early: test mirrors vault_unseal apt_configs keygen earlystagepackages locales profiles
+	echo "provisioning done" > /etc/default/earlystageconfigs;
+	@echo "$(ccgreen)Early provisioning stage completed$(ccend)"
+endif
 
 test:
 ifeq ($(UNAME), Linux)
