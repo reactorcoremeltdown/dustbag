@@ -13,3 +13,17 @@ TEXT="🎉🎉🎉 \\nСегодня я выполнил ${NUMBER_OF_TASKS} за
 curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
     -H 'Content-Type: application/json' \
     -d "{ \"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"${TEXT}\" }"
+
+source /etc/secrets/gmail_config
+
+SUBJECT="Дайджест по задачам за $(date '+%d.%m.%Y')"
+
+MESSAGE="Subject: ${SUBJECT}\n\n${TEXT}"
+
+curl --url "smtp://$SMTP_SERVER:$SMTP_PORT" \
+    --ssl-reqd \
+    --mail-from "$SMTP_USERNAME" \
+    --mail-rcpt "$TO" \
+    --user "$SMTP_USERNAME:$SMTP_PASSWORD" \
+    --tlsv1.2 \
+    -T <(echo -e "$MESSAGE")
