@@ -21,10 +21,10 @@ for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
     source <(echo "${feed}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     echo "  [feeds.${name}]" >> /etc/podsync/podsync.toml
     echo "  url = \"${url}\"" >>  /etc/podsync/podsync.toml
-    echo "  page_size = 10" >> /etc/podsync/podsync.toml
-    echo "  update_period = 1h" >> /etc/podsync/podsync.toml
-    echo "  quality = high" >> /etc/podsync/podsync.toml
-    echo "  format = audio" >> /etc/podsync/podsync.toml
+    echo "  page_size = \"10\"" >> /etc/podsync/podsync.toml
+    echo "  update_period = \"1h\"" >> /etc/podsync/podsync.toml
+    echo "  quality = \"high\"" >> /etc/podsync/podsync.toml
+    echo "  format = \"audio\"" >> /etc/podsync/podsync.toml
     if [[ ${format} = 'audio' ]]; then
         echo '  youtube_dl_args = [ "--audio-quality", "192K" ]' >> /etc/podsync/podsync.toml
     fi
