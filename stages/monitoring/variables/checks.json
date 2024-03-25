@@ -97,7 +97,7 @@
     },
     {
       "name": "crl",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_crl",
       "argument": "/etc/nginx/pki/pki/crl.pem",
       "interval": "3h",
