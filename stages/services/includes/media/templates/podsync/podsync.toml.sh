@@ -15,6 +15,12 @@ data_dir = "/var/storage/wastebox/tiredsysadmin.cc/podcasts"
 [tokens]
 youtube = "${YOUTUBE_API_KEY}"
 [feeds]
+  [feeds.mds]
+  url = "https://www.youtube.com/channel/UCNJCyZJK0e-0YWzxs7BY00A"
+  page_size = 100
+  update_period = "1h"
+  quality = "high"
+  format = "audio"
 EOF
 
 for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
