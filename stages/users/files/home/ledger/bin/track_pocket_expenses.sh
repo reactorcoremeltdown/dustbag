@@ -41,6 +41,15 @@ if [[ ${JOB_ID} != 'EOQ' ]]; then
             sqlite3 /home/ledger/expenses.db "insert into expenses (category, amount) values (\"${CATEGORY}\", ${AMOUNT})"
             # echo -e "\n$(date '+%Y/%m/%d') ${DESCRIPTION}\n    ${DESTINATION_TOPIC}  ${AMOUNT}\n    ${SOURCE_TOPIC}  -${AMOUNT}\n" >> /home/ledger/ledger.book
 
+            RATE=`sqlite3 /home/ledger/expenses.db "select (sum(amount)/30) as total from expenses where time > strftime(\"%s\", date(\"now\", \"-30 days\")) and category = \"${CATEGORY}\""`
+
+            if [[ ${RATE} -gt 3 ]]; then
+                export NAME="expenses"
+                export STATUS="2"
+                export MESSAGE="Expenses for category ${CATEGORY} went over budget! Current spending rate is ${RATE}"
+
+                /etc/monitoring/notifiers/gotify.sh
+            fi
             echo "Unlocking job"
             UNLOCK_JOB_TOKEN=$(curl -s -XPOST -H "${UA}" --data-urlencode "token=${USER_TOKEN}" https://api.rcmd.space/v6/token/get)
             curl -s -XPOST -H "${UA}" \
