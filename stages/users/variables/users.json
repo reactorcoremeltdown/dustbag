@@ -7,7 +7,7 @@
             { "name": "radicale", "shell": "/bin/bash", "groups": "radicale", "keygen": false, "authorized_keys": true },
             { "name": "syncthing", "shell": "/bin/bash", "groups": "syncthing", "keygen": false, "authorized_keys": false },
             { "name": "www-data", "shell": "/sbin/nologin", "groups": "www-data,syncthing", "keygen": false, "authorized_keys": false },
-            { "name": "ledger", "shell": "/bin/bash", "groups": "ledger,apps", "keygen": false, "authorized_keys": true },
+            { "name": "ledger", "shell": "/bin/bash", "groups": "ledger,apps,secrets", "keygen": false, "authorized_keys": true },
             { "name": "docker-registry", "shell": "/sbin/nologin", "groups": "docker-registry,www-data,syncthing", "keygen": false, "authorized_keys": true }
         ]
     }
