@@ -27,6 +27,7 @@ for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
     name=$(echo "${feed}" | jq -cr '.name')
     url=$(echo "${feed}" | jq -cr '.url')
     filters=$(echo "${feed}" | jq -cr '.filters')
+    playlist_sort=$(echo "${feed}" | jq -cr '.playlist_sort')
     echo "  [feeds.${name}]" >> /etc/podsync/podsync.toml
     echo "  url = \"${url}\"" >>  /etc/podsync/podsync.toml
     echo "  page_size = 10" >> /etc/podsync/podsync.toml
@@ -40,6 +41,9 @@ for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
     fi
     if [[ ${filters} != "null" ]]; then
         echo "  filters = ${filters}" >> /etc/podsync/podsync.toml
+    fi
+    if [[ ${playlist_sort} != "null" ]]; then
+        echo "  playlist_sort = ${playlist_sort}" >> /etc/podsync/podsync.toml
     fi
 done
 
