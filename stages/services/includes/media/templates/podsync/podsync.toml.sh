@@ -24,7 +24,9 @@ youtube = "${YOUTUBE_API_KEY}"
 EOF
 
 for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
-    source <(echo "${feed}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
+    name=$(echo "${feed}" | jq -cr '.name')
+    url=$(echo "${feed}" | jq -cr '.url')
+    filters=$(echo "${feed}" | jq -cr '.filters')
     echo "  [feeds.${name}]" >> /etc/podsync/podsync.toml
     echo "  url = \"${url}\"" >>  /etc/podsync/podsync.toml
     echo "  page_size = 10" >> /etc/podsync/podsync.toml
@@ -36,9 +38,8 @@ for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
     if [[ ${format} = 'audio' ]]; then
         echo '  youtube_dl_args = [ "--audio-quality", "192K" ]' >> /etc/podsync/podsync.toml
     fi
-    if [[ ${filters} != "" ]]; then
+    if [[ ${filters} != "null" ]]; then
         echo "  filters = ${filters}" >> /etc/podsync/podsync.toml
-        filters=""
     fi
 done
 
