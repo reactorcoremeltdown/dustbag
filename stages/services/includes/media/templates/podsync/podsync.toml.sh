@@ -31,6 +31,8 @@ for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
     echo "  update_period = \"1h\"" >> /etc/podsync/podsync.toml
     echo "  quality = \"high\"" >> /etc/podsync/podsync.toml
     echo "  format = \"audio\"" >> /etc/podsync/podsync.toml
+    echo "  clean = { keep_last = 10 }" >> /etc/podsync/podsync.toml
+    echo "  private_feed = true" >> /etc/podsync/podsync.toml
     if [[ ${format} = 'audio' ]]; then
         echo '  youtube_dl_args = [ "--audio-quality", "192K" ]' >> /etc/podsync/podsync.toml
     fi
