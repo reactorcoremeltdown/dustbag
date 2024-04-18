@@ -1,4 +1,4 @@
-secrets: directory unpack reset_gmail
+secrets: directory unpack reset_configs vault_seal
 	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
 
 directory:
@@ -15,3 +15,19 @@ remove_config_gmail:
 
 reset_gmail: remove_config_gmail misc
 	@echo "$(ccgreen) GMail config has been updated"
+
+remove_config_podsync:
+	rm -fr /etc/podsync/podsync.toml
+
+reset_podsync: remove_config_podsync podsync
+	@echo "$(ccgreen) Podsync config has been updated"
+
+remove_config_gitea:
+	rm -fr /etc/gitea/app.ini
+	rm -fr /home/git/.config/drone_api_key
+
+reset_gitea: remove_config_gitea gitea_config
+	@echo "$(ccgreen) Gitea config has been updated"
+
+reset_configs: reset_gmail reset_podsync reset_gitea vault_seal
+	@echo "$(ccgreen) All configs have been updated"
