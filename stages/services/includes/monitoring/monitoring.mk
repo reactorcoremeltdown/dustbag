@@ -1,7 +1,7 @@
 ROOT_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
 deviceping:
-	test -f /root/.deviceping || vault-request-unlock && vault-request-key users api/main | yq -r ".[] | select(.username == \"$(DEVICEPING_ID)\") | .key" > /root/.deviceping
+	test -f /root/.deviceping || (vault-request-unlock && vault-request-key users api/main | yq -r ".[] | select(.username == \"$(DEVICEPING_ID)\") | .key" > /root/.deviceping)
 	chmod 400 /root/.deviceping
 	install -D -m 755 stages/services/includes/monitoring/files/usr/local/bin/deviceping /usr/local/bin
 	@echo "$(ccgreen)Setting up deviceping completed$(ccend)"

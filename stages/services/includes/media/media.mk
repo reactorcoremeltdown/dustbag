@@ -1,8 +1,8 @@
 davfs2:
 	timeout 5 test -d /var/storage/smallwastebox || mkdir -p /var/storage/smallwastebox
-	test -f /etc/davfs2/secrets || vault-request-unlock && bash stages/services/includes/media/templates/davfs2/secrets.sh
+	test -f /etc/davfs2/secrets || (vault-request-unlock && bash stages/services/includes/media/templates/davfs2/secrets.sh)
 	install -D -m 644 stages/services/includes/media/files/etc/systemd/system/davfs2-mounts/* /etc/systemd/system
-	test -f /etc/secrets/gocryptfs || vault-request-unlock && vault-request-key password system/gocryptfs > /etc/secrets/gocryptfs
+	test -f /etc/secrets/gocryptfs || (vault-request-unlock && vault-request-key password system/gocryptfs > /etc/secrets/gocryptfs)
 	chmod 400 /etc/secrets/gocryptfs
 	test -d /var/storage/wastebox || mkdir -p /var/storage/wastebox
 	systemctl daemon-reload
@@ -19,7 +19,7 @@ podsync:
 	install -D -m 644 -v stages/services/includes/media/files/etc/systemd/system/podsync.service /etc/systemd/system
 	systemctl daemon-reload
 	systemctl enable podsync.service
-	test -f /etc/podsync/podsync.toml || vault-request-unlock && bash stages/services/includes/media/templates/podsync/podsync.toml.sh stages/services/includes/media/variables/podsync.yaml
+	test -f /etc/podsync/podsync.toml || (vault-request-unlock && bash stages/services/includes/media/templates/podsync/podsync.toml.sh stages/services/includes/media/variables/podsync.yaml)
 	systemctl restart podsync.service
 	@echo "$(ccgreen)Setting up podsync completed$(ccend)"
 

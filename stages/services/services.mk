@@ -66,7 +66,7 @@ misc:
 	install -D -m 755 stages/services/files/usr/local/bin/rcmd-space-stats /usr/local/bin
 	install -D -m 755 stages/services/files/usr/local/bin/kanboard-stats /usr/local/bin
 	install -D -m 755 stages/services/files/usr/local/src/rcmd-functions.mk /usr/local/src
-	test -f /etc/secrets/gmail_config || vault-request-unlock && vault-request-key gmail_config tasks > /etc/secrets/gmail_config && chmod 400 /etc/secrets/gmail_config
+	test -f /etc/secrets/gmail_config || (vault-request-unlock && vault-request-key gmail_config tasks > /etc/secrets/gmail_config && chmod 400 /etc/secrets/gmail_config)
 	@echo "$(ccgreen)Setting up misc scripts completed$(ccend)"
 
 vault_seal:
