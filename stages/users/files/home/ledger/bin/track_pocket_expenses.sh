@@ -37,8 +37,10 @@ if [[ ${JOB_ID} != 'EOQ' ]]; then
 
     CATEGORY=$(echo "${JOB_PAYLOAD}" | jq -r '.category')
     AMOUNT=$(echo "${JOB_PAYLOAD}" | jq -r '.amount')
+    DATE=$(echo "${JOB_PAYLOAD}" | jq -r '.date')
+    TIMESTAMP=$(date --date "${DATE}" '+%s')
     if ! test -z ${AMOUNT}; then
-            sqlite3 /home/ledger/expenses.db "insert into expenses (category, amount) values (\"${CATEGORY}\", ${AMOUNT})"
+            sqlite3 /home/ledger/expenses.db "insert into expenses (time, category, amount) values (${TIMESTAMP}, \"${CATEGORY}\", ${AMOUNT})"
             # echo -e "\n$(date '+%Y/%m/%d') ${DESCRIPTION}\n    ${DESTINATION_TOPIC}  ${AMOUNT}\n    ${SOURCE_TOPIC}  -${AMOUNT}\n" >> /home/ledger/ledger.book
 
             RATE=`sqlite3 /home/ledger/expenses.db "select (sum(amount)/30) as total from expenses where time > strftime(\"%s\", date(\"now\", \"-30 days\")) and category = \"${CATEGORY}\""`
