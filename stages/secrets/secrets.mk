@@ -10,6 +10,9 @@ unpack: directory
 	stages/secrets/files/bin/age-$(shell uname -s)-$(shell uname -m) -d stages/secrets/files/etc/secrets/secrets.json.age > /etc/secrets/secrets.json
 	chmod 440 /etc/secrets/secrets.json
 
+vault_unlock:
+	rbw unlock
+
 remove_config_gmail:
 	rm -fr /etc/secrets/gmail_config
 
@@ -35,5 +38,5 @@ reset_containers:
 	bash stages/secrets/templates/task-transformer.sh
 	@echo "$(ccgreen) Container secrets have been updated"
 
-reset_configs: reset_gmail reset_podsync reset_gitea reset_containers vault_seal
+reset_configs: vault_unlock reset_gmail reset_podsync reset_gitea reset_containers vault_seal
 	@echo "$(ccgreen) All configs have been updated"
