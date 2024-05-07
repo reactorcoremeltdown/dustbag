@@ -49,8 +49,8 @@ webhook:
 acl:
 ${USERS}
 EOF
-    systemctl stop rcmd-api-v6.services
+    systemctl stop rcmd-api-v6.service
     podman secret rm rcmd-api-v6 || true
     echo "${YAML}" | podman secret create rcmd-api-v6 -
-    systemctl start rcmd-api-v6.services
+    systemctl start rcmd-api-v6.service
 fi
