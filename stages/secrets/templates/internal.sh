@@ -69,6 +69,5 @@ EOF
     echo "${YAML}" | podman secret create rcmd-api-internal -
     rbw-request-key 'internal_api' 'auth/ssh/private' | cat - <(echo) | podman secret create rcmd-api-internal-ssh-private -
     rbw-request-key 'internal_api' 'auth/ssh/public' | podman secret create rcmd-api-internal-ssh-public -
-    rbw-request-lock
     systemctl start rcmd-api-internal.service
 fi
