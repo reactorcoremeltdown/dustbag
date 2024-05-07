@@ -20,7 +20,7 @@
                 "section": "stable"
             },
             { "name": "elasticstack",
-                "state": "present",
+                "state": "absent",
                 "key": "https://artifacts.elastic.co/GPG-KEY-elasticsearch",
                 "url": "https://artifacts.elastic.co/packages/8.x/apt",
                 "distro": "stable",
