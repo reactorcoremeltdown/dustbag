@@ -2,7 +2,7 @@ secrets: directory unpack reset_configs vault_seal
 	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
 
 directory:
-	groupadd secrets
+	getent group secrets | groupadd secrets
 	install -d -m 550 /etc/secrets
 	chown -R root:secrets /etc/secrets
 
