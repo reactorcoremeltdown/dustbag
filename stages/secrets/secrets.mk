@@ -1,4 +1,4 @@
-secrets: directory unpack reset_configs vault_seal
+secrets: directory unpack reset_configs
 	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
 
 directory:
@@ -29,5 +29,11 @@ remove_config_gitea:
 reset_gitea: remove_config_gitea gitea_config
 	@echo "$(ccgreen) Gitea config has been updated"
 
-reset_configs: reset_gmail reset_podsync reset_gitea vault_seal
+reset_containers:
+	bash stages/secrets/templates/fsmq.sh
+	bash stages/secrets/templates/internal.sh
+	bash stages/secrets/templates/task-transformer.sh
+	@echo "$(ccgreen) Container secrets have been updated"
+
+reset_configs: reset_gmail reset_podsync reset_gitea reset_containers vault_seal
 	@echo "$(ccgreen) All configs have been updated"
