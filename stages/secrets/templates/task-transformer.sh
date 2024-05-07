@@ -40,5 +40,5 @@ EOF
     podman secret rm task-transformer || true
     echo "${YAML}" | podman secret create task-transformer -
     vault-request-lock
-    systemctl start task-transformer.services
+    systemctl start task-transformer.service
 fi
