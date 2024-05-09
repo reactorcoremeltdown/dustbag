@@ -5,5 +5,6 @@
 59 23 * * * /home/ledger/bin/total_snacks_score.sh 2>&1 | systemd-cat -t ledger -p info
 30 0,6,12,18 * * * /home/ledger/bin/track_sprint.sh 2>&1 | systemd-cat -t ledger -p info
 30 8 * * * /home/ledger/bin/track_weight.sh 2>&1 | systemd-cat -t ledger -p info
+30 9 * * * /home/ledger/bin/track_sleep.sh 2>&1 | systemd-cat -t ledger -p info
 # * * * * * hledger -f /home/ledger/ledger.book b -N -O csv cash:pocket > /var/spool/api/ledger/cash.csv
 #30 7 * * 2,4,6 /home/ledger/bin/weekly_expenses.sh
