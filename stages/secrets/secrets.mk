@@ -35,6 +35,7 @@ reset_gitea: remove_config_gitea gitea_config
 reset_containers:
 	bash stages/secrets/templates/fsmq.sh
 	bash stages/secrets/templates/internal.sh
+	bash stages/secrets/templates/grafana.sh
 	bash stages/secrets/templates/task-transformer.sh
 	@echo "$(ccgreen) Container secrets have been updated"
 
