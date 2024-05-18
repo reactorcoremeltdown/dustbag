@@ -7,6 +7,7 @@ OAUTH_SECRETS=$(vault-request-key 'oauth_secrets' 'api/grafana')
 read -r -d '' INI <<-EOF
 [paths]
 [server]
+root_url = https://graph.rcmd.space
 [database]
 [datasources]
 [remote_cache]
