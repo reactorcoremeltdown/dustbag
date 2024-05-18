@@ -20,7 +20,7 @@ root_url = https://graph.rcmd.space
 [users]
 [auth]
 [auth.anonymous]
-enabled = true
+enabled = false
 org_name = Main Org.
 org_role = Viewer
 hide_version = true
@@ -33,8 +33,8 @@ hide_version = true
 [auth.generic_oauth]
 name = Gitea
 enabled = true
-allow_sign_up = false
-auto_login = false
+allow_sign_up = true
+auto_login = true
 scopes = openid email name
 ${OAUTH_SECRETS}
 team_ids =
