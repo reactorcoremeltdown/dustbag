@@ -78,6 +78,8 @@ allowed_organizations =
 [external_image_storage.azure_blob]
 [external_image_storage.local]
 [rendering]
+server_url = http://10.88.0.1:27108/render
+callback_url = http://10.88.0.1:27105
 [panels]
 [plugins]
 [live]
