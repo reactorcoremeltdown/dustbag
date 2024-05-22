@@ -7,7 +7,6 @@ directory:
 	chown -R root:secrets /etc/secrets
 
 unpack: directory
-	#stages/secrets/files/bin/age-$(shell uname -s)-$(shell uname -m) -d stages/secrets/files/etc/secrets/secrets.json.age > /etc/secrets/secrets.json
 	vault-request-unlock && vault-request-key 'secrets-json' 'system' > /etc/secrets/secrets.json
 	chmod 440 /etc/secrets/secrets.json
 
