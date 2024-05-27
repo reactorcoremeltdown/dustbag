@@ -79,6 +79,7 @@ server {
     }
     location /media {
         proxy_set_header X-Vouch-User \$auth_resp_x_vouch_user;
+        root /var/storage/wastebox/tiredsysadmin.cc/wiki;
         add_header Access-Control-Allow-Origin *;
         expires 3d;
         try_files \$uri \$uri/ =404;
