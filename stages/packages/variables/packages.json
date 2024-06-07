@@ -72,6 +72,7 @@
           "texlive-fonts-recommended",
           "texlive-latex-recommended",
           "texlive-latex-extra",
+          "trivy",
           "lmodern",
           "percona-toolkit",
           "postfix",

@@ -33,6 +33,13 @@
                 "distro": "all",
                 "section": "main"
             },
+            { "name": "trivy",
+                "state": "present",
+                "key": "https://tiredsysadmin.cc/media/files/trivy.gpg",
+                "url": "https://aquasecurity.github.io/trivy-repo/deb",
+                "distro": "bookworm",
+                "section": "main"
+            },
             { "name": "kaliko-backports",
                 "state": "absent",
                 "key": "https://kaliko.me/kaliko.gpg",
