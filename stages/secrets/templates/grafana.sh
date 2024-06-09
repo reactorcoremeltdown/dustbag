@@ -34,7 +34,7 @@ hide_version = true
 name = Gitea
 enabled = true
 allow_sign_up = true
-auto_login = false
+auto_login = true
 scopes = openid email name
 ${OAUTH_SECRETS}
 team_ids =
