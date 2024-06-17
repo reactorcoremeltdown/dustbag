@@ -1,17 +1,6 @@
 {
     "debian": {
         "repositories": [
-            { "name": "docker",
-                "state": "absent",
-                "key": "https://download.docker.com/linux/debian/gpg",
-                "url": "https://download.docker.com/linux/debian",
-                "section": "stable" },
-            { "name": "backports",
-                "state": "absent",
-                "url": "http://deb.debian.org/debian",
-                "key": "file:///usr/share/keyrings/debian-keyring.gpg",
-                "distro": "bullseye-backports",
-                "section": "main" },
             { "name": "syncthing",
                 "state": "present",
                 "key": "https://syncthing.net/release-key.gpg",
@@ -19,32 +8,18 @@
                 "distro": "syncthing",
                 "section": "stable"
             },
-            { "name": "elasticstack",
-                "state": "absent",
-                "key": "https://artifacts.elastic.co/GPG-KEY-elasticsearch",
-                "url": "https://artifacts.elastic.co/packages/8.x/apt",
-                "distro": "stable",
-                "section": "main"
-            },
             { "name": "helm",
                 "state": "present",
-                "key": "https://tiredsysadmin.cc/media/files/helm.gpg",
+                "key": "https://baltocdn.com/helm/signing.asc",
                 "url": "https://baltocdn.com/helm/stable/debian/",
                 "distro": "all",
                 "section": "main"
             },
             { "name": "trivy",
                 "state": "present",
-                "key": "https://tiredsysadmin.cc/media/files/trivy.gpg",
+                "key": "https://aquasecurity.github.io/trivy-repo/deb/public.key",
                 "url": "https://aquasecurity.github.io/trivy-repo/deb",
                 "distro": "bookworm",
-                "section": "main"
-            },
-            { "name": "kaliko-backports",
-                "state": "absent",
-                "key": "https://kaliko.me/kaliko.gpg",
-                "url": "https://deb.kaliko.me/debian-backports/",
-                "distro": "bullseye-backports",
                 "section": "main"
             }
         ]
