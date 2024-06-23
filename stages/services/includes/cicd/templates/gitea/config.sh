@@ -50,8 +50,7 @@ PATH     = /var/lib/gitea/data/gitea.db
 ROOT = /home/git
 
 [ui]
-DEFAULT_THEME = arc-green
-THEMES = gitea,arc-green
+THEMES =
 
 [mailer]
 ENABLED = false
