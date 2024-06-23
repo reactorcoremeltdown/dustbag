@@ -50,7 +50,8 @@ PATH     = /var/lib/gitea/data/gitea.db
 ROOT = /home/git
 
 [ui]
-THEMES =
+DEFAULT_THEME = gitea-dark
+THEMES = gitea-light,gitea-dark
 
 [mailer]
 ENABLED = false
