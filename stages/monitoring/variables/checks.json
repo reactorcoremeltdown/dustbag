@@ -452,6 +452,16 @@
   ],
   "fermium": [
     {
+      "name": "ft_motion",
+      "state": "present",
+      "plugin": "check_feature_toggle",
+      "argument": "motion",
+      "interval": "20s",
+      "description": "Feature toggle for motion service",
+      "hostname": "fermium.rcmd.space",
+      "notify": ["feature_toggle"]
+    },
+    {
       "name": "home_stereo",
       "state": "present",
       "plugin": "check_mpd_online",
