@@ -1,0 +1,9 @@
+[Unit]
+Description=Cleanup before start
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/birdhouse-cleanup.sh
+
+[Install]
+WantedBy=multi-user.target

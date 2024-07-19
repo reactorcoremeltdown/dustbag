@@ -12,6 +12,8 @@ seedbox: early users services
 
 printserver: lock early packages services monitoring unlock
 
+birdhouse: birdhouse
+
 include variables/colors.mk
 include variables/globalvars.mk
 include stages/lock/lock.mk

@@ -74,6 +74,7 @@ vault_seal:
 
 include stages/services/includes/nginx/nginx.mk
 include stages/services/includes/system/system.mk
+include stages/services/includes/system/birdhouse.mk
 include stages/services/includes/monitoring/monitoring.mk
 include stages/services/includes/cicd/cicd.mk
 include stages/services/includes/media/media.mk
