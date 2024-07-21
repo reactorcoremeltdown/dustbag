@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+TARGET="/media/external"
+
+while true; do
+	DATE=$(date '+%Y-%m-%d_%H-%M-%S')
+	ffmpeg -f v4l2 -framerate 10 -video_size 1280x720 -input_format mjpeg -i /dev/video0 -t 1800 -c:v copy ${TARGET}/${DATE}.mkv
+	sleep 10
+done

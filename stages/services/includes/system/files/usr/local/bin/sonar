@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+
+import time
+import datetime
+import serial
+
+while 1:
+    ser = serial.Serial('/dev/ttyS0', 9600, timeout=4)
+    #wake = [0x7E,0xFF,0x06,0x0B,0x00,0x00,0x00,0xEF]
+    #ser.write(serial.to_bytes(wake))
+    #time.sleep(1)
+    play = [0x7E,0xFF,0x06,0x03,0x00,0x00,0x01,0xEF]
+    ser.write(serial.to_bytes(play))
+    #time.sleep(1)
+    #sleep = [0x7E,0xFF,0x06,0x0A,0x00,0x00,0x00,0xEF]
+    #ser.write(serial.to_bytes(sleep))
+    current_time = datetime.datetime.now()
+    print("Reporting online status at ", current_time)
+    time.sleep(10)

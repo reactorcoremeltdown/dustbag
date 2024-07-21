@@ -1,0 +1,9 @@
+[Unit]
+Description=A dummy MP3 sonar
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/sonar
+
+[Install]
+WantedBy=multi-user.target
