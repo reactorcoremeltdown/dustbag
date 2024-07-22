@@ -1,12 +1,17 @@
-ifeq ($(MAKECMDGOALS),)
-secrets: unpack
-	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
-else ifeq ($(MAKECMDGOALS), production)
+MACHINE_ID := $(shell cat /etc/machine-id)
+
+ifeq ($(MACHINE_ID), bbb5f20db211480faf15e28f1bf8b015)
 secrets: unpack reset_configs
 	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
-else ifeq ($(MAKECMDGOALS), fermium)
+
+else ifeq ($(MACHINE_ID), 6b2164a96a984edbb8626ed09d87aa66)
 secrets: unpack reset_podsync
 	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
+
+else
+secrets: unpack
+	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
+
 endif
 
 directory:
