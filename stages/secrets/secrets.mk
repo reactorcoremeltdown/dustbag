@@ -5,11 +5,11 @@ secrets: unpack reset_configs
 	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
 
 else ifeq ($(MACHINE_ID), 6b2164a96a984edbb8626ed09d87aa66)
-secrets: unpack reset_podsync
+secrets: unpack reset_podsync vault_seal
 	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
 
 else
-secrets: unpack
+secrets: unpack vault_seal
 	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
 
 endif
