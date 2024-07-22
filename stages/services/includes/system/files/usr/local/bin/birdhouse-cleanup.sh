@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-STORAGE_PATH="/path/to/storage"
+STORAGE_PATH="/media/external"
 
 USED=`df --output=pcent ${STORAGE_PATH}`
 
