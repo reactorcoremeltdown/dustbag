@@ -31,6 +31,21 @@ server {
         proxy_set_header User-Agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36";
     }
 }
+
+server {
+    listen 80;
+    server_name podcasts.rcmd.space;
+
+    access_log /var/log/nginx/podcasts.rcmd.space_access.log json;
+    error_log /var/log/nginx/podcasts.rcmd.space_error.log;
+
+    location / {
+        root /var/lib/podsync;
+
+        charset UTF-8;
+        try_files \$uri \$uri/ =404;
+    }
+}
 EOF
 
 ln -sf /etc/nginx/sites-available/proxies.conf /etc/nginx/sites-enabled/proxies.conf
