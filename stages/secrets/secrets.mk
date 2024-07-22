@@ -1,5 +1,13 @@
-secrets: directory unpack reset_configs
+ifeq ($(MAKECMDGOALS),)
+secrets: unpack
 	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
+else ifeq ($(MAKECMDGOALS), production)
+secrets: unpack reset_configs
+	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
+else ifeq ($(MAKECMDGOALS), fermium)
+secrets: unpack reset_podsync
+	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
+endif
 
 directory:
 	getent group secrets || groupadd secrets
