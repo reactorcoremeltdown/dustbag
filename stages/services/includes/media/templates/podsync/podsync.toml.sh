@@ -10,17 +10,11 @@ cat <<EOF > /etc/podsync/podsync.toml
 [server]
 port = 26000
 hostname = "https://podcasts.rcmd.space"
-data_dir = "/var/storage/wastebox/tiredsysadmin.cc/podcasts"
+data_dir = "/var/lib/podsync"
 
 [tokens]
 youtube = "${YOUTUBE_API_KEY}"
 [feeds]
-  [feeds.mds]
-  url = "https://www.youtube.com/channel/UCNJCyZJK0e-0YWzxs7BY00A"
-  page_size = 2000
-  update_period = "1h"
-  quality = "high"
-  format = "audio"
 EOF
 
 for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
