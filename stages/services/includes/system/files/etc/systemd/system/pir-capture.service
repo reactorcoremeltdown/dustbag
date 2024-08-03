@@ -1,0 +1,11 @@
+[Unit]
+Description=Capture short videos triggered by PIR sensor
+
+[Service]
+Type=simple
+# ExecStart=/usr/local/bin/pir-capture
+ExecStart=/usr/local/bin/permanent-record
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

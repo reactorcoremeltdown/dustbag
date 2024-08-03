@@ -39,11 +39,25 @@ server {
     application/rss+xml
     text/css;
 
-    root /var/storage/wastebox/tiredsysadmin.cc/podcasts;
 
     server_name podcasts.rcmd.space;
 
     location / {
+        proxy_pass http://10.8.0.102:80;
+        proxy_http_version 1.1;
+        client_max_body_size 0;
+
+        proxy_set_header   Host \$http_host;
+    }
+
+    location /mds.xml {
+        root /var/storage/wastebox/tiredsysadmin.cc/podcasts;
+        charset UTF-8;
+        try_files \$uri \$uri/ =404;
+    }
+
+    location /mds {
+        root /var/storage/wastebox/tiredsysadmin.cc/podcasts;
         charset UTF-8;
         try_files \$uri \$uri/ =404;
     }

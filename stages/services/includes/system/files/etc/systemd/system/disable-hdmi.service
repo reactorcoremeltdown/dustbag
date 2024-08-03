@@ -1,0 +1,9 @@
+[Unit]
+Description=Disables HDMI output
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/tvservice -o
+
+[Install]
+WantedBy=multi-user.target

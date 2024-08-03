@@ -27,7 +27,7 @@ case $1 in
 esac
 
 if [[ ${CURRENT_SCORE} -gt ${PREVIOUS_SCORE} ]]; then
-        fail "The number of explosions at location ${LOCATION} has increased to ${CURRENT_SCORE}\\n\\nCheck reports here:\\n- https://alerts.in.ua/en\\n- https://t.me/we_from_zaporizhzhia\\n- https://t.me/vanek_nikolaev\\n"
+        fail "The number of explosions at location ${LOCATION} has increased to ${CURRENT_SCORE}\\n\\nCheck reports here:\\n- https://alerts.in.ua/en\\n- https://t.me/eto_zp\\n- https://t.me/vanek_nikolaev\\n"
 else
         ok "There are no new reported explosions at location ${LOCATION}\\nThe current number of cases is ${CURRENT_SCORE}"
 fi

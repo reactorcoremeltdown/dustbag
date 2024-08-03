@@ -1,0 +1,10 @@
+[Unit]
+Description=Poweroff button handler
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/powerbutton
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
