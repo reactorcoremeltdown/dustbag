@@ -22,6 +22,7 @@ sonar:
 	systemctl start sonar.service
 
 recorder:
+	test -f /media/external/start_delay.txt || echo "START_DELAY=600" > /media/external/start_delay.txt
 	install -D -m 755 -v stages/services/includes/system/files/usr/local/bin/permanent-record /usr/local/bin
 	install -D -m 644 -v stages/services/includes/system/files/etc/systemd/system/pir-capture.service /etc/systemd/system
 	systemctl daemon-reload

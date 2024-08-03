@@ -4,6 +4,7 @@ Description=Capture short videos triggered by PIR sensor
 [Service]
 Type=simple
 # ExecStart=/usr/local/bin/pir-capture
+EnvironmentFile=-/media/external/start_delay.txt
 ExecStart=/usr/local/bin/permanent-record
 Restart=always
 
