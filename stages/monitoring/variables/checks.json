@@ -32,6 +32,15 @@
       "notify": ["gotify"]
     },
     {
+      "name": "check_vcfb_updates",
+      "state": "present",
+      "plugin": "check_website_diff",
+      "argument": "https://vcfb.de/2024/ausstellungen.html",
+      "interval": "12h",
+      "description": "Checking VCFB exhibitions for 2024",
+      "notify": ["telegram"]
+    },
+    {
       "name": "provisioning",
       "state": "present",
       "plugin": "check_file",

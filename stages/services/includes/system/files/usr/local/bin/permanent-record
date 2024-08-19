@@ -2,9 +2,7 @@
 
 TARGET="/media/external"
 
-START_DELAY_SEC=$(echo "${START_DELAY * 60}" | bc)
-
-sleep ${START_DELAY_SEC}
+sleep "${START_DELAY}m"
 
 while true; do
 	DATE=$(date '+%Y-%m-%d_%H-%M-%S')
