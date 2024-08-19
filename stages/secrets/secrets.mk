@@ -22,6 +22,7 @@ directory:
 unpack: directory
 	vault-request-unlock && vault-request-key 'secrets-json' 'system' > /etc/secrets/secrets.json.new
 	mv /etc/secrets/secrets.json.new /etc/secrets/secrets.json
+	chown -R root:secrets /etc/secrets/secrets.json
 	chmod 440 /etc/secrets/secrets.json
 
 vault_unlock:
