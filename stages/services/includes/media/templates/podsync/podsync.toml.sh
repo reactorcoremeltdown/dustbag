@@ -21,6 +21,7 @@ for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
     name=$(echo "${feed}" | jq -cr '.name')
     url=$(echo "${feed}" | jq -cr '.url')
     filters=$(echo "${feed}" | jq -cr '.filters')
+    keep_last=$(echo "${feed}" | jq -cr '.keep_last')
     playlist_sort=$(echo "${feed}" | jq -cr '.playlist_sort')
     echo "  [feeds.${name}]" >> /etc/podsync/podsync.toml
     echo "  url = \"${url}\"" >>  /etc/podsync/podsync.toml
