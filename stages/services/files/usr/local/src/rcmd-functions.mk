@@ -12,9 +12,9 @@ define disable
 endef
 
 define installfile
-	install -D -m 644 $(1) $(2) $(3)
+	install -D -m 644 -v $(1) $(2)
 endef
 
 define installexec
-	install -D -m 755 $(1) $(2) $(3)
+	install -D -m 755 -v $(1) $(2)
 endef
