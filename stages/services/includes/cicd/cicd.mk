@@ -59,7 +59,7 @@ drone_runner_amd64:
 		/usr/local/bin
 	mkdir -p /home/git/.drone-runner-exec || true
 	chown git:git /home/git/.drone-runner-exec
-	test -f /home/git/.drone-runner-exec/config || (vault-request-unlock && bash stages/services/includes/cicd/templates/drone/runner.cfg.sh $(ROLE))
+	test -f /home/git/.drone-runner-exec/config || bash stages/services/includes/cicd/templates/drone/runner.cfg.sh $(ROLE)
 	install -D -m 755 stages/services/includes/cicd/files/usr/local/bin/drone-runner-amd64 /usr/local/bin
 	install -D -m 644 stages/services/includes/cicd/files/etc/systemd/system/drone-runner-amd64.service /etc/systemd/system
 	systemctl enable drone-runner-amd64.service

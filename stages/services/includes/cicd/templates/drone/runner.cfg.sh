@@ -6,6 +6,7 @@ IFS=$'\n'
 ROLE="${1}"
 
 if [[ ${ROLE} != "builder" ]]; then
+    vault-request-unlock
     RPC_SECRET=$(vault-request-key rpc-secret drone)
 else
     RPC_SECRET=$(jq -cr '.secrets.drone."rpc-secret"' /etc/secrets/secrets.json)
