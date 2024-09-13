@@ -86,3 +86,46 @@ server {
 EOF
 
 ln -sf /etc/nginx/sites-available/${SITE}.conf /etc/nginx/sites-enabled/${SITE}.conf
+
+SITE='deb'
+
+cat <<EOF > /etc/nginx/sites-available/${SITE}.conf
+server {
+  listen 80;
+  listen [::]:80;
+  server_name ${SITE}.rcmd.space;
+
+  return 301 https://\$server_name\$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+
+    access_log /var/log/nginx/${SITE}.rcmd.space_access.log json;
+    error_log /var/log/nginx/${SITE}.rcmd.space_error.log;
+
+    ### SSL cert files ###
+    ssl_certificate ${new_ssl_certificate};
+    ssl_certificate_key ${new_ssl_certificate_key};
+
+    ### Add SSL specific settings here ###
+    ssl_session_timeout 10m;
+
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers '${ssl_ciphers}';
+    ssl_prefer_server_ciphers on;
+
+    root /opt/debian/repo;
+
+    server_name ${SITE}.rcmd.space;
+
+    location ~ /(db|conf) {
+        deny all;
+        return  404;
+    }
+
+}
+EOF
+
+ln -sf /etc/nginx/sites-available/${SITE}.conf /etc/nginx/sites-enabled/${SITE}.conf
