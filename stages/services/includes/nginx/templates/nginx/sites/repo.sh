@@ -93,7 +93,7 @@ cat <<EOF > /etc/nginx/sites-available/${SITE}.conf
 server {
   listen 80;
   listen [::]:80;
-  server_name ${SITE}.rcmd.space;
+  server_name ${SITE}.tiredsysadmin.cc;
 
   return 301 https://\$server_name\$request_uri;
 }
@@ -102,12 +102,12 @@ server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
 
-    access_log /var/log/nginx/${SITE}.rcmd.space_access.log json;
-    error_log /var/log/nginx/${SITE}.rcmd.space_error.log;
+    access_log /var/log/nginx/${SITE}.tiredsysadmin.cc_access.log json;
+    error_log /var/log/nginx/${SITE}.tiredsysadmin.cc_error.log;
 
     ### SSL cert files ###
-    ssl_certificate ${new_ssl_certificate};
-    ssl_certificate_key ${new_ssl_certificate_key};
+    ssl_certificate ${blog_ssl_certificate};
+    ssl_certificate_key ${blog_ssl_certificate_key};
 
     ### Add SSL specific settings here ###
     ssl_session_timeout 10m;
@@ -118,7 +118,7 @@ server {
 
     root /opt/debian/repo;
 
-    server_name ${SITE}.rcmd.space;
+    server_name ${SITE}.tiredsysadmin.cc;
 
     location ~ /(db|conf) {
         deny all;
