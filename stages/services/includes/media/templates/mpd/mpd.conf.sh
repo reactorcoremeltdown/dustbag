@@ -45,18 +45,6 @@ audio_output {
         mixer_index     "0"             # optional
 }
 
-audio_output {
-    type        "httpd"
-    name        "HTTP output"
-    encoder     "opus"      # optional
-    port        "8000"
-#   quality     "5.0"           # do not define if bitrate is defined
-    bitrate     "192000"            # do not define if quality is defined
-    format      "44100:16:1"
-    always_on       "yes"           # prevent MPD from disconnecting all listeners when playback is stopped.
-    tags            "yes"           # httpd supports sending tags to listening streams.
-}
-
 filesystem_charset              "UTF-8"
 EOF
 
