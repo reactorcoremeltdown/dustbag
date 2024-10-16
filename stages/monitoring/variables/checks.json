@@ -33,7 +33,7 @@
     },
     {
       "name": "check_vcfb_updates",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_website_diff",
       "argument": "https://vcfb.de/2024/ausstellungen.html",
       "interval": "12h",
@@ -313,6 +313,18 @@
       "argument": "https://api.rcmd.space/internal/healthcheck",
       "interval": "1m",
       "description": "RCMD Internal API website",
+      "notify": ["gotify", "telegram"]
+    },
+    {
+      "name": "rbw_proxy",
+      "state": "present",
+      "plugin": "check_http_success_rate",
+      "warningThreshold": "99",
+      "criticalThreshold": "97",
+      "flowOperator": "downwards",
+      "argument": "http://10.88.0.1:26105/healthcheck",
+      "interval": "1m",
+      "description": "RCMD Internal API, RBW proxy",
       "notify": ["gotify", "telegram"]
     },
     {
