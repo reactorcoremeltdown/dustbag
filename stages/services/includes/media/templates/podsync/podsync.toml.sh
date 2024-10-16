@@ -45,7 +45,7 @@ for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
         echo "  playlist_sort = ${playlist_sort}" >> /etc/podsync/podsync.toml
     fi
     if [[ ${cron_schedule} != "null" ]]; then
-        echo "  cron_schedule = ${cron_schedule}" >> /etc/podsync/podsync.toml
+        echo "  cron_schedule = \"${cron_schedule}\"" >> /etc/podsync/podsync.toml
     else
         echo "  update_period = \"1h\"" >> /etc/podsync/podsync.toml
     fi
