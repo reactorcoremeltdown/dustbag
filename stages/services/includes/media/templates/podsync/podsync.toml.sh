@@ -22,11 +22,11 @@ for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
     url=$(echo "${feed}" | jq -cr '.url')
     filters=$(echo "${feed}" | jq -cr '.filters')
     keep_last=$(echo "${feed}" | jq -cr '.keep_last')
+    cron_schedule=$(echo "${feed}" | jq -cr '.cron_schedule')
     playlist_sort=$(echo "${feed}" | jq -cr '.playlist_sort')
     echo "  [feeds.${name}]" >> /etc/podsync/podsync.toml
     echo "  url = \"${url}\"" >>  /etc/podsync/podsync.toml
     echo "  page_size = 10" >> /etc/podsync/podsync.toml
-    echo "  update_period = \"1h\"" >> /etc/podsync/podsync.toml
     echo "  quality = \"high\"" >> /etc/podsync/podsync.toml
     echo "  format = \"audio\"" >> /etc/podsync/podsync.toml
     echo "  private_feed = true" >> /etc/podsync/podsync.toml
@@ -43,6 +43,11 @@ for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
     fi
     if [[ ${playlist_sort} != "null" ]]; then
         echo "  playlist_sort = ${playlist_sort}" >> /etc/podsync/podsync.toml
+    fi
+    if [[ ${cron_schedule} != "null" ]]; then
+        echo "  cron_schedule = ${cron_schedule}" >> /etc/podsync/podsync.toml
+    else
+        echo "  update_period = \"1h\"" >> /etc/podsync/podsync.toml
     fi
 done
 
