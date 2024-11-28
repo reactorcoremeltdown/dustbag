@@ -364,7 +364,7 @@
       "argument": "12",
       "interval": "15m",
       "description": "Check for reported explosions in Zaporizhzhia",
-      "notify": ["telegram", "gotify" ]
+      "notify": ["telegram", "gotify_disaster" ]
     },
     {
       "name": "caldav_backups",
