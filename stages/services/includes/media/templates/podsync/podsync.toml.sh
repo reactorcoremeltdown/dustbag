@@ -5,11 +5,12 @@ IFS=$'\n'
 
 YOUTUBE_API_KEY=$(vault-request-key youtube_api_key podsync)
 FEEDS=$(vault-request-key feeds podsync)
+SERVER_HOSTNAME=$(vault-request-key server_hostname podsync)
 
 cat <<EOF > /etc/podsync/podsync.toml
 [server]
 port = 26000
-hostname = "https://podcasts.rcmd.space"
+hostname = "https://${SERVER_HOSTNAME}"
 data_dir = "/var/lib/podsync"
 
 [tokens]
