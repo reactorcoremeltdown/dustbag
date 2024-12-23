@@ -31,7 +31,7 @@ for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
     echo "  format = \"audio\"" >> /etc/podsync/podsync.toml
     echo "  private_feed = true" >> /etc/podsync/podsync.toml
     if [[ ${format} = 'audio' ]]; then
-        echo '  youtube_dl_args = [ "--audio-quality", "192K" ]' >> /etc/podsync/podsync.toml
+        echo '  youtube_dl_args = [ "--audio-quality", "192K", "--match-filter", "!is_live" ]' >> /etc/podsync/podsync.toml
     fi
     if [[ ${filters} != "null" ]]; then
         echo "  filters = ${filters}" >> /etc/podsync/podsync.toml
