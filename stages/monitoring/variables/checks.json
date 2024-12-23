@@ -33,7 +33,7 @@
     },
     {
       "name": "check_vcfb_updates",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_website_diff",
       "argument": "https://vcfb.de/2024/ausstellungen.html",
       "interval": "12h",
@@ -316,6 +316,18 @@
       "notify": ["gotify", "telegram"]
     },
     {
+      "name": "rbw_proxy",
+      "state": "present",
+      "plugin": "check_http_success_rate",
+      "warningThreshold": "99",
+      "criticalThreshold": "97",
+      "flowOperator": "downwards",
+      "argument": "http://10.88.0.1:26105/healthcheck",
+      "interval": "1m",
+      "description": "RCMD Internal API, RBW proxy",
+      "notify": ["gotify", "telegram"]
+    },
+    {
       "name": "ci_website",
       "state": "present",
       "plugin": "check_http_success_rate",
@@ -352,7 +364,7 @@
       "argument": "12",
       "interval": "15m",
       "description": "Check for reported explosions in Zaporizhzhia",
-      "notify": ["telegram", "gotify" ]
+      "notify": ["telegram", "gotify_disaster" ]
     },
     {
       "name": "caldav_backups",

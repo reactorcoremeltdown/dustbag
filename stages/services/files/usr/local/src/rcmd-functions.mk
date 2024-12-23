@@ -10,3 +10,11 @@ define disable
 	systemctl disable $(1)
 	systemctl stop $(1)
 endef
+
+define installfile
+	install -D -m 644 -v $(1) $(2)
+endef
+
+define installexec
+	install -D -m 755 -v $(1) $(2)
+endef

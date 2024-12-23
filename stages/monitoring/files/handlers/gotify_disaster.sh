@@ -16,7 +16,7 @@ case $STATUS in
     ;;
   "2")
     text="❌❌❌\\n$tail_extended"
-    bot_token=` jq -r '.secrets."gotify-ng"[] | select( .name == "critical" ) | .token' /etc/secrets/secrets.json `
+    bot_token=` jq -r '.secrets."gotify-ng"[] | select( .name == "disaster" ) | .token' /etc/secrets/secrets.json `
     ;;
 esac
 
