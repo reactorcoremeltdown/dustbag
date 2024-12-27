@@ -25,6 +25,7 @@ for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
     keep_last=$(echo "${feed}" | jq -cr '.keep_last')
     cron_schedule=$(echo "${feed}" | jq -cr '.cron_schedule')
     playlist_sort=$(echo "${feed}" | jq -cr '.playlist_sort')
+    youtube_dl_args=$(echo "${feed}" | jq -cr '.youtube_dl_args')
     echo "  [feeds.${name}]" >> /etc/podsync/podsync.toml
     echo "  url = \"${url}\"" >>  /etc/podsync/podsync.toml
     echo "  page_size = 10" >> /etc/podsync/podsync.toml
