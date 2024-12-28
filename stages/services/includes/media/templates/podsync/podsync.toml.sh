@@ -26,6 +26,7 @@ for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
     cron_schedule=$(echo "${feed}" | jq -cr '.cron_schedule')
     playlist_sort=$(echo "${feed}" | jq -cr '.playlist_sort')
     youtube_dl_args=$(echo "${feed}" | jq -cr '.youtube_dl_args')
+    post_download_hook=$(echo "${feed}" | jq -cr '.post_download_hook')
     echo "  [feeds.${name}]" >> /etc/podsync/podsync.toml
     echo "  url = \"${url}\"" >>  /etc/podsync/podsync.toml
     echo "  page_size = 10" >> /etc/podsync/podsync.toml
@@ -39,6 +40,9 @@ for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
     fi
     if [[ ${filters} != "null" ]]; then
         echo "  filters = ${filters}" >> /etc/podsync/podsync.toml
+    fi
+    if [[ ${post_download_hook} != "null" ]]; then
+        echo "  post_download_hook = ${post_download_hook}" >> /etc/podsync/podsync.toml
     fi
     if [[ ${keep_last} != "null" ]]; then
         echo "  clean = { keep_last = ${keep_last} }" >> /etc/podsync/podsync.toml
