@@ -37,7 +37,7 @@ services:
       token: "${KANBOARD_WEBHOOK}"
     projects:
     - name: "sprint"
-      id: 16
+      id: 17
       color: "amber"
     - name: "chores"
       id: 1
