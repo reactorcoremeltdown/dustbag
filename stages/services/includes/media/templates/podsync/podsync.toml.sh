@@ -29,7 +29,7 @@ for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
     post_download_hook=$(echo "${feed}" | jq -cr '.post_download_hook')
     echo "  [feeds.${name}]" >> /etc/podsync/podsync.toml
     echo "  url = \"${url}\"" >>  /etc/podsync/podsync.toml
-    echo "  page_size = 10" >> /etc/podsync/podsync.toml
+    echo "  page_size = 1" >> /etc/podsync/podsync.toml
     echo "  quality = \"high\"" >> /etc/podsync/podsync.toml
     echo "  format = \"audio\"" >> /etc/podsync/podsync.toml
     echo "  private_feed = true" >> /etc/podsync/podsync.toml
