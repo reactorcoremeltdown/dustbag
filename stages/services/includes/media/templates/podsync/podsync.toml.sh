@@ -67,7 +67,7 @@ cat <<EOF >>  /etc/podsync/podsync.toml
 [downloader]
 self_update = true
 timeout = 45
-debug_hook = /usr/local/bin/youtube_debug_logger.sh
+debug_hook = "/usr/local/bin/youtube_debug_logger.sh"
 
 [log]
 filename = "/var/log/podsync/podsync.log"
