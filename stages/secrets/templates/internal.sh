@@ -11,6 +11,7 @@ if [ "${UPTIME}" -gt 10800 ]; then
     KANBOARD_API=$(rbw-request-key 'api' 'kanboard')
     KANBOARD_WEBHOOK=$(rbw-request-key 'webhook' 'kanboard')
     DEBUG=$(rbw-request-key 'debug' 'api/internal')
+    TASKS_FSMQ_TOKEN=$(vault-request-key 'fsmq_token' 'tasks')
 
     USERS="$(rbw-request-key 'users' 'api/internal')"
 
@@ -25,6 +26,10 @@ network:
   routePrefix: "/internal"
   rbwProxyAddress: "http://10.88.0.1:26105"
 services:
+  fsmq:
+    url: "https://api.rcmd.space/v6/"
+    queue: "tasksync"
+    token: "${TASKS_FSMQ_TOKEN}"
   telegram:
     defaultChat: ${TELEGRAM_CHAT}
     botToken: "${TELEGRAM_BOT}"
