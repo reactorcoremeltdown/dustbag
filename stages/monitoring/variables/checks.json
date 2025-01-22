@@ -505,6 +505,15 @@
       "notify": ["dummy"]
     },
     {
+      "name": "podsync_service",
+      "state": "present",
+      "plugin": "check_systemd_service",
+      "argument": "podsync.service",
+      "interval": "1m",
+      "description": "Podcast sync service",
+      "notify": ["telegram","gotify"]
+    },
+    {
       "name": "home_storage",
       "state": "present",
       "plugin": "check_disk_space",
