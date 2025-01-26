@@ -16,7 +16,8 @@
 15 6 * * * /etc/monitoring/scripts/backups.sh /var/lib/rssreader/ file:///var/storage/wastebox/Backups/rssreader/
 20 6 * * * /etc/monitoring/scripts/backups.sh /home/syncthing/.config/syncthing/ file:///var/storage/wastebox/Backups/syncthing/
 25 6 * * * /etc/monitoring/scripts/backups.sh /var/lib/grafana/ file:///var/storage/wastebox/Backups/grafana/
-25 6 * * * /etc/monitoring/scripts/backups.sh /var/lib/vault/ file:///var/storage/wastebox/Backups/vault/
+30 6 * * * /etc/monitoring/scripts/backups.sh /var/lib/vault/ file:///var/storage/wastebox/Backups/vault/
+40 6 * * * /etc/monitoring/scripts/backups.sh /var/lib/gitea/ file:///var/storage/wastebox/Backups/gitea-backups/
 
 20 6 * * * cp -fp /var/storage/wastebox/Music/Library/*.m3u /var/storage/wastebox/Backups/Playlist-files/
 30 6 * * * /etc/monitoring/scripts/backup.sh /var/storage/wastebox/Backups/Playlist-files/ file:///var/storage/wastebox/Backups/Playlists/

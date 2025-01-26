@@ -3,6 +3,8 @@
 source=${1}
 destination=${2}
 
+test -d ${destination} || mkdir ${destination}
+
 GPG_KEY='F70F4BD3AF1D1B95'
 
 
