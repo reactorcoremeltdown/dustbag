@@ -41,6 +41,8 @@ server {
 
     server_name git.rcmd.space;
 
+    client_max_body_size 200M;
+
     location / {
         proxy_pass http://127.0.0.1:25010;
     }
