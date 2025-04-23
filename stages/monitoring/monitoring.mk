@@ -31,10 +31,8 @@ endif
 
 wtfd_amd64:
 	systemctl stop wtfd.service || true
-	rm -f /tmp/dafuq
-	wget -c https://repo.rcmd.space/binaries/dafuq/releases/v0.10.0/dafuq-linux_amd64 -O /tmp/dafuq
-	install -D -m 755 /tmp/dafuq /usr/local/bin
-	cp stages/monitoring/files/configs/wtfd.service /etc/systemd/system/wtfd.service
+	apt -y install dafuq
+	cp stages/monitoring/files/configs/wtfd-standard.service /etc/systemd/system/wtfd.service
 	chmod 644 /etc/systemd/system/wtfd.service
 
 wtfd_armv6:
