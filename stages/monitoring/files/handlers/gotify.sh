@@ -2,8 +2,8 @@
 
 
 text=""
-tail="\\nHostname: $HOSTNAME\\nCheck name: $NAME\\nDescription: $MESSAGE"
-tail_extended="\\nHostname: $HOSTNAME\\nCheck name: $NAME\\nDescription: $MESSAGE\\n\\nLogin: https://http2ssh.tiredsysadmin.cc/go.html?ssh=ssh://rcmd@${HOSTNAME}"
+tail="\\n**Hostname**: $HOSTNAME\\n**Check name**: $NAME\\n**Description**: $MESSAGE"
+tail_extended="\\n**Hostname**: $HOSTNAME\\n**Check name**: $NAME\\n**Description**: $MESSAGE\\n\\n**Login**: [${HOSTNAME}](https://http2ssh.tiredsysadmin.cc/go.html?ssh=ssh://rcmd@${HOSTNAME})"
 
 case $STATUS in
   "0")
@@ -23,6 +23,6 @@ esac
 curl -s -XPOST \
     --header "Content-Type: application/json" \
     "https://notifications.rcmd.space/message?token=${bot_token}" \
-    --data "{ \"message\": \"${text}\", \"title\": \"WTFD\", \"priority\": 5 }"
+    --data "{ \"message\": \"${text}\", \"title\": \"WTFD\", \"priority\": 5, \"extras\": { \"client::display\": { \"contentType\": \"text/markdown\" } } }"
 
 exit 0
