@@ -5,7 +5,7 @@ chat_id=`cat /etc/secrets/secrets.json | jq -r .secrets.telegram.chat_id`
 
 text=""
 tail="\\n**Hostname**: $HOSTNAME\\n**Check name**: $NAME\\n**Description**: $MESSAGE"
-tail_extended="\\n**Hostname**: $HOSTNAME\\n**Check name**: $NAME\\nDescription: $MESSAGE\\n\\n**Login**: [${HOSTNAME}](https://http2ssh.tiredsysadmin.cc/go.html?ssh=ssh://rcmd@${HOSTNAME})"
+tail_extended="\\n**Hostname**: $HOSTNAME\\n**Check name**: $NAME\\n**Description**: $MESSAGE\\n\\n**Login**: [${HOSTNAME}](https://http2ssh.tiredsysadmin.cc/go.html?ssh=ssh://rcmd@${HOSTNAME})"
 
 case $STATUS in
   "0")

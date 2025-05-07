@@ -2,8 +2,8 @@
 
 
 text=""
-tail="\\n**Hostname**: $HOSTNAME\\n**Check name**: $NAME\\n**Description**: $MESSAGE"
-tail_extended="\\n**Hostname**: $HOSTNAME\\n**Check name**: $NAME\\n**Description**: $MESSAGE\\n\\n**Login**: [${HOSTNAME}](https://http2ssh.tiredsysadmin.cc/go.html?ssh=ssh://rcmd@${HOSTNAME})"
+tail="\\n**Hostname**: $HOSTNAME\\n\\n**Check name**: $NAME\\n\\n**Description**: $MESSAGE"
+tail_extended="\\n**Hostname**: $HOSTNAME\\n\\n**Check name**: $NAME\\n\\n**Description**: $MESSAGE\\n\\n**Login**: [${HOSTNAME}](https://http2ssh.tiredsysadmin.cc/go.html?ssh=ssh://rcmd@${HOSTNAME})"
 
 case $STATUS in
   "0")
