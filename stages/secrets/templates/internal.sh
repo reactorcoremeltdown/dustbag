@@ -65,6 +65,9 @@ services:
     - name: "objectives"
       id: 10
       color: "orange"
+    - name: "work"
+      id: 13
+      color: "yellow"
 users:
 ${USERS}
 EOF
