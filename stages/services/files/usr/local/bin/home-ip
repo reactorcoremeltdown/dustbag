@@ -17,5 +17,5 @@ REQUEST_TOKEN=`curl -s -H "${UA}" --data-urlencode "token=${DEVICEPING_TOKEN}" h
 
 curl -s -H "${UA}" --data-urlencode "token=${REQUEST_TOKEN}" \
     --data-urlencode "queue=home-ip" \
-    --data-urlencode "payload=$(curl https://ipecho.net/plain)" \
+    --data-urlencode "payload=$(curl -s -4 https://ipecho.net/plain)" \
     https://api.rcmd.space/v6/queue/put-job
