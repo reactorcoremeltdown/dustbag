@@ -62,6 +62,9 @@ endif
 ## Service targets
 ##################
 
+home_ip:
+	install -D -m 755 stages/services/files/usr/local/bin/home-ip /usr/local/bin
+
 misc:
 	install -D -m 755 stages/services/files/usr/local/bin/rcmd-space-stats /usr/local/bin
 	install -D -m 755 stages/services/files/usr/local/bin/kanboard-stats /usr/local/bin

@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+API_URL="https://api.rcmd.space/v6"
+UA="User-Agent: monitoring/home-ip-0.1"
+
+DEVICEPING_TOKEN=`cat /root/.deviceping`
+
+REQUEST_TOKEN=`curl -s -H "${UA}" --data-urlencode "token=${DEVICEPING_TOKEN}" https://api.rcmd.space/v6/token/get`
+
+curl -s -H "${UA}" --data-urlencode "token=${REQUEST_TOKEN}" \
+    --data-urlencode "queue=home-ip" \
+    https://api.rcmd.space/v6/queue/discard-all-jobs
+
+sleep 0.1
+
+REQUEST_TOKEN=`curl -s -H "${UA}" --data-urlencode "token=${DEVICEPING_TOKEN}" https://api.rcmd.space/v6/token/get`
+
+curl -s -H "${UA}" --data-urlencode "token=${REQUEST_TOKEN}" \
+    --data-urlencode "queue=home-ip" \
+    --data-urlencode "payload=$(curl https://ipecho.net/plain)" \
+    https://api.rcmd.space/v6/queue/put-job
