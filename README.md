@@ -28,4 +28,4 @@ Ansible appears to be too slow and bloated for simple operation like configure o
 
 ### Debian 13 Trixie roadmap
 
-+ [ ] TBD
++ [x] Retired `hledger`
