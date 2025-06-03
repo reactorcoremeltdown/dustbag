@@ -65,4 +65,6 @@ server {
 
 EOF
 
-ln -sf /etc/nginx/sites-available/netdata.conf /etc/nginx/sites-enabled/netdata.conf
+cat /dev/null > /etc/nginx/sites-available/netdata.conf
+
+test -f /etc/nginx/sites-enabled/netdata.conf && rm -f /etc/nginx/sites-enabled/netdata.conf

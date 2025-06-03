@@ -656,7 +656,7 @@
     },
     {
       "name": "netdata_protected",
-      "state": "present",
+      "state": "absent",
       "plugin": "check_protected_url",
       "argument": "https://netdata.rcmd.space",
       "interval": "62s",
