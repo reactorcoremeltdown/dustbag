@@ -3,7 +3,7 @@
 ifeq ($(MAKECMDGOALS), production)
 MACHINE := production
 
-monitoring: wtfd_amd64 checks wtfd netdata
+monitoring: wtfd_amd64 checks wtfd
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
 ## Fermium, the little Pi Zero W
@@ -73,15 +73,6 @@ wtfd_restart:
 
 wtfd: wtfd_files wtfd_restart
 	@echo "$(ccgreen)Installing wtfd completed$(ccend)"
-
-netdata_files:
-	dpkg-query -s netdata > /dev/null && apt-get purge -y netdata
-
-netdata_restart:
-	systemctl stop netdata
-
-netdata: netdata_files
-	@echo "$(ccgreen)Installing netdata completed$(ccend)"
 
 checks_configs:
 	bash stages/monitoring/templates/checks.sh stages/monitoring/variables/checks.json $(MACHINE)
