@@ -5,10 +5,10 @@ source /etc/monitoring/plugins/okfail.sh
 HASH=$(echo "$1" | md5sum | awk '{print $1}')
 
 OLD_FILE="/tmp/old_file_${HASH}.html"
-test -f ${OLD_FILE} || curl -s "$1" > ${OLD_FILE}
+test -f ${OLD_FILE} || curl -L -s "$1" > ${OLD_FILE}
 
 NEW_FILE="/tmp/new_file_${HASH}.html"
-curl -s "$1" > ${NEW_FILE}
+curl -L -s "$1" > ${NEW_FILE}
 
 diff -q ${OLD_FILE} ${NEW_FILE}
 ret_code=$?
