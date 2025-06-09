@@ -33,12 +33,12 @@
     },
     {
       "name": "check_vcfb_updates",
-      "state": "absent",
+      "state": "present",
       "plugin": "check_website_diff",
-      "argument": "https://vcfb.de/2024/ausstellungen.html",
+      "argument": "https://vcfb.de",
       "interval": "12h",
       "description": "Checking VCFB exhibitions for 2024",
-      "notify": ["telegram"]
+      "notify": ["telegram", "gotify"]
     },
     {
       "name": "provisioning",
