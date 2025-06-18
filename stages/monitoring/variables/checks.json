@@ -7,7 +7,7 @@
       "argument": "syncthing@syncthing.service",
       "interval": "1m",
       "description": "Syncthing: production (systemd service)",
-      "notify": ["telegram", "gotify"]
+      "notify": ["telegram", "gotify", "alert_fatigue"]
     },
     {
       "name": "prod_syncthing",
@@ -19,7 +19,7 @@
       "argument": "http://127.0.0.1:8384/rest/noauth/health",
       "interval": "1m",
       "description": "Syncthing: production",
-      "notify": ["telegram", "gotify"],
+      "notify": ["telegram", "gotify", "alert_fatigue"],
       "suppressedBy": ["prod_syncthing_service"]
     },
     {
@@ -29,7 +29,7 @@
       "argument": "dav.rcmd.space",
       "interval": "10m",
       "description": "Radicale SSL certificate",
-      "notify": ["gotify"]
+      "notify": ["gotify", "alert_fatigue"]
     },
     {
       "name": "check_vcfb_updates",
@@ -38,7 +38,7 @@
       "argument": "https://vcfb.de",
       "interval": "12h",
       "description": "Checking VCFB exhibitions for 2024",
-      "notify": ["telegram", "gotify"]
+      "notify": ["telegram", "gotify", "alert_fatigue"]
     },
     {
       "name": "provisioning",
@@ -51,7 +51,7 @@
       "warningThreshold": "10",
       "criticalThreshold": "5",
       "flowOperator": "downwards",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "traccar",
@@ -74,7 +74,7 @@
       "description": "Enсrypted webdav mount",
       "hostname": "rcmd.space",
       "suppressedBy": ["gocryptfs_config"],
-      "notify": ["gotify"]
+      "notify": ["gotify", "alert_fatigue"]
     },
     {
       "name": "gocryptfs_config",
@@ -84,7 +84,7 @@
       "interval": "15s",
       "description": "Decrypted webdav mount",
       "hostname": "rcmd.space",
-      "notify": ["gotify"]
+      "notify": ["gotify", "alert_fatigue"]
     },
     {
       "name": "site_https",
@@ -93,7 +93,7 @@
       "argument": "rcmd.space",
       "interval": "10m",
       "description": "Main Website SSL certificate",
-      "notify": ["gotify"]
+      "notify": ["gotify", "alert_fatigue"]
     },
     {
       "name": "blog_https",
@@ -102,25 +102,7 @@
       "argument": "blog.rcmd.space",
       "interval": "10m",
       "description": "Blog Website SSL certificate",
-      "notify": ["gotify"]
-    },
-    {
-      "name": "crl",
-      "state": "absent",
-      "plugin": "check_crl",
-      "argument": "/etc/nginx/pki/pki/crl.pem",
-      "interval": "3h",
-      "description": "Certificate revocation list",
-      "notify": ["gotify"]
-    },
-    {
-      "name": "podsync_service",
-      "state": "absent",
-      "plugin": "check_systemd_service",
-      "argument": "podsync.service",
-      "interval": "1m",
-      "description": "Podcast sync service",
-      "notify": ["telegram"]
+      "notify": ["gotify", "alert_fatigue"]
     },
     {
       "name": "dave_service",
@@ -129,7 +111,7 @@
       "argument": "dave.service",
       "interval": "1m",
       "description": "DAVE, a WebDAV server",
-      "notify": ["gotify"]
+      "notify": ["gotify", "alert_fatigue"]
     },
     {
       "name": "tinc_host",
@@ -138,7 +120,7 @@
       "argument": "tinc@clusternet.service",
       "interval": "1m",
       "description": "TINC, main server",
-      "notify": ["gotify"]
+      "notify": ["gotify", "alert_fatigue"]
     },
     {
       "name": "task-transformer",
@@ -147,7 +129,7 @@
       "argument": "task-transformer.service",
       "interval": "5m",
       "description": "VTODO + VEVENT + Kanboard sync service",
-      "notify": ["telegram"]
+      "notify": ["telegram", "alert_fatigue"]
     },
     {
       "name": "kernel_version",
@@ -156,7 +138,7 @@
       "argument": "",
       "interval": "48h",
       "description": "Linux Kernel Version",
-      "notify": ["telegram"]
+      "notify": ["telegram", "alert_fatigue"]
     },
     {
       "name": "free_space",
@@ -168,7 +150,7 @@
       "warningThreshold": "90",
       "criticalThreshold": "95",
       "flowOperator": "upwards",
-      "notify": ["gotify"]
+      "notify": ["gotify", "alert_fatigue"]
     },
     {
       "name": "hetzner_storagebox_v2",
@@ -180,19 +162,7 @@
       "warningThreshold": "80",
       "criticalThreshold": "95",
       "flowOperator": "upwards",
-      "notify": ["gotify"]
-    },
-    {
-      "name": "container_volume_free_space",
-      "state": "absent",
-      "plugin": "check_disk_space",
-      "argument": "/var/lib/containers",
-      "interval": "3m",
-      "description": "Free space on disk",
-      "warningThreshold": "80",
-      "criticalThreshold": "90",
-      "flowOperator": "upwards",
-      "notify": ["gotify"]
+      "notify": ["gotify", "alert_fatigue"]
     },
     {
       "name": "task_transformer_edit",
@@ -205,7 +175,7 @@
       "criticalThreshold": "5",
       "flowOperator": "upwards",
       "suppressedBy": ["task-transformer"],
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "task_transformer_sync",
@@ -218,7 +188,7 @@
       "criticalThreshold": "5",
       "flowOperator": "upwards",
       "suppressedBy": ["task-transformer"],
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "task_transformer_update_due",
@@ -230,7 +200,7 @@
       "warningThreshold": "3",
       "criticalThreshold": "5",
       "flowOperator": "upwards",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "task_transformer_online",
@@ -243,7 +213,7 @@
       "criticalThreshold": "500",
       "flowOperator": "upwards",
       "suppressedBy": ["task-transformer"],
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "internal_wiki",
@@ -255,7 +225,7 @@
       "criticalThreshold": "97",
       "flowOperator": "downwards",
       "description": "Internal wiki engine",
-      "notify": ["telegram"]
+      "notify": ["telegram", "alert_fatigue"]
     },
     {
       "name": "wiki_pictures",
@@ -265,7 +235,7 @@
       "interval": "1m",
       "flowOperator": "downwards",
       "description": "Wiki picture storage",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "api_website_health",
@@ -277,7 +247,7 @@
       "criticalThreshold": "97",
       "flowOperator": "downwards",
       "description": "RCMD API website",
-      "notify": ["gotify"]
+      "notify": ["gotify", "alert_fatigue"]
     },
     {
       "name": "radicale",
@@ -289,7 +259,7 @@
       "argument": "https://dav.rcmd.space/radicale/.web/",
       "interval": "1m",
       "description": "Radicale CalDAV server",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "grafana_web",
@@ -301,7 +271,7 @@
       "argument": "http://localhost:27105/api/health",
       "interval": "10m",
       "description": "Grafana Web interface",
-      "notify": ["telegram"]
+      "notify": ["telegram", "alert_fatigue"]
     },
     {
       "name": "api_internal_website",
@@ -313,7 +283,7 @@
       "argument": "https://api.rcmd.space/internal/healthcheck",
       "interval": "1m",
       "description": "RCMD Internal API website",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "rbw_proxy",
@@ -325,7 +295,7 @@
       "argument": "http://10.88.0.1:26105/healthcheck",
       "interval": "1m",
       "description": "RCMD Internal API, RBW proxy",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "ci_website",
@@ -337,16 +307,7 @@
       "argument": "https://ci.rcmd.space/badge/dummy.svg",
       "interval": "1m",
       "description": "CI engine",
-      "notify": ["telegram"]
-    },
-    {
-      "name": "ipv6",
-      "state": "absent",
-      "plugin": "check_ipv6_connection",
-      "argument": "https://rcmd.space",
-      "interval": "5m",
-      "description": "Checking IPv6 availability",
-      "notify": ["telegram"]
+      "notify": ["telegram", "alert_fatigue"]
     },
     {
       "name": "api_https",
@@ -355,7 +316,7 @@
       "argument": "api.rcmd.space",
       "interval": "10m",
       "description": "API HTTPS certificate",
-      "notify": ["gotify"]
+      "notify": ["gotify", "alert_fatigue"]
     },
     {
       "name": "explosions_zp",
@@ -364,7 +325,7 @@
       "argument": "12",
       "interval": "15m",
       "description": "Check for reported explosions in Zaporizhzhia",
-      "notify": ["telegram", "gotify_disaster" ]
+      "notify": ["telegram", "gotify_disaster", "alert_fatigue"]
     },
     {
       "name": "caldav_backups",
@@ -374,7 +335,7 @@
       "interval": "6h",
       "description": "CalDAV backups",
       "suppressedBy": ["webdav_filesystem"],
-      "notify": ["telegram"]
+      "notify": ["telegram", "alert_fatigue"]
     },
     {
       "name": "kanboard_backups",
@@ -384,7 +345,7 @@
       "interval": "6h",
       "description": "Kanboard backups",
       "suppressedBy": ["webdav_filesystem"],
-      "notify": ["telegram"]
+      "notify": ["telegram","alert_fatigue"]
     },
     {
       "name": "website_backups",
@@ -394,7 +355,7 @@
       "interval": "6h",
       "description": "Website backups",
       "suppressedBy": ["webdav_filesystem"],
-      "notify": ["telegram"]
+      "notify": ["telegram", "alert_fatigue"]
     },
     {
       "name": "fermium_online",
@@ -403,7 +364,7 @@
       "argument": "fermium.rcmd.space",
       "interval": "20m",
       "description": "Device online test: fermium",
-      "notify": ["gotify"]
+      "notify": ["gotify", "alert_fatigue"]
     },
     {
       "name": "printserver_online",
@@ -412,7 +373,7 @@
       "argument": "printer.tiredsysadmin.cc",
       "interval": "20m",
       "description": "Device online test: printserver",
-      "notify": ["telegram"]
+      "notify": ["telegram", "alert_fatigue"]
     },
     {
       "name": "home_stereo",
@@ -423,7 +384,7 @@
       "description": "[relay] MPD server online test",
       "hostname": "fermiumv2.rcmd.space",
       "suppressedBy": ["tinc_host"],
-      "notify": ["telegram"]
+      "notify": ["telegram", "alert_fatigue"]
     },
     {
       "name": "home_syncthing",
@@ -434,7 +395,7 @@
       "description": "[relay] Syncthing at home",
       "hostname": "fermiumv2.rcmd.space",
       "suppressedBy": ["tinc_host"],
-      "notify": ["telegram"]
+      "notify": ["telegram", "alert_fatigue"]
     },
     {
       "name": "home_printer",
@@ -446,7 +407,7 @@
       "description": "[relay] CUPS server online test",
       "hostname": "fermiumv2.rcmd.space",
       "suppressedBy": ["printserver_online"],
-      "notify": ["telegram"]
+      "notify": ["telegram", "alert_fatigue"]
     },
     {
       "name": "home_printer_device",
@@ -457,7 +418,7 @@
       "interval": "10m",
       "hostname": "fermiumv2.rcmd.space",
       "description": "[relay] Checking printer status, Brother Industries, Ltd HL-2140 series",
-      "notify": ["telegram"]
+      "notify": ["telegram", "alert_fatigue"]
     },
     {
       "name": "home_storage",
@@ -468,7 +429,7 @@
       "description": "[relay] Home storage status",
       "hostname": "fermiumv2.rcmd.space",
       "suppressedBy": ["tinc_host"],
-      "notify": ["telegram"]
+      "notify": ["telegram", "alert_fatigue"]
     }
   ],
   "fermium": [
@@ -511,7 +472,7 @@
       "argument": "podsync.service",
       "interval": "1m",
       "description": "Podcast sync service",
-      "notify": ["telegram","gotify"]
+      "notify": ["telegram","gotify", "alert_fatigue"]
     },
     {
       "name": "home_storage",
@@ -554,7 +515,7 @@
       "interval": "3m",
       "description": "TINC Mesh VPN Network",
       "hostname": "192.168.2.221",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "main_website",
@@ -567,7 +528,7 @@
       "interval": "1m",
       "description": "RCMD.space website",
       "hostname": "192.168.2.120",
-      "notify": ["gotify"]
+      "notify": ["gotify", "alert_fatigue"]
     }
   ],
   "printserver": [
@@ -598,7 +559,7 @@
       "argument": "https://wiki.rcmd.space",
       "interval": "62s",
       "description": "Wiki protection check",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "blog_beta_protected",
@@ -607,7 +568,7 @@
       "argument": "https://beta.tiredsysadmin.cc",
       "interval": "62s",
       "description": "Blog beta protection check",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "site_beta_protected",
@@ -616,7 +577,7 @@
       "argument": "https://beta.rcmd.space",
       "interval": "62s",
       "description": "Site beta protection check",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "kanboard_protected",
@@ -625,7 +586,7 @@
       "argument": "https://board.rcmd.space",
       "interval": "62s",
       "description": "Kanboard protection check",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "grafana_protected",
@@ -634,7 +595,7 @@
       "argument": "https://graph.rcmd.space",
       "interval": "62s",
       "description": "Grafana protection check",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "mixtape_protected",
@@ -643,7 +604,7 @@
       "argument": "https://mixtape.tiredsysadmin.cc",
       "interval": "62s",
       "description": "Mixtape protection check",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "mood_protected",
@@ -652,16 +613,7 @@
       "argument": "https://mood.rcmd.space",
       "interval": "62s",
       "description": "Mood journal protection check",
-      "notify": ["gotify", "telegram"]
-    },
-    {
-      "name": "netdata_protected",
-      "state": "absent",
-      "plugin": "check_protected_url",
-      "argument": "https://netdata.rcmd.space",
-      "interval": "62s",
-      "description": "Netdata protection check",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "reader_protected",
@@ -670,7 +622,7 @@
       "argument": "https://reader.tiredsysadmin.cc",
       "interval": "62s",
       "description": "RSS reader protection check",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "main_domain_expiry",
@@ -679,7 +631,7 @@
       "argument": "rcmd.space",
       "interval": "24h",
       "description": "rcmd.space domain expiry check",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "blog_domain_expiry",
@@ -688,7 +640,7 @@
       "argument": "tiredsysadmin.cc",
       "interval": "24h",
       "description": "tiredsysadmin.cc domain expiry check",
-      "notify": ["gotify", "telegram"]
+      "notify": ["gotify", "telegram", "alert_fatigue"]
     },
     {
       "name": "main_website",
@@ -701,17 +653,7 @@
       "interval": "3m",
       "description": "RCMD.space website",
       "hostname": "outpost.rcmd.space",
-      "notify": ["gotify"]
-    },
-    {
-      "name": "ipv6",
-      "state": "absent",
-      "plugin": "check_ipv6_connection",
-      "argument": "https://rcmd.space",
-      "interval": "5m",
-      "description": "Checking IPv6 availability",
-      "hostname": "outpost.rcmd.space",
-      "notify": ["telegram"]
+      "notify": ["gotify", "alert_fatigue"]
     },
     {
       "name": "blog_website",
@@ -724,7 +666,7 @@
       "interval": "3m",
       "description": "Blog website",
       "hostname": "outpost.rcmd.space",
-      "notify": ["gotify"]
+      "notify": ["gotify", "alert_fatigue"]
     }
   ]
 }
