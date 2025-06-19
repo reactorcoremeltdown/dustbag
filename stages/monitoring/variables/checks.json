@@ -461,7 +461,7 @@
       "criticalThreshold": "97",
       "flowOperator": "downwards",
       "argument": "http://127.0.0.1:8384/rest/noauth/health",
-      "interval": "1m",
+      "interval": "62s",
       "description": "Syncthing at home",
       "notify": ["dummy"]
     },
@@ -512,7 +512,7 @@
       "criticalThreshold": "93",
       "flowOperator": "downwards",
       "argument": "http://10.8.0.6",
-      "interval": "3m",
+      "interval": "181s",
       "description": "TINC Mesh VPN Network",
       "hostname": "192.168.2.221",
       "notify": ["gotify", "telegram", "alert_fatigue"]
@@ -525,7 +525,7 @@
       "criticalThreshold": "97",
       "flowOperator": "downwards",
       "argument": "https://rcmd.space",
-      "interval": "1m",
+      "interval": "63s",
       "description": "RCMD.space website",
       "hostname": "192.168.2.120",
       "notify": ["gotify", "alert_fatigue"]
