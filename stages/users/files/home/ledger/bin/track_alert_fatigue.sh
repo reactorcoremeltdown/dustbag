@@ -35,7 +35,7 @@ if [[ ${JOB_ID} != 'EOQ' ]]; then
 
     echo "Payload: ${JOB_PAYLOAD}"
 
-    if ! test -z ${SCORE}; then
+    if ! test -z ${JOB_PAYLOAD}; then
             sqlite3 /home/ledger/expenses.db "insert into alert_fatigue (name) values (${JOB_PAYLOAD})"
             # echo -e "\n$(date '+%Y/%m/%d') ${DESCRIPTION}\n    ${DESTINATION_TOPIC}  ${AMOUNT}\n    ${SOURCE_TOPIC}  -${AMOUNT}\n" >> /home/ledger/ledger.book
 
