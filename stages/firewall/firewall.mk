@@ -4,7 +4,7 @@ firewall: early apply_rules
 template_rules:
 	install -d -m 755 /etc/firewall
 	install -d -m 755 /etc/iptables
-	bash stages/firewall/templates/input.sh stages/firewall/variables/firewall.json
+	bash stages/firewall/templates/input.sh stages/firewall/variables/firewall.yaml
 
 apply_rules: template_rules
 	iptables --flush INPUT

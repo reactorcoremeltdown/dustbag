@@ -2,7 +2,7 @@
 
 IFS=$'\n'
 
-for user in `jq -cr '.debian.users[]' ${1}`; do
+for user in `yq -o=json -I=0  '.debian.users[]' ${1}`; do
     source <(echo "${user}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     groups ${name} > /dev/null || /sbin/useradd -m -s ${shell} ${name} || /usr/sbin/useradd -m -s ${shell} ${name}
     HOMEDIR=$(getent passwd ${name} | cut -f 6 -d ':')

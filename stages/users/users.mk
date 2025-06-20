@@ -1,10 +1,10 @@
 ifeq ($(MAKECMDGOALS), production)
-USERSDB := stages/users/variables/users.json
+USERSDB := stages/users/variables/users.yaml
 
 users: early accounts sudoers configs ledger_scripts
 	@echo "$(ccgreen)Setting up users completed$(ccend)"
 else
-USERSDB := stages/users/variables/users_lite.json
+USERSDB := stages/users/variables/users_lite.yaml
 
 users: early accounts sudoers
 	@echo "$(ccgreen)Setting up users completed$(ccend)"

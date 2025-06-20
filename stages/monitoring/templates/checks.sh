@@ -4,7 +4,7 @@ set -e
 
 IFS=$'\n'
 
-for check in $(jq -cr ".${2}[]" ${1}); do
+for check in $(yq -o=json -I=0 ".${2}[]" ${1}); do
     # source <(echo "${check}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     name=`echo "${check}" | jq -cr '.name'`
     state=`echo "${check}" | jq -cr '.state'`

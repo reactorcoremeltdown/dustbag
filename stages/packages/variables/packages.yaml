@@ -1,0 +1,91 @@
+debian:
+  essentials:
+    - at
+    - bc
+    - htop
+    - bash-completion
+    - dnsutils
+    - curl
+    - davfs2
+    - dialog
+    - git
+    - jq
+    - markdown
+    - iptables-persistent
+    - needrestart
+    - python3-pip
+    - python3-venv
+    - reptyr
+    - screen
+    - sudo
+    - sqlite3
+    - sshfs
+    - syncthing
+    - tinc
+    - uuid-runtime
+    - unattended-upgrades
+    - vim
+    - whois
+    - neovim
+  sandbox:
+    - helm
+  builder:
+    - podman
+    - postfix
+    - mailutils
+  fermium:
+    - helm
+    - libncurses-dev
+    - libportmidi-dev
+    - libasound2-dev
+  server:
+    - cowsay
+    - aha
+    - cryptsetup
+    - duplicity
+    - docker-registry
+    - certbot
+    - gnuplot
+    - gocryptfs
+    - gridsite-clients
+    - html2text
+    - imagemagick
+    - inotify-tools
+    - mosh
+    - ffmpeg
+    - nfs-common
+    - libimage-exiftool-perl
+    - lua-dbi-mysql
+    - ncmpcpp
+    - nginx-full
+    - openvpn
+    - pandoc
+    - texlive-latex-base
+    - texlive-fonts-recommended
+    - texlive-latex-recommended
+    - texlive-latex-extra
+    - trivy
+    - lmodern
+    - percona-toolkit
+    - postfix
+    - radicale
+    - podman
+    - prometheus
+    - python3-full
+    - python3-bcrypt
+    - python3-passlib
+    - python3-tqdm
+    - pup
+    - id3v2
+    - telnet
+    - tree
+    - khal
+    - todoman
+    - zip
+    - redis
+    - webdis
+python:
+  server:
+    - yt-dlp
+    - beets
+  noop: []

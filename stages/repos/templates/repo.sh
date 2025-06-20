@@ -5,7 +5,7 @@ DISTRO=`lsb_release -cs`
 DEBIAN_VERSION=`lsb_release -sr`
 
 
-for repo in `jq -c '.debian.repositories[]' ${1}`; do
+for repo in `yq -o=json -I=0 '.debian.repositories[]' ${1}`; do
     source <(echo "${repo}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     if [[ ${state} = 'present' ]]; then
         test -z ${distro} && distro=${DISTRO}

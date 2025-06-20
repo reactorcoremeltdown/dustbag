@@ -37,10 +37,8 @@ wtfd_amd64:
 
 wtfd_armv6:
 	systemctl stop wtfd.service || true
-	rm -f /tmp/dafuq
-	wget -c https://repo.rcmd.space/binaries/dafuq/releases/v0.10.0/dafuq-linux_arm -O /tmp/dafuq
-	install -D -m 755 /tmp/dafuq /usr/local/bin
-	cp stages/monitoring/files/configs/wtfd_generic.service /etc/systemd/system/wtfd.service
+	apt -y install dafuq
+	cp stages/monitoring/files/configs/wtfd-standard.service /etc/systemd/system/wtfd.service
 	chmod 644 /etc/systemd/system/wtfd.service
 
 wtfd_files:
@@ -75,7 +73,7 @@ wtfd: wtfd_files wtfd_restart
 	@echo "$(ccgreen)Installing wtfd completed$(ccend)"
 
 checks_configs:
-	bash stages/monitoring/templates/checks.sh stages/monitoring/variables/checks.json $(MACHINE)
+	bash stages/monitoring/templates/checks.sh stages/monitoring/variables/checks.yaml $(MACHINE)
 	@echo "$(ccgreen)Installing DAFUQ checks completed$(ccend)"
 
 checks: wtfd_files checks_configs wtfd_restart

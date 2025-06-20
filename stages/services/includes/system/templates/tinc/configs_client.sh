@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source <(jq -r '.services.tinc | to_entries[] | [.key,(.value|@sh)] | join("=")' stages/services/variables/services.json)
+source <(yq -r '.services.tinc | to_entries[] | [.key,(.value|@sh)] | join("=")' stages/services/variables/services.yaml)
 
 install -d -m 0755 /etc/tinc/${netname}
 install -d -m 0755 /etc/tinc/${netname}/hosts

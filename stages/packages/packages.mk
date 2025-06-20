@@ -1,15 +1,15 @@
 ifeq ($(MAKECMDGOALS), production)
-	PACKAGES := $(shell jq -cr '.debian.essentials[], .debian.server[]' stages/packages/variables/packages.json | xargs)
-	PYTHON_PACKAGES := $(shell jq -cr '.python.server[]' stages/packages/variables/packages.json | xargs)
+	PACKAGES := $(shell yq -r '.debian.essentials[], .debian.server[]' stages/packages/variables/packages.yaml | xargs)
+	PYTHON_PACKAGES := $(shell yq -r '.python.server[]' stages/packages/variables/packages.yaml | xargs)
 else ifeq ($(MAKECMDGOALS), seedbox)
-	PACKAGES := $(shell jq -cr '.debian.essentials[]' stages/packages/variables/packages.json | xargs)
-	PYTHON_PACKAGES := $(shell jq -cr '.python.noop[]' stages/packages/variables/packages.json | xargs)
+	PACKAGES := $(shell yq -r '.debian.essentials[]' stages/packages/variables/packages.yaml | xargs)
+	PYTHON_PACKAGES := $(shell yq -r '.python.noop[]' stages/packages/variables/packages.yaml | xargs)
 else ifeq ($(MAKECMDGOALS), builder)
-	PACKAGES := $(shell jq -cr '.debian.essentials[], .debian.builder[]' stages/packages/variables/packages.json | xargs)
-	PYTHON_PACKAGES := $(shell jq -cr '.python.noop[]' stages/packages/variables/packages.json | xargs)
+	PACKAGES := $(shell yq -r '.debian.essentials[], .debian.builder[]' stages/packages/variables/packages.yaml | xargs)
+	PYTHON_PACKAGES := $(shell yq -r '.python.noop[]' stages/packages/variables/packages.yaml | xargs)
 else
-	PACKAGES := $(shell jq -cr '.debian.essentials[]' stages/packages/variables/packages.json | xargs)
-	PYTHON_PACKAGES := $(shell jq -cr '.python.noop[]' stages/packages/variables/packages.json | xargs)
+	PACKAGES := $(shell yq -r '.debian.essentials[]' stages/packages/variables/packages.yaml | xargs)
+	PYTHON_PACKAGES := $(shell yq -r '.python.noop[]' stages/packages/variables/packages.yaml | xargs)
 endif
 
 packages: repos

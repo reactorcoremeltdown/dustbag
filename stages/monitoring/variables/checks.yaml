@@ -1,0 +1,696 @@
+production:
+  - name: prod_syncthing_service
+    state: present
+    plugin: check_systemd_service
+    argument: syncthing@syncthing.service
+    interval: 1m
+    description: 'Syncthing: production (systemd service)'
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
+  - name: prod_syncthing
+    state: present
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    argument: http://127.0.0.1:8384/rest/noauth/health
+    interval: 1m
+    description: 'Syncthing: production'
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
+    suppressedBy:
+      - prod_syncthing_service
+  - name: dav_https
+    state: present
+    plugin: check_https_certificate
+    argument: dav.rcmd.space
+    interval: 10m
+    description: Radicale SSL certificate
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: check_vcfb_updates
+    state: present
+    plugin: check_website_diff
+    argument: https://vcfb.de
+    interval: 12h
+    description: Checking VCFB exhibitions for 2024
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
+  - name: provisioning
+    state: present
+    plugin: check_file
+    argument: /etc/default/earlystageconfigs
+    interval: 15s
+    description: Provisioning file
+    hostname: rcmd.space
+    warningThreshold: "10"
+    criticalThreshold: "5"
+    flowOperator: downwards
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: traccar
+    state: present
+    plugin: check_traccar_logs
+    argument: ""
+    interval: 15s
+    description: Traccar location tracker
+    hostname: rcmd.space
+    criticalThreshold: "1814000"
+    flowOperator: upwards
+    notify:
+      - telegram
+  - name: webdav_filesystem
+    state: present
+    plugin: check_file
+    argument: /var/storage/wastebox/tiredsysadmin.cc/podcasts/JMGODIER.xml
+    interval: 15s
+    description: Enсrypted webdav mount
+    hostname: rcmd.space
+    suppressedBy:
+      - gocryptfs_config
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: gocryptfs_config
+    state: present
+    plugin: check_file
+    argument: /var/storage/smallwastebox/encrypted/gocryptfs.conf
+    interval: 15s
+    description: Decrypted webdav mount
+    hostname: rcmd.space
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: site_https
+    state: present
+    plugin: check_https_certificate
+    argument: rcmd.space
+    interval: 10m
+    description: Main Website SSL certificate
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: blog_https
+    state: present
+    plugin: check_https_certificate
+    argument: blog.rcmd.space
+    interval: 10m
+    description: Blog Website SSL certificate
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: dave_service
+    state: present
+    plugin: check_systemd_service
+    argument: dave.service
+    interval: 1m
+    description: DAVE, a WebDAV server
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: tinc_host
+    state: present
+    plugin: check_systemd_service
+    argument: tinc@clusternet.service
+    interval: 1m
+    description: TINC, main server
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: task-transformer
+    state: present
+    plugin: check_systemd_service
+    argument: task-transformer.service
+    interval: 5m
+    description: VTODO + VEVENT + Kanboard sync service
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: kernel_version
+    state: present
+    plugin: check_kernel_version
+    argument: ""
+    interval: 48h
+    description: Linux Kernel Version
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: free_space
+    state: present
+    plugin: check_disk_space
+    argument: /
+    interval: 3m
+    descripMissing spacetion: Free space on disk
+    warningThreshold: "90"
+    criticalThreshold: "95"
+    flowOperator: upwards
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: hetzner_storagebox_v2
+    state: present
+    plugin: check_storagebox_space
+    argument: u346154
+    interval: 2m
+    description: Free space on STORAGEBOX V2
+    warningThreshold: "80"
+    criticalThreshold: "95"
+    flowOperator: upwards
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: task_transformer_edit
+    state: present
+    plugin: check_redis_key
+    argument: task-transformer-edit-error
+    interval: 15m
+    description: Task Transformer edit command errors
+    warningThreshold: "3"
+    criticalThreshold: "5"
+    flowOperator: upwards
+    suppressedBy:
+      - task-transformer
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: task_transformer_sync
+    state: present
+    plugin: check_redis_key
+    argument: task-transformer-sync-error
+    interval: 15m
+    description: Task Transformer sync status
+    warningThreshold: "3"
+    criticalThreshold: "5"
+    flowOperator: upwards
+    suppressedBy:
+      - task-transformer
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: task_transformer_update_due
+    state: present
+    plugin: check_redis_key
+    argument: task-transformer-update-due
+    interval: 15m
+    description: Task Transformer, updating due date of kanboard cards
+    warningThreshold: "3"
+    criticalThreshold: "5"
+    flowOperator: upwards
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: task_transformer_online
+    state: present
+    plugin: check_redis_timestamp
+    argument: task-transformer-sync-timestamp
+    interval: 5m
+    description: Task Transformer operational status
+    warningThreshold: "301"
+    criticalThreshold: "500"
+    flowOperator: upwards
+    suppressedBy:
+      - task-transformer
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: internal_wiki
+    state: present
+    plugin: check_http_success_rate
+    argument: http://localhost:26008/pages/notes/sprints
+    interval: 5m
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    description: Internal wiki engine
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: wiki_pictures
+    state: present
+    plugin: check_file
+    argument: /var/storage/wastebox/tiredsysadmin.cc/media/pics/IMG_20230308_134654_494-4hlt6piqgba2xsypulrslb6eyhsz.jpg
+    interval: 1m
+    flowOperator: downwards
+    description: Wiki picture storage
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: api_website_health
+    state: present
+    plugin: check_http_success_rate
+    argument: https://api.rcmd.space/v6/healthcheck
+    interval: 1m
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    description: RCMD API website
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: radicale
+    state: present
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    argument: https://dav.rcmd.space/radicale/.web/
+    interval: 1m
+    description: Radicale CalDAV server
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: grafana_web
+    state: present
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    argument: http://localhost:27105/api/health
+    interval: 10m
+    description: Grafana Web interface
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: api_internal_website
+    state: present
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    argument: https://api.rcmd.space/internal/healthcheck
+    interval: 1m
+    description: RCMD Internal API website
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: rbw_proxy
+    state: present
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    argument: http://10.88.0.1:26105/healthcheck
+    interval: 1m
+    description: RCMD Internal API, RBW proxy
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: ci_website
+    state: present
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    argument: https://ci.rcmd.space/badge/dummy.svg
+    interval: 1m
+    description: CI engine
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: api_https
+    state: present
+    plugin: check_https_certificate
+    argument: api.rcmd.space
+    interval: 10m
+    description: API HTTPS certificate
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: explosions_zp
+    state: present
+    plugin: check_ua_explosions
+    argument: "12"
+    interval: 15m
+    description: Check for reported explosions in Zaporizhzhia
+    notify:
+      - telegram
+      - gotify_disaster
+      - alert_fatigue
+  - name: caldav_backups
+    state: present
+    plugin: check_duplicity_backup
+    argument: file:///var/storage/wastebox/Backups/radicale/
+    interval: 6h
+    description: CalDAV backups
+    suppressedBy:
+      - webdav_filesystem
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: kanboard_backups
+    state: present
+    plugin: check_duplicity_backup
+    argument: file:///var/storage/wastebox/Backups/kanboard/
+    interval: 6h
+    description: Kanboard backups
+    suppressedBy:
+      - webdav_filesystem
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: website_backups
+    state: present
+    plugin: check_duplicity_backup
+    argument: file:///var/storage/wastebox/Backups/websites/
+    interval: 6h
+    description: Website backups
+    suppressedBy:
+      - webdav_filesystem
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: fermium_online
+    state: present
+    plugin: check_deviceping
+    argument: fermium.rcmd.space
+    interval: 20m
+    description: 'Device online test: fermium'
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: printserver_online
+    state: present
+    plugin: check_deviceping
+    argument: printer.tiredsysadmin.cc
+    interval: 20m
+    description: 'Device online test: printserver'
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: home_stereo
+    state: present
+    plugin: relay
+    argument: http://fermium.tiredsysadmin.cc:8881?check=home_stereo
+    interval: 30m
+    description: '[relay] MPD server online test'
+    hostname: fermiumv2.rcmd.space
+    suppressedBy:
+      - tinc_host
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: home_syncthing
+    state: present
+    plugin: relay
+    argument: http://fermium.tiredsysadmin.cc:8881?check=home_syncthing
+    interval: 30m
+    description: '[relay] Syncthing at home'
+    hostname: fermiumv2.rcmd.space
+    suppressedBy:
+      - tinc_host
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: home_printer
+    state: present
+    plugin: relay
+    argument: http://fermium.tiredsysadmin.cc:8881?check=home_printer
+    interval: 30m
+    suppressedBy:
+      - tinc_host
+    description: '[relay] CUPS server online test'
+    hostname: fermiumv2.rcmd.space
+    suppressedBy:
+      - printserver_online
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: home_printer_device
+    state: present
+    plugin: relay
+    argument: http://fermium.tiredsysadmin.cc:8881?check=home_printer_device
+    suppressedBy:
+      - tinc_host
+    interval: 10m
+    hostname: fermiumv2.rcmd.space
+    description: '[relay] Checking printer status, Brother Industries, Ltd HL-2140 series'
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: home_storage
+    state: present
+    plugin: relay
+    argument: http://fermium.tiredsysadmin.cc:8881?check=home_storage
+    interval: 30m
+    description: '[relay] Home storage status'
+    hostname: fermiumv2.rcmd.space
+    suppressedBy:
+      - tinc_host
+    notify:
+      - telegram
+      - alert_fatigue
+fermium:
+  - name: ft_motion
+    state: present
+    plugin: check_feature_toggle
+    argument: motion
+    interval: 20s
+    description: Feature toggle for motion service
+    hostname: fermium.rcmd.space
+    notify:
+      - feature_toggle
+  - name: home_stereo
+    state: present
+    plugin: check_mpd_online
+    argument: ""
+    interval: 5m
+    description: MPD server online test
+    hostname: fermium.rcmd.space
+    notify:
+      - dummy
+  - name: home_syncthing
+    state: present
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    argument: http://127.0.0.1:8384/rest/noauth/health
+    interval: 62s
+    description: Syncthing at home
+    notify:
+      - dummy
+  - name: podsync_service
+    state: present
+    plugin: check_systemd_service
+    argument: podsync.service
+    interval: 1m
+    description: Podcast sync service
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
+  - name: home_storage
+    state: present
+    plugin: check_disk_space
+    argument: /
+    interval: 3m
+    description: Free space on disk
+    warningThreshold: "90"
+    criticalThreshold: "95"
+    flowOperator: upwards
+    notify:
+      - dummy
+  - name: home_printer
+    state: present
+    plugin: relay
+    argument: http://printer.tiredsysadmin.cc:8881?check=home_printer
+    interval: 10m
+    description: '[relay] CUPS server online test'
+    notify:
+      - dummy
+  - name: home_printer_device
+    state: present
+    plugin: relay
+    argument: http://printer.tiredsysadmin.cc:8881?check=home_printer_device
+    interval: 5m
+    description: '[relay] Checking printer status, Brother Industries, Ltd HL-2140 series'
+    notify:
+      - dummy
+  - name: home_tinc_network
+    state: present
+    plugin: check_http_success_rate
+    warningThreshold: "96"
+    criticalThreshold: "93"
+    flowOperator: downwards
+    argument: http://10.8.0.6
+    interval: 181s
+    description: TINC Mesh VPN Network
+    hostname: 192.168.2.221
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: main_website
+    state: present
+    plugin: check_http_success_rate
+    warningThreshold: "98"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    argument: https://rcmd.space
+    interval: 63s
+    description: RCMD.space website
+    hostname: 192.168.2.120
+    notify:
+      - gotify
+      - alert_fatigue
+printserver:
+  - name: home_printer
+    state: present
+    plugin: check_cups_online
+    argument: ""
+    interval: 5m
+    description: CUPS server online test
+    notify:
+      - dummy
+  - name: home_printer_device
+    state: present
+    plugin: check_usb_device
+    argument: 04f9:0033
+    interval: 3m
+    description: Checking printer status, Brother Industries, Ltd HL-2140 series
+    notify:
+      - dummy
+outpost:
+  - name: wiki_protected
+    state: present
+    plugin: check_protected_url
+    argument: https://wiki.rcmd.space
+    interval: 62s
+    description: Wiki protection check
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: blog_beta_protected
+    state: present
+    plugin: check_protected_url
+    argument: https://beta.tiredsysadmin.cc
+    interval: 62s
+    description: Blog beta protection check
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: site_beta_protected
+    state: present
+    plugin: check_protected_url
+    argument: https://beta.rcmd.space
+    interval: 62s
+    description: Site beta protection check
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: kanboard_protected
+    state: present
+    plugin: check_protected_url
+    argument: https://board.rcmd.space
+    interval: 62s
+    description: Kanboard protection check
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: grafana_protected
+    state: present
+    plugin: check_protected_url
+    argument: https://graph.rcmd.space
+    interval: 62s
+    description: Grafana protection check
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: mixtape_protected
+    state: present
+    plugin: check_protected_url
+    argument: https://mixtape.tiredsysadmin.cc
+    interval: 62s
+    description: Mixtape protection check
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: mood_protected
+    state: present
+    plugin: check_protected_url
+    argument: https://mood.rcmd.space
+    interval: 62s
+    description: Mood journal protection check
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: reader_protected
+    state: present
+    plugin: check_protected_url
+    argument: https://reader.tiredsysadmin.cc
+    interval: 62s
+    description: RSS reader protection check
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: main_domain_expiry
+    state: present
+    plugin: check_domain_expiry
+    argument: rcmd.space
+    interval: 24h
+    description: rcmd.space domain expiry check
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: blog_domain_expiry
+    state: present
+    plugin: check_domain_expiry
+    argument: tiredsysadmin.cc
+    interval: 24h
+    description: tiredsysadmin.cc domain expiry check
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: main_website
+    state: present
+    plugin: check_http_success_rate
+    warningThreshold: "98"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    argument: https://rcmd.space
+    interval: 3m
+    description: RCMD.space website
+    hostname: outpost.rcmd.space
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: blog_website
+    state: present
+    plugin: check_http_success_rate
+    warningThreshold: "98"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    argument: https://tiredsysadmin.cc
+    interval: 3m
+    description: Blog website
+    hostname: outpost.rcmd.space
+    notify:
+      - gotify
+      - alert_fatigue
