@@ -3,14 +3,14 @@
 ifeq ($(MAKECMDGOALS), production)
 MACHINE := production
 
-monitoring: wtfd_amd64 checks wtfd
+monitoring: wtfd_package checks wtfd
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
 ## Fermium, the little Pi Zero W
 else ifeq ($(MAKECMDGOALS), fermium)
 MACHINE := fermium
 
-monitoring: wtfd_armv6 checks wtfd
+monitoring: wtfd_package checks wtfd
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
 else ifeq ($(MAKECMDGOALS), printserver)
@@ -22,14 +22,14 @@ monitoring: wtfd_armv6 checks wtfd
 else ifeq ($(MAKECMDGOALS), outpost)
 MACHINE := outpost
 
-monitoring: wtfd_amd64 checks wtfd
+monitoring: wtfd_package checks wtfd
 	cat stages/monitoring/files/configs/wtfd_generic.service > /etc/systemd/system/wtfd.service
 	systemctl daemon-reload && systemctl restart wtfd
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
 endif
 
-wtfd_amd64:
+wtfd_package:
 	systemctl stop wtfd.service || true
 	apt -y install dafuq
 	cp stages/monitoring/files/configs/wtfd-standard.service /etc/systemd/system/wtfd.service
@@ -38,7 +38,7 @@ wtfd_amd64:
 wtfd_armv6:
 	systemctl stop wtfd.service || true
 	apt -y install dafuq
-	cp stages/monitoring/files/configs/wtfd-standard.service /etc/systemd/system/wtfd.service
+	cp stages/monitoring/files/configs/wtfd_generic.service /etc/systemd/system/wtfd.service
 	chmod 644 /etc/systemd/system/wtfd.service
 
 wtfd_files:
