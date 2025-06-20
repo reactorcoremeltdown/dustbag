@@ -3,7 +3,7 @@
 API_URL="https://api.rcmd.space/v6"
 UA="User-Agent: monitoring/fatigue-0.1"
 
-API_TOKEN=`jq -cr '.secrets.monitoring.token' /etc/secrets/secrets.json`
+API_TOKEN=`jq -cr '.secrets.ledger.token' /etc/secrets/secrets.json`
 
 ONETIME_TOKEN=`curl -s -XPOST -H "${UA}" --data-urlencode "token=${API_TOKEN}" ${API_URL}/token/get`
 
