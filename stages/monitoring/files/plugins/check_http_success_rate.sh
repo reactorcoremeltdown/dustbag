@@ -7,34 +7,44 @@ test -d /var/lib/httpsuccessrate/ || mkdir -p /var/lib/httpsuccessrate
 TIMEFRAME=$(date --date "now -3 hours" '+%s')
 TIMEOUT="10000"
 
-TOTAL_COUNT=$(sqlite3 /var/lib/httpsuccessrate/timeseries.db <<EOF
+sleep 0.2
+
+TOTAL_COUNT=$(sqlite3 /var/lib/httpsuccessrate/timeseries_${PLUGIN_NAME}.db <<EOF
 .timeout ${TIMEOUT}
 select count(*) from ${PLUGIN_NAME};
 EOF
 )
 
+sleep 0.2
+
 if [[ ${TOTAL_COUNT} -gt 1000 ]]; then
-    sqlite3 /var/lib/httpsuccessrate/timeseries.db <<EOF
+    sqlite3 /var/lib/httpsuccessrate/timeseries_${PLUGIN_NAME}.db <<EOF
 .timeout ${TIMEOUT}
 delete from ${PLUGIN_NAME} where time < strftime('%s', 'now', '-2 days');
 EOF
 fi
 
-sqlite3 /var/lib/httpsuccessrate/timeseries.db <<EOF
+sleep 0.2
+
+sqlite3 /var/lib/httpsuccessrate/timeseries_${PLUGIN_NAME}.db <<EOF
 .timeout ${TIMEOUT}
 CREATE TABLE IF NOT EXISTS ${PLUGIN_NAME} (time timestamp default (strftime('%s', 'now')), status text);
 EOF
 
 status=`curl -A "monit-ping-check" -s -o /dev/null -w "%{http_code}" --connect-timeout 20 --max-time 20 $1`
 
-sqlite3 /var/lib/httpsuccessrate/timeseries.db <<EOF
+sleep 0.2
+
+sqlite3 /var/lib/httpsuccessrate/timeseries_${PLUGIN_NAME}.db <<EOF
 .timeout ${TIMEOUT}
 insert into ${PLUGIN_NAME} (status) values (${status});
 EOF
 
+sleep 0.2
+
 PERCENTAGE="0"
 
-PERCENTAGE_DEC=$(sqlite3 /var/lib/httpsuccessrate/timeseries.db <<EOF
+PERCENTAGE_DEC=$(sqlite3 /var/lib/httpsuccessrate/timeseries_${PLUGIN_NAME}.db <<EOF
 .timeout ${TIMEOUT}
 select round(100.0 * count(*) / (select count(*) from ${PLUGIN_NAME} where time > ${TIMEFRAME})) as percentage from ${PLUGIN_NAME} where status = '200' and time > ${TIMEFRAME};
 EOF
