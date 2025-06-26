@@ -1,4 +1,5 @@
 UNAME := $(shell uname)
+MACHINE_ARCH := $(shell uname -m)
 RETRY := $(shell test -f /etc/default/earlystageconfigs && echo "true")
 HOSTNAME := $(shell cat variables/main.json | jq -r .hostname)
 
@@ -12,11 +13,19 @@ early: test mirrors vault_unseal apt_configs keygen earlystagepackages locales p
 	@echo "$(ccgreen)Early provisioning stage completed$(ccend)"
 endif
 
+ifeq ($(MACHINE_ARCH), x86_64)
+YQ_DOWNLOAD_URL := "https://github.com/mikefarah/yq/releases/download/v4.45.4/yq_linux_amd64"
+else ifeq ($(MACHINE_ARCH), armv6l)
+YQ_DOWNLOAD_URL := "https://github.com/mikefarah/yq/releases/download/v4.45.4/yq_linux_arm"
+else ifeq ($(MACHINE_ARCH), aarch64)
+YQ_DOWNLOAD_URL := "https://github.com/mikefarah/yq/releases/download/v4.45.4/yq_linux_arm64"
+endif
+
 test:
 ifeq ($(UNAME), Linux)
-	jq --version || apt -y update && apt install -y jq golang-go git make curl lsb-release
+	jq --version || apt -y update && apt install -y jq wget git make curl lsb-release
 	apt-get purge -y yq
-	git clone https://github.com/mikefarah/yq.git && cd yq && make install
+	wget -c $(YQ_DOWNLOAD_URL) -O /usr/local/bin/yq && chmod +x /usr/local/bin/yq
 else
 	@printf "`tput bold`This operating system is not supported`tput sgr0`\n"
 	exit 1
