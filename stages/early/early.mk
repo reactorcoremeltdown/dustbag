@@ -14,7 +14,9 @@ endif
 
 test:
 ifeq ($(UNAME), Linux)
-	jq --version || apt -y update && apt install -y jq yq git make curl lsb-release
+	jq --version || apt -y update && apt install -y jq golang-go git make curl lsb-release
+	apt-get purge -y yq
+	git clone https://github.com/mikefarah/yq.git && cd yq && make install
 else
 	@printf "`tput bold`This operating system is not supported`tput sgr0`\n"
 	exit 1
