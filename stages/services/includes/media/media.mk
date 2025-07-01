@@ -1,6 +1,6 @@
 davfs2:
 	timeout 5 test -d /var/storage/smallwastebox || mkdir -p /var/storage/smallwastebox
-	test -f /etc/davfs2/secrets || (vault-request-unlock && bash stages/services/includes/media/templates/davfs2/secrets.sh)
+	grep -oq "managed by dustbag" /etc/davfs2/secrets || (vault-request-unlock && bash stages/services/includes/media/templates/davfs2/secrets.sh)
 	install -D -m 644 stages/services/includes/media/files/etc/systemd/system/davfs2-mounts/* /etc/systemd/system
 	test -f /etc/secrets/gocryptfs || (vault-request-unlock && vault-request-key password system/gocryptfs > /etc/secrets/gocryptfs)
 	chmod 400 /etc/secrets/gocryptfs
