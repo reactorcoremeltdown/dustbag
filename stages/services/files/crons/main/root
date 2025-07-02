@@ -53,3 +53,4 @@
 25 20 * * * /usr/local/bin/achievements.sh hermesconrad
 25 17 * * * /usr/local/bin/achievements.sh businesscat
 12 21 * * * /usr/local/bin/achievements.sh hakunamatata
+50 20 * * 5 /usr/local/bin/achievements.sh scroogemcduck
