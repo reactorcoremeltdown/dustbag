@@ -56,5 +56,5 @@ EOF
 
     kubect get namespace api || kubectl create namespace api
     kubectl delete secret --namespace=api rcmd-api-v6 || true
-    echo "${YAML}" | kubectl create secret generic rcmd-api-v6 --from-file=fsmq.yaml=/dev/stdin
+    echo "${YAML}" | kubectl create secret generic --namespace=api rcmd-api-v6 --from-file=fsmq.yaml=/dev/stdin
 fi
