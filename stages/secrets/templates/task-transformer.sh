@@ -40,4 +40,8 @@ EOF
     podman secret rm task-transformer || true
     echo "${YAML}" | podman secret create task-transformer -
     systemctl start task-transformer.service
+
+    kubect get namespace apps || kubectl create namespace apps
+    kubectl delete secret --namespace=apps task-transformer || true
+    echo "${YAML}" | kubectl create secret generic --namespace=apps grafana --from-file=config.yaml=/dev/stdin
 fi
