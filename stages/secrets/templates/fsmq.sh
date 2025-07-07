@@ -53,4 +53,8 @@ EOF
     podman secret rm rcmd-api-v6 || true
     echo "${YAML}" | podman secret create rcmd-api-v6 -
     systemctl start rcmd-api-v6.service
+
+    kubect get namespace api || kubectl create namespace api
+    kubectl delete secret --namespace=api rcmd-api-v6 || true
+    echo "${YAML}" | kubectl create secret generic rcmd-api-v6 --from-file=fsmq.yaml=/dev/stdin
 fi
