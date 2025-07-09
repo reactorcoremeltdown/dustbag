@@ -50,7 +50,9 @@
 # Positive affirmations
 3 21 * * * /usr/local/bin/achievements.sh flash
 3 11 * * * /usr/local/bin/achievements.sh runningman
-25 20 * * * /usr/local/bin/achievements.sh hermesconrad
+25 21 * * * /usr/local/bin/achievements.sh hermesconrad
 25 17 * * * /usr/local/bin/achievements.sh businesscat
 12 21 * * * /usr/local/bin/achievements.sh hakunamatata
 50 20 * * 5 /usr/local/bin/achievements.sh scroogemcduck
+10 10 1 * * /usr/local/bin/achievements.sh ricksanchez
+15 10 1 3,6,9,12 * /usr/local/bin/achievements.sh jefflebowski
