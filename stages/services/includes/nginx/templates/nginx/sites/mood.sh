@@ -47,7 +47,7 @@ server {
 
     auth_request /validate;
     location = /validate {
-        proxy_pass http://127.0.0.1:29090/validate;
+        proxy_pass http://127.0.0.1:30021/validate;
         proxy_set_header Host \$http_host;
         proxy_pass_request_body off;
         proxy_set_header Content-Length "";
