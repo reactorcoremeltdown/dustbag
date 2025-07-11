@@ -141,7 +141,7 @@ production:
     warningThreshold: "99"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: http://127.0.0.1:30071/healthcheck
+    argument: http://int.rcmd.space:30071/healthcheck
     interval: 1m
     description: 'VTODO + VEVENT + Kanboard sync service'
     notify:
@@ -242,7 +242,7 @@ production:
   - name: internal_wiki
     state: present
     plugin: check_http_success_rate
-    argument: http://localhost:26008/pages/notes/sprints
+    argument: http://int.rcmd.space:30085/pages/notes/sprints
     interval: 5m
     warningThreshold: "99"
     criticalThreshold: "97"
@@ -293,9 +293,9 @@ production:
     warningThreshold: "99"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: http://localhost:27105/api/health
+    argument: http://int.rcmd.space:30031/api/health
     interval: 10m
-    description: Grafana Web interface
+    description: Grafana Web interfacUe
     notify:
       - telegram
       - alert_fatigue
