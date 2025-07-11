@@ -18,7 +18,7 @@ youtube = "${YOUTUBE_API_KEY}"
 [feeds]
 EOF
 
-for feed in $(echo "${FEEDS}" | yq -cr '.[]'); do
+for feed in $(echo "${FEEDS}" | yq -o=json -I=0 '.[]'); do
     name=$(echo "${feed}" | jq -cr '.name')
     url=$(echo "${feed}" | jq -cr '.url')
     filters=$(echo "${feed}" | jq -cr '.filters')
