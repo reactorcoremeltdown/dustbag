@@ -107,6 +107,6 @@ podman secret rm rcmd-api-grafana || true
 echo "${INI}" | podman secret create rcmd-api-grafana -
 systemctl start rcmd-api-grafana.service
 
-kubect get namespace monitoring || kubectl create namespace monitoring
+kubectl get namespace monitoring || kubectl create namespace monitoring
 kubectl delete secret --namespace=monitoring grafana || true
 echo "${INI}" | kubectl create secret generic --namespace=monitoring grafana --from-file=grafana.ini=/dev/stdin
