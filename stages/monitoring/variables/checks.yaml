@@ -136,6 +136,19 @@ production:
       - telegram
       - alert_fatigue
   - name: task-transformer
+    state: absent
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    argument: http://int.rcmd.space:30071/healthcheck
+    interval: 1m
+    description: 'VTODO + VEVENT + Kanboard sync service'
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
+  - name: task_transformer
     state: present
     plugin: check_http_success_rate
     warningThreshold: "99"
