@@ -79,8 +79,8 @@ allowed_organizations =
 [external_image_storage.azure_blob]
 [external_image_storage.local]
 [rendering]
-server_url = http://10.88.0.1:27108/render
-callback_url = http://10.88.0.1:27105
+server_url = http://grafana-renderer.monitoring.svc.cluster.local:8081/render
+callback_url = http://grafana.monitoring.svc.cluster.local:3000
 [panels]
 [plugins]
 [live]
