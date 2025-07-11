@@ -35,6 +35,7 @@ name = Gitea
 enabled = true
 allow_sign_up = true
 auto_login = true
+skip_org_role_sync = true
 scopes = openid email name
 ${OAUTH_SECRETS}
 team_ids =
