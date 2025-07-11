@@ -127,13 +127,26 @@ production:
       - gotify
       - alert_fatigue
   - name: task-transformer
-    state: present
+    state: absent
     plugin: check_systemd_service
     argument: task-transformer.service
     interval: 5m
     description: VTODO + VEVENT + Kanboard sync service
     notify:
       - telegram
+      - alert_fatigue
+  - name: task-transformer
+    state: present
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    argument: http://127.0.0.1:30071/healthcheck
+    interval: 1m
+    description: 'VTODO + VEVENT + Kanboard sync service'
+    notify:
+      - telegram
+      - gotify
       - alert_fatigue
   - name: kernel_version
     state: present
