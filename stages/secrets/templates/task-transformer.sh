@@ -15,7 +15,7 @@ system:
 network:
   host: "127.0.0.1"
   port: 8080
-  webdis: "10.88.0.1:7379"
+  webdis: "rbw.rcmd.space:7379"
 services:
   fsmq:
     url: "https://api.rcmd.space/v6/"
