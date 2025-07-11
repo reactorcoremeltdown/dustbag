@@ -3,7 +3,7 @@
 function request_key() {
 	KEY=${1}
 	FOLDER=${2}
-	OUTPUT=`curl -s -XPOST --data-urlencode "key=${KEY}" --data-urlencode "folder=${FOLDER}" http://10.88.0.1:26105/vault/request-key`
+	OUTPUT=`curl -s -XPOST --data-urlencode "key=${KEY}" --data-urlencode "folder=${FOLDER}" https://rbw.rcmd.space/vault/request-key`
 	echo "${OUTPUT}"
 }
 

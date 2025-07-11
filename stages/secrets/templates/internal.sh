@@ -24,7 +24,7 @@ system:
 network:
   port: 80
   routePrefix: "/internal"
-  rbwProxyAddress: "http://10.88.0.1:26105"
+  rbwProxyAddress: "https://rbw.rcmd.space"
 services:
   fsmq:
     url: "https://api.rcmd.space/v6/"

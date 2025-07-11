@@ -3,7 +3,7 @@
 counter=0
 
 function request_status() {
-	STATUS=`curl -s -XPOST -o /dev/null -w "%{http_code}" http://10.88.0.1:26105/vault/lock`
+	STATUS=`curl -s -XPOST -o /dev/null -w "%{http_code}" https://rbw.rcmd.space/vault/lock`
 	echo "${STATUS}"
 }
 
