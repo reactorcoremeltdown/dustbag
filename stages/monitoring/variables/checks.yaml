@@ -604,6 +604,16 @@ outpost:
       - gotify
       - telegram
       - alert_fatigue
+  - name: wiki_backend_protected
+    state: present
+    plugin: check_protected_url
+    argument: http://garage.rcmd.space:30085
+    interval: 126s
+    description: Wiki (backend) protection check
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
   - name: blog_beta_protected
     state: present
     plugin: check_protected_url
@@ -634,12 +644,32 @@ outpost:
       - gotify
       - telegram
       - alert_fatigue
+  - name: kanboard_backend_protected
+    state: present
+    plugin: check_protected_url
+    argument: http://garage.rcmd.space:30081
+    interval: 124s
+    description: Kanboard (backend) protection check
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
   - name: grafana_protected
     state: present
     plugin: check_protected_url
     argument: https://graph.rcmd.space
     interval: 62s
     description: Grafana protection check
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: grafana_backend_protected
+    state: present
+    plugin: check_protected_url
+    argument: http://garage.rcmd.space:30031
+    interval: 124s
+    description: Grafana (backend) protection check
     notify:
       - gotify
       - telegram
