@@ -51,7 +51,7 @@
 3 21 * * * /usr/local/bin/achievements.sh flash
 3 11 * * * /usr/local/bin/achievements.sh runningman
 25 21 * * * /usr/local/bin/achievements.sh hermesconrad
-25 17 * * * /usr/local/bin/achievements.sh businesscat
+25 17 * * 1-5 /usr/local/bin/achievements.sh businesscat
 12 21 * * * /usr/local/bin/achievements.sh hakunamatata
 50 20 * * 5 /usr/local/bin/achievements.sh scroogemcduck
 10 10 1 * * /usr/local/bin/achievements.sh ricksanchez
