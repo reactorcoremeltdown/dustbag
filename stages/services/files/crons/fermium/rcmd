@@ -1,0 +1,1 @@
+* * * * * cd /home/rcmd/kb.git && git fetch -p origin && git push --mirror
