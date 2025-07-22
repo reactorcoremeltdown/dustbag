@@ -41,9 +41,6 @@ for feed in $(echo "${FEEDS}" | yq -o=json -I=0 '.[]'); do
     if [[ ${filters} != "null" ]]; then
         echo "  filters = ${filters}" >> /etc/podsync/podsync.toml
     fi
-    if [[ ${post_download_hook} != "null" ]]; then
-        echo "  post_download_hook = ${post_download_hook}" >> /etc/podsync/podsync.toml
-    fi
     if [[ ${keep_last} != "null" ]]; then
         echo "  clean = { keep_last = ${keep_last} }" >> /etc/podsync/podsync.toml
     else
@@ -56,6 +53,11 @@ for feed in $(echo "${FEEDS}" | yq -o=json -I=0 '.[]'); do
         echo "  cron_schedule = \"${cron_schedule}\"" >> /etc/podsync/podsync.toml
     else
         echo "  update_period = \"1h\"" >> /etc/podsync/podsync.toml
+    fi
+    if [[ ${post_download_hook} != "null" ]]; then
+        echo "  [[feeds.${name}.post_episode_download]]" >> /etc/podsync/podsync.toml
+        echo "  command = [\"${post_download_hook}\"]" >> /etc/podsync/podsync.toml
+        echo "  timeout = 30" >> /etc/podsync/podsync.toml
     fi
 done
 
