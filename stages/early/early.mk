@@ -72,6 +72,6 @@ endif
 
 profiles:
 ifneq ($(RETRY), true)
-	install -D -v -m 644 \
-		stages/early/files/99-bashrc.sh /etc/profile.d
+	install -T -D -v -m 644 \
+		stages/early/files/99-bashrc.sh /root/.bash_profile
 endif
