@@ -57,7 +57,7 @@ for feed in $(echo "${FEEDS}" | yq -o=json -I=0 '.[]'); do
     if [[ ${post_download_hook} != "null" ]]; then
         echo "  [[feeds.${name}.post_episode_download]]" >> /etc/podsync/podsync.toml
         echo "  command = [${post_download_hook}]" >> /etc/podsync/podsync.toml
-        echo "  timeout = 30" >> /etc/podsync/podsync.toml
+        echo "  timeout = 300" >> /etc/podsync/podsync.toml
     fi
 done
 
