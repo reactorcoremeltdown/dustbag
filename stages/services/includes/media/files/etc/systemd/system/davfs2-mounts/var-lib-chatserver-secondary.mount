@@ -1,0 +1,16 @@
+[Unit]
+Description=Hetzner StorageBox
+Before=nginx.service
+Before=docker-registry.service
+After=network-online.target
+Wants=network-online.target
+
+[Mount]
+What=https://webdav.382578846.site
+Where=/var/lib/chatserver-secondary
+Options=rw,user,uid=syncthing,gid=syncthing,dir_mode=0775,file_mode=0664
+Type=davfs
+TimeoutSec=60
+
+[Install]
+WantedBy=remote-fs.target

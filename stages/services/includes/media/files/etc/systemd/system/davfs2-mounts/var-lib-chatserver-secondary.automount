@@ -1,0 +1,11 @@
+[Unit]
+Description=
+After=network-online.target
+Wants=network-online.target
+
+[Automount]
+Where=/var/lib/chatserver-secondary
+TimeoutIdleSec=300
+
+[Install]
+WantedBy=remote-fs.target

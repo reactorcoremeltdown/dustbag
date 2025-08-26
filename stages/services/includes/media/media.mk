@@ -5,10 +5,11 @@ davfs2:
 	test -f /etc/secrets/gocryptfs || (vault-request-unlock && vault-request-key password system/gocryptfs > /etc/secrets/gocryptfs)
 	chmod 400 /etc/secrets/gocryptfs
 	test -d /var/storage/wastebox || mkdir -p /var/storage/wastebox
+	test -d /var/lib/chatserver-secondary || mkdir -p /var/lib/chatserver-secondary
 	systemctl daemon-reload
-	systemctl enable var-storage-smallwastebox.automount gocryptfs.service
+	systemctl enable var-storage-smallwastebox.automount gocryptfs.service var-lib-chatserver-secondary.automount
 	systemctl disable var-storage-wastebox.automount var-storage-wastebox.mount
-	systemctl start var-storage-smallwastebox.mount gocryptfs.service
+	systemctl start var-storage-smallwastebox.mount gocryptfs.service var-lib-chatserver-secondary.mount
 	@echo "$(ccgreen)Setting up davfs2 mounts completed$(ccend)"
 
 podsync:
