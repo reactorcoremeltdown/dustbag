@@ -161,6 +161,18 @@ production:
       - telegram
       - gotify
       - alert_fatigue
+  - name: gotify_health
+    state: present
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    argument: https://notifications.rcmd.space/health
+    interval: 1m
+    description: 'Gotify online status'
+    notify:
+      - telegram
+      - alert_fatigue
   - name: task_transformer
     state: present
     plugin: check_http_success_rate
