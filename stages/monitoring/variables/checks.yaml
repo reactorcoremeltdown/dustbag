@@ -148,6 +148,19 @@ production:
       - telegram
       - gotify
       - alert_fatigue
+  - name: chatserver
+    state: present
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    argument: https://382578846.site/#/status
+    interval: 1m
+    description: 'Databag online status'
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
   - name: task_transformer
     state: present
     plugin: check_http_success_rate
