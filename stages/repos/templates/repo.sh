@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 IFS=$'\n'
-DISTRO=`lsb_release -cs`
+DISTRO_SLUG=`lsb_release -cs`
 DEBIAN_VERSION=`lsb_release -sr`
 
 
@@ -9,7 +9,7 @@ for repo in `yq -o=json -I=0 '.debian.repositories[]' ${1}`; do
     unset ${distro}
     source <(echo "${repo}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     if [[ ${state} = 'present' ]]; then
-        test -z ${distro} && distro=${DISTRO}
+        test -z ${distro} && distro=${DISTRO_SLUG}
         if [[ ${DEBIAN_VERSION} -lt 11 ]]; then
             KEYRING="/etc/apt/trusted.gpg.d/${name}.gpg"
             test -z ${key} || test -f ${KEYRING} || apt-key --keyring ${KEYRING} adv --fetch-keys --no-tty ${key}
