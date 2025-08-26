@@ -380,6 +380,17 @@ production:
     notify:
       - telegram
       - alert_fatigue
+  - name: chatserver_backups
+    state: present
+    plugin: check_duplicity_backup
+    argument: file:///var/storage/wastebox/Backups/chatserver-backups/
+    interval: 6h
+    description: Databag backups
+    suppressedBy:
+      - webdav_filesystem
+    notify:
+      - telegram
+      - alert_fatigue
   - name: kanboard_backups
     state: present
     plugin: check_duplicity_backup
