@@ -4,7 +4,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Automount]
-Where=/var/lib/chatserver-secondary
+Where=/var/lib/chatserver_secondary
 TimeoutIdleSec=300
 
 [Install]
