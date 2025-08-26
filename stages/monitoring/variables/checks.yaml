@@ -372,6 +372,15 @@ production:
     notify:
       - gotify
       - alert_fatigue
+  - name: gotify_https
+    state: present
+    plugin: check_https_certificate
+    argument: notifications.rcmd.space
+    interval: 10m
+    description: Gotify HTTPS certificate
+    notify:
+      - telegram
+      - alert_fatigue
   - name: explosions_zp
     state: present
     plugin: check_ua_explosions
