@@ -17,7 +17,7 @@ for repo in `yq -o=json -I=0 '.debian.repositories[]' ${1}`; do
             echo "${repo}" | jq -cr '. | "deb \(.url) DISTRO \(.section)"' | sed "s|DISTRO|${distro}|g" > /etc/apt/sources.list.d/${name}.list
         else
             KEYRING="/usr/share/keyrings/${name}.gpg"
-            test -z ${key} || test -f ${KEYRING} || curl -s ${key} | gpg --dearmor > ${KEYRING}
+            test -z ${key} || test -f ${KEYRING} || curl -s -L ${key} | gpg --dearmor > ${KEYRING}
             echo "${repo}" | jq -cr '. | "deb [signed-by=KEYRING] \(.url) DISTRO \(.section)"' | sed "s|DISTRO|${distro}|g;s|KEYRING|${KEYRING}|" > /etc/apt/sources.list.d/${name}.list
         fi
     else
