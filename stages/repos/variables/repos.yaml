@@ -8,9 +8,9 @@ debian:
       section: stable
     - name: helm
       state: present
-      key: https://baltocdn.com/helm/signing.asc
-      url: https://baltocdn.com/helm/stable/debian/
-      distro: all
+      key: https://packages.buildkite.com/helm-linux/helm-debian/gpgkey
+      url: https://packages.buildkite.com/helm-linux/helm-debian/any/
+      distro: any
       section: main
     - name: trivy
       state: present
