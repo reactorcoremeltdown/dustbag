@@ -9,6 +9,7 @@ for repo in `yq -o=json -I=0 '.debian.repositories[]' ${1}`; do
     unset ${distro}
     source <(echo "${repo}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
     if [[ ${state} = 'present' ]]; then
+        echo "Current distro is ${distro}"
         test -z ${distro} && distro=${DISTRO_SLUG}
         if [[ ${DEBIAN_VERSION} -lt 11 ]]; then
             KEYRING="/etc/apt/trusted.gpg.d/${name}.gpg"
