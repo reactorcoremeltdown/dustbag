@@ -102,7 +102,7 @@ production:
   - name: blog_https
     state: present
     plugin: check_https_certificate
-    argument: blog.rcmd.space
+    argument: tiredsysadmin.cc
     interval: 10m
     description: Blog Website SSL certificate
     notify:
