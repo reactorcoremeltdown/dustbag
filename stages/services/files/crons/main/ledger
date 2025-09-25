@@ -10,3 +10,4 @@
 # * * * * * hledger -f /home/ledger/ledger.book b -N -O csv cash:pocket > /var/spool/api/ledger/cash.csv
 #30 7 * * 2,4,6 /home/ledger/bin/weekly_expenses.sh
 57 23 * * * /home/ledger/bin/total_alert_fatigue.sh 2>&1 | systemd-cat -t ledger -p info
+50 22 * * * /home/ledger/bin/gadgetbridge_stats.sh 2>&1 | systemd-cat -t ledger -p info
