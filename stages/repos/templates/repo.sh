@@ -3,6 +3,9 @@
 IFS=$'\n'
 DISTRO_SLUG=`lsb_release -cs`
 DEBIAN_VERSION=`lsb_release -sr`
+MAKECMDGOALS="${2}"
+
+echo "Setting up debian packages on ${MAKECMDGOALS}"
 
 
 for repo in `yq -o=json -I=0 '.debian.repositories[]' ${1}`; do

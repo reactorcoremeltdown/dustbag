@@ -7,7 +7,7 @@ repos: setup_debian_repositories update_debian_repositories
 endif
 
 setup_debian_repositories:
-	bash stages/repos/templates/repo.sh stages/repos/variables/repos.yaml
+	bash stages/repos/templates/repo.sh stages/repos/variables/repos.yaml $(MAKECMDGOALS)
 
 update_debian_repositories:
 	apt -y update
