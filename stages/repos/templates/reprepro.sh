@@ -31,5 +31,5 @@ for branch in `yq -o=json -I=0 '.debian.reprepro.branches[]' ${1}`; do
         echo "" >> ${DESTINATION}
     done
 
-    cd ${location} && reprepro createsymlinks
+    cd "${location}/repo" && reprepro createsymlinks
 done
