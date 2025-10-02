@@ -12,7 +12,7 @@ for branch in `yq -o=json -I=0 '.debian.reprepro.branches[]' ${1}`; do
     description=$(echo "${branch}" | jq -cr '.description')
     signwith=$(echo "${branch}" | jq -cr '.signwith')
 
-    DESTINATION="${location}/repo/conf/distributions-test"
+    DESTINATION="${location}/repo/conf/distributions"
 
     test -f ${DESTINATION} && cat /dev/null > ${DESTINATION}
 
