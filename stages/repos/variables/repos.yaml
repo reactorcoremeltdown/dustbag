@@ -1,29 +1,59 @@
 debian:
   repositories:
-    - name: syncthing
-      state: present
-      key: https://syncthing.net/release-key.gpg
-      url: https://apt.syncthing.net/
-      distro: syncthing
-      section: stable
-    - name: helm
-      state: present
-      key: https://packages.buildkite.com/helm-linux/helm-debian/gpgkey
-      url: https://packages.buildkite.com/helm-linux/helm-debian/any/
-      distro: any
-      section: main
-    - name: trivy
-      state: present
-      key: https://aquasecurity.github.io/trivy-repo/deb/public.key
-      url: https://aquasecurity.github.io/trivy-repo/deb
-      section: main
-    - name: tiredsysadmin-test
-      state: present
-      key: https://deb-test.tiredsysadmin.cc/dists/bookworm/tiredsysadmin-repo.gpg
-      url: https://deb-test.tiredsysadmin.cc/
-      section: main
-    - name: tiredsysadmin
-      state: present
-      key: https://deb.tiredsysadmin.cc/dists/bookworm/tiredsysadmin-repo.gpg
-      url: https://deb.tiredsysadmin.cc/
-      section: main
+    - name: "syncthing"
+      state: "present"
+      key: "https://syncthing.net/release-key.gpg"
+      url: "https://apt.syncthing.net/"
+      distro: "syncthing"
+      section: "stable"
+    - name: "helm"
+      state: "present"
+      key: "https://packages.buildkite.com/helm-linux/helm-debian/gpgkey"
+      url: "https://packages.buildkite.com/helm-linux/helm-debian/any/"
+      distro: "any"
+      section: "main"
+    - name: "trivy"
+      state: "present"
+      key: "https://aquasecurity.github.io/trivy-repo/deb/public.key"
+      url: "https://aquasecurity.github.io/trivy-repo/deb"
+      section: "main"
+    - name: "tiredsysadmin-test"
+      state: "present"
+      key: "https://deb-test.tiredsysadmin.cc/dists/bookworm/tiredsysadmin-repo.gpg"
+      url: "https://deb-test.tiredsysadmin.cc/"
+      section: "main"
+    - name: "tiredsysadmin"
+      state: "present"
+      key: "https://deb.tiredsysadmin.cc/dists/bookworm/tiredsysadmin-repo.gpg"
+      url: "https://deb.tiredsysadmin.cc/"
+      section: "main"
+  reprepro:
+    branches:
+      - name: "debian"
+        location: "/opt/debian"
+        origin: "deb.tiredsysadmin.cc"
+        limit: 0
+        components: "main"
+        description: "Distributing system tools made by Tiredsysadmin.cc"
+        signwith: "B5D8A77D41E1BD97BA81F35E9E1A77C31D844928"
+        distributions:
+          - name: "bookworm"
+            architectures: "amd64 arm64 armhf"
+          - name: "bullseye"
+            architectures: "amd64 arm64 armhf"
+          - name: "buster"
+            architectures: "amd64 arm64 armhf"
+          - name: "jammy"
+            architectures: "amd64 arm64 armhf"
+          - name: "noble"
+            architectures: "amd64 arm64 armhf"
+      - name: "debian-test"
+        location: "/opt/debian-test"
+        origin: "debtest.tiredsysadmin.cc"
+        limit: 0
+        components: "main"
+        description: "Distributing system tools made by Tiredsysadmin.cc, testing repo"
+        signwith: "B5D8A77D41E1BD97BA81F35E9E1A77C31D844928"
+        distributions:
+          - name: "bookworm"
+            architectures: "amd64 arm64 armhf"
