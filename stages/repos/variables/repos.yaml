@@ -22,7 +22,7 @@ debian:
       section: "main"
     - name: "tiredsysadmin-test"
       state: "present"
-      install_on: "outpost"
+      install_on: "production"
       key: "https://deb-test.tiredsysadmin.cc/dists/bookworm/tiredsysadmin-repo.gpg"
       url: "https://deb-test.tiredsysadmin.cc/"
       section: "main"
