@@ -5,6 +5,8 @@ source <(jq -r '.nginx.variables | to_entries[] | [.key,(.value|@sh)] | join("="
 SITE='printer'
 
 cat <<EOF > /etc/nginx/sites-available/${SITE}.conf
+### Deployed by https://git.rcmd.space/rcmd/dustbag
+
 server {
   listen 80;
   listen [::]:80;

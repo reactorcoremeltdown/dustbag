@@ -3,10 +3,14 @@
 source <(jq -r '.nginx.variables | to_entries[] | [.key,(.value|@sh)] | join("=")' variables/main.json)
 
 cat <<EOF > /etc/nginx/sites-available/dav.conf
+### Deployed by https://git.rcmd.space/rcmd/dustbag
+
 server {
     listen 80;
     listen [::]:80;
     server_name dav.rcmd.space;
+
+    include /etc/nginx/common_ratelimit.conf;
 
     return 301 https://\$server_name\$request_uri;
 }
@@ -30,6 +34,8 @@ server {
     ssl_prefer_server_ciphers on;
 
     server_name dav.rcmd.space;
+
+    include /etc/nginx/common_ratelimit.conf;
 
     location / {
         return 200 "It works!";
@@ -57,6 +63,8 @@ server {
     listen [::]:80;
     server_name webdav.rcmd.space;
 
+    include /etc/nginx/common_ratelimit.conf;
+
     return 301 https://\$server_name\$request_uri;
 }
 
@@ -79,6 +87,8 @@ server {
     ssl_prefer_server_ciphers on;
 
     server_name webdav.rcmd.space;
+
+    include /etc/nginx/common_ratelimit.conf;
 
     location / {
         auth_basic "Protected area";

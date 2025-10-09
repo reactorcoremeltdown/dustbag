@@ -3,10 +3,14 @@
 source <(jq -r '.nginx.variables | to_entries[] | [.key,(.value|@sh)] | join("=")' variables/main.json)
 
 cat <<EOF > /etc/nginx/sites-available/podcasts.conf
+### Deployed by https://git.rcmd.space/rcmd/dustbag
+
 server {
     listen 80;
     listen [::]:80;
     server_name podcasts.rcmd.space;
+
+    include /etc/nginx/common_ratelimit.conf;
 
     return 301 https://\$server_name\$request_uri;
 }
@@ -42,6 +46,8 @@ server {
 
     server_name podcasts.rcmd.space;
 
+    include /etc/nginx/common_ratelimit.conf;
+
     location / {
         proxy_pass http://10.8.0.102:80;
         proxy_http_version 1.1;
@@ -67,6 +73,8 @@ server {
     listen 80;
     listen [::]:80;
     server_name podcasts.tiredsysadmin.cc;
+
+    include /etc/nginx/common_ratelimit.conf;
 
     return 301 https://\$server_name\$request_uri;
 }
@@ -101,6 +109,8 @@ server {
 
 
     server_name podcasts.tiredsysadmin.cc;
+
+    include /etc/nginx/common_ratelimit.conf;
 
     location / {
         proxy_pass http://10.8.0.102:80;

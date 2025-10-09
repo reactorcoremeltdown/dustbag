@@ -5,10 +5,14 @@ SITE='bank'
 source <(jq -r '.nginx.variables | to_entries[] | [.key,(.value|@sh)] | join("=")' variables/main.json)
 
 cat <<EOF > /etc/nginx/sites-available/bank.conf
+### Deployed by https://git.rcmd.space/rcmd/dustbag
+
 server {
   listen 80;
   listen [::]:80;
   server_name ${SITE}.rcmd.space;
+
+  include /etc/nginx/common_ratelimit.conf;
 
   return 301 https://\$server_name\$request_uri;
 }
@@ -42,6 +46,8 @@ server {
     text/css;
 
     server_name ${SITE}.rcmd.space;
+
+    include /etc/nginx/common_ratelimit.conf;
 
     auth_basic "Protected area";
     auth_basic_user_file /etc/nginx/htpasswd;
