@@ -35,6 +35,7 @@ nginx_configs:
 	install -D -m 644 -v stages/services/includes/nginx/files/etc/nginx/conf.d/log_format_json.conf /etc/nginx/conf.d
 	install -D -m 644 -v stages/services/includes/nginx/files/etc/nginx/conf.d/traccar.conf /etc/nginx/conf.d
 	install -D -m 644 -v stages/services/includes/nginx/files/etc/nginx/conf.d/limits.conf /etc/nginx/conf.d
+	install -D -m 644 -v stages/services/includes/nginx/files/etc/nginx/common_ratelimit.conf /etc/nginx
 	jq -cr '.secrets.nginx.htpasswd' /etc/secrets/secrets.json > /etc/nginx/htpasswd && chown root:www-data /etc/nginx/htpasswd && chmod 440 /etc/nginx/htpasswd
 	jq -cr '.secrets.nginx.htpasswd_secondary' /etc/secrets/secrets.json > /etc/nginx/htpasswd_secondary && chown root:www-data /etc/nginx/htpasswd_secondary && chmod 440 /etc/nginx/htpasswd_secondary
 	jq -cr '.secrets.nginx.htpasswd_tasksync' /etc/secrets/secrets.json > /etc/nginx/htpasswd_tasksync && chown root:www-data /etc/nginx/htpasswd_tasksync && chmod 440 /etc/nginx/htpasswd_tasksync
