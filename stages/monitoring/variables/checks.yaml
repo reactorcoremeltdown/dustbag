@@ -5,6 +5,7 @@ production:
     argument: syncthing@syncthing.service
     interval: 1m
     description: 'Syncthing: production (systemd service)'
+    timeoutSec: 120
     notify:
       - telegram
       - gotify
