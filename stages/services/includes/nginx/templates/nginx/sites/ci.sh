@@ -141,8 +141,6 @@ server {
         proxy_read_timeout      7m;
     }
     location /rpc/v2/stage {
-        limit_req zone=api;
-
         proxy_pass http://127.0.0.1:28002;
         proxy_http_version 1.1;
 
