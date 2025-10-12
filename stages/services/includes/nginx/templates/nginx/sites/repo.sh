@@ -5,10 +5,14 @@ source <(jq -r '.nginx.variables | to_entries[] | [.key,(.value|@sh)] | join("="
 SITE='repo'
 
 cat <<EOF > /etc/nginx/sites-available/${SITE}.conf
+### Deployed by https://git.rcmd.space/rcmd/dustbag
+
 server {
   listen 80;
   listen [::]:80;
   server_name ${SITE}.rcmd.space;
+
+  include /etc/nginx/common_ratelimit.conf;
 
   return 301 https://\$server_name\$request_uri;
 }
@@ -42,6 +46,8 @@ server {
     text/css;
 
     server_name ${SITE}.rcmd.space;
+
+    include /etc/nginx/common_ratelimit.conf;
 
     location / {
         if (\$http_user_agent ~ "^(docker\/1\.(3|4|5(?!\.[0-9]-dev))|Go ).*$" ) {
@@ -90,10 +96,14 @@ ln -sf /etc/nginx/sites-available/${SITE}.conf /etc/nginx/sites-enabled/${SITE}.
 SITE='deb'
 
 cat <<EOF > /etc/nginx/sites-available/${SITE}.conf
+### Deployed by https://git.rcmd.space/rcmd/dustbag
+
 server {
   listen 80;
   listen [::]:80;
   server_name ${SITE}.tiredsysadmin.cc;
+
+  include /etc/nginx/common_ratelimit.conf;
 
   return 301 https://\$server_name\$request_uri;
 }
@@ -120,6 +130,8 @@ server {
 
     server_name ${SITE}.tiredsysadmin.cc;
 
+    include /etc/nginx/common_ratelimit.conf;
+
     location ~ /(db|conf) {
         deny all;
         return  404;
@@ -131,6 +143,8 @@ server {
   listen 80;
   listen [::]:80;
   server_name ${SITE}-test.tiredsysadmin.cc;
+
+  include /etc/nginx/common_ratelimit.conf;
 
   return 301 https://\$server_name\$request_uri;
 }
@@ -156,6 +170,8 @@ server {
     root /opt/debian-test/repo;
 
     server_name ${SITE}-test.tiredsysadmin.cc;
+
+    include /etc/nginx/common_ratelimit.conf;
 
     location ~ /(db|conf) {
         deny all;

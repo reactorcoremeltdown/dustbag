@@ -2,6 +2,8 @@
 
 
 cat <<EOF > /etc/nginx/sites-available/proxies.conf
+### Deployed by https://git.rcmd.space/rcmd/dustbag
+
 
 server {
     listen 80;

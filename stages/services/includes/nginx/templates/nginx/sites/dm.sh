@@ -3,9 +3,13 @@
 source <(jq -r '.nginx.variables | to_entries[] | [.key,(.value|@sh)] | join("=")' variables/main.json)
 
 cat <<EOF > /etc/nginx/sites-available/dm.conf
+### Deployed by https://git.rcmd.space/rcmd/dustbag
+
 server {
     listen 10.200.200.1:80;
     server_name dm.tiredsysadmin.cc;
+
+    include /etc/nginx/common_ratelimit.conf;
 
     return 301 https://\$server_name\$request_uri;
 }
@@ -28,6 +32,8 @@ server {
     ssl_prefer_server_ciphers on;
 
     server_name dm.tiredsysadmin.cc;
+
+    include /etc/nginx/common_ratelimit.conf;
 
     location / { 
         proxy_pass http://10.8.0.102:16800; 
