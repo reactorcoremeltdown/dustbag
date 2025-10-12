@@ -15,6 +15,7 @@ for check in $(yq -o=json -I=0 ".${2}[]" ${1}); do
     warningThreshold=`echo "${check}" | jq -cr '.warningThreshold'`
     criticalThreshold=`echo "${check}" | jq -cr '.criticalThreshold'`
     flowOperator=`echo "${check}" | jq -cr '.flowOperator'`
+    timeoutSec=`echo "${check}" | jq -cr '.timeoutSec'`
 
     echo "Check name: ${name}"
     check_hostname=$(echo "${check}" | jq -cr '.hostname')
@@ -29,6 +30,7 @@ description = ${description}
 plugin = ${plugin}.sh
 argument = ${argument}
 interval = ${interval}
+timeoutSec = ${timeoutSec}
 warningThreshold = ${warningThreshold}
 criticalThreshold = ${criticalThreshold}
 flowOperator = ${flowOperator}
