@@ -17,6 +17,9 @@ function get_lights() {
             "2")
                 echo -en "\e[31m•\e[0m "
                 ;;
+            "-1")
+                echo -en "\e[31m•\e[0m "
+                ;;
         esac
     done
     echo -e "\n\n"
@@ -41,6 +44,9 @@ function get_descriptions() {
                 ;;
             "2")
                 echo -e "\e[31m${Name}: CRITICAL  \e[0m\e[31m${Output}\e[0m\n\t${Description}\n"
+                ;;
+            "-1")
+                echo -e "\e[31m${Name}: TIMEOUT  \e[0m\e[31m${Output}\e[0m\n\t${Description}\n"
                 ;;
         esac
     done
