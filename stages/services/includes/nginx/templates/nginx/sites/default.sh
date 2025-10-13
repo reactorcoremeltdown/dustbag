@@ -10,11 +10,11 @@ server {
     listen [::]:80;
 
     ### SSL cert files ###
-    server_name it-the-drote.tk;
+    server_name _;
 
     include /etc/nginx/common_ratelimit.conf;
 
-    return 301 https://tiredsysadmin.cc;
+    return 459;
 }
 EOF
 
