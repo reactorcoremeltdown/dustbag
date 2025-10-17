@@ -5,6 +5,7 @@ production:
     argument: syncthing@syncthing.service
     interval: 1m
     description: 'Syncthing: production (systemd service)'
+    hostname: garage.rcmd.space
     timeoutSec: 120
     notify:
       - telegram
@@ -19,6 +20,7 @@ production:
     argument: http://127.0.0.1:8384/rest/noauth/health
     interval: 1m
     description: 'Syncthing: production'
+    hostname: garage.rcmd.space
     notify:
       - telegram
       - gotify
@@ -31,6 +33,7 @@ production:
     argument: dav.rcmd.space
     interval: 10m
     description: Radicale SSL certificate
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - alert_fatigue
@@ -40,6 +43,7 @@ production:
     argument: https://vcfb.de
     interval: 12h
     description: Checking VCFB exhibitions for 2024
+    hostname: garage.rcmd.space
     notify:
       - telegram
       - gotify
@@ -50,7 +54,7 @@ production:
     argument: /etc/default/earlystageconfigs
     interval: 15s
     description: Provisioning file
-    hostname: rcmd.space
+    hostname: garage.rcmd.space
     warningThreshold: "10"
     criticalThreshold: "5"
     flowOperator: downwards
@@ -64,7 +68,7 @@ production:
     argument: ""
     interval: 15s
     description: Traccar location tracker
-    hostname: rcmd.space
+    hostname: garage.rcmd.space
     criticalThreshold: "1814000"
     flowOperator: upwards
     notify:
@@ -75,7 +79,7 @@ production:
     argument: /var/storage/wastebox/tiredsysadmin.cc/podcasts/JMGODIER.xml
     interval: 15s
     description: Enсrypted webdav mount
-    hostname: rcmd.space
+    hostname: garage.rcmd.space
     suppressedBy:
       - gocryptfs_config
     notify:
@@ -87,7 +91,7 @@ production:
     argument: /var/storage/smallwastebox/encrypted/gocryptfs.conf
     interval: 15s
     description: Decrypted webdav mount
-    hostname: rcmd.space
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - alert_fatigue
@@ -97,6 +101,7 @@ production:
     argument: rcmd.space
     interval: 10m
     description: Main Website SSL certificate
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - alert_fatigue
@@ -106,6 +111,7 @@ production:
     argument: tiredsysadmin.cc
     interval: 10m
     description: Blog Website SSL certificate
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - alert_fatigue
@@ -115,6 +121,7 @@ production:
     argument: dave.service
     interval: 1m
     description: DAVE, a WebDAV server
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - alert_fatigue
@@ -124,29 +131,8 @@ production:
     argument: tinc@clusternet.service
     interval: 1m
     description: TINC, main server
+    hostname: garage.rcmd.space
     notify:
-      - gotify
-      - alert_fatigue
-  - name: task-transformer
-    state: absent
-    plugin: check_systemd_service
-    argument: task-transformer.service
-    interval: 5m
-    description: VTODO + VEVENT + Kanboard sync service
-    notify:
-      - telegram
-      - alert_fatigue
-  - name: task-transformer
-    state: absent
-    plugin: check_http_success_rate
-    warningThreshold: "99"
-    criticalThreshold: "97"
-    flowOperator: downwards
-    argument: http://int.rcmd.space:30071/healthcheck
-    interval: 1m
-    description: 'VTODO + VEVENT + Kanboard sync service'
-    notify:
-      - telegram
       - gotify
       - alert_fatigue
   - name: chatserver
@@ -158,6 +144,7 @@ production:
     argument: https://382578846.site/#/status
     interval: 1m
     description: 'Databag online status'
+    hostname: 382578846.site
     notify:
       - telegram
       - gotify
@@ -171,6 +158,7 @@ production:
     argument: https://notifications.rcmd.space/health
     interval: 1m
     description: 'Gotify online status'
+    hostname: notifications.rcmd.space
     notify:
       - telegram
       - alert_fatigue
@@ -183,6 +171,7 @@ production:
     argument: http://int.rcmd.space:30071/healthcheck
     interval: 1m
     description: 'VTODO + VEVENT + Kanboard sync service'
+    hostname: garage.rcmd.space
     notify:
       - telegram
       - gotify
@@ -193,6 +182,7 @@ production:
     argument: ""
     interval: 48h
     description: Linux Kernel Version
+    hostname: garage.rcmd.space
     notify:
       - telegram
       - alert_fatigue
@@ -202,6 +192,7 @@ production:
     argument: /
     interval: 3m
     descripMissing spacetion: Free space on disk
+    hostname: garage.rcmd.space
     warningThreshold: "90"
     criticalThreshold: "95"
     flowOperator: upwards
@@ -214,6 +205,7 @@ production:
     argument: u346154
     interval: 2m
     description: Free space on STORAGEBOX V2
+    hostname: garage.rcmd.space
     warningThreshold: "80"
     criticalThreshold: "95"
     flowOperator: upwards
@@ -226,6 +218,7 @@ production:
     argument: task-transformer-edit-error
     interval: 15m
     description: Task Transformer edit command errors
+    hostname: garage.rcmd.space
     warningThreshold: "3"
     criticalThreshold: "5"
     flowOperator: upwards
@@ -241,6 +234,7 @@ production:
     argument: task-transformer-sync-error
     interval: 15m
     description: Task Transformer sync status
+    hostname: garage.rcmd.space
     warningThreshold: "3"
     criticalThreshold: "5"
     flowOperator: upwards
@@ -256,6 +250,7 @@ production:
     argument: task-transformer-update-due
     interval: 15m
     description: Task Transformer, updating due date of kanboard cards
+    hostname: garage.rcmd.space
     warningThreshold: "3"
     criticalThreshold: "5"
     flowOperator: upwards
@@ -269,6 +264,7 @@ production:
     argument: task-transformer-sync-timestamp
     interval: 5m
     description: Task Transformer operational status
+    hostname: garage.rcmd.space
     warningThreshold: "301"
     criticalThreshold: "500"
     flowOperator: upwards
@@ -287,6 +283,7 @@ production:
     criticalThreshold: "97"
     flowOperator: downwards
     description: Internal wiki engine
+    hostname: garage.rcmd.space
     notify:
       - telegram
       - alert_fatigue
@@ -297,6 +294,7 @@ production:
     interval: 1m
     flowOperator: downwards
     description: Wiki picture storage
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -310,6 +308,7 @@ production:
     criticalThreshold: "97"
     flowOperator: downwards
     description: RCMD API website
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - alert_fatigue
@@ -322,6 +321,7 @@ production:
     argument: https://dav.rcmd.space/radicale/.web/
     interval: 1m
     description: Radicale CalDAV server
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -335,6 +335,7 @@ production:
     argument: http://int.rcmd.space:30031/api/health
     interval: 10m
     description: Grafana Web interfacUe
+    hostname: garage.rcmd.space
     notify:
       - telegram
       - alert_fatigue
@@ -347,6 +348,7 @@ production:
     argument: https://api.rcmd.space/internal/healthcheck
     interval: 1m
     description: RCMD Internal API website
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -360,6 +362,7 @@ production:
     argument: https://rbw.rcmd.space/healthcheck
     interval: 1m
     description: RCMD Internal API, RBW proxy
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -373,6 +376,7 @@ production:
     argument: https://ci.rcmd.space/badge/dummy.svg
     interval: 1m
     description: CI engine
+    hostname: garage.rcmd.space
     notify:
       - telegram
       - alert_fatigue
@@ -382,6 +386,7 @@ production:
     argument: api.rcmd.space
     interval: 10m
     description: API HTTPS certificate
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - alert_fatigue
@@ -391,6 +396,7 @@ production:
     argument: notifications.rcmd.space
     interval: 10m
     description: Gotify HTTPS certificate
+    hostname: notifications.rcmd.space
     notify:
       - telegram
       - alert_fatigue
@@ -400,6 +406,7 @@ production:
     argument: "12"
     interval: 15m
     description: Check for reported explosions in Zaporizhzhia
+    hostname: garage.rcmd.space
     notify:
       - telegram
       - gotify_disaster
@@ -410,6 +417,7 @@ production:
     argument: file:///var/storage/wastebox/Backups/radicale/
     interval: 6h
     description: CalDAV backups
+    hostname: garage.rcmd.space
     suppressedBy:
       - webdav_filesystem
     notify:
@@ -421,6 +429,7 @@ production:
     argument: file:///var/storage/wastebox/Backups/chatserver-backups/
     interval: 6h
     description: Databag backups
+    hostname: garage.rcmd.space
     suppressedBy:
       - webdav_filesystem
     notify:
@@ -432,6 +441,7 @@ production:
     argument: file:///var/storage/wastebox/Backups/kanboard/
     interval: 6h
     description: Kanboard backups
+    hostname: garage.rcmd.space
     suppressedBy:
       - webdav_filesystem
     notify:
@@ -443,6 +453,7 @@ production:
     argument: file:///var/storage/wastebox/Backups/websites/
     interval: 6h
     description: Website backups
+    hostname: garage.rcmd.space
     suppressedBy:
       - webdav_filesystem
     notify:
@@ -454,6 +465,7 @@ production:
     argument: fermium.rcmd.space
     interval: 20m
     description: 'Device online test: fermium'
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - alert_fatigue
@@ -463,6 +475,7 @@ production:
     argument: printer.tiredsysadmin.cc
     interval: 20m
     description: 'Device online test: printserver'
+    hostname: fermium-wg.tiredsysadmin.cc
     notify:
       - telegram
       - alert_fatigue
@@ -649,6 +662,7 @@ outpost:
     argument: https://wiki.rcmd.space
     interval: 62s
     description: Wiki protection check
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -659,6 +673,7 @@ outpost:
     argument: http://garage.rcmd.space:30085
     interval: 126s
     description: Wiki (backend) protection check
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -669,6 +684,7 @@ outpost:
     argument: https://beta.tiredsysadmin.cc
     interval: 62s
     description: Blog beta protection check
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -679,6 +695,7 @@ outpost:
     argument: https://beta.rcmd.space
     interval: 62s
     description: Site beta protection check
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -689,6 +706,7 @@ outpost:
     argument: https://board.rcmd.space
     interval: 62s
     description: Kanboard protection check
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -699,6 +717,7 @@ outpost:
     argument: http://garage.rcmd.space:30081
     interval: 124s
     description: Kanboard (backend) protection check
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -709,6 +728,7 @@ outpost:
     argument: https://graph.rcmd.space
     interval: 62s
     description: Grafana protection check
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -719,6 +739,7 @@ outpost:
     argument: http://garage.rcmd.space:30031
     interval: 124s
     description: Grafana (backend) protection check
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -729,6 +750,7 @@ outpost:
     argument: https://mixtape.tiredsysadmin.cc
     interval: 62s
     description: Mixtape protection check
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -739,6 +761,7 @@ outpost:
     argument: https://mood.rcmd.space
     interval: 62s
     description: Mood journal protection check
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -749,6 +772,7 @@ outpost:
     argument: https://reader.tiredsysadmin.cc
     interval: 62s
     description: RSS reader protection check
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -759,6 +783,7 @@ outpost:
     argument: rcmd.space
     interval: 24h
     description: rcmd.space domain expiry check
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -769,6 +794,7 @@ outpost:
     argument: tiredsysadmin.cc
     interval: 24h
     description: tiredsysadmin.cc domain expiry check
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - telegram
@@ -782,7 +808,7 @@ outpost:
     argument: https://rcmd.space
     interval: 3m
     description: RCMD.space website
-    hostname: outpost.rcmd.space
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - alert_fatigue
@@ -795,7 +821,7 @@ outpost:
     argument: https://tiredsysadmin.cc
     interval: 3m
     description: Blog website
-    hostname: outpost.rcmd.space
+    hostname: garage.rcmd.space
     notify:
       - gotify
       - alert_fatigue
