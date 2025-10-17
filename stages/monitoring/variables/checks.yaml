@@ -467,7 +467,7 @@ production:
       - telegram
       - alert_fatigue
   - name: home_stereo
-    state: present
+    state: absent
     plugin: relay
     argument: http://fermium.tiredsysadmin.cc:8881?check=home_stereo
     interval: 30m
@@ -479,7 +479,7 @@ production:
       - telegram
       - alert_fatigue
   - name: home_syncthing
-    state: present
+    state: absent
     plugin: relay
     argument: http://fermium.tiredsysadmin.cc:8881?check=home_syncthing
     interval: 30m
