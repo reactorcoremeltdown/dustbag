@@ -491,7 +491,7 @@ production:
       - telegram
       - alert_fatigue
   - name: home_printer
-    state: present
+    state: absent
     plugin: relay
     argument: http://fermium.tiredsysadmin.cc:8881?check=home_printer
     interval: 30m
@@ -505,7 +505,7 @@ production:
       - telegram
       - alert_fatigue
   - name: home_printer_device
-    state: present
+    state: absent
     plugin: relay
     argument: http://fermium.tiredsysadmin.cc:8881?check=home_printer_device
     suppressedBy:
@@ -517,7 +517,7 @@ production:
       - telegram
       - alert_fatigue
   - name: home_storage
-    state: present
+    state: absent
     plugin: relay
     argument: http://fermium.tiredsysadmin.cc:8881?check=home_storage
     interval: 30m
@@ -598,7 +598,7 @@ fermium:
     notify:
       - dummy
   - name: home_tinc_network
-    state: present
+    state: absent
     plugin: check_http_success_rate
     warningThreshold: "96"
     criticalThreshold: "93"
@@ -613,7 +613,7 @@ fermium:
       - telegram
       - alert_fatigue
   - name: main_website
-    state: present
+    state: absent
     plugin: check_http_success_rate
     warningThreshold: "98"
     criticalThreshold: "97"
