@@ -480,24 +480,24 @@ production:
       - telegram
       - alert_fatigue
   - name: home_stereo
-    state: absent
+    state: present
     plugin: relay
     argument: http://fermium.tiredsysadmin.cc:8881?check=home_stereo
     interval: 30m
     description: '[relay] MPD server online test'
-    hostname: fermiumv2.rcmd.space
+    hostname: fermium-wg.tiredsysadmin.cc
     suppressedBy:
       - tinc_host
     notify:
       - telegram
       - alert_fatigue
   - name: home_syncthing
-    state: absent
+    state: present
     plugin: relay
     argument: http://fermium.tiredsysadmin.cc:8881?check=home_syncthing
     interval: 30m
     description: '[relay] Syncthing at home'
-    hostname: fermiumv2.rcmd.space
+    hostname: fermium-wg.tiredsysadmin.cc
     suppressedBy:
       - tinc_host
     notify:
@@ -511,7 +511,7 @@ production:
     suppressedBy:
       - tinc_host
     description: '[relay] CUPS server online test'
-    hostname: fermiumv2.rcmd.space
+    hostname: fermium-wg.tiredsysadmin.cc
     suppressedBy:
       - printserver_online
     notify:
@@ -524,18 +524,18 @@ production:
     suppressedBy:
       - tinc_host
     interval: 10m
-    hostname: fermiumv2.rcmd.space
+    hostname: fermium-wg.tiredsysadmin.cc
     description: '[relay] Checking printer status, Brother Industries, Ltd HL-2140 series'
     notify:
       - telegram
       - alert_fatigue
   - name: home_storage
-    state: absent
+    state: present
     plugin: relay
     argument: http://fermium.tiredsysadmin.cc:8881?check=home_storage
     interval: 30m
     description: '[relay] Home storage status'
-    hostname: fermiumv2.rcmd.space
+    hostname: fermium-wg.tiredsysadmin.cc
     suppressedBy:
       - tinc_host
     notify:
@@ -557,7 +557,7 @@ fermium:
     argument: ""
     interval: 5m
     description: MPD server online test
-    hostname: fermium.rcmd.space
+    hostname: fermium-wg.tiredsysadmin.cc
     notify:
       - dummy
   - name: home_syncthing
@@ -569,6 +569,7 @@ fermium:
     argument: http://127.0.0.1:8384/rest/noauth/health
     interval: 62s
     description: Syncthing at home
+    hostname: fermium-wg.tiredsysadmin.cc
     notify:
       - dummy
   - name: podsync_service
@@ -577,6 +578,7 @@ fermium:
     argument: podsync.service
     interval: 1m
     description: Podcast sync service
+    hostname: fermium-wg.tiredsysadmin.cc
     notify:
       - telegram
       - gotify
@@ -590,6 +592,7 @@ fermium:
     warningThreshold: "90"
     criticalThreshold: "95"
     flowOperator: upwards
+    hostname: fermium-wg.tiredsysadmin.cc
     notify:
       - dummy
   - name: home_printer
@@ -611,7 +614,7 @@ fermium:
     notify:
       - dummy
   - name: home_tinc_network
-    state: absent
+    state: present
     plugin: check_http_success_rate
     warningThreshold: "96"
     criticalThreshold: "93"
@@ -620,13 +623,28 @@ fermium:
     interval: 181s
     timeoutSec: 120
     description: TINC Mesh VPN Network
-    hostname: 192.168.2.221
+    hostname: fermium-wg.tiredsysadmin.cc
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: home_wireguard_network
+    state: present
+    plugin: check_http_success_rate
+    warningThreshold: "96"
+    criticalThreshold: "93"
+    flowOperator: downwards
+    argument: http://10.8.0.6:8881
+    interval: 182s
+    timeoutSec: 120
+    description: Wireguard VPN Network
+    hostname: fermium-wg.tiredsysadmin.cc
     notify:
       - gotify
       - telegram
       - alert_fatigue
   - name: main_website
-    state: absent
+    state: present
     plugin: check_http_success_rate
     warningThreshold: "98"
     criticalThreshold: "97"
@@ -634,7 +652,7 @@ fermium:
     argument: https://rcmd.space
     interval: 63s
     description: RCMD.space website
-    hostname: 192.168.2.120
+    hostname: fermium-wg.tiredsysadmin.cc
     notify:
       - gotify
       - alert_fatigue
