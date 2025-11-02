@@ -54,6 +54,8 @@ endif
 
 earlystagepackages:
 ifneq ($(RETRY), true)
+	test -d /usr/lib/python3/dist-packages/certbot_dns_hetzner || mkdir -p /usr/lib/python3/dist-packages/certbot_dns_hetzner
+	install -D -m 644 stages/early/files/usr/lib/python3/dist-packages/certbot_dns_hetzner/* /usr/lib/python3/dist-packages/certbot_dns_hetzner
 	apt update && DEBIAN_FRONTEND=noninteractive apt -o Acquire::ForceIPv4=true install -y dirmngr \
 		apt-transport-https \
 		certbot \
