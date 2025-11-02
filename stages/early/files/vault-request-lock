@@ -3,7 +3,7 @@
 counter=0
 
 function request_status() {
-	API_TOKEN=`jq -r '.secrets.ledger.token' /etc/secrets/secrets.json`
+	API_TOKEN=`cat /etc/secrets/seed`
 
 	REQUEST_TOKEN=`curl -s -XPOST --data-urlencode "token=${API_TOKEN}" https://api.rcmd.space/internal/token/get`
 	MACHINE_ID=`cat /etc/machine-id`
