@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function request_key() {
-	API_TOKEN=`jq -r '.secrets.ledger.token' /etc/secrets/secrets.json`
+	API_TOKEN=`cat /etc/secrets/seed`
 
 	REQUEST_TOKEN=`curl -s -XPOST --data-urlencode "token=${API_TOKEN}" https://api.rcmd.space/internal/token/get`
 	KEY=${1}

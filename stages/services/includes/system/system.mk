@@ -22,7 +22,7 @@ sshd: sshd_config sshd_restart
 
 crons:
 	timedatectl set-timezone "Europe/Berlin" || true
-	test -f /boot/dietpi.txt && ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+	test -f /boot/dietpi.txt && ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime || true
 	bash stages/services/includes/system/templates/crons.sh $(CRONS)
 	@echo "$(ccgreen)Setting up crons completed$(ccend)"
 
