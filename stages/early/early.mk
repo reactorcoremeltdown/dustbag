@@ -60,7 +60,9 @@ ifneq ($(RETRY), true)
 		lsb-release \
 		debian-keyring \
 		python3-certbot-dns-cloudflare \
+		python3-pip \
 		locales
+	pip3 install --break-system-packages certbot-dns-hetzner-cloud
 endif
 
 locales:
