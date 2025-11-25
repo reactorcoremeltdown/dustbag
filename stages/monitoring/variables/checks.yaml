@@ -1,4 +1,13 @@
 production:
+  - name: garage_provisioning
+    state: present
+    plugin: check_device_provisioning
+    argument: ""
+    interval: 5m
+    description: Checking provisioning status of Garage
+    notify:
+      - telegram
+      - alert_fatigue
   - name: prod_syncthing_service
     state: present
     plugin: check_systemd_service
@@ -542,6 +551,14 @@ production:
       - telegram
       - alert_fatigue
 fermium:
+  - name: fermium_provisioning
+    state: present
+    plugin: check_device_provisioning
+    argument: ""
+    interval: 5m
+    description: Checking provisioning status of Fermium
+    notify:
+      - dummy
   - name: ft_motion
     state: present
     plugin: check_feature_toggle
@@ -657,6 +674,14 @@ fermium:
       - gotify
       - alert_fatigue
 printserver:
+  - name: printserver_provisioning
+    state: present
+    plugin: check_device_provisioning
+    argument: ""
+    interval: 5m
+    description: Checking provisioning status of Printer
+    notify:
+      - dummy
   - name: home_printer
     state: present
     plugin: check_cups_online
@@ -674,6 +699,14 @@ printserver:
     notify:
       - dummy
 outpost:
+  - name: outpost_provisioning
+    state: present
+    plugin: check_device_provisioning
+    argument: ""
+    interval: 5m
+    description: Checking provisioning status of Outpost
+    notify:
+      - dummy
   - name: wiki_protected
     state: present
     plugin: check_protected_url
