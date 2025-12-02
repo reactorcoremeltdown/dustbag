@@ -5,11 +5,11 @@ HOSTNAME := $(shell cat variables/main.json | jq -r .hostname)
 
 ifeq ($(MAKECMDGOALS), builder)
 early: test mirrors apt_configs keygen earlystagepackages locales profiles
-	echo "provisioning done" > /etc/default/earlystageconfigs;
+	date '+%s' > /etc/default/earlystageconfigs;
 	@echo "$(ccgreen)Early provisioning stage completed$(ccend)"
 else
 early: test mirrors vault_unseal apt_configs keygen earlystagepackages locales profiles
-	echo "provisioning done" > /etc/default/earlystageconfigs;
+	date '+%s' > /etc/default/earlystageconfigs;
 	@echo "$(ccgreen)Early provisioning stage completed$(ccend)"
 endif
 
@@ -60,7 +60,9 @@ ifneq ($(RETRY), true)
 		lsb-release \
 		debian-keyring \
 		python3-certbot-dns-cloudflare \
+		python3-pip \
 		locales
+	pip3 install --break-system-packages certbot-dns-hetzner-cloud
 endif
 
 locales:

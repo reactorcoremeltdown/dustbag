@@ -23,6 +23,10 @@
 20 6 * * * cp -fp /var/storage/wastebox/Music/Library/*.m3u /var/storage/wastebox/Backups/Playlist-files/
 30 6 * * * /etc/monitoring/scripts/backup.sh /var/storage/wastebox/Backups/Playlist-files/ file:///var/storage/wastebox/Backups/Playlists/
 
+### Restart reaction
+
+10 0 * * * systemctl restart reaction.service
+
 ### Podman cleanup
 10 3 * * * podman container prune --force && podman image prune --all --force
 ### Laminar cleanup

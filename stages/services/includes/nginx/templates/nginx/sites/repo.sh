@@ -12,8 +12,6 @@ server {
   listen [::]:80;
   server_name ${SITE}.rcmd.space;
 
-  include /etc/nginx/common_ratelimit.conf;
-
   return 301 https://\$server_name\$request_uri;
 }
 
@@ -46,8 +44,6 @@ server {
     text/css;
 
     server_name ${SITE}.rcmd.space;
-
-    include /etc/nginx/common_ratelimit.conf;
 
     location / {
         if (\$http_user_agent ~ "^(docker\/1\.(3|4|5(?!\.[0-9]-dev))|Go ).*$" ) {

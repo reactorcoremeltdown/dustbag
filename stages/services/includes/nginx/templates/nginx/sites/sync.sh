@@ -10,8 +10,6 @@ server {
     listen [::]:80;
     server_name sync.rcmd.space;
 
-    include /etc/nginx/common_ratelimit.conf;
-
     return 301 https://\$server_name\$request_uri;
 }
 
@@ -35,8 +33,21 @@ server {
 
     server_name sync.rcmd.space;
 
-    include /etc/nginx/common_ratelimit.conf;
-
+    auth_request /validate;
+    location = /validate {
+        proxy_pass http://127.0.0.1:30021/validate;
+        proxy_set_header Host \$http_host;
+        proxy_pass_request_body off;
+        proxy_set_header Content-Length "";
+        auth_request_set \$auth_resp_x_vouch_user \$upstream_http_x_vouch_user;
+        auth_request_set \$auth_resp_jwt \$upstream_http_x_vouch_jwt;
+        auth_request_set \$auth_resp_err \$upstream_http_x_vouch_err;
+        auth_request_set \$auth_resp_failcount \$upstream_http_x_vouch_failcount;
+    }
+    error_page 401 = @error401;
+    location @error401 {
+        return 302 https://auth.rcmd.space/login?url=\$scheme://\$http_host\$request_uri&vouch-failcount=\$auth_resp_failcount&X-Vouch-Token=\$auth_resp_jwt&error=\$auth_resp_err;
+    }
     location / { 
         proxy_pass http://127.0.0.1:8384; 
         proxy_set_header X-Real-IP \$remote_addr;
