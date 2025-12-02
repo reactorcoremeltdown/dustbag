@@ -43,3 +43,6 @@
 
 ### Sorting photos
 20 2 * * 7 /usr/local/bin/phockup-wrapper
+
+### Telegraphite: scrape posts from channels
+* * * * * /opt/virtualenv/bin/telegraphite -e /root/telegraphite.env -c /root/channels.txt -d /root/data --log-file /var/log/telegraphite.log once
