@@ -12,6 +12,11 @@ rules:
     protocol: tcp
     address_v4: worldv4
     address_v6: worldv6
+  - name: XMPP C2S
+    port: 5222
+    protocol: tcp
+    address_v4: worldv4
+    address_v6: worldv6
   - name: tinc tcp
     port: 655
     protocol: tcp
