@@ -21,7 +21,7 @@ debian:
       url: "https://aquasecurity.github.io/trivy-repo/deb"
       section: "main"
     - name: "tiredsysadmin-test"
-      state: "present"
+      state: "absent"
       install_on: "production"
       key: "https://deb-test.tiredsysadmin.cc/dists/bookworm/tiredsysadmin-repo.gpg"
       url: "https://deb-test.tiredsysadmin.cc/"
