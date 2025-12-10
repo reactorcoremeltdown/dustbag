@@ -15,7 +15,7 @@ debian:
       distro: "any"
       section: "main"
     - name: "trivy"
-      state: "present"
+      state: "absent"
       install_on: "production"
       key: "https://aquasecurity.github.io/trivy-repo/deb/public.key"
       url: "https://aquasecurity.github.io/trivy-repo/deb"
