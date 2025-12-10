@@ -24,7 +24,7 @@ for branch in `yq -o=json -I=0 '.debian.reprepro.branches[]' ${1}`; do
         echo "Label: ${origin}" >> ${DESTINATION}
         echo "Codename: ${distro}" >> ${DESTINATION}
         echo "Architectures: ${architectures}" >> ${DESTINATION}
-        echo "Limit: ${limit}" >> ${DESTINATION}
+        # echo "Limit: ${limit}" >> ${DESTINATION}
         echo "Components: ${components}" >> ${DESTINATION}
         echo "Description: ${description}" >> ${DESTINATION}
         echo "SignWith: ${signwith}" >> ${DESTINATION}
