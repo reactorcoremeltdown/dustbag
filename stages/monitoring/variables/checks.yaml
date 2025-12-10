@@ -424,7 +424,7 @@ production:
     state: present
     plugin: check_zp_explosions
     argument: "/root/data/ivan_fedorov_zp/posts.json"
-    interval: 3m
+    interval: 30s
     description: Check for reported explosions in Zaporizhzhia
     hostname: garage.rcmd.space
     notify:
