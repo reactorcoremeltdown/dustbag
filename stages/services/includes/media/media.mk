@@ -7,9 +7,9 @@ davfs2:
 	test -d /var/storage/wastebox || mkdir -p /var/storage/wastebox
 	test -d /var/lib/chatserver_secondary || mkdir -p /var/lib/chatserver_secondary
 	systemctl daemon-reload
-	systemctl enable var-storage-smallwastebox.automount gocryptfs.service var-lib-chatserver_secondary.automount
+	systemctl enable var-storage-smallwastebox.automount var-lib-chatserver_secondary.automount
 	systemctl disable var-storage-wastebox.automount var-storage-wastebox.mount
-	systemctl start var-storage-smallwastebox.mount gocryptfs.service var-lib-chatserver_secondary.mount
+	systemctl start var-storage-smallwastebox.mount var-lib-chatserver_secondary.mount
 	@echo "$(ccgreen)Setting up davfs2 mounts completed$(ccend)"
 
 podsync:
