@@ -23,9 +23,9 @@ if [ -z "$RESULT" ]; then
 fi
 
 if [ "${RESULT}" -ge "$CRITICAL_THRESHOLD" ]; then
-        fail "Query result above critical threshold!"
+        fail "Query result (${RESULT}) above critical threshold (${CRITICAL_THRESHOLD})!"
 elif [ "${RESULT}" -ge "$WARNING_THRESHOLD" ]; then
-        warning "Query result above warning threshold!"
+        warning "Query result (${RESULT}) above warning threshold (${WARNING_THRESHOLD})!"
 else
-        ok "Query result below all thresholds"
+        ok "Query result (${RESULT}) below all thresholds"
 fi
