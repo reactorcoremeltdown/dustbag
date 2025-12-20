@@ -7,7 +7,7 @@ PROM_URL="http://localhost:9090/api/v1/query"
 WARNING_THRESHOLD=${WARNING_THRESHOLD:=1}
 CRITICAL_THRESHOLD=${CRITICAL_THRESHOLD:=2}
 
-QUERY="$1"
+QUERY="${OPTION}"
 
 if [ -z "$QUERY" ]; then
   echo "UNKNOWN - No PromQL query provided"
