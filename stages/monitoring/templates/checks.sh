@@ -11,6 +11,7 @@ for check in $(yq -o=json -I=0 ".${2}[]" ${1}); do
     description=`echo "${check}" | jq -cr '.description'`
     plugin=`echo "${check}" | jq -cr '.plugin'`
     argument=`echo "${check}" | jq -cr '.argument'`
+    option=`echo "${check}" | jq -cr '.option'`
     interval=`echo "${check}" | jq -cr '.interval'`
     warningThreshold=`echo "${check}" | jq -cr '.warningThreshold'`
     criticalThreshold=`echo "${check}" | jq -cr '.criticalThreshold'`
@@ -29,6 +30,7 @@ name = ${name}
 description = ${description}
 plugin = ${plugin}.sh
 argument = ${argument}
+option = ${option}
 interval = ${interval}
 timeoutSec = ${timeoutSec}
 warningThreshold = ${warningThreshold}
