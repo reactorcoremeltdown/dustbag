@@ -8,6 +8,34 @@ production:
     notify:
       - telegram
       - alert_fatigue
+  - name: storage_disk_health
+    state: present
+    plugin: check_promql
+    argument: 'smartctl_device_smart_status == 0'
+    warningThreshold: '1'
+    criticalThreshold: '2'
+    interval: 1m
+    description: 'Snapraid disks health'
+    hostname: garage.rcmd.space
+    timeoutSec: 120
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
+  - name: storage_disk_temperature
+    state: present
+    plugin: check_promql
+    argument: 'smartctl_device_temperature > 55'
+    warningThreshold: '1'
+    criticalThreshold: '3'
+    interval: 1m
+    description: 'Snapraid disks temperature'
+    hostname: garage.rcmd.space
+    timeoutSec: 120
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
   - name: prod_syncthing_service
     state: present
     plugin: check_systemd_service
