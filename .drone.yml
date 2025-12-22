@@ -137,6 +137,7 @@ steps:
 - name: report
   commands:
   - /usr/local/bin/telegram.run
+  - /usr/local/bin/jabber.run
 
 trigger:
   status:
