@@ -1,0 +1,19 @@
+#!/bin/bash -e
+
+MAIN_TOKEN=`cat /etc/secrets/seed`
+
+ONE_TIME_TOKEN=`curl -s -XPOST --data-urlencode "token=${MAIN_TOKEN}" https://api.rcmd.space/internal/token/get`
+
+if [[ ${DRONE_BUILD_STATUS} = "success" ]]; then
+    TEXT="📦 ${DRONE_REPO_NAME} build completed\\n\\nDetails: ${DRONE_BUILD_LINK}"
+else
+    TEXT="⛔ ${DRONE_REPO_NAME} build failed\\n\\nDetails: ${DRONE_BUILD_LINK}"
+fi
+
+curl -s -XPOST \
+    --data-urlencode "token=${ONE_TIME_TOKEN}" \
+    --data-urlencode "recepient=alerts@chats.tiredsysadmin.cc" \
+    --data-urlencode "message=${TEXT}" \
+    https://api.rcmd.space/internal/jabber
+
+exit ${FAILURE}

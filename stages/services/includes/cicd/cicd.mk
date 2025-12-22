@@ -57,6 +57,9 @@ drone_runner_amd64:
 	install -D -v -m 755 \
 		stages/services/includes/cicd/files/usr/local/bin/telegram.run \
 		/usr/local/bin
+	install -D -v -m 755 \
+		stages/services/includes/cicd/files/usr/local/bin/jabber.run \
+		/usr/local/bin
 	mkdir -p /home/git/.drone-runner-exec || true
 	chown git:git /home/git/.drone-runner-exec
 	test -f /home/git/.drone-runner-exec/config || bash stages/services/includes/cicd/templates/drone/runner.cfg.sh $(ROLE)
