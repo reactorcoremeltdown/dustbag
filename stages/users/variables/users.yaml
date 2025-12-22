@@ -12,7 +12,7 @@ debian:
       authorized_keys: true
     - name: git
       shell: /bin/bash
-      groups: git,docker,syncthing,laminar
+      groups: git,docker,syncthing,laminar,secrets
       keygen: true
       authorized_keys: false
     - name: radicale
