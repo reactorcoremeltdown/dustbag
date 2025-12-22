@@ -12,7 +12,7 @@ fi
 
 curl -s -XPOST \
     --data-urlencode "token=${ONE_TIME_TOKEN}" \
-    --data-urlencode "recepient=alerts@chats.tiredsysadmin.cc" \
+    --data-urlencode "recepient=builds@chats.tiredsysadmin.cc" \
     --data-urlencode "message=${TEXT}" \
     https://api.rcmd.space/internal/jabber
 
