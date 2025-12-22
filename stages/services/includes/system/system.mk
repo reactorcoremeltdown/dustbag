@@ -50,3 +50,8 @@ seppuku:
 	atq | cut -f 1 | xargs atrm
 	echo '/usr/local/bin/seppuku' | at now + 5 hours
 	@echo "$(ccgreen)Installed seppuku$(ccend)"
+
+snapraid_nas:
+	install -D -m 755 stages/services/includes/system/files/usr/local/bin/snapraid_sync.sh /usr/local/bin
+	apt install -y snapraid mergerfs
+	install -D -m 644 stages/services/includes/system/files/etc/snapraid.conf /etc
