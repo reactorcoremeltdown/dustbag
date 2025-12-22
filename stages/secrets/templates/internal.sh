@@ -33,6 +33,8 @@ services:
   telegram:
     defaultChat: ${TELEGRAM_CHAT}
     botToken: "${TELEGRAM_BOT}"
+  xmpp:
+    unixSocketPath: "/var/lib/pizdabol/jabber.socket"
   kanboard:
     api:
       url: "https://board.rcmd.space/jsonrpc.php"
