@@ -590,6 +590,24 @@ production:
       - telegram
       - alert_fatigue
 fermium:
+  - name: snapraid_parity
+    state: present
+    plugin: check_file
+    argument: /mnt/snapraid/parity1/snapraid.parity
+    interval: 15s
+    description: Snapraid parity
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: snapraid_content
+    state: present
+    plugin: check_file
+    argument: /mnt/snapraid/data1/.snapraid.content
+    interval: 15s
+    description: Snapraid content
+    notify:
+      - gotify
+      - alert_fatigue
   - name: fermium_provisioning
     state: present
     plugin: check_device_provisioning
