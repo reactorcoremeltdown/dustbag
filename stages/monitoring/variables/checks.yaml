@@ -153,7 +153,7 @@ production:
       - gotify
       - alert_fatigue
   - name: dave_service
-    state: present
+    state: absent
     plugin: check_systemd_service
     argument: dave.service
     interval: 1m
@@ -590,6 +590,16 @@ production:
       - telegram
       - alert_fatigue
 fermium:
+  - name: dave_service
+    state: present
+    plugin: check_systemd_service
+    argument: dave.service
+    interval: 1m
+    description: DAVE, a WebDAV server
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - alert_fatigue
   - name: snapraid_parity
     state: present
     plugin: check_file
