@@ -650,7 +650,7 @@ fermium:
     warningThreshold: "99"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: http://127.0.0.1:8384/rest/noauth/health
+    argument: http://192.168.2.227:8384/rest/noauth/health
     interval: 62s
     description: Syncthing at home
     hostname: fermium-wg.tiredsysadmin.cc
