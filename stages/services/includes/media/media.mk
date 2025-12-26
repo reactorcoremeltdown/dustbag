@@ -12,6 +12,13 @@ davfs2:
 	systemctl start var-storage-smallwastebox.mount var-lib-chatserver_secondary.mount
 	@echo "$(ccgreen)Setting up davfs2 mounts completed$(ccend)"
 
+wastebox:
+	install -D -m 644 stages/services/includes/media/files/etc/systemd/system/davfs2-mounts/* /etc/systemd/system
+	test -d /var/storage/wastebox || mkdir -p /var/storage/wastebox
+	systemctl daemon-reload
+	systemctl disable var-storage-wastebox.automount var-storage-wastebox.mount
+	@echo "$(ccgreen)Setting up wastebox mounts completed$(ccend)"
+
 podsync:
 	test -L /usr/local/bin/youtube-dl || ln -s /opt/virtualenv/bin/yt-dlp /usr/local/bin/youtube-dl
 	install -D -m 755 -v stages/services/includes/media/files/usr/local/bin/podsync-arm64 /usr/local/bin

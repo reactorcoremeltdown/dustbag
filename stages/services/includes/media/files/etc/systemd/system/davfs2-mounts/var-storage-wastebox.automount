@@ -1,6 +1,6 @@
 [Unit]
-Description=Hetzner Storagebox automount
-After=network-online.target
+Description=Home NAS on RPi4 automount
+After=wg-quick@wg0.service
 Wants=network-online.target
 
 [Automount]
@@ -8,4 +8,4 @@ Where=/var/storage/wastebox
 TimeoutIdleSec=300
 
 [Install]
-WantedBy=remote-fs.target
+WantedBy=multi-user.target

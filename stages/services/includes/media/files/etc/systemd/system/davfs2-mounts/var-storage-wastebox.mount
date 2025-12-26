@@ -1,16 +1,18 @@
+# Managed by https://git.rcmd.space/rcmd/dustbag
 [Unit]
-Description=Hetzner StorageBox
+Description=Home NAS on RPi4
 Before=nginx.service
 Before=docker-registry.service
-After=network-online.target
+Before=k3s.service
+After=wg-quick@wg0.service
 Wants=network-online.target
 
 [Mount]
-What=https://u214397.your-storagebox.de
+What=10.200.200.5:/mnt/pool
 Where=/var/storage/wastebox
-Options=rw,user,uid=syncthing,gid=syncthing,dir_mode=0775,file_mode=0664
-Type=davfs
+Options=_netdev,auto
+Type=nfs
 TimeoutSec=60
 
 [Install]
-WantedBy=remote-fs.target
+WantedBy=multi-user.target
