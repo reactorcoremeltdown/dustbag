@@ -3,7 +3,7 @@
 ifeq ($(MAKECMDGOALS), production)
 MACHINE := production
 
-monitoring: wtfd_package checks wtfd
+monitoring: wtfd_package checks wtfd prometheus
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
 ## Fermium, the little Pi Zero W
@@ -77,3 +77,9 @@ checks_configs:
 	@echo "$(ccgreen)Installing DAFUQ checks completed$(ccend)"
 
 checks: wtfd_files checks_configs wtfd_restart
+
+prometheus:
+	apt install -y prometheus prometheus-nginx-exporter
+	install -D -v -m 644 stages/monitoring/files/etc/prometheus/prometheus.yml /etc/prometheus
+	systemctl restart prometheus.service
+	@echo "$(ccgreen)Installing prometheus completed$(ccend)"
