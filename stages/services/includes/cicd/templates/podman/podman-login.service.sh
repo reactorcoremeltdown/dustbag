@@ -9,6 +9,8 @@ cat <<EOF > /etc/systemd/system/podman-login.service
 Description=Login into container repo at login
 Before=containers.target
 After=docker-registry.service
+Restart=on-failure
+RestartSec=30
 
 [Service]
 Type=oneshot
