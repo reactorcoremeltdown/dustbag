@@ -703,7 +703,7 @@ fermium:
     warningThreshold: "96"
     criticalThreshold: "93"
     flowOperator: downwards
-    argument: http://10.8.0.6:8881
+      argument: http://10.8.0.6:8881
     interval: 181s
     timeoutSec: 120
     description: TINC Mesh VPN Network
@@ -718,7 +718,7 @@ fermium:
     warningThreshold: "96"
     criticalThreshold: "93"
     flowOperator: downwards
-    argument: http://10.8.0.6:8881
+    argument: http://10.200.200.1:8881
     interval: 182s
     timeoutSec: 120
     description: Wireguard VPN Network
