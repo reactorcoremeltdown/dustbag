@@ -16,7 +16,7 @@ wastebox:
 	install -D -m 644 stages/services/includes/media/files/etc/systemd/system/davfs2-mounts/* /etc/systemd/system
 	test -d /var/storage/wastebox || mkdir -p /var/storage/wastebox
 	systemctl daemon-reload
-	systemctl disable var-storage-wastebox.automount var-storage-wastebox.mount
+	systemctl enable var-storage-wastebox.automount var-storage-wastebox.mount
 	@echo "$(ccgreen)Setting up wastebox mounts completed$(ccend)"
 
 podsync:
