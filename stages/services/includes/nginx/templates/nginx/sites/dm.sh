@@ -36,7 +36,7 @@ server {
     include /etc/nginx/common_ratelimit.conf;
 
     location / { 
-        proxy_pass http://10.8.0.102:16800; 
+        proxy_pass http://10.200.200.5:16800; 
         proxy_set_header X-Real-IP \$remote_addr;
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto \$scheme;

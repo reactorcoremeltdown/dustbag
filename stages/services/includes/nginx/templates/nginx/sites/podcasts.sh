@@ -49,7 +49,7 @@ server {
     include /etc/nginx/common_ratelimit.conf;
 
     location / {
-        proxy_pass http://10.8.0.102:80;
+        proxy_pass http://10.200.200.5:80;
         proxy_http_version 1.1;
         client_max_body_size 0;
 
