@@ -53,9 +53,9 @@ EOF
 PERCENTAGE=`echo "${PERCENTAGE_DEC}" | cut -f 1 -d '.'`
 
 if [[ $PERCENTAGE -lt ${CRITICAL_THRESHOLD} ]]; then
-    fail "The success rate of ${1} is ${PERCENTAGE}%! Check the site health"
+    fail "The success rate of ${OPTION} is ${PERCENTAGE}%! Check the site health"
 elif [[ ${PERCENTAGE} -lt ${WARNING_THRESHOLD} ]]; then
-    warning "The success rate of ${1} is ${PERCENTAGE}%"
+    warning "The success rate of ${OPTION} is ${PERCENTAGE}%"
 else
-    ok "The success rate of ${1} is ${PERCENTAGE}%"
+    ok "The success rate of ${OPTION} is ${PERCENTAGE}%"
 fi
