@@ -2,10 +2,10 @@
 
 source /etc/monitoring/plugins/okfail.sh
 
-service_status=`systemctl is-active $1`
+service_status=`systemctl is-active ${OPTION}`
 
 if [[ $service_status = 'active' ]]; then
-    ok "Unit $1 is UP" "$DESCRIPTION" "$ENVIRONMENT"
+    ok "Unit ${OPTION} is UP" "$DESCRIPTION" "$ENVIRONMENT"
 else
-    fail "Unit $1 is DOWN" "$DESCRIPTION" "$ENVIRONMENT"
+    fail "Unit ${OPTION} is DOWN" "$DESCRIPTION" "$ENVIRONMENT"
 fi

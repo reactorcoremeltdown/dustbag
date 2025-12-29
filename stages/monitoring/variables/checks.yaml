@@ -2,7 +2,7 @@ production:
   - name: garage_provisioning
     state: present
     plugin: check_device_provisioning
-    argument: ""
+    option: ""
     interval: 5m
     description: Checking provisioning status of Garage
     notify:
@@ -39,7 +39,7 @@ production:
   - name: prod_syncthing_service
     state: present
     plugin: check_systemd_service
-    argument: syncthing@syncthing.service
+    option: syncthing@syncthing.service
     interval: 1m
     description: 'Syncthing: production (systemd service)'
     hostname: garage.rcmd.space
@@ -155,7 +155,7 @@ production:
   - name: dave_service
     state: absent
     plugin: check_systemd_service
-    argument: dave.service
+    option: dave.service
     interval: 1m
     description: DAVE, a WebDAV server
     hostname: garage.rcmd.space
@@ -165,7 +165,7 @@ production:
   - name: tinc_host
     state: present
     plugin: check_systemd_service
-    argument: tinc@clusternet.service
+    option: tinc@clusternet.service
     interval: 1m
     description: TINC, main server
     hostname: garage.rcmd.space
@@ -601,7 +601,7 @@ fermium:
   - name: dave_service
     state: present
     plugin: check_systemd_service
-    argument: dave.service
+    option: dave.service
     interval: 1m
     description: DAVE, a WebDAV server
     hostname: garage.rcmd.space
@@ -667,7 +667,7 @@ fermium:
   - name: podsync_service
     state: present
     plugin: check_systemd_service
-    argument: podsync.service
+    option: podsync.service
     interval: 1m
     description: Podcast sync service
     hostname: fermium-wg.tiredsysadmin.cc
