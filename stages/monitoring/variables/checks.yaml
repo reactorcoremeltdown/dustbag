@@ -226,7 +226,7 @@ production:
   - name: free_space
     state: present
     plugin: check_disk_space
-    argument: /
+    option: /
     interval: 3m
     descripMissing spacetion: Free space on disk
     hostname: garage.rcmd.space
@@ -669,9 +669,21 @@ fermium:
   - name: home_storage
     state: present
     plugin: check_disk_space
-    argument: /
+    option: /
     interval: 3m
     description: Free space on disk
+    warningThreshold: "90"
+    criticalThreshold: "95"
+    flowOperator: upwards
+    hostname: fermium-wg.tiredsysadmin.cc
+    notify:
+      - dummy
+  - name: nfs_storage
+    state: present
+    plugin: check_disk_space
+    option: /mnt/pool
+    interval: 3m
+    description: Free space on NFS
     warningThreshold: "90"
     criticalThreshold: "95"
     flowOperator: upwards
