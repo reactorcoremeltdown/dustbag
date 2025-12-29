@@ -67,7 +67,7 @@ production:
   - name: dav_https
     state: present
     plugin: check_https_certificate
-    argument: dav.rcmd.space
+    option: dav.rcmd.space
     interval: 10m
     description: Radicale SSL certificate
     hostname: garage.rcmd.space
@@ -135,7 +135,7 @@ production:
   - name: site_https
     state: present
     plugin: check_https_certificate
-    argument: rcmd.space
+    option: rcmd.space
     interval: 10m
     description: Main Website SSL certificate
     hostname: garage.rcmd.space
@@ -145,7 +145,7 @@ production:
   - name: blog_https
     state: present
     plugin: check_https_certificate
-    argument: tiredsysadmin.cc
+    option: tiredsysadmin.cc
     interval: 10m
     description: Blog Website SSL certificate
     hostname: garage.rcmd.space
@@ -420,7 +420,7 @@ production:
   - name: api_https
     state: present
     plugin: check_https_certificate
-    argument: api.rcmd.space
+    option: api.rcmd.space
     interval: 10m
     description: API HTTPS certificate
     hostname: garage.rcmd.space
@@ -430,7 +430,7 @@ production:
   - name: gotify_https
     state: present
     plugin: check_https_certificate
-    argument: notifications.rcmd.space
+    option: notifications.rcmd.space
     interval: 10m
     description: Gotify HTTPS certificate
     hostname: notifications.rcmd.space
