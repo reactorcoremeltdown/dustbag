@@ -4,16 +4,16 @@ IFS=$'\n'
 
 source /etc/monitoring/plugins/okfail.sh
 
-DATA=`curl -s https://api.alerts.in.ua/v3/stats/duration/today.json | jq -r ".data[] | select(.luid==${1}) | .ex"`
+DATA=`curl -s https://api.alerts.in.ua/v3/stats/duration/today.json | jq -r ".data[] | select(.luid==${OPTION}) | .ex"`
 
 if [ "${DATA}" != '' ] && [ "${DATA}" != 'null' ]; then
-        sqlite3 /home/ledger/expenses.db "insert into ua_explosions (location, score) values (${1}, ${DATA})"
+        sqlite3 /home/ledger/expenses.db "insert into ua_explosions (location, score) values (${OPTION}, ${DATA})"
 else
-        sqlite3 /home/ledger/expenses.db "insert into ua_explosions (location, score) values (${1}, 0)"
+        sqlite3 /home/ledger/expenses.db "insert into ua_explosions (location, score) values (${OPTION}, 0)"
 fi
 
-CURRENT_SCORE=`sqlite3 /home/ledger/expenses.db "select score from ua_explosions where location = ${1} order by time desc limit 1"`
-PREVIOUS_SCORE=`sqlite3 /home/ledger/expenses.db "select score from ua_explosions where location = ${1} order by time desc limit 1 offset 1"`
+CURRENT_SCORE=`sqlite3 /home/ledger/expenses.db "select score from ua_explosions where location = ${OPTION} order by time desc limit 1"`
+PREVIOUS_SCORE=`sqlite3 /home/ledger/expenses.db "select score from ua_explosions where location = ${OPTION} order by time desc limit 1 offset 1"`
 
 LOCATION="No Data"
 
