@@ -447,21 +447,10 @@ production:
     notify:
       - telegram
       - gotify_disaster
-  - name: explosions_zp_new
-    state: absent
-    plugin: check_zp_explosions
-    argument: "/root/data/ivan_fedorov_zp/posts.json"
-    interval: 30s
-    description: Check for reported explosions in Zaporizhzhia
-    hostname: garage.rcmd.space
-    notify:
-      - telegram
-      - gotify_disaster
-      - alert_fatigue
   - name: caldav_backups
     state: present
     plugin: check_duplicity_backup
-    argument: file:///var/storage/wastebox/Backups/radicale/
+    option: file:///var/storage/wastebox/Backups/radicale/
     interval: 6h
     description: CalDAV backups
     hostname: garage.rcmd.space
@@ -473,7 +462,7 @@ production:
   - name: chatserver_backups
     state: present
     plugin: check_duplicity_backup
-    argument: file:///var/storage/wastebox/Backups/chatserver-backups/
+    option: file:///var/storage/wastebox/Backups/chatserver-backups/
     interval: 6h
     description: Databag backups
     hostname: garage.rcmd.space
@@ -485,7 +474,7 @@ production:
   - name: kanboard_backups
     state: present
     plugin: check_duplicity_backup
-    argument: file:///var/storage/wastebox/Backups/kanboard/
+    option: file:///var/storage/wastebox/Backups/kanboard/
     interval: 6h
     description: Kanboard backups
     hostname: garage.rcmd.space
@@ -497,7 +486,7 @@ production:
   - name: website_backups
     state: present
     plugin: check_duplicity_backup
-    argument: file:///var/storage/wastebox/Backups/websites/
+    option: file:///var/storage/wastebox/Backups/websites/
     interval: 6h
     description: Website backups
     hostname: garage.rcmd.space
