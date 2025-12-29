@@ -77,7 +77,7 @@ production:
   - name: check_vcfb_updates
     state: present
     plugin: check_website_diff
-    argument: https://vcfb.de
+    option: https://vcfb.de
     interval: 12h
     description: Checking VCFB exhibitions for 2024
     hostname: garage.rcmd.space
