@@ -2,7 +2,7 @@
 
 source ${PLUGINSDIR}/okfail.sh
 
-source <(curl -s "${1}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
+source <(curl -s "${OPTION}" | jq  -cr '. | to_entries[] | [.key,(.value|@sh)] | join("=")')
 
 case ${CurrentStatus} in
     "0")

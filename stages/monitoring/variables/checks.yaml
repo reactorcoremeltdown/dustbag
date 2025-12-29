@@ -529,7 +529,7 @@ production:
   - name: home_stereo
     state: present
     plugin: relay
-    argument: http://fermium.tiredsysadmin.cc:8881?check=home_stereo
+    option: http://fermium.tiredsysadmin.cc:8881?check=home_stereo
     interval: 30m
     description: '[relay] MPD server online test'
     hostname: fermium-wg.tiredsysadmin.cc
@@ -541,7 +541,7 @@ production:
   - name: home_syncthing
     state: present
     plugin: relay
-    argument: http://fermium.tiredsysadmin.cc:8881?check=home_syncthing
+    option: http://fermium.tiredsysadmin.cc:8881?check=home_syncthing
     interval: 30m
     description: '[relay] Syncthing at home'
     hostname: fermium-wg.tiredsysadmin.cc
@@ -553,7 +553,7 @@ production:
   - name: home_printer
     state: absent
     plugin: relay
-    argument: http://fermium.tiredsysadmin.cc:8881?check=home_printer
+    option: http://fermium.tiredsysadmin.cc:8881?check=home_printer
     interval: 30m
     suppressedBy:
       - tinc_host
@@ -567,7 +567,7 @@ production:
   - name: home_printer_device
     state: absent
     plugin: relay
-    argument: http://fermium.tiredsysadmin.cc:8881?check=home_printer_device
+    option: http://fermium.tiredsysadmin.cc:8881?check=home_printer_device
     suppressedBy:
       - tinc_host
     interval: 10m
@@ -579,14 +579,23 @@ production:
   - name: home_storage
     state: present
     plugin: relay
-    argument: http://fermium.tiredsysadmin.cc:8881?check=home_storage
+    option: http://fermium.tiredsysadmin.cc:8881?check=home_storage
     interval: 30m
     description: '[relay] Home storage status'
     hostname: fermium-wg.tiredsysadmin.cc
-    suppressedBy:
-      - tinc_host
     notify:
       - telegram
+      - alert_fatigue
+  - name: nfs_storage
+    state: present
+    plugin: relay
+    option: http://fermium.tiredsysadmin.cc:8881?check=nfs_storage
+    interval: 30m
+    description: '[relay] NFS storage status'
+    hostname: fermium-wg.tiredsysadmin.cc
+    notify:
+      - telegram
+      - gotify
       - alert_fatigue
 fermium:
   - name: dave_service
@@ -693,7 +702,7 @@ fermium:
   - name: home_printer
     state: present
     plugin: relay
-    argument: http://printer.tiredsysadmin.cc:8881?check=home_printer
+    option: http://printer.tiredsysadmin.cc:8881?check=home_printer
     interval: 10m
     timeoutSec: 240
     description: '[relay] CUPS server online test'
@@ -702,7 +711,7 @@ fermium:
   - name: home_printer_device
     state: present
     plugin: relay
-    argument: http://printer.tiredsysadmin.cc:8881?check=home_printer_device
+    option: http://printer.tiredsysadmin.cc:8881?check=home_printer_device
     interval: 5m
     timeoutSec: 240
     description: '[relay] Checking printer status, Brother Industries, Ltd HL-2140 series'
