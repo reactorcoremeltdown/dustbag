@@ -2,7 +2,7 @@
 
 source /etc/monitoring/plugins/okfail.sh
 
-DEVICE=$(lsusb -d ${1})
+DEVICE=$(lsusb -d ${OPTION})
 ret_code=$?
 
 if [[ $ret_code = 0 ]]; then

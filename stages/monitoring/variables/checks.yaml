@@ -252,7 +252,7 @@ production:
   - name: task_transformer_edit
     state: present
     plugin: check_redis_key
-    argument: task-transformer-edit-error
+    option: task-transformer-edit-error
     interval: 15m
     description: Task Transformer edit command errors
     hostname: garage.rcmd.space
@@ -268,7 +268,7 @@ production:
   - name: task_transformer_sync
     state: present
     plugin: check_redis_key
-    argument: task-transformer-sync-error
+    option: task-transformer-sync-error
     interval: 15m
     description: Task Transformer sync status
     hostname: garage.rcmd.space
@@ -284,7 +284,7 @@ production:
   - name: task_transformer_update_due
     state: present
     plugin: check_redis_key
-    argument: task-transformer-update-due
+    option: task-transformer-update-due
     interval: 15m
     description: Task Transformer, updating due date of kanboard cards
     hostname: garage.rcmd.space
@@ -298,7 +298,7 @@ production:
   - name: task_transformer_online
     state: present
     plugin: check_redis_timestamp
-    argument: task-transformer-sync-timestamp
+    option: task-transformer-sync-timestamp
     interval: 5m
     description: Task Transformer operational status
     hostname: garage.rcmd.space
@@ -498,7 +498,7 @@ production:
   - name: fermium_online
     state: present
     plugin: check_deviceping
-    argument: fermium.rcmd.space
+    option: fermium.rcmd.space
     interval: 20m
     description: 'Device online test: fermium'
     hostname: garage.rcmd.space
@@ -508,7 +508,7 @@ production:
   - name: printserver_online
     state: present
     plugin: check_deviceping
-    argument: printer.tiredsysadmin.cc
+    option: printer.tiredsysadmin.cc
     interval: 20m
     description: 'Device online test: printserver'
     hostname: fermium-wg.tiredsysadmin.cc
@@ -618,7 +618,7 @@ fermium:
   - name: fermium_provisioning
     state: present
     plugin: check_device_provisioning
-    argument: ""
+    option: ""
     interval: 5m
     description: Checking provisioning status of Fermium
     notify:
@@ -626,7 +626,7 @@ fermium:
   - name: ft_motion
     state: present
     plugin: check_feature_toggle
-    argument: motion
+    option: motion
     interval: 20s
     description: Feature toggle for motion service
     hostname: fermium.rcmd.space
@@ -635,7 +635,7 @@ fermium:
   - name: home_stereo
     state: present
     plugin: check_mpd_online
-    argument: ""
+    option: ""
     interval: 5m
     description: MPD server online test
     hostname: fermium-wg.tiredsysadmin.cc
@@ -753,7 +753,7 @@ printserver:
   - name: printserver_provisioning
     state: present
     plugin: check_device_provisioning
-    argument: ""
+    option: ""
     interval: 5m
     description: Checking provisioning status of Printer
     notify:
@@ -761,7 +761,7 @@ printserver:
   - name: home_printer
     state: present
     plugin: check_cups_online
-    argument: ""
+    option: ""
     interval: 5m
     description: CUPS server online test
     notify:
@@ -769,7 +769,7 @@ printserver:
   - name: home_printer_device
     state: present
     plugin: check_usb_device
-    argument: 04f9:0033
+    option: 04f9:0033
     interval: 3m
     description: Checking printer status, Brother Industries, Ltd HL-2140 series
     notify:
@@ -778,7 +778,7 @@ outpost:
   - name: outpost_provisioning
     state: present
     plugin: check_device_provisioning
-    argument: ""
+    option: ""
     interval: 5m
     description: Checking provisioning status of Outpost
     notify:
@@ -786,7 +786,7 @@ outpost:
   - name: wiki_protected
     state: present
     plugin: check_protected_url
-    argument: https://wiki.rcmd.space
+    option: https://wiki.rcmd.space
     interval: 62s
     description: Wiki protection check
     hostname: garage.rcmd.space
@@ -797,7 +797,7 @@ outpost:
   - name: wiki_backend_protected
     state: present
     plugin: check_protected_url
-    argument: http://garage.rcmd.space:30085
+    option: http://garage.rcmd.space:30085
     interval: 126s
     description: Wiki (backend) protection check
     hostname: garage.rcmd.space
@@ -808,7 +808,7 @@ outpost:
   - name: blog_beta_protected
     state: present
     plugin: check_protected_url
-    argument: https://beta.tiredsysadmin.cc
+    option: https://beta.tiredsysadmin.cc
     interval: 62s
     description: Blog beta protection check
     hostname: garage.rcmd.space
@@ -819,7 +819,7 @@ outpost:
   - name: site_beta_protected
     state: present
     plugin: check_protected_url
-    argument: https://beta.rcmd.space
+    option: https://beta.rcmd.space
     interval: 62s
     description: Site beta protection check
     hostname: garage.rcmd.space
@@ -830,7 +830,7 @@ outpost:
   - name: kanboard_protected
     state: present
     plugin: check_protected_url
-    argument: https://board.rcmd.space
+    option: https://board.rcmd.space
     interval: 62s
     description: Kanboard protection check
     hostname: garage.rcmd.space
@@ -841,7 +841,7 @@ outpost:
   - name: kanboard_backend_protected
     state: present
     plugin: check_protected_url
-    argument: http://garage.rcmd.space:30081
+    option: http://garage.rcmd.space:30081
     interval: 124s
     description: Kanboard (backend) protection check
     hostname: garage.rcmd.space
@@ -852,7 +852,7 @@ outpost:
   - name: grafana_protected
     state: present
     plugin: check_protected_url
-    argument: https://graph.rcmd.space
+    option: https://graph.rcmd.space
     interval: 62s
     description: Grafana protection check
     hostname: garage.rcmd.space
@@ -863,7 +863,7 @@ outpost:
   - name: grafana_backend_protected
     state: present
     plugin: check_protected_url
-    argument: http://garage.rcmd.space:30031
+    option: http://garage.rcmd.space:30031
     interval: 124s
     description: Grafana (backend) protection check
     hostname: garage.rcmd.space
@@ -874,7 +874,7 @@ outpost:
   - name: mixtape_protected
     state: present
     plugin: check_protected_url
-    argument: https://mixtape.tiredsysadmin.cc
+    option: https://mixtape.tiredsysadmin.cc
     interval: 62s
     description: Mixtape protection check
     hostname: garage.rcmd.space
@@ -885,7 +885,7 @@ outpost:
   - name: mood_protected
     state: present
     plugin: check_protected_url
-    argument: https://mood.rcmd.space
+    option: https://mood.rcmd.space
     interval: 62s
     description: Mood journal protection check
     hostname: garage.rcmd.space
@@ -896,7 +896,7 @@ outpost:
   - name: reader_protected
     state: present
     plugin: check_protected_url
-    argument: https://reader.tiredsysadmin.cc
+    option: https://reader.tiredsysadmin.cc
     interval: 62s
     description: RSS reader protection check
     hostname: garage.rcmd.space
@@ -907,7 +907,7 @@ outpost:
   - name: main_domain_expiry
     state: present
     plugin: check_domain_expiry
-    argument: rcmd.space
+    option: rcmd.space
     interval: 24h
     description: rcmd.space domain expiry check
     hostname: garage.rcmd.space
@@ -918,7 +918,7 @@ outpost:
   - name: blog_domain_expiry
     state: present
     plugin: check_domain_expiry
-    argument: tiredsysadmin.cc
+    option: tiredsysadmin.cc
     interval: 24h
     description: tiredsysadmin.cc domain expiry check
     hostname: garage.rcmd.space
