@@ -2,8 +2,8 @@
 
 source /etc/monitoring/plugins/okfail.sh
 
-if [[ -f $1 ]]; then
-	ok "File $1 is in place"
+if [[ -f ${OPTION} ]]; then
+	ok "File ${OPTION} is in place"
 else
-	fail "File $1 is not in place!" "$DESCRIPTION" "$ENVIRONMENT"
+	fail "File ${OPTION} is not in place!" "$DESCRIPTION" "$ENVIRONMENT"
 fi
