@@ -6,7 +6,7 @@ source /etc/monitoring/plugins/okfail.sh
 
 DATA=`curl -s https://api.alerts.in.ua/v3/stats/duration/today.json | jq -r ".data[] | select(.luid==${1}) | .ex"`
 
-if [[ "${DATA}" != 'null' ]]; then
+if [ "${DATA}" != '' ] && [ "${DATA}" != 'null' ]; then
         sqlite3 /home/ledger/expenses.db "insert into ua_explosions (location, score) values (${1}, ${DATA})"
 else
         sqlite3 /home/ledger/expenses.db "insert into ua_explosions (location, score) values (${1}, 0)"
@@ -17,7 +17,7 @@ PREVIOUS_SCORE=`sqlite3 /home/ledger/expenses.db "select score from ua_explosion
 
 LOCATION="No Data"
 
-case $1 in
+case "${OPTION}" in
         "12")
                 LOCATION="Zaporizhzhia region"
                 ;;

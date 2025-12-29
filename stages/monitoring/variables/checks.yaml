@@ -438,18 +438,17 @@ production:
       - telegram
       - alert_fatigue
   - name: explosions_zp
-    state: absent
+    state: present
     plugin: check_ua_explosions
-    argument: "12"
+    option: "12"
     interval: 15m
     description: Check for reported explosions in Zaporizhzhia
     hostname: garage.rcmd.space
     notify:
       - telegram
       - gotify_disaster
-      - alert_fatigue
   - name: explosions_zp_new
-    state: present
+    state: absent
     plugin: check_zp_explosions
     argument: "/root/data/ivan_fedorov_zp/posts.json"
     interval: 30s
