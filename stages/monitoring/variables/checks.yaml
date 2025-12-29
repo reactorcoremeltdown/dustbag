@@ -102,7 +102,7 @@ production:
   - name: traccar
     state: present
     plugin: check_traccar_logs
-    argument: ""
+    option: ""
     interval: 15s
     description: Traccar location tracker
     hostname: garage.rcmd.space
@@ -216,7 +216,7 @@ production:
   - name: kernel_version
     state: present
     plugin: check_kernel_version
-    argument: ""
+    option: ""
     interval: 48h
     description: Linux Kernel Version
     hostname: garage.rcmd.space
@@ -239,7 +239,7 @@ production:
   - name: hetzner_storagebox_v2
     state: present
     plugin: check_storagebox_space
-    argument: u346154
+    option: u346154
     interval: 2m
     description: Free space on STORAGEBOX V2
     hostname: garage.rcmd.space
