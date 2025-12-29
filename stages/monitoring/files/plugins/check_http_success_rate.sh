@@ -31,7 +31,7 @@ sqlite3 /var/lib/httpsuccessrate/timeseries_${PLUGIN_NAME}.db <<EOF
 CREATE TABLE IF NOT EXISTS ${PLUGIN_NAME} (time timestamp default (strftime('%s', 'now')), status text);
 EOF
 
-status=`curl -A "monit-ping-check" -s -o /dev/null -w "%{http_code}" --connect-timeout 20 --max-time 20 $1`
+status=`curl -A "monit-ping-check" -s -o /dev/null -w "%{http_code}" --connect-timeout 20 --max-time 20 ${OPTION}`
 
 sleep 0.2
 

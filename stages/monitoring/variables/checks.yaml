@@ -54,7 +54,7 @@ production:
     warningThreshold: "99"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: http://127.0.0.1:8384/rest/noauth/health
+    option: http://127.0.0.1:8384/rest/noauth/health
     interval: 1m
     description: 'Syncthing: production'
     hostname: garage.rcmd.space
@@ -178,7 +178,7 @@ production:
     warningThreshold: "99"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: https://382578846.site/#/status
+    option: https://382578846.site/#/status
     interval: 1m
     description: 'Databag online status'
     hostname: 382578846.site
@@ -192,7 +192,7 @@ production:
     warningThreshold: "99"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: https://notifications.rcmd.space/health
+    option: https://notifications.rcmd.space/health
     interval: 1m
     description: 'Gotify online status'
     hostname: notifications.rcmd.space
@@ -205,7 +205,7 @@ production:
     warningThreshold: "99"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: http://int.rcmd.space:30071/healthcheck
+    option: http://int.rcmd.space:30071/healthcheck
     interval: 1m
     description: 'VTODO + VEVENT + Kanboard sync service'
     hostname: garage.rcmd.space
@@ -314,7 +314,7 @@ production:
   - name: internal_wiki
     state: present
     plugin: check_http_success_rate
-    argument: http://int.rcmd.space:30085/pages/notes/sprints
+    option: http://int.rcmd.space:30085/pages/notes/sprints
     interval: 5m
     warningThreshold: "99"
     criticalThreshold: "97"
@@ -339,7 +339,7 @@ production:
   - name: api_website_health
     state: present
     plugin: check_http_success_rate
-    argument: https://api.rcmd.space/v6/healthcheck
+    option: https://api.rcmd.space/v6/healthcheck
     interval: 1m
     warningThreshold: "99"
     criticalThreshold: "97"
@@ -355,7 +355,7 @@ production:
     warningThreshold: "99"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: https://dav.rcmd.space/radicale/.web/
+    option: https://dav.rcmd.space/radicale/.web/
     interval: 1m
     description: Radicale CalDAV server
     hostname: garage.rcmd.space
@@ -369,7 +369,7 @@ production:
     warningThreshold: "99"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: http://int.rcmd.space:30031/api/health
+    option: http://int.rcmd.space:30031/api/health
     interval: 10m
     description: Grafana Web interfacUe
     hostname: garage.rcmd.space
@@ -382,7 +382,7 @@ production:
     warningThreshold: "99"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: https://api.rcmd.space/internal/healthcheck
+    option: https://api.rcmd.space/internal/healthcheck
     interval: 1m
     description: RCMD Internal API website
     hostname: garage.rcmd.space
@@ -396,7 +396,7 @@ production:
     warningThreshold: "99"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: https://rbw.rcmd.space/healthcheck
+    option: https://rbw.rcmd.space/healthcheck
     interval: 1m
     description: RCMD Internal API, RBW proxy
     hostname: garage.rcmd.space
@@ -410,7 +410,7 @@ production:
     warningThreshold: "99"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: https://ci.rcmd.space/badge/dummy.svg
+    option: https://ci.rcmd.space/badge/dummy.svg
     interval: 1m
     description: CI engine
     hostname: garage.rcmd.space
@@ -658,7 +658,7 @@ fermium:
     warningThreshold: "99"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: http://192.168.2.227:8384/rest/noauth/health
+    option: http://192.168.2.227:8384/rest/noauth/health
     interval: 62s
     description: Syncthing at home
     hostname: fermium-wg.tiredsysadmin.cc
@@ -723,7 +723,7 @@ fermium:
     warningThreshold: "96"
     criticalThreshold: "93"
     flowOperator: downwards
-    argument: http://10.8.0.6:8881
+    option: http://10.8.0.6:8881
     interval: 181s
     timeoutSec: 120
     description: TINC Mesh VPN Network
@@ -738,7 +738,7 @@ fermium:
     warningThreshold: "96"
     criticalThreshold: "93"
     flowOperator: downwards
-    argument: http://10.200.200.1:8881
+    option: http://10.200.200.1:8881
     interval: 182s
     timeoutSec: 120
     description: Wireguard VPN Network
@@ -753,7 +753,7 @@ fermium:
     warningThreshold: "98"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: https://rcmd.space
+    option: https://rcmd.space
     interval: 63s
     description: RCMD.space website
     hostname: fermium-wg.tiredsysadmin.cc
@@ -943,7 +943,7 @@ outpost:
     warningThreshold: "98"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: https://rcmd.space
+    option: https://rcmd.space
     interval: 3m
     description: RCMD.space website
     hostname: garage.rcmd.space
@@ -956,7 +956,7 @@ outpost:
     warningThreshold: "98"
     criticalThreshold: "97"
     flowOperator: downwards
-    argument: https://tiredsysadmin.cc
+    option: https://tiredsysadmin.cc
     interval: 3m
     description: Blog website
     hostname: garage.rcmd.space
