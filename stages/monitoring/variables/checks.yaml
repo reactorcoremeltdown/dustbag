@@ -540,7 +540,7 @@ production:
       - telegram
       - alert_fatigue
   - name: home_printer
-    state: absent
+    state: present
     plugin: relay
     option: http://fermium.tiredsysadmin.cc:8881?check=home_printer
     interval: 30m
@@ -554,7 +554,7 @@ production:
       - telegram
       - alert_fatigue
   - name: home_printer_device
-    state: absent
+    state: present
     plugin: relay
     option: http://fermium.tiredsysadmin.cc:8881?check=home_printer_device
     suppressedBy:
