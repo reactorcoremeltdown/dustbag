@@ -50,7 +50,7 @@ drone_server:
 	test -f /etc/drone/server.cfg && md5sum /etc/drone/server.cfg > /etc/drone/checksum.txt
 	mkdir -p /var/lib/drone || true
 	install -D -m 644 stages/services/includes/cicd/files/etc/systemd/system/drone-server.service /etc/systemd/system
-	systemctl enable drone-server.service
+	systemctl daemon-reload && systemctl enable drone-server.service
 	@echo "$(ccgreen)Installed drone server$(ccend)"
 
 drone_runner_amd64:
