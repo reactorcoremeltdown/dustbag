@@ -32,7 +32,7 @@ services:
       token: "${KANBOARD_API}"
       user: "jsonrpc"
     projects:
-      sprint: 17
+      sprint: 18
       chores: 1
       work: 13
 EOF
