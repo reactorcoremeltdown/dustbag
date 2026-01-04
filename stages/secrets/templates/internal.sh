@@ -74,16 +74,10 @@ users:
 ${USERS}
 EOF
 
-    systemctl stop rcmd-api-internal.service
-    podman secret rm rcmd-api-internal rcmd-api-internal-ssh-private rcmd-api-internal-ssh-public || true
-    echo "${YAML}" | podman secret create rcmd-api-internal -
-    rbw-request-key 'internal_api' 'auth/ssh/private' | cat - <(echo) | podman secret create rcmd-api-internal-ssh-private -
-    rbw-request-key 'internal_api' 'auth/ssh/public' | podman secret create rcmd-api-internal-ssh-public -
-    systemctl start rcmd-api-internal.service
-
     kubectl get namespace api || kubectl create namespace api
     kubectl delete secret --namespace=api rcmd-api-internal rcmd-api-internal-ssh-private rcmd-api-internal-ssh-public || true
     echo "${YAML}" | kubectl create secret generic --namespace=api rcmd-api-internal --from-file=config.yaml=/dev/stdin
     rbw-request-key 'internal_api' 'auth/ssh/private' | cat - <(echo) | kubectl create secret generic --namespace=api rcmd-api-internal-ssh-private --from-file=id_rsa=/dev/stdin
     rbw-request-key 'internal_api' 'auth/ssh/public' | kubectl create secret generic --namespace=api rcmd-api-internal-ssh-public --from-file=id_rsa.pub=/dev/stdin
+    kubectl rollout restart deployment/rcmd-api-internal -n api
 fi

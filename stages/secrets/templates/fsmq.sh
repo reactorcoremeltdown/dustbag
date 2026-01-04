@@ -49,12 +49,8 @@ webhook:
 acl:
 ${USERS}
 EOF
-    systemctl stop rcmd-api-v6.service
-    podman secret rm rcmd-api-v6 || true
-    echo "${YAML}" | podman secret create rcmd-api-v6 -
-    systemctl start rcmd-api-v6.service
-
     kubectl get namespace api || kubectl create namespace api
     kubectl delete secret --namespace=api rcmd-api-v6 || true
     echo "${YAML}" | kubectl create secret generic --namespace=api rcmd-api-v6 --from-file=fsmq.yaml=/dev/stdin
+    kubectl rollout restart deployment/rcmd-api-v6 -n api
 fi
