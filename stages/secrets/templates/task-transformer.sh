@@ -32,16 +32,12 @@ services:
       token: "${KANBOARD_API}"
       user: "jsonrpc"
     projects:
-      sprint: 17
+      sprint: 18
       chores: 1
       work: 13
 EOF
-    systemctl stop task-transformer.service
-    podman secret rm task-transformer || true
-    echo "${YAML}" | podman secret create task-transformer -
-    systemctl start task-transformer.service
-
     kubectl get namespace apps || kubectl create namespace apps
     kubectl delete secret --namespace=apps task-transformer || true
     echo "${YAML}" | kubectl create secret generic --namespace=apps task-transformer --from-file=config.yaml=/dev/stdin
+    kubectl rollout restart deployment/task-transformer -n apps
 fi
