@@ -8,7 +8,7 @@ REGULAR_TASKS_PROJECT="1"
 
 NUMBER_OF_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select count(*) from tasks where (is_active = 0 and date_completed > strftime('%s', 'now', 'start of day') and project_id != ${REPEATING_TASKS_PROJECT}) or (date_modification > strftime('%s', 'now', 'start of day') and project_id = ${REPEATING_TASKS_PROJECT})"`
 
-NORMAL_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select '⋅ ' || title from tasks where (is_active = 0 and date_completed > strftime('%s', 'now', 'start of day', 'localtime') and project_id != ${REPEATING_TASKS_PROJECT}) order by date_due"`
+NORMAL_TASKS=`cat /var/lib/task-transformer/json/completed.txt`
 REPEATING_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select '⋅ ' || title from tasks where (date_modification > strftime('%s', 'now', 'start of day', 'localtime') and project_id = ${REPEATING_TASKS_PROJECT} and title not like '💊%') order by date_due"`
 OUTSTANDING_TASKS=`sqlite3 /var/lib/kanboard/data/db.sqlite "select '⋅ ' || strftime('%Y-%m-%d %H:%M', datetime(date_due, 'unixepoch'), 'localtime') || '\\n    ' || title || '\n' from tasks where (date_due < strftime('%s', 'now', '+72 hours') and project_id = ${REGULAR_TASKS_PROJECT} and is_active = 1 and title not like 'Interview:%' and title not like 'Termin:%') order by date_due"`
 
@@ -36,3 +36,5 @@ curl --url "smtp://$SMTP_SERVER:$SMTP_PORT" \
     --user "$SMTP_USERNAME:$SMTP_PASSWORD" \
     --tlsv1.2 \
     -T <(echo -e "$MESSAGE")
+
+rm -f /var/lib/task-transformer/json/completed.txt
