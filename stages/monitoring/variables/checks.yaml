@@ -237,7 +237,7 @@ production:
       - gotify
       - alert_fatigue
   - name: hetzner_storagebox_v2
-    state: present
+    state: absent
     plugin: check_storagebox_space
     option: u346154
     interval: 2m
