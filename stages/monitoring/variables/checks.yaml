@@ -123,7 +123,7 @@ production:
       - gotify
       - alert_fatigue
   - name: gocryptfs_config
-    state: present
+    state: absent
     plugin: check_file
     option: /var/storage/smallwastebox/encrypted/gocryptfs.conf
     interval: 15s
