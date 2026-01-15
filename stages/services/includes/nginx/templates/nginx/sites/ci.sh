@@ -211,8 +211,6 @@ server {
 
     server_name ${SITE}.rcmd.space;
 
-    include /etc/nginx/common_ratelimit.conf;
-
     location / {
         proxy_pass http://10.200.200.5:28003;
         proxy_http_version 1.1;
