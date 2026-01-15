@@ -212,23 +212,16 @@ server {
     server_name ${SITE}.rcmd.space;
 
     location / {
-        proxy_pass http://10.200.200.5:28003;
-        proxy_http_version 1.1;
-
-        # Ensuring it can use websockets
-        proxy_set_header   Upgrade \$http_upgrade;
-        proxy_set_header   Connection "upgrade";
-        proxy_set_header   X-Real-IP \$remote_addr;
-        proxy_set_header   X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header   X-Forwarded-Proto http;
-        proxy_redirect     http:// \$scheme://;
-
+        proxy_set_header   X-Forwarded-For \$remote_addr;
+        proxy_set_header   X-Forwarded-Proto \$scheme;
         proxy_set_header   Host \$http_host;
 
-        # These sets the timeout so that the websocket can stay alive
-        proxy_connect_timeout   7m;
-        proxy_send_timeout      7m;
-        proxy_read_timeout      7m;
+        proxy_pass http://10.200.200.5:28003;
+        proxy_redirect     off;
+        proxy_http_version 1.1;
+        proxy_buffering    off;
+
+        chunked_transfer_encoding off;
     }
 }
 
