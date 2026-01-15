@@ -48,6 +48,7 @@ woodpecker_server:
 	mkdir -p /etc/woodpecker || true
 	bash stages/services/includes/cicd/templates/woodpecker/woodpecker.cfg.sh
 	mkdir -p /var/lib/woodpecker || true
+	chmod -R 1000:1000 /var/lib/woodpecker
 	install -D -m 644 stages/services/includes/cicd/files/etc/systemd/system/woodpecker-server.service /etc/systemd/system
 	systemctl daemon-reload && systemctl enable woodpecker-server.service
 	@echo "$(ccgreen)Installed woodpecker server$(ccend)"
