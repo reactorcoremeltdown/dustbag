@@ -44,6 +44,14 @@ fdroid:
 	systemctl reload nginx.service
 	@echo "$(ccgreen)Setting up fdroid completed$(ccend)"
 
+woodpecker_server:
+	mkdir -p /etc/woodpecker || true
+	bash stages/services/includes/cicd/templates/woodpecker/woodpecker.cfg.sh
+	mkdir -p /var/lib/woodpecker || true
+	install -D -m 644 stages/services/includes/cicd/files/etc/systemd/system/woodpecker-server.service /etc/systemd/system
+	systemctl daemon-reload && systemctl enable woodpecker-server.service
+	@echo "$(ccgreen)Installed woodpecker server$(ccend)"
+
 drone_server:
 	mkdir -p /etc/drone || true
 	bash stages/services/includes/cicd/templates/drone/server.cfg.sh

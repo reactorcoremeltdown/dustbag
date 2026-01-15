@@ -1,0 +1,19 @@
+[Unit]
+Description=CI Server
+
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/podman rm -f woodpecker-server
+ExecStart=/usr/bin/podman run \
+    --name woodpecker-server \
+    -p 127.0.0.1:28003:80 \
+    --cpus=0.6 \
+    --env-file /etc/woodpecker/server.cfg \
+    --mount type=bind,source=/var/lib/woodpecker,target=/var/lib/woodpecker \
+    woodpeckerci/woodpecker-server:v3.13.0
+ExecStop=/usr/bin/podman stop -t 2 woodpecker-server
+ExecStopPost=-/usr/bin/podman rm -f woodpecker-server
+ExecStopPost=/bin/sleep 2
+
+[Install]
+WantedBy=containers.target
