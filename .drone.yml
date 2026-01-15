@@ -89,7 +89,8 @@ node:
 
 trigger:
   target:
-  - arm
+    exclude:
+    - arm
 
 ---
 kind: pipeline
