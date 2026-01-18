@@ -1,0 +1,15 @@
+---
+when:
+  - path:
+      include:
+        - 'stages/early/*'
+        - '.woodpecker/all_early.yaml'
+    event: push
+steps:
+  build:
+    image: bash
+    commands:
+      - echo $GIT_SUDO | sudo -S make early
+    environment:
+      GIT_SUDO:
+        from_secret: git_sudo
