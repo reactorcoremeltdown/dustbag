@@ -5,6 +5,8 @@ when:
         - 'stages/early/*'
         - '.woodpecker/all_early.yaml'
     event: push
+labels:
+  role: *
 steps:
   build:
     image: bash
