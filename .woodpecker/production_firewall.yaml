@@ -1,0 +1,17 @@
+---
+when:
+  - event: push
+  - path:
+      include:
+        - 'stages/firewall/*'
+        - '.woodpecker/production_firewall.yaml'
+labels:
+  role: production
+steps:
+  build:
+    image: bash
+    commands:
+      - echo $GIT_SUDO | sudo -S make firewall
+    environment:
+      GIT_SUDO:
+        from_secret: git_sudo
