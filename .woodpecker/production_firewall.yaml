@@ -4,6 +4,7 @@ when:
       include:
         - 'stages/firewall/*'
         - '.woodpecker/production_firewall.yaml'
+    event: push
 labels:
   role: production
 steps:
