@@ -16,7 +16,7 @@ exported_graphs:
 	install -D -m 755 stages/services/includes/monitoring/files/usr/local/bin/grafana_pictures.sh /usr/local/bin
 	@echo "$(ccgreen)Setting up graphs completed$(ccend)"
 
-gotify: nginx_packages nginx_certificates
+gotify: nginx_packages nginx_certificates podman
 	test -d /var/lib/gotify || mkdir -p /var/lib/gotify
 	install -D -m 644 stages/services/includes/monitoring/files/etc/systemd/system/gotify.service /etc/systemd/system
 	systemctl enable gotify.service
