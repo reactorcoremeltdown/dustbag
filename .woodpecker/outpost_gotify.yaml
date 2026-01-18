@@ -5,6 +5,7 @@ when:
         - 'stages/services/includes/monitoring/templates/nginx/sites/gotify.sh'
         - 'stages/services/includes/monitoring/monitoring.mk'
         - '.woodpecker/outpost_gotify.yaml'
+    event: push
 labels:
   role: outpost
 steps:
