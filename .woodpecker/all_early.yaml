@@ -6,7 +6,61 @@ when:
         - '.woodpecker/all_early.yaml'
     event: push
 labels:
-  role: *
+  role: production
+steps:
+  build:
+    image: bash
+    commands:
+      - echo $GIT_SUDO | sudo -S make early
+    environment:
+      GIT_SUDO:
+        from_secret: git_sudo
+
+---
+when:
+  - path:
+      include:
+        - 'stages/early/*'
+        - '.woodpecker/all_early.yaml'
+    event: push
+labels:
+  role: homeserver
+steps:
+  build:
+    image: bash
+    commands:
+      - echo $GIT_SUDO | sudo -S make early
+    environment:
+      GIT_SUDO:
+        from_secret: git_sudo
+
+---
+when:
+  - path:
+      include:
+        - 'stages/early/*'
+        - '.woodpecker/all_early.yaml'
+    event: push
+labels:
+  role: outpost
+steps:
+  build:
+    image: bash
+    commands:
+      - echo $GIT_SUDO | sudo -S make early
+    environment:
+      GIT_SUDO:
+        from_secret: git_sudo
+
+---
+when:
+  - path:
+      include:
+        - 'stages/early/*'
+        - '.woodpecker/all_early.yaml'
+    event: push
+labels:
+  role: printserver
 steps:
   build:
     image: bash
