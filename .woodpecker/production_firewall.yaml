@@ -1,6 +1,5 @@
 ---
 when:
-  - event: push
   - path:
       include:
         - 'stages/firewall/*'

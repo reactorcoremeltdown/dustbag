@@ -1,11 +1,10 @@
 ---
 when:
-  - event: push
   - path:
       include:
         - 'stages/services/includes/monitoring/templates/nginx/sites/gotify.sh'
         - 'stages/services/includes/monitoring/monitoring.mk'
-        - 'stages/services/includes/monitoring/monitoring.mk'
+        - '.woodpecker/outpost_gotify.yaml'
 labels:
   role: outpost
 steps:
