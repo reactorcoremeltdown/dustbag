@@ -1,0 +1,18 @@
+---
+when:
+  - event: push
+  - path:
+      include:
+        - 'stages/services/includes/monitoring/templates/nginx/sites/gotify.sh'
+        - 'stages/services/includes/monitoring/monitoring.mk'
+        - 'stages/services/includes/monitoring/monitoring.mk'
+labels:
+  role: outpost
+steps:
+  build:
+    image: bash
+    commands:
+      - echo $GIT_SUDO | sudo -S make gotify
+    environment:
+      GIT_SUDO:
+        from_secret: git_sudo
