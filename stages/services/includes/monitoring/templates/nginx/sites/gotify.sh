@@ -7,7 +7,7 @@ SITE='notifications'
 cat <<EOF > /etc/nginx/sites-available/${SITE}.conf
 server {
   listen 80;
-  listen [::]:80;
+  # listen [::]:80;
   server_name ${SITE}.rcmd.space;
 
   return 301 https://\$server_name\$request_uri;
@@ -15,7 +15,7 @@ server {
 
 server {
     listen 443 ssl http2;
-    listen [::]:443 ssl http2;
+    # listen [::]:443 ssl http2;
 
     access_log /var/log/nginx/${SITE}.rcmd.space_access.log json;
     error_log /var/log/nginx/${SITE}.rcmd.space_error.log;
