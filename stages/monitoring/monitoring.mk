@@ -6,8 +6,8 @@ MACHINE := production
 monitoring: wtfd_package checks wtfd prometheus
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
-## Fermium, the little Pi Zero W
-else ifeq ($(MACHINE_ROLE), fermium)
+## Fermium, the RPi 4
+else ifeq ($(MACHINE_ROLE), homeserver)
 MACHINE := fermium
 
 monitoring: wtfd_package checks wtfd
@@ -27,7 +27,7 @@ monitoring: wtfd_package checks wtfd
 
 endif
 
-wtfd_package:
+wtfd_package: setup_debian_repositories update_debian_repositories
 	systemctl stop wtfd.service || true
 	apt -y install dafuq
 	cp stages/monitoring/files/configs/wtfd-standard.service /etc/systemd/system/wtfd.service
