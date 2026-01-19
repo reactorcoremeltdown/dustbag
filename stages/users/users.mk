@@ -1,4 +1,4 @@
-ifeq ($(MAKECMDGOALS), production)
+ifeq ($(MACHINE_ROLE), production)
 USERSDB := stages/users/variables/users.yaml
 
 users: early accounts sudoers configs ledger_scripts
