@@ -1,0 +1,28 @@
+---
+when:
+  - path:
+      include:
+        - 'stages/monitoring/*'
+        - '.woodpecker/all_monitoring.yaml'
+    event: push
+matrix:
+  ROLE:
+    - production
+    - homeserver
+    - outpost
+    - printserver
+labels:
+  role: ${ROLE}
+skip_clone: true
+steps:
+  clone:
+    image: bash
+    commands:
+      - git clone --depth=1 ${CI_REPO_CLONE_SSH_URL}
+  build:
+    image: bash
+    commands:
+      - cd ${CI_REPO_NAME} && echo $GIT_SUDO | sudo -S make wtfd_package checks wtfd MACHINE_ROLE=${ROLE}
+    environment:
+      GIT_SUDO:
+        from_secret: git_sudo

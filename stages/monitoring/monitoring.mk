@@ -1,30 +1,28 @@
 # Main server
 
-ifeq ($(MAKECMDGOALS), production)
+ifeq ($(MACHINE_ROLE), production)
 MACHINE := production
 
 monitoring: wtfd_package checks wtfd prometheus
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
 ## Fermium, the little Pi Zero W
-else ifeq ($(MAKECMDGOALS), fermium)
+else ifeq ($(MACHINE_ROLE), fermium)
 MACHINE := fermium
 
 monitoring: wtfd_package checks wtfd
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
-else ifeq ($(MAKECMDGOALS), printserver)
+else ifeq ($(MACHINE_ROLE), printserver)
 MACHINE := printserver
 
 monitoring: wtfd_package checks wtfd
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
-else ifeq ($(MAKECMDGOALS), outpost)
+else ifeq ($(MACHINE_ROLE), outpost)
 MACHINE := outpost
 
 monitoring: wtfd_package checks wtfd
-	cat stages/monitoring/files/configs/wtfd_generic.service > /etc/systemd/system/wtfd.service
-	systemctl daemon-reload && systemctl restart wtfd
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
 endif
