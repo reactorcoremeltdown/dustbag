@@ -1,13 +1,13 @@
 ROOT_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
 ## GENERIC host (runs by default)
-ifeq ($(MAKECMDGOALS),)
+ifeq ($(MACHINE_ROLE),)
 DEVICEPING_ID := untrusted-third-party
 services: users packages deviceping vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Production host
-else ifeq ($(MAKECMDGOALS), production)
+else ifeq ($(MACHINE_ROLE), production)
 CRONS := stages/services/files/crons/main
 ROLE := production
 
@@ -15,7 +15,7 @@ services: users packages motd sshd crons dave wastebox gitea exported_graphs ngi
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium V2, the Pi 4 at home
-else ifeq ($(MAKECMDGOALS), fermium)
+else ifeq ($(MACHINE_ROLE), homeserver)
 CRONS := stages/services/files/crons/fermium
 DEVICEPING_ID := deviceping_fermium
 ROLE := homeserver
@@ -24,27 +24,27 @@ services: users packages crons nginx_proxies nginx tinc_client mpd motion podsyn
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Seedbox
-else ifeq ($(MAKECMDGOALS), seedbox)
+else ifeq ($(MACHINE_ROLE), seedbox)
 
 services: users packages drone_runner_amd64 vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Buildbox
-else ifeq ($(MAKECMDGOALS), builder)
+else ifeq ($(MACHINE_ROLE), builder)
 ROLE := builder
 
 services: users packages podman drone_runner_amd64 seppuku
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Outpost
-else ifeq ($(MAKECMDGOALS), outpost)
+else ifeq ($(MACHINE_ROLE), outpost)
 ROLE := outpost
 
 services: users packages podman drone_runner_amd64 tinc_client nginx_packages nginx_certificates nginx_configs gotify vault_seal
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Printserver V2, the Pi Zero W edition
-else ifeq ($(MAKECMDGOALS), printserver)
+else ifeq ($(MACHINE_ROLE), printserver)
 CRONS := stages/services/files/crons/printserver
 DEVICEPING_ID := deviceping_printserver
 ROLE := printer
