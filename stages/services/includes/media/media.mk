@@ -31,7 +31,7 @@ podsync:
 	systemctl restart podsync.service
 	@echo "$(ccgreen)Setting up podsync completed$(ccend)"
 
-dave: davfs2
+dave:
 	install -D -m 755 stages/services/includes/media/files/usr/local/bin/dave /usr/local/bin
 	install -D -m 644 -v stages/services/includes/media/files/etc/systemd/system/dave.service /etc/systemd/system
 	install -d -m 750 --owner=www-data --group=www-data /var/www/.dave
