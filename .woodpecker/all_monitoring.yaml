@@ -2,7 +2,7 @@
 when:
   - path:
       include:
-        - 'stages/monitoring/*'
+        - 'stages/monitoring/**'
         - '.woodpecker/all_monitoring.yaml'
     event: push
 matrix:
