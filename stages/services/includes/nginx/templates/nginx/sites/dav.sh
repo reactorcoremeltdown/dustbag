@@ -16,8 +16,9 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
 
     access_log /var/log/nginx/dav.rcmd.space_access.log json;
     error_log /var/log/nginx/dav.rcmd.space_error.log;

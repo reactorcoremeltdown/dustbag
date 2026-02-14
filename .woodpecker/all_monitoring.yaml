@@ -2,7 +2,7 @@
 when:
   - path:
       include:
-        - 'stages/monitoring/*'
+        - 'stages/monitoring/**'
         - '.woodpecker/all_monitoring.yaml'
     event: push
 matrix:
@@ -22,7 +22,7 @@ steps:
   build:
     image: bash
     commands:
-      - cd ${CI_REPO_NAME} && echo $GIT_SUDO | sudo -S make wtfd_package checks wtfd MACHINE_ROLE=${ROLE}
+      - cd ${CI_REPO_NAME} && echo $GIT_SUDO | sudo -S make monitoring MACHINE_ROLE=${ROLE}
     environment:
       GIT_SUDO:
         from_secret: git_sudo
