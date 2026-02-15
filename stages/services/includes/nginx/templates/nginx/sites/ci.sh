@@ -219,7 +219,7 @@ server {
         proxy_set_header   X-Forwarded-Proto \$scheme;
         proxy_set_header   Host \$http_host;
 
-        proxy_pass http://10.200.200.5:28003;
+        proxy_pass http://10.200.1.3:28003;
         proxy_redirect     off;
         proxy_http_version 1.1;
         proxy_buffering    off;
