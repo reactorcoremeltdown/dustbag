@@ -6,8 +6,8 @@ Restart=always
 ExecStartPre=-/usr/bin/podman rm -f woodpecker-server
 ExecStart=/usr/bin/podman run \
     --name woodpecker-server \
-    -p 10.200.200.5:28003:8000 \
-    -p 10.200.200.5:9000:9000 \
+    -p 10.200.1.3:28003:8000 \
+    -p 10.200.1.3:9000:9000 \
     --cpus=0.6 \
     --env-file /etc/woodpecker/server.cfg \
     --mount type=bind,source=/var/lib/woodpecker,target=/var/lib/woodpecker \
