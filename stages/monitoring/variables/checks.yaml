@@ -163,7 +163,7 @@ production:
       - gotify
       - alert_fatigue
   - name: tinc_host
-    state: present
+    state: absent
     plugin: check_systemd_service
     option: tinc@clusternet.service
     interval: 1m
@@ -522,8 +522,6 @@ production:
     interval: 30m
     description: '[relay] MPD server online test'
     hostname: fermium-wg.tiredsysadmin.cc
-    suppressedBy:
-      - tinc_host
     notify:
       - telegram
       - alert_fatigue
@@ -534,8 +532,6 @@ production:
     interval: 30m
     description: '[relay] Syncthing at home'
     hostname: fermium-wg.tiredsysadmin.cc
-    suppressedBy:
-      - tinc_host
     notify:
       - telegram
       - alert_fatigue
@@ -544,8 +540,6 @@ production:
     plugin: relay
     option: http://fermium.tiredsysadmin.cc:8881?check=home_printer
     interval: 30m
-    suppressedBy:
-      - tinc_host
     description: '[relay] CUPS server online test'
     hostname: fermium-wg.tiredsysadmin.cc
     suppressedBy:
@@ -557,8 +551,6 @@ production:
     state: present
     plugin: relay
     option: http://fermium.tiredsysadmin.cc:8881?check=home_printer_device
-    suppressedBy:
-      - tinc_host
     interval: 10m
     hostname: fermium-wg.tiredsysadmin.cc
     description: '[relay] Checking printer status, Brother Industries, Ltd HL-2140 series'
@@ -707,7 +699,7 @@ fermium:
     notify:
       - dummy
   - name: home_tinc_network
-    state: present
+    state: absent
     plugin: check_http_success_rate
     warningThreshold: "96"
     criticalThreshold: "93"
@@ -727,7 +719,7 @@ fermium:
     warningThreshold: "96"
     criticalThreshold: "93"
     flowOperator: downwards
-    option: http://10.200.200.1:8881
+    option: http://10.200.1.1:8881
     interval: 182s
     timeoutSec: 120
     description: Wireguard VPN Network
