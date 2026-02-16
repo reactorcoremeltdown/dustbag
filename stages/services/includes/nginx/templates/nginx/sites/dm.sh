@@ -6,7 +6,7 @@ cat <<EOF > /etc/nginx/sites-available/dm.conf
 ### Deployed by https://git.rcmd.space/rcmd/dustbag
 
 server {
-    listen 10.200.200.1:80;
+    listen 10.200.1.1:80;
     server_name dm.tiredsysadmin.cc;
 
     include /etc/nginx/common_ratelimit.conf;
@@ -15,7 +15,7 @@ server {
 }
 
 server {
-    listen 10.200.200.1:443 ssl http2;
+    listen 10.200.1.1:443 ssl http2;
 
     access_log /var/log/nginx/dm.tiredsysadmin.cc_access.log json;
     error_log /var/log/nginx/dm.tiredsysadmin.cc_error.log;
@@ -36,7 +36,7 @@ server {
     include /etc/nginx/common_ratelimit.conf;
 
     location / { 
-        proxy_pass http://10.200.200.5:16800; 
+        proxy_pass http://10.200.1.3:16800; 
         proxy_set_header X-Real-IP \$remote_addr;
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto \$scheme;
