@@ -21,6 +21,13 @@ else ifeq ($(MACHINE_ARCH), aarch64)
 YQ_DOWNLOAD_URL := "https://github.com/mikefarah/yq/releases/download/v4.45.4/yq_linux_arm64"
 endif
 
+early_begin:
+	iac begin early_stage
+	iac stages/early/files/cfg/basic_files.yaml
+
+early_end:
+	iac end
+
 iacd:
 	test -d /etc/iacd/entities/iac.rcmd.space || mkdir -p /etc/iacd/entities/iac.rcmd.space
 	install -D -m 755 stages/early/files/etc/iacd/entities/iac.rcmd.space/* /etc/iacd/entities/iac.rcmd.space
