@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+
+case ${1} in
+    "create")
+        echo "File created"
+        ;;
+    "update")
+        echo "File updated"
+        ;;
+    "delete")
+        echo "File deleted"
+        ;;
+esac

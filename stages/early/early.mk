@@ -4,11 +4,11 @@ RETRY := $(shell test -f /etc/default/earlystageconfigs && echo "true")
 HOSTNAME := $(shell cat variables/main.json | jq -r .hostname)
 
 ifeq ($(MAKECMDGOALS), builder)
-early: test mirrors apt_configs keygen earlystagepackages locales profiles
+early: iacd test mirrors apt_configs keygen earlystagepackages locales profiles
 	date '+%s' > /etc/default/earlystageconfigs;
 	@echo "$(ccgreen)Early provisioning stage completed$(ccend)"
 else
-early: test mirrors vault_unseal apt_configs keygen earlystagepackages locales profiles
+early: iacd test mirrors vault_unseal apt_configs keygen earlystagepackages locales profiles
 	date '+%s' > /etc/default/earlystageconfigs;
 	@echo "$(ccgreen)Early provisioning stage completed$(ccend)"
 endif
@@ -20,6 +20,10 @@ YQ_DOWNLOAD_URL := "https://github.com/mikefarah/yq/releases/download/v4.45.4/yq
 else ifeq ($(MACHINE_ARCH), aarch64)
 YQ_DOWNLOAD_URL := "https://github.com/mikefarah/yq/releases/download/v4.45.4/yq_linux_arm64"
 endif
+
+iacd:
+	test -d /etc/iacd/entities/iac.rcmd.space || mkdir -p /etc/iacd/entities/iac.rcmd.space
+	install -D -m 755 stages/early/files/etc/iacd/entities/iac.rcmd.space/* /etc/iacd/entities/iac.rcmd.space
 
 test:
 ifeq ($(UNAME), Linux)

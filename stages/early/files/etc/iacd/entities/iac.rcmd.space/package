@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+
+case ${1} in
+    "create")
+        echo "Package created"
+        ;;
+    "update")
+        echo "Package updated"
+        ;;
+    "delete")
+        echo "Package deleted"
+        ;;
+esac
