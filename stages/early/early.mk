@@ -8,7 +8,7 @@ early: iacd test mirrors apt_configs keygen earlystagepackages locales profiles
 	date '+%s' > /etc/default/earlystageconfigs;
 	@echo "$(ccgreen)Early provisioning stage completed$(ccend)"
 else
-early: iacd test mirrors vault_unseal apt_configs keygen earlystagepackages locales profiles
+early: early_begin iacd test mirrors vault_unseal apt_configs keygen earlystagepackages locales profiles early_end
 	date '+%s' > /etc/default/earlystageconfigs;
 	@echo "$(ccgreen)Early provisioning stage completed$(ccend)"
 endif
