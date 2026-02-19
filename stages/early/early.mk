@@ -22,7 +22,7 @@ YQ_DOWNLOAD_URL := "https://github.com/mikefarah/yq/releases/download/v4.45.4/yq
 endif
 
 early_begin:
-	echo $(PWD)
+	printenv
 	iac begin early_stage
 	iac stages/early/files/cfg/basic_files.yaml
 
