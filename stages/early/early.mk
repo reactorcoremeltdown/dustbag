@@ -23,7 +23,7 @@ endif
 
 early_begin:
 	printenv
-	echo "Running in $(MAIL)"
+	echo "Running in $(PWD)"
 	iac begin early_stage
 	iac stages/early/files/cfg/basic_files.yaml
 

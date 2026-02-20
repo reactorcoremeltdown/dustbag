@@ -1,3 +1,5 @@
+PWD := $(shell pwd)
+
 all: early packages users services
 
 builder: early packages users services
