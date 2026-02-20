@@ -1,4 +1,5 @@
 PWD := $(shell pwd)
+export
 
 all: early packages users services
 
