@@ -26,4 +26,3 @@ steps:
     environment:
       GIT_SUDO:
         from_secret: git_sudo
-# yoink
