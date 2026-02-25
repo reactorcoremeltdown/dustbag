@@ -1,0 +1,8 @@
+---
+kind: "iac.rcmd.space/file"
+id: "early.apt_configs"
+file:
+  - name: "/etc/apt/apt.conf.d/forceuserdefinedconfigs"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/early/files/forceuserdefinedconfigs"

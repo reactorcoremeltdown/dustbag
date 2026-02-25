@@ -47,11 +47,7 @@ vault_unseal:
 	install -D -m 755 stages/early/files/rbw-* /usr/local/bin
 
 apt_configs:
-ifneq ($(RETRY), true)
-	cp stages/early/files/forceuserdefinedconfigs /etc/apt/apt.conf.d/forceuserdefinedconfigs
-	chmod 644 /etc/apt/apt.conf.d/forceuserdefinedconfigs
-	chown root:root /etc/apt/apt.conf.d/forceuserdefinedconfigs
-endif
+	iac stages/early/files/cfg/apt_configs.yaml
 
 mirrors:
 ifneq ($(RETRY), true)
