@@ -2,7 +2,7 @@
 when:
   - path:
       include:
-        - 'stages/early/*'
+        - 'stages/early/**'
         - '.woodpecker/all_early.yaml'
     event: push
 matrix:
