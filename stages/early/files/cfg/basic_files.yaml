@@ -6,3 +6,11 @@ file:
     mode: "644"
     ownership: "rcmd:rcmd"
     source: "stages/early/files/etc/dummy.txt"
+---
+kind: "iac.rcmd.space/file"
+id: "testfiles.secondary"
+file:
+  - name: "/home/rcmd/test2.txt"
+    mode: "600"
+    ownership: "rcmd:rcmd"
+    source: "stages/early/files/etc/dummy.txt"
