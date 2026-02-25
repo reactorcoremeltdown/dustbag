@@ -1,14 +1,21 @@
 #!/usr/bin/env bash
 
+IFS=$'\n'
 
-case ${1} in
-    "create")
-        echo "Package created"
-        ;;
-    "update")
-        echo "Package updated"
-        ;;
-    "delete")
-        echo "Package deleted"
-        ;;
-esac
+ENTRIES=$(yq -o=json '.package' ${IACD_DOCUMENT} | jq -cr '.[]')
+
+apt -y update
+
+for entry in $ENTRIES; do
+    entry_name=$(echo "${entry}" | jq -r '.name')
+    case ${1} in
+        "create" | "update")
+            apt -y install ${entry_name}
+            echo "Package installed"
+            ;;
+        "delete")
+            apt -y purge ${entry_name}
+            echo "Package deleted"
+            ;;
+    esac
+done

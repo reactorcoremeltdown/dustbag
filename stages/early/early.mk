@@ -34,8 +34,7 @@ iacd:
 
 test:
 ifeq ($(UNAME), Linux)
-	jq --version || apt -y update && apt install -y jq wget git make curl lsb-release
-	apt-get purge -y yq
+	iac stages/early/files/cfg/core_packages.yaml
 	wget -c $(YQ_DOWNLOAD_URL) -O /usr/local/bin/yq && chmod +x /usr/local/bin/yq
 else
 	@printf "`tput bold`This operating system is not supported`tput sgr0`\n"

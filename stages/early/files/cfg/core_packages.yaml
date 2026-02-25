@@ -1,0 +1,10 @@
+---
+kind: "iac.rcmd.space/package"
+id: "early.core_packages"
+package:
+  - name: "jq"
+  - name: "make"
+  - name: "curl"
+  - name: "git"
+  - name: "wget"
+  - name: "lsb-release"
