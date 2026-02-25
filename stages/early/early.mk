@@ -42,8 +42,7 @@ else
 endif
 
 vault_unseal:
-	install -D -m 755 stages/early/files/vault-* /usr/local/bin
-	install -D -m 755 stages/early/files/rbw-* /usr/local/bin
+	iac stages/early/files/cfg/vault_binaries.yaml
 
 apt_configs:
 	iac stages/early/files/cfg/apt_configs.yaml
