@@ -2,7 +2,7 @@ kind: "iac.rcmd.space/file"
 id: "testfiles"
 file:
   - name: "/home/rcmd/test1.txt"
-    mode: "666"
+    mode: "644"
     ownership: "rcmd:rcmd"
     source: "stages/early/files/etc/dummy.txt"
   - name: "/home/rcmd/test2.txt"
