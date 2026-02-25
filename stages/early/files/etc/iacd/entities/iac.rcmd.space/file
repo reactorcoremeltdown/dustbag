@@ -1,14 +1,26 @@
 #!/usr/bin/env bash
 
+IFS=$'\n'
 
-case ${1} in
-    "create")
-        echo "File created"
-        ;;
-    "update")
-        echo "File updated"
-        ;;
-    "delete")
-        echo "File deleted"
-        ;;
-esac
+ENTRIES=$(yq -o=json '.file' ${IACD_DOCUMENT} | jq -cr '.[]')
+
+
+for entry in $ENTRIES; do
+    entry_name=$(echo "${entry}" | jq -r '.name')
+    entry_source="${IACD_PWD}/"$(echo "${entry}" | jq -r '.source')
+    entry_mode=$(echo "${entry}" | jq -r '.mode')
+    entry_ownership=$(echo "${entry}" | jq -r '.ownership')
+
+    case ${1} in
+        "create" | "update")
+            cp -R "${entry_source}" "${entry_name}"
+            chown "${entry_ownership}" "${entry_name}"
+            chmod "${entry_mode}" "${entry_name}"
+            echo "File ${entry_name} created (or updated)"
+            ;;
+        "delete")
+            rm -f "${entry_name}"
+            echo "File ${entry_name} deleted"
+            ;;
+    esac
+done

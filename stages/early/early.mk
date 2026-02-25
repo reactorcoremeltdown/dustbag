@@ -26,7 +26,7 @@ early_begin:
 	iac stages/early/files/cfg/basic_files.yaml
 
 early_end:
-	iac end
+	iac end early_stage
 
 iacd:
 	test -d /etc/iacd/entities/iac.rcmd.space || mkdir -p /etc/iacd/entities/iac.rcmd.space
