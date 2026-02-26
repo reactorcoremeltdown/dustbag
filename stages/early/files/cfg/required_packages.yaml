@@ -1,0 +1,11 @@
+---
+kind: "iac.rcmd.space/package"
+id: "early.required_packages"
+package:
+  - name: "apt-transport-https"
+  - name: "certbot"
+  - name: "lsb-release"
+  - name: "debian-keyring"
+  - name: "python3-certbot-dns-cloudflare"
+  - name: "python3-pip"
+  - name: "locales"
