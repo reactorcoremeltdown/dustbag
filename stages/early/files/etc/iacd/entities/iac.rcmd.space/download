@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -e
+
+IFS=$'\n'
+
+ENTRIES=$(yq -o=json '.download' ${IACD_DOCUMENT} | jq -cr '.[]')
+
+
+for entry in $ENTRIES; do
+    entry_destination=$(echo "${entry}" | jq -r '.destination')
+    entry_url=$(echo "${entry}" | jq -r '.url')
+    entry_mode=$(echo "${entry}" | jq -r '.mode')
+    entry_ownership=$(echo "${entry}" | jq -r '.ownership')
+
+    case ${1} in
+        "create" | "update")
+            curl --fail -s "${entry_url}" > "${entry_destination}"
+            chown "${entry_ownership}" "${entry_destination}"
+            chmod "${entry_mode}" "${entry_destination}"
+            echo "Download ${entry_url} created (or updated)"
+            ;;
+        "delete")
+            rm -f "${entry_destination}"
+            echo "Download ${entry_name} deleted"
+            ;;
+    esac
+done
