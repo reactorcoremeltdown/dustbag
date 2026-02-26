@@ -6,3 +6,7 @@ download:
     mode: "755"
     ownership: "root:root"
     destination: "/usr/local/bin/yq"
+  - url: "https://repo.rcmd.space/binaries/tpl/tpl_arm64"
+    mode: "755"
+    ownership: "root:root"
+    destination: "/usr/local/bin/tpl"
