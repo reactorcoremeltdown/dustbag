@@ -14,11 +14,11 @@ early: early_begin iacd test mirrors vault_unseal apt_configs keygen earlystagep
 endif
 
 ifeq ($(MACHINE_ARCH), x86_64)
-YQ_DOWNLOAD_URL := "https://github.com/mikefarah/yq/releases/download/v4.45.4/yq_linux_amd64"
+CORE_BINARIES_CONFIG := "stages/early/files/cfg/core_binaries_amd64.yaml"
 else ifeq ($(MACHINE_ARCH), armv6l)
-YQ_DOWNLOAD_URL := "https://github.com/mikefarah/yq/releases/download/v4.45.4/yq_linux_arm"
+CORE_BINARIES_CONFIG := "stages/early/files/cfg/core_binaries_armhf.yaml"
 else ifeq ($(MACHINE_ARCH), aarch64)
-YQ_DOWNLOAD_URL := "https://github.com/mikefarah/yq/releases/download/v4.45.4/yq_linux_arm64"
+CORE_BINARIES_CONFIG := "stages/early/files/cfg/core_binaries_arm64.yaml"
 endif
 
 early_begin:
@@ -35,7 +35,7 @@ iacd:
 test:
 ifeq ($(UNAME), Linux)
 	iac stages/early/files/cfg/core_packages.yaml
-	wget -c $(YQ_DOWNLOAD_URL) -O /usr/local/bin/yq && chmod +x /usr/local/bin/yq
+	iac $(CORE_BINARIES_CONFIG)
 else
 	@printf "`tput bold`This operating system is not supported`tput sgr0`\n"
 	exit 1
