@@ -71,7 +71,7 @@ server {
         proxy_send_timeout      7m;
         proxy_read_timeout      7m;
     }
-    location /binaries/dafuq {
+    location /binaries {
         root /opt/apps;
 
         autoindex on;
