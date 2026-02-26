@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 IFS=$'\n'
 
 ENTRIES=$(yq -o=json '.file' ${IACD_DOCUMENT} | jq -cr '.[]')

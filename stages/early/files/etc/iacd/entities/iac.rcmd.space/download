@@ -15,7 +15,7 @@ for entry in $ENTRIES; do
 
     case ${1} in
         "create" | "update")
-            curl --fail -s "${entry_url}" > "${entry_destination}"
+            curl --fail -sL "${entry_url}" > "${entry_destination}"
             chown "${entry_ownership}" "${entry_destination}"
             chmod "${entry_mode}" "${entry_destination}"
             echo "Download ${entry_url} created (or updated)"

@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -e
+
+IFS=$'\n'
+
+ENTRIES=$(yq -o=json '.command' ${IACD_DOCUMENT} | jq -cr '.[]')
+
+
+for entry in $ENTRIES; do
+    entry_create=$(echo "${entry}" | jq -r '.createCommand')
+    entry_delete=$(echo "${entry}" | jq -r '.deleteCommand')
+
+    case ${1} in
+        "create" | "update")
+            bash -c "${entry_create}"
+            ;;
+        "delete")
+            bash -c "${entry_delete}"
+            ;;
+    esac
+done
