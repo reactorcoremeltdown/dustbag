@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+DISTRO=`lsb_release -cs`
+DEBIAN_VERSION=`lsb_release -sr`
+MIRROR="https://deb.debian.org"
+
+cat <<EOF > /etc/facts.json
+{
+    "debian": {
+        "version": ${DEBIAN_VERSION},
+        "codename": "${DISTRO}"
+    }
+}
+EOF

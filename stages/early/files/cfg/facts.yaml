@@ -1,6 +1,17 @@
 ---
+kind: "iac.rcmd.space/file"
+id: "early.facts.bin"
+annotations:
+  triggers:
+    - "early.facts.cmd"
+file:
+  - name: "/usr/local/bin/facts"
+    mode: "755"
+    ownership: "root:root"
+    source: "stages/early/files/usr/local/bin/facts"
+---
 kind: "iac.rcmd.space/command"
-id: "early.facts"
+id: "early.facts.cmd"
 command:
-  - createCommand: "echo \"test\" > /etc/facts.json"
+  - createCommand: "/usr/local/bin/facts"
     deleteCommand: "rm -f /etc/facts.json"
