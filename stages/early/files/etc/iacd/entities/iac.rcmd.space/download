@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 set -e
-set -x
 
 IFS=$'\n'
+
+echo "Printing ${IACD_DOCUMENT}"
+cat "${IACD_DOCUMENT}"
 
 ENTRIES=$(yq -o=json '.download' ${IACD_DOCUMENT} | jq -cr '.[]')
 

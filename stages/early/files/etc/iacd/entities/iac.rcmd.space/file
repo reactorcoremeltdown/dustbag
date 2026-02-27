@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 set -eo pipefail
-set -x
 
 IFS=$'\n'
+
+echo "Printing ${IACD_DOCUMENT}"
+cat "${IACD_DOCUMENT}"
 
 ENTRIES=$(yq -o=json '.file' ${IACD_DOCUMENT} | jq -cr '.[]')
 
