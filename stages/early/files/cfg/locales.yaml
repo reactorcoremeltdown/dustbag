@@ -1,0 +1,18 @@
+---
+kind: "iac.rcmd.space/file"
+id: "early.locales.cfg"
+annotations:
+  triggers:
+    - "early.locales.update"
+file:
+  - name: "/etc/locale.gen"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/early/files/locale.gen"
+---
+kind: "iac.rcmd.space/command"
+id: "early.locales.update"
+command:
+  - createCommand: "/sbin/locale-gen || /usr/sbin/locale-gen"
+    deleteCommand: "/bin/true"
+

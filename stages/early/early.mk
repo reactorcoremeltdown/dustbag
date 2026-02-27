@@ -67,11 +67,7 @@ ifneq ($(RETRY), true)
 endif
 
 locales:
-ifneq ($(RETRY), true)
-	install -D -v -m 644 \
-		stages/early/files/locale.gen /etc
-	/sbin/locale-gen || /usr/sbin/locale-gen
-endif
+	iac stages/early/files/cfg/locales.yaml
 
 profiles:
 	iac stages/early/files/cfg/profiles.yaml
