@@ -4,11 +4,11 @@ RETRY := $(shell test -f /etc/default/earlystageconfigs && echo "true")
 HOSTNAME := $(shell cat variables/main.json | jq -r .hostname)
 
 ifeq ($(MAKECMDGOALS), builder)
-early: iacd test mirrors apt_configs keygen earlystagepackages locales profiles
+early: iacd test facts mirrors apt_configs keygen earlystagepackages locales profiles
 	date '+%s' > /etc/default/earlystageconfigs;
 	@echo "$(ccgreen)Early provisioning stage completed$(ccend)"
 else
-early: early_begin iacd test mirrors vault_unseal apt_configs keygen earlystagepackages locales profiles early_end
+early: early_begin iacd test facts mirrors vault_unseal apt_configs keygen earlystagepackages locales profiles early_end
 	date '+%s' > /etc/default/earlystageconfigs;
 	@echo "$(ccgreen)Early provisioning stage completed$(ccend)"
 endif
@@ -39,6 +39,9 @@ else
 	@printf "`tput bold`This operating system is not supported`tput sgr0`\n"
 	exit 1
 endif
+
+facts:
+	iac stages/early/files/cfg/facts.yaml
 
 vault_unseal:
 	iac stages/early/files/cfg/vault_binaries.yaml

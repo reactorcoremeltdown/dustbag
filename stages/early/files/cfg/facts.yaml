@@ -1,0 +1,6 @@
+---
+kind: "iac.rcmd.space/command"
+id: "early.facts"
+command:
+  - createCommand: "echo \"test\" > /etc/facts.json"
+    deleteCommand: "rm -f /etc/facts.json"
