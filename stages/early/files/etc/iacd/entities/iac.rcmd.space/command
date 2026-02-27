@@ -4,12 +4,12 @@ set -eo pipefail
 
 IFS=$'\n'
 
-ENTRIES=$(yq -o=json '.command' ${IACD_DOCUMENT} | jq -cr '.[]')
+ENTRIES=$(yq -o=json '.command' ${IACD_DOCUMENT} | jq -cRr 'fromjson | .[]')
 
 
 for entry in $ENTRIES; do
-    entry_create=$(echo "${entry}" | jq -r '.createCommand')
-    entry_delete=$(echo "${entry}" | jq -r '.deleteCommand')
+    entry_create=$(echo "${entry}" | jq -Rr 'fromjson | .createCommand')
+    entry_delete=$(echo "${entry}" | jq -r 'fromjson | .deleteCommand')
 
     case ${1} in
         "create" | "update")

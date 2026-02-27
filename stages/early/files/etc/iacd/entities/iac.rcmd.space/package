@@ -4,11 +4,11 @@ set -eo pipefail
 
 IFS=$'\n'
 
-ENTRIES=$(yq -o=json '.package' ${IACD_DOCUMENT} | jq -cr '.[]')
+ENTRIES=$(yq -o=json '.package' ${IACD_DOCUMENT} | jq -cRr 'fromjson | .[]')
 
 
 for entry in $ENTRIES; do
-    entry_name=$(echo "${entry}" | jq -r '.name')
+    entry_name=$(echo "${entry}" | jq -Rr 'fromjson | .name')
     case ${1} in
         "create" | "update")
             apt-get -y update
