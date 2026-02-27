@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
+set -e
 
 IFS=$'\n'
 
-ENTRIES=$(yq -o=json '.download' ${IACD_DOCUMENT} | jq -cRr 'fromjson | .[]')
+ENTRIES=$(yq -o=json '.download' ${IACD_DOCUMENT} | jq -cr '.[]')
 
 
 for entry in $ENTRIES; do
-    entry_destination=$(echo "${entry}" | jq -Rr  'fromjson | .destination')
-    entry_url=$(echo "${entry}" | jq -Rr 'fromjson | .url')
-    entry_mode=$(echo "${entry}" | jq -Rr 'fromjson | .mode')
-    entry_ownership=$(echo "${entry}" | jq -Rr 'fromjson | .ownership')
+    entry_destination=$(echo "${entry}" | jq -r '.destination')
+    entry_url=$(echo "${entry}" | jq -r '.url')
+    entry_mode=$(echo "${entry}" | jq -r '.mode')
+    entry_ownership=$(echo "${entry}" | jq -r '.ownership')
 
     case ${1} in
         "create" | "update")

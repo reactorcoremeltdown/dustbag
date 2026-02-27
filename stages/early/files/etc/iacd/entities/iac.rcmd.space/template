@@ -4,19 +4,19 @@ set -eo pipefail
 
 IFS=$'\n'
 
-ENTRIES=$(yq -o=json '.template' ${IACD_DOCUMENT} | jq -cRr 'fromjson | .[]')
+ENTRIES=$(yq -o=json '.template' ${IACD_DOCUMENT} | jq -cr '.[]')
 
 for entry in $ENTRIES; do
-    entry_name=$(echo "${entry}" | jq -Rr 'fromjson | .name')
-    entry_template="${IACD_PWD}/"$(echo "${entry}" | jq -Rr 'fromjson | .template')
-    entry_config=$(echo "${entry}" | jq -Rr 'fromjson | .config')
+    entry_name=$(echo "${entry}" | jq -r '.name')
+    entry_template="${IACD_PWD}/"$(echo "${entry}" | jq -r '.template')
+    entry_config=$(echo "${entry}" | jq -r '.config')
     if [ -f "${entry_config}" ]; then
         entry_config_path="${entry_config}"
     else
         entry_config_path="${IACD_PWD}/${entry_config}"
     fi
-    entry_mode=$(echo "${entry}" | jq -Rr 'fromjson | .mode')
-    entry_ownership=$(echo "${entry}" | jq -Rr 'fromjson | .ownership')
+    entry_mode=$(echo "${entry}" | jq -r '.mode')
+    entry_ownership=$(echo "${entry}" | jq -r '.ownership')
 
     case ${1} in
         "create" | "update")

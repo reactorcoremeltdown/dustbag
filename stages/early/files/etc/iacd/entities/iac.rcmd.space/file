@@ -4,14 +4,14 @@ set -eo pipefail
 
 IFS=$'\n'
 
-ENTRIES=$(yq -o=json '.file' ${IACD_DOCUMENT} | jq -cRr 'fromjson | .[]')
+ENTRIES=$(yq -o=json '.file' ${IACD_DOCUMENT} | jq -cr '.[]')
 
 
 for entry in $ENTRIES; do
-    entry_name=$(echo "${entry}" | jq -Rr 'fromjson | .name')
-    entry_source="${IACD_PWD}/"$(echo "${entry}" | jq -Rr 'fromjson | .source')
-    entry_mode=$(echo "${entry}" | jq -r 'fromjson | .mode')
-    entry_ownership=$(echo "${entry}" | jq -r 'fromjson | .ownership')
+    entry_name=$(echo "${entry}" | jq -r '.name')
+    entry_source="${IACD_PWD}/"$(echo "${entry}" | jq -r '.source')
+    entry_mode=$(echo "${entry}" | jq -r '.mode')
+    entry_ownership=$(echo "${entry}" | jq -r '.ownership')
 
     case ${1} in
         "create" | "update")
