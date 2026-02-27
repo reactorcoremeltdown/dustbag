@@ -74,7 +74,4 @@ ifneq ($(RETRY), true)
 endif
 
 profiles:
-ifneq ($(RETRY), true)
-	install -T -D -v -m 644 \
-		stages/early/files/99-bashrc.sh /root/.bash_profile
-endif
+	iac stages/early/files/cfg/profiles.yaml

@@ -1,0 +1,8 @@
+---
+kind: "iac.rcmd.space/file"
+id: "early.profiles"
+file:
+  - name: "/root/.bash_profile"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/early/files/99-bashrc.sh"
