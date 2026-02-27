@@ -23,7 +23,6 @@ endif
 
 early_begin:
 	iac begin early_stage
-	iac stages/early/files/cfg/basic_files.yaml
 
 early_end:
 	iac end early_stage
