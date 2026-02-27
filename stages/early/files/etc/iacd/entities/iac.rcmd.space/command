@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -eo pipefail
 
 IFS=$'\n'
 
@@ -17,6 +17,9 @@ for entry in $ENTRIES; do
             ;;
         "delete")
             bash -c "${entry_delete}"
+            ;;
+        "compare")
+            exit 0
             ;;
     esac
 done

@@ -1,23 +1,26 @@
 #!/usr/bin/env bash
 
-set -e
+set -eo pipefail
 
 IFS=$'\n'
 
 ENTRIES=$(yq -o=json '.package' ${IACD_DOCUMENT} | jq -cr '.[]')
 
-apt-get -y update
 
 for entry in $ENTRIES; do
     entry_name=$(echo "${entry}" | jq -r '.name')
     case ${1} in
         "create" | "update")
+            apt-get -y update
             apt-get -y install ${entry_name}
             echo "Package installed"
             ;;
         "delete")
             apt-get -y purge ${entry_name}
             echo "Package deleted"
+            ;;
+        "compare")
+            dpkg -l ${entry_name}
             ;;
     esac
 done

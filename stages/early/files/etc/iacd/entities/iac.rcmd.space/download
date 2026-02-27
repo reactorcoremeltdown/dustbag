@@ -24,5 +24,8 @@ for entry in $ENTRIES; do
             rm -f "${entry_destination}"
             echo "Download ${entry_name} deleted"
             ;;
+        "compare")
+            test -f "${entry_destination}"
+            ;;
     esac
 done
