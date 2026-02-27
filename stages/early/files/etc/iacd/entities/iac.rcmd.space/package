@@ -20,7 +20,7 @@ for entry in $ENTRIES; do
             echo "Package deleted"
             ;;
         "compare")
-            dpkg -l ${entry_name}
+            dpkg -l ${entry_name} > /dev/null
             ;;
     esac
 done
