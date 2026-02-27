@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -eo pipefail
 
 IFS=$'\n'
 
@@ -23,6 +23,9 @@ for entry in $ENTRIES; do
         "delete")
             rm -f "${entry_name}"
             echo "File ${entry_name} deleted"
+            ;;
+        "compare")
+            diff -q "${entry_source}" "${entry_name}"
             ;;
     esac
 done
