@@ -1,0 +1,9 @@
+---
+kind: "iac.rcmd.space/template"
+id: "early.example"
+template:
+  - name: "/etc/example.txt"
+    template: "stages/early/templates/example.txt.tmpl"
+    config: "stages/early/variables/config.json"
+    mode: "640"
+    ownership: "root:root"

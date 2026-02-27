@@ -42,6 +42,7 @@ endif
 
 facts:
 	iac stages/early/files/cfg/facts.yaml
+	iac stages/early/files/cfg/example.yaml
 
 vault_unseal:
 	iac stages/early/files/cfg/vault_binaries.yaml
