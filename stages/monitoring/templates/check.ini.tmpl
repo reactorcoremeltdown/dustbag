@@ -1,6 +1,8 @@
 [config]
 name = {{ .name }}
+{{- if .description }}
 description = {{ .description }}
+{{- end }}
 plugin = {{ .plugin }}.sh
 {{- if .argument }}
 argument = {{ .argument }}
