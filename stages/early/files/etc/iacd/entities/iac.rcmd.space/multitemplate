@@ -30,7 +30,7 @@ for entry in $ENTRIES; do
             echo "Template ${entry_name} created (or updated)"
             ;;
         "delete")
-            for $template in $(yq -o=json '.items' "${entry_config_path}" | jq -cr '.[]'); do
+            for template in $(yq -o=json '.items' "${entry_config_path}" | jq -cr '.[]'); do
                 entry_name=$(echo "${template}" | jq -r '.name')
                 rm -f "${entry_path}/${entry_name}.${entry_extension}"
             done
@@ -38,7 +38,7 @@ for entry in $ENTRIES; do
             ;;
         "compare")
             tmpfile=$(mktemp)
-            for $template in $(yq -o=json '.items' "${entry_config_path}" | jq -cr '.[]'); do
+            for template in $(yq -o=json '.items' "${entry_config_path}" | jq -cr '.[]'); do
                 entry_name=$(echo "${template}" | jq -r '.name')
                 echo "${template}" | tpl -f ${entry_template} >> ${tmpfile}
             done
