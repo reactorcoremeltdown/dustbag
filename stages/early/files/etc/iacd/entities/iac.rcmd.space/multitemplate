@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -eo pipefail
-set -x
 
 IFS=$'\n'
 ENTRIES=$(yq -o=json '.multitemplate' ${IACD_DOCUMENT} | jq -cr '.[]')
