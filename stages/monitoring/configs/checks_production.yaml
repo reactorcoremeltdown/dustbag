@@ -4,7 +4,7 @@ id: "monitoring.checks"
 annotations:
   triggers:
     - "monitoring.wtfd.restart"
-template:
+multitemplate:
   - path: "/etc/monitoring/configs"
     template: "stages/monitoring/templates/check.ini.tmpl"
     config: "stages/monitoring/variables/checks_production.yaml"
