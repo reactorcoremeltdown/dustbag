@@ -1,0 +1,23 @@
+---
+kind: "iac.rcmd.space/package"
+id: "monitoring.prometheus.packages"
+package:
+  - name: "prometheus"
+  - name: "prometheus-nginx-exporter"
+---
+kind: "iac.rcmd.space/file"
+id: "monitoring.prometheus.config"
+annotations:
+  triggers:
+    - "monitoring.prometheus.restart"
+file:
+  - name: "/etc/prometheus/prometheus.yml"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/monitoring/files/etc/prometheus/prometheus.yml"
+---
+kind: "iac.rcmd.space/command"
+id: "monitoring.prometheus.restart"
+command:
+  - createCommand: "systemctl restart prometheus.service"
+    deleteCommand: "/bin/true"

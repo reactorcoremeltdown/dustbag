@@ -3,26 +3,26 @@
 ifeq ($(MACHINE_ROLE), production)
 MACHINE := production
 
-monitoring: wtfd_package checks wtfd prometheus
+monitoring: monitoring_begin wtfd_package checks wtfd prometheus monitoring_end
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
 ## Fermium, the RPi 4
 else ifeq ($(MACHINE_ROLE), homeserver)
 MACHINE := fermium
 
-monitoring: wtfd_package checks wtfd
+monitoring: monitoring_begin wtfd_package checks wtfd monitoring_end
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
 else ifeq ($(MACHINE_ROLE), printserver)
 MACHINE := printserver
 
-monitoring: wtfd_package checks wtfd
+monitoring: monitoring_begin wtfd_package checks wtfd monitoring_end
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
 else ifeq ($(MACHINE_ROLE), outpost)
 MACHINE := outpost
 
-monitoring: wtfd_package checks wtfd
+monitoring: monitoring_begin wtfd_package checks wtfd monitoring_end
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 
 endif
@@ -77,7 +77,11 @@ checks_configs:
 checks: wtfd_files checks_configs wtfd_restart
 
 prometheus:
-	apt install -y prometheus prometheus-nginx-exporter
-	install -D -v -m 644 stages/monitoring/files/etc/prometheus/prometheus.yml /etc/prometheus
-	systemctl restart prometheus.service
+	iac stages/monitoring/configs/prometheus.yaml
 	@echo "$(ccgreen)Installing prometheus completed$(ccend)"
+
+monitoring_begin:
+	iac begin monitoring_stage
+
+monitoring_end:
+	iac end monitoring_stage
