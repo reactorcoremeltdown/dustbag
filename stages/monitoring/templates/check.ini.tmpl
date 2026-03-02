@@ -2,13 +2,25 @@
 name = {{ .name }}
 description = {{ .description }}
 plugin = {{ .plugin }}.sh
+{{- if .argument }}
 argument = {{ .argument }}
+{{- end }}
+{{- if .option }}
 option = {{ .option }}
+{{- end }}
 interval = {{ .interval }}
+{{- if .timeoutSec }}
 timeoutSec = {{ .timeoutSec }}
+{{- end }}
+{{- if .warningThreshold }}
 warningThreshold = {{ .warningThreshold }}
+{{- end }}
+{{- if .criticalThreshold }}
 criticalThreshold = {{ .criticalThreshold }}
+{{- end }}
+{{- if .flowOperator }}
 flowOperator = {{ .flowOperator }}
+{{- end }}
 {{- range .notify }}
 notify = {{ . }}.sh
 {{- end }}
