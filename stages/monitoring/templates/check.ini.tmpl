@@ -9,12 +9,12 @@ timeoutSec = {{ .timeoutSec }}
 warningThreshold = {{ .warningThreshold }}
 criticalThreshold = {{ .criticalThreshold }}
 flowOperator = {{ .flowOperator }}
-{{ range .notify }}
+{{- range .notify }}
 notify = {{ . }}.sh
 {{- end }}
-{{ range .suppressedBy }}
+{{- range .suppressedBy }}
 suppressedBy = {{ . }}.sh
 {{- end }}
-{{ if .hostname }}
+{{- if .hostname }}
 hostname = {{ .hostname }}
 {{- end }}

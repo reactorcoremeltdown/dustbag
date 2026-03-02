@@ -72,7 +72,7 @@ wtfd: wtfd_files wtfd_restart
 	@echo "$(ccgreen)Installing wtfd completed$(ccend)"
 
 checks_configs:
-	iac "stages/monitoring/configs/checks_$(MACHINE).yaml"
+	iac "stages/monitoring/configs/checks_$(MACHINE_ROLE).yaml"
 	@echo "$(ccgreen)Installing DAFUQ checks completed$(ccend)"
 
 checks: wtfd_files checks_configs wtfd_restart
