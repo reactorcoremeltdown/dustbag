@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -eo pipefail
+set -x
 
 IFS=$'\n'
 ENTRIES=$(yq -o=json '.multitemplate' ${IACD_DOCUMENT} | jq -cr '.[]')
@@ -21,7 +22,7 @@ for entry in $ENTRIES; do
     case ${1} in
         "create" | "update")
             rm -f "${entry_path}/*.${entry_extension}"
-            for $template in $(yq -o=json '.items' | jq -cr '.[]'); do
+            for template in $(yq -o=json '.items' "${entry_config_path}" | jq -cr '.[]'); do
                 entry_name=$(echo "${template}" | jq -r '.name')
                 echo "${template}" | tpl -f ${entry_template} > "${entry_path}/${entry_name}.${entry_extension}"
                 chown "${entry_ownership}" "${entry_path}/${entry_name}.${entry_extension}"
@@ -30,7 +31,7 @@ for entry in $ENTRIES; do
             echo "Template ${entry_name} created (or updated)"
             ;;
         "delete")
-            for $template in $(yq -o=json '.items' | jq -cr '.[]'); do
+            for $template in $(yq -o=json '.items' "${entry_config_path}" | jq -cr '.[]'); do
                 entry_name=$(echo "${template}" | jq -r '.name')
                 rm -f "${entry_path}/${entry_name}.${entry_extension}"
             done
@@ -38,14 +39,14 @@ for entry in $ENTRIES; do
             ;;
         "compare")
             tmpfile=$(mktemp)
-            for $template in $(yq -o=json '.items' | jq -cr '.[]'); do
+            for $template in $(yq -o=json '.items' "${entry_config_path}" | jq -cr '.[]'); do
                 entry_name=$(echo "${template}" | jq -r '.name')
                 echo "${template}" | tpl -f ${entry_template} >> ${tmpfile}
             done
             tmpcontent=$(cat ${tmpfile} | sort | base64 -w 0)
             rm -f ${tmpfile}
 
-            diff -q (echo "${tmpcontent}") $(cat "${entry_path}/*.${entry_extension}" | sort | base64 -w 0)
+            diff -q <(echo "${tmpcontent}") <(cat "${entry_path}/*.${entry_extension}" | sort | base64 -w 0)
             ;;
     esac
 done
