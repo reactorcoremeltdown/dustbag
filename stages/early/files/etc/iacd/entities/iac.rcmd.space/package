@@ -3,12 +3,7 @@
 set -eo pipefail
 
 IFS=$'\n'
-
-echo "Printing ${IACD_DOCUMENT}"
-cat "${IACD_DOCUMENT}"
-
 ENTRIES=$(yq -o=json '.package' ${IACD_DOCUMENT} | jq -cr '.[]')
-
 
 for entry in $ENTRIES; do
     entry_name=$(echo "${entry}" | jq -r '.name')
