@@ -1,0 +1,493 @@
+items:
+  - name: garage_provisioning
+    plugin: check_device_provisioning
+    option: ""
+    interval: 5m
+    description: Checking provisioning status of Garage
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: storage_disk_health
+    plugin: check_promql
+    option: 'smartctl_device_smart_status == 0'
+    warningThreshold: '1'
+    criticalThreshold: '2'
+    interval: 1m
+    description: 'Snapraid disks health'
+    hostname: garage.rcmd.space
+    timeoutSec: 120
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
+  - name: storage_disk_temperature
+    plugin: check_promql
+    option: 'smartctl_device_temperature > 55'
+    warningThreshold: '1'
+    criticalThreshold: '3'
+    interval: 1m
+    description: 'Snapraid disks temperature'
+    hostname: garage.rcmd.space
+    timeoutSec: 120
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
+  - name: prod_syncthing_service
+    plugin: check_systemd_service
+    option: syncthing@syncthing.service
+    interval: 1m
+    description: 'Syncthing: production (systemd service)'
+    hostname: garage.rcmd.space
+    timeoutSec: 120
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
+  - name: prod_syncthing
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    option: http://127.0.0.1:8384/rest/noauth/health
+    interval: 1m
+    description: 'Syncthing: production'
+    hostname: garage.rcmd.space
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
+    suppressedBy:
+      - prod_syncthing_service
+  - name: dav_https
+    plugin: check_https_certificate
+    option: dav.rcmd.space
+    interval: 10m
+    description: Radicale SSL certificate
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: check_vcfb_updates
+    plugin: check_website_diff
+    option: https://vcfb.de
+    interval: 12h
+    description: Checking VCFB exhibitions for 2024
+    hostname: garage.rcmd.space
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
+  - name: provisioning
+    plugin: check_file
+    option: /etc/default/earlystageconfigs
+    interval: 15s
+    description: Provisioning file
+    hostname: garage.rcmd.space
+    warningThreshold: "10"
+    criticalThreshold: "5"
+    flowOperator: downwards
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: traccar
+    plugin: check_traccar_logs
+    option: ""
+    interval: 15s
+    description: Traccar location tracker
+    hostname: garage.rcmd.space
+    criticalThreshold: "1814000"
+    flowOperator: upwards
+    notify:
+      - telegram
+  - name: webdav_filesystem
+    plugin: check_file
+    option: /var/storage/wastebox/tiredsysadmin.cc/podcasts/JMGODIER.xml
+    interval: 15s
+    description: Enсrypted webdav mount
+    hostname: garage.rcmd.space
+    suppressedBy:
+      - gocryptfs_config
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: site_https
+    plugin: check_https_certificate
+    option: rcmd.space
+    interval: 10m
+    description: Main Website SSL certificate
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: blog_https
+    plugin: check_https_certificate
+    option: tiredsysadmin.cc
+    interval: 10m
+    description: Blog Website SSL certificate
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: chatserver
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    option: https://382578846.site/#/status
+    interval: 1m
+    description: 'Databag online status'
+    hostname: 382578846.site
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
+  - name: gotify_health
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    option: https://notifications.rcmd.space/health
+    interval: 1m
+    description: 'Gotify online status'
+    hostname: notifications.rcmd.space
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: task_transformer
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    option: http://int.rcmd.space:30071/healthcheck
+    interval: 1m
+    description: 'VTODO + VEVENT + Kanboard sync service'
+    hostname: garage.rcmd.space
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
+  - name: kernel_version
+    plugin: check_kernel_version
+    option: ""
+    interval: 48h
+    description: Linux Kernel Version
+    hostname: garage.rcmd.space
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: free_space
+    plugin: check_disk_space
+    option: /
+    interval: 3m
+    descripMissing spacetion: Free space on disk
+    hostname: garage.rcmd.space
+    warningThreshold: "90"
+    criticalThreshold: "95"
+    flowOperator: upwards
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: task_transformer_edit
+    plugin: check_redis_key
+    option: task-transformer-edit-error
+    interval: 15m
+    description: Task Transformer edit command errors
+    hostname: garage.rcmd.space
+    warningThreshold: "3"
+    criticalThreshold: "5"
+    flowOperator: upwards
+    suppressedBy:
+      - task-transformer
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: task_transformer_sync
+    plugin: check_redis_key
+    option: task-transformer-sync-error
+    interval: 15m
+    description: Task Transformer sync status
+    hostname: garage.rcmd.space
+    warningThreshold: "3"
+    criticalThreshold: "5"
+    flowOperator: upwards
+    suppressedBy:
+      - task-transformer
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: task_transformer_update_due
+    plugin: check_redis_key
+    option: task-transformer-update-due
+    interval: 15m
+    description: Task Transformer, updating due date of kanboard cards
+    hostname: garage.rcmd.space
+    warningThreshold: "3"
+    criticalThreshold: "5"
+    flowOperator: upwards
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: task_transformer_online
+    plugin: check_redis_timestamp
+    option: task-transformer-sync-timestamp
+    interval: 5m
+    description: Task Transformer operational status
+    hostname: garage.rcmd.space
+    warningThreshold: "301"
+    criticalThreshold: "500"
+    flowOperator: upwards
+    suppressedBy:
+      - task-transformer
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: internal_wiki
+    plugin: check_http_success_rate
+    option: http://int.rcmd.space:30085/pages/notes/sprints
+    interval: 5m
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    description: Internal wiki engine
+    hostname: garage.rcmd.space
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: wiki_pictures
+    plugin: check_file
+    option: /var/storage/wastebox/tiredsysadmin.cc/media/pics/IMG_20230308_134654_494-4hlt6piqgba2xsypulrslb6eyhsz.jpg
+    interval: 1m
+    flowOperator: downwards
+    description: Wiki picture storage
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: api_website_health
+    plugin: check_http_success_rate
+    option: https://api.rcmd.space/v6/healthcheck
+    interval: 1m
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    description: RCMD API website
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: radicale
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    option: https://dav.rcmd.space/radicale/.web/
+    interval: 1m
+    description: Radicale CalDAV server
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: grafana_web
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    option: http://int.rcmd.space:30031/api/health
+    interval: 10m
+    description: Grafana Web interfacUe
+    hostname: garage.rcmd.space
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: api_internal_website
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    option: https://api.rcmd.space/internal/healthcheck
+    interval: 1m
+    description: RCMD Internal API website
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: rbw_proxy
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    option: https://rbw.rcmd.space/healthcheck
+    interval: 1m
+    description: RCMD Internal API, RBW proxy
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: ci_website
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    option: https://ci.rcmd.space/badge/dummy.svg
+    interval: 1m
+    description: CI engine
+    hostname: garage.rcmd.space
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: api_https
+    plugin: check_https_certificate
+    option: api.rcmd.space
+    interval: 10m
+    description: API HTTPS certificate
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: gotify_https
+    plugin: check_https_certificate
+    option: notifications.rcmd.space
+    interval: 10m
+    description: Gotify HTTPS certificate
+    hostname: notifications.rcmd.space
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: explosions_zp
+    plugin: check_ua_explosions
+    option: "12"
+    interval: 15m
+    description: Check for reported explosions in Zaporizhzhia
+    hostname: garage.rcmd.space
+    notify:
+      - telegram
+      - gotify_disaster
+  - name: caldav_backups
+    plugin: check_duplicity_backup
+    option: file:///var/storage/wastebox/Backups/radicale/
+    interval: 6h
+    description: CalDAV backups
+    hostname: garage.rcmd.space
+    suppressedBy:
+      - webdav_filesystem
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: chatserver_backups
+    plugin: check_duplicity_backup
+    option: file:///var/storage/wastebox/Backups/chatserver-backups/
+    interval: 6h
+    description: Databag backups
+    hostname: garage.rcmd.space
+    suppressedBy:
+      - webdav_filesystem
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: kanboard_backups
+    plugin: check_duplicity_backup
+    option: file:///var/storage/wastebox/Backups/kanboard/
+    interval: 6h
+    description: Kanboard backups
+    hostname: garage.rcmd.space
+    suppressedBy:
+      - webdav_filesystem
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: website_backups
+    plugin: check_duplicity_backup
+    option: file:///var/storage/wastebox/Backups/websites/
+    interval: 6h
+    description: Website backups
+    hostname: garage.rcmd.space
+    suppressedBy:
+      - webdav_filesystem
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: fermium_online
+    plugin: check_deviceping
+    option: fermium.rcmd.space
+    interval: 20m
+    description: 'Device online test: fermium'
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: printserver_online
+    plugin: check_deviceping
+    option: printer.tiredsysadmin.cc
+    interval: 20m
+    description: 'Device online test: printserver'
+    hostname: fermium-wg.tiredsysadmin.cc
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: home_stereo
+    plugin: relay
+    option: http://fermium.tiredsysadmin.cc:8881?check=home_stereo
+    interval: 30m
+    description: '[relay] MPD server online test'
+    hostname: fermium-wg.tiredsysadmin.cc
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: home_syncthing
+    plugin: relay
+    option: http://fermium.tiredsysadmin.cc:8881?check=home_syncthing
+    interval: 30m
+    description: '[relay] Syncthing at home'
+    hostname: fermium-wg.tiredsysadmin.cc
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: home_printer
+    plugin: relay
+    option: http://fermium.tiredsysadmin.cc:8881?check=home_printer
+    interval: 30m
+    description: '[relay] CUPS server online test'
+    hostname: fermium-wg.tiredsysadmin.cc
+    suppressedBy:
+      - printserver_online
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: home_printer_device
+    plugin: relay
+    option: http://fermium.tiredsysadmin.cc:8881?check=home_printer_device
+    interval: 10m
+    hostname: fermium-wg.tiredsysadmin.cc
+    description: '[relay] Checking printer status, Brother Industries, Ltd HL-2140 series'
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: home_storage
+    plugin: relay
+    option: http://fermium.tiredsysadmin.cc:8881?check=home_storage
+    interval: 30m
+    description: '[relay] Home storage status'
+    hostname: fermium-wg.tiredsysadmin.cc
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: nfs_storage
+    plugin: relay
+    option: http://fermium.tiredsysadmin.cc:8881?check=nfs_storage
+    interval: 30m
+    description: '[relay] NFS storage status'
+    hostname: fermium-wg.tiredsysadmin.cc
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue

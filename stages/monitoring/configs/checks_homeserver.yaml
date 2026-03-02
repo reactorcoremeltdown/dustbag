@@ -1,0 +1,12 @@
+---
+kind: "iac.rcmd.space/multitemplate"
+id: "monitoring.checks"
+annotations:
+  triggers:
+    - "monitoring.wtfd.restart"
+template:
+  - path: "/etc/monitoring/configs"
+    template: "stages/monitoring/templates/check.ini.tmpl"
+    config: "stages/monitoring/variables/checks_homeserver.yaml"
+    mode: "644"
+    ownership: "root:root"

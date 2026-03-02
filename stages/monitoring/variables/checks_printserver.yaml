@@ -1,0 +1,22 @@
+items:
+  - name: printserver_provisioning
+    plugin: check_device_provisioning
+    option: ""
+    interval: 5m
+    description: Checking provisioning status of Printer
+    notify:
+      - dummy
+  - name: home_printer
+    plugin: check_cups_online
+    option: ""
+    interval: 5m
+    description: CUPS server online test
+    notify:
+      - dummy
+  - name: home_printer_device
+    plugin: check_usb_device
+    option: 04f9:0033
+    interval: 3m
+    description: Checking printer status, Brother Industries, Ltd HL-2140 series
+    notify:
+      - dummy

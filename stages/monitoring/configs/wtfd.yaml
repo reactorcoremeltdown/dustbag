@@ -1,0 +1,6 @@
+---
+kind: "iac.rcmd.space/command"
+id: "monitoring.wtfd.restart"
+command:
+  - createCommand: "systemctl enable wtfd.service && systemctl restart wtfd.service"
+    deleteCommand: "/bin/true"

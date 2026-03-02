@@ -1,0 +1,162 @@
+items:
+  - name: outpost_provisioning
+    plugin: check_device_provisioning
+    option: ""
+    interval: 5m
+    description: Checking provisioning status of Outpost
+    notify:
+      - dummy
+  - name: wiki_protected
+    plugin: check_protected_url
+    option: https://wiki.rcmd.space
+    interval: 62s
+    description: Wiki protection check
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: wiki_backend_protected
+    plugin: check_protected_url
+    option: http://garage.rcmd.space:30085
+    interval: 126s
+    description: Wiki (backend) protection check
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: blog_beta_protected
+    plugin: check_protected_url
+    option: https://beta.tiredsysadmin.cc
+    interval: 62s
+    description: Blog beta protection check
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: site_beta_protected
+    plugin: check_protected_url
+    option: https://beta.rcmd.space
+    interval: 62s
+    description: Site beta protection check
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: kanboard_protected
+    plugin: check_protected_url
+    option: https://board.rcmd.space
+    interval: 62s
+    description: Kanboard protection check
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: kanboard_backend_protected
+    plugin: check_protected_url
+    option: http://garage.rcmd.space:30081
+    interval: 124s
+    description: Kanboard (backend) protection check
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: grafana_protected
+    plugin: check_protected_url
+    option: https://graph.rcmd.space
+    interval: 62s
+    description: Grafana protection check
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: grafana_backend_protected
+    plugin: check_protected_url
+    option: http://garage.rcmd.space:30031
+    interval: 124s
+    description: Grafana (backend) protection check
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: mixtape_protected
+    plugin: check_protected_url
+    option: https://mixtape.tiredsysadmin.cc
+    interval: 62s
+    description: Mixtape protection check
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: mood_protected
+    plugin: check_protected_url
+    option: https://mood.rcmd.space
+    interval: 62s
+    description: Mood journal protection check
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: reader_protected
+    plugin: check_protected_url
+    option: https://reader.tiredsysadmin.cc
+    interval: 62s
+    description: RSS reader protection check
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: main_domain_expiry
+    plugin: check_domain_expiry
+    option: rcmd.space
+    interval: 24h
+    description: rcmd.space domain expiry check
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: blog_domain_expiry
+    plugin: check_domain_expiry
+    option: tiredsysadmin.cc
+    interval: 24h
+    description: tiredsysadmin.cc domain expiry check
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
+  - name: main_website
+    plugin: check_http_success_rate
+    warningThreshold: "98"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    option: https://rcmd.space
+    interval: 3m
+    description: RCMD.space website
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - alert_fatigue
+  - name: blog_website
+    plugin: check_http_success_rate
+    warningThreshold: "98"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    option: https://tiredsysadmin.cc
+    interval: 3m
+    description: Blog website
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - alert_fatigue

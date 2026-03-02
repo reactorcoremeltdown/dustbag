@@ -68,10 +68,11 @@ wtfd_restart:
 	#systemctl start wtfd.service
 
 wtfd: wtfd_files wtfd_restart
+	iac stages/monitoring/configs/wtfd.yaml
 	@echo "$(ccgreen)Installing wtfd completed$(ccend)"
 
 checks_configs:
-	bash stages/monitoring/templates/checks.sh stages/monitoring/variables/checks.yaml $(MACHINE)
+	iac "stages/monitoring/configs/checks_$(MACHINE).yaml"
 	@echo "$(ccgreen)Installing DAFUQ checks completed$(ccend)"
 
 checks: wtfd_files checks_configs wtfd_restart
