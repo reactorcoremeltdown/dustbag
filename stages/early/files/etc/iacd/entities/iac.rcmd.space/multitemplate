@@ -45,7 +45,7 @@ for entry in $ENTRIES; do
             tmpcontent=$(cat ${tmpfile} | sort | base64 -w 0)
             rm -f ${tmpfile}
 
-            diff -y <(echo "${tmpcontent}") <(cat ${entry_path}/*.${entry_extension} | sort | base64 -w 0)
+            diff <(echo "${tmpcontent}") <(cat ${entry_path}/*.${entry_extension} | sort | base64 -w 0)
             ;;
     esac
 done
