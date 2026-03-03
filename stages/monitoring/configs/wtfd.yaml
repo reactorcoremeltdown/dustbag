@@ -1,7 +1,16 @@
 ---
+kind: "iac.rcmd.space/package"
+id: "early.core_packages"
+package:
+  - name: "dafuq"
+---
 kind: "iac.rcmd.space/file"
 id: "monitoring.wtfd.files"
 file:
+  - name: "/var/www/healthchecks"
+    mode: "755"
+    ownership: "root:root"
+    source: "directory"
   - name: "/etc/monitoring/configs"
     mode: "755"
     ownership: "root:root"
@@ -26,6 +35,10 @@ file:
     mode: "755"
     ownership: "root:root"
     source: "stages/monitoring/files/plugins"
+  - name: "/etc/monitoring/notifiers"
+    mode: "755"
+    ownership: "root:root"
+    source: "stages/monitoring/files/handlers"
 ---
 kind: "iac.rcmd.space/command"
 id: "monitoring.wtfd.restart"
