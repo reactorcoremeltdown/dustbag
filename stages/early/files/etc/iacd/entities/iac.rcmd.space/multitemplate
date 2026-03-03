@@ -20,7 +20,7 @@ for entry in $ENTRIES; do
 
     case ${1} in
         "create" | "update")
-            rm -f "${entry_path}/*.${entry_extension}"
+            rm -f "${entry_path}"/*."${entry_extension}"
             for template in $(yq -o=json '.items' "${entry_config_path}" | jq -cr '.[]'); do
                 entry_name=$(echo "${template}" | jq -r '.name')
                 echo "${template}" | tpl -f ${entry_template} > "${entry_path}/${entry_name}.${entry_extension}"
@@ -45,7 +45,7 @@ for entry in $ENTRIES; do
             tmpcontent=$(cat ${tmpfile} | sort | base64 -w 0)
             rm -f ${tmpfile}
 
-            diff <(echo -n "${tmpcontent}") <(cat ${entry_path}/*.${entry_extension} | sort | base64 -w 0)
+            diff -q <(echo -n "${tmpcontent}") <(cat ${entry_path}/*.${entry_extension} | sort | base64 -w 0)
             ;;
     esac
 done
