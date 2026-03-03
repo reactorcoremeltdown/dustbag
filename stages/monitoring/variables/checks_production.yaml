@@ -333,18 +333,6 @@ items:
       - gotify
       - telegram
       - alert_fatigue
-  - name: ci_website
-    plugin: check_http_success_rate
-    warningThreshold: "99"
-    criticalThreshold: "97"
-    flowOperator: downwards
-    option: https://ci.rcmd.space/badge/dummy.svg
-    interval: 1m
-    description: CI engine
-    hostname: garage.rcmd.space
-    notify:
-      - telegram
-      - alert_fatigue
   - name: api_https
     plugin: check_https_certificate
     option: api.rcmd.space
