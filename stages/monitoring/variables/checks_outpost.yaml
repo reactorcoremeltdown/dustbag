@@ -16,6 +16,16 @@ items:
       - gotify
       - telegram
       - alert_fatigue
+  - name: inventory_protected
+    plugin: check_protected_url
+    option: https://inventory.tiredsysadmin.cc
+    interval: 63s
+    description: Inventory protection check
+    hostname: garage.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
   - name: wiki_backend_protected
     plugin: check_protected_url
     option: http://garage.rcmd.space:30085
