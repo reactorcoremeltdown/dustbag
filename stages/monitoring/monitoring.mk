@@ -45,7 +45,6 @@ wtfd_files:
 	install -d /etc/monitoring && \
 		install -D -v -m 644 \
 		stages/monitoring/files/configs/config.ini /etc/monitoring
-	install -d /etc/monitoring/configs
 	install -d /etc/monitoring/plugins && \
 		install -D -v -m 755 \
 		stages/monitoring/files/plugins/* /etc/monitoring/plugins

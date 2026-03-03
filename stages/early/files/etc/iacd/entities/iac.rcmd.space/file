@@ -20,13 +20,17 @@ for entry in $ENTRIES; do
         "create" | "update")
             if [ "${entry_source}" = "directory" ]; then
                 mkdir -p "${entry_name}"
+                chmod "${entry_mode}" "${entry_name}"
+                chown "${entry_ownership}" "${entry_name}"
             elif [ -d "${entry_source}" ]; then
-                cp -R "${entry_source}"/* "${entry_name}"
+                install -D -v -m "${entry_mode}" "${entry_source}"/* "${entry_name}"
+                chown "${entry_ownership}" "${entry_name}"/*
+            elif [ -d "${entry_source}" ]; then
             else
                 cp -R "${entry_source}" "${entry_name}"
+                chmod "${entry_mode}" "${entry_name}"
+                chown "${entry_ownership}" "${entry_name}"
             fi
-            chown "${entry_ownership}" "${entry_name}"
-            chmod "${entry_mode}" "${entry_name}"
             echo "File ${entry_name} created (or updated)"
             ;;
         "delete")
