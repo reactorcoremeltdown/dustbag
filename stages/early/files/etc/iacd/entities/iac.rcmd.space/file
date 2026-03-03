@@ -25,7 +25,6 @@ for entry in $ENTRIES; do
             elif [ -d "${entry_source}" ]; then
                 install -D -v -m "${entry_mode}" "${entry_source}"/* "${entry_name}"
                 chown "${entry_ownership}" "${entry_name}"/*
-            elif [ -d "${entry_source}" ]; then
             else
                 cp -R "${entry_source}" "${entry_name}"
                 chmod "${entry_mode}" "${entry_name}"
