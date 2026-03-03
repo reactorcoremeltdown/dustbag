@@ -443,15 +443,6 @@ items:
     notify:
       - telegram
       - alert_fatigue
-  - name: home_syncthing
-    plugin: relay
-    option: http://fermium.tiredsysadmin.cc:8881?check=home_syncthing
-    interval: 30m
-    description: '[relay] Syncthing at home'
-    hostname: fermium-wg.tiredsysadmin.cc
-    notify:
-      - telegram
-      - alert_fatigue
   - name: home_printer
     plugin: relay
     option: http://fermium.tiredsysadmin.cc:8881?check=home_printer
