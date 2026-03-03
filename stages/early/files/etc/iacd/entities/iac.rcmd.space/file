@@ -7,23 +7,38 @@ ENTRIES=$(yq -o=json '.file' ${IACD_DOCUMENT} | jq -cr '.[]')
 
 for entry in $ENTRIES; do
     entry_name=$(echo "${entry}" | jq -r '.name')
-    entry_source="${IACD_PWD}/"$(echo "${entry}" | jq -r '.source')
+    entry_source_input=$(echo "${entry}" | jq -r '.source')
+    if [ "${entry_source_input}" != "directory" ]; then
+        entry_source="${IACD_PWD}/${entry_source_input}"
+    else
+        entry_source="${entry_source_input}"
+    fi
     entry_mode=$(echo "${entry}" | jq -r '.mode')
     entry_ownership=$(echo "${entry}" | jq -r '.ownership')
 
     case ${1} in
         "create" | "update")
-            cp -R "${entry_source}" "${entry_name}"
+            if [ "${entry_source}" = "directory" ]; then
+                mkdir -p "${entry_name}"
+            elif [ -d "${entry_source}" ]; then
+                cp -R "${entry_source}"/* "${entry_name}"
+            else
+                cp -R "${entry_source}" "${entry_name}"
+            fi
             chown "${entry_ownership}" "${entry_name}"
             chmod "${entry_mode}" "${entry_name}"
             echo "File ${entry_name} created (or updated)"
             ;;
         "delete")
-            rm -f "${entry_name}"
+            rm -fr "${entry_name}"
             echo "File ${entry_name} deleted"
             ;;
         "compare")
-            diff -q "${entry_source}" "${entry_name}"
+            if [ "${entry_source}" != "directory" ]; then
+                diff -q "${entry_source}" "${entry_name}"
+            else
+                test -d "${entry_name}"
+            fi
             ;;
     esac
 done
