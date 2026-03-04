@@ -34,6 +34,7 @@ for entry in $ENTRIES; do
                         apt-get -y purge ${old_entry_name}
                     fi
                 done
+            fi
             dpkg -l ${entry_name} > /dev/null || apt-get -y install ${entry_name}
             ;;
         "delete")
