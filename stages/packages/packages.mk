@@ -1,19 +1,24 @@
 ifeq ($(MAKECMDGOALS), production)
-	PACKAGES := $(shell yq -r '.debian.essentials[], .debian.server[]' stages/packages/variables/packages.yaml | xargs)
 	PYTHON_PACKAGES := $(shell yq -r '.python.server[]' stages/packages/variables/packages.yaml | xargs)
-else ifeq ($(MAKECMDGOALS), seedbox)
-	PACKAGES := $(shell yq -r '.debian.essentials[]' stages/packages/variables/packages.yaml | xargs)
-	PYTHON_PACKAGES := $(shell yq -r '.python.noop[]' stages/packages/variables/packages.yaml | xargs)
-else ifeq ($(MAKECMDGOALS), builder)
-	PACKAGES := $(shell yq -r '.debian.essentials[], .debian.builder[]' stages/packages/variables/packages.yaml | xargs)
-	PYTHON_PACKAGES := $(shell yq -r '.python.noop[]' stages/packages/variables/packages.yaml | xargs)
+packages: packages_begin packages_generic packages_server packages_end packages_venv
 else
-	PACKAGES := $(shell yq -r '.debian.essentials[]' stages/packages/variables/packages.yaml | xargs)
 	PYTHON_PACKAGES := $(shell yq -r '.python.noop[]' stages/packages/variables/packages.yaml | xargs)
+packages: packages_begin packages_generic packages_end packages_venv
 endif
 
-packages: repos
-	dpkg-query -s $(PACKAGES) > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y $(PACKAGES)
+packages_begin:
+	iac begin packages
+
+packages_begin:
+	iac end packages
+
+packages_server:
+	iac stages/packages/configs/packages_server.yaml
+
+packages_generic:
+	iac stages/packages/configs/packages_essentials.yaml
+
+packages_venv: repos
 	mkdir -p /opt/virtualenv || true
 	python3 -m venv /opt/virtualenv
 	/opt/virtualenv/bin/pip3 install $(PYTHON_PACKAGES) || true
