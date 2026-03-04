@@ -11,38 +11,48 @@ case ${1} in
         ;;
 esac
 
-for entry in $ENTRIES; do
-    entry_name=$(echo "${entry}" | jq -r '.name')
-    case ${1} in
-        "create")
+case ${1} in
+    "create")
+        for entry in $ENTRIES; do
+            entry_name=$(echo "${entry}" | jq -r '.name')
             apt-get -y install ${entry_name}
-            echo "Package installed"
-            ;;
-        "update")
-            if [ "${IACD_OLD_DOCUMENT}" != "" ]; then
-                OLD_ENTRIES=$(yq -o=json '.package' ${IACD_OLD_DOCUMENT} | jq -cr '.[]')
-                for old_entry in ${OLD_ENTRIES}; do
-                    PURGE="true"
-                    old_entry_name=$(echo "${old_entry}" | jq -r '.name')
-                    for new_entry in ${ENTRIES}; do
-                        new_entry_name=$(echo "${new_entry}" | jq -r '.name')
-                        if [ "${old_entry_name}" = "${new_entry_name}" ]; then
-                            PURGE="false"
-                        fi
-                    done
-                    if [ "${PURGE}" = "true" ]; then
-                        apt-get -y purge ${old_entry_name}
+            echo "Package ${entry_name} installed"
+        done
+        ;;
+    "update")
+        if [ "${IACD_OLD_DOCUMENT}" != "" ]; then
+            OLD_ENTRIES=$(yq -o=json '.package' ${IACD_OLD_DOCUMENT} | jq -cr '.[]')
+            for old_entry in ${OLD_ENTRIES}; do
+                PURGE="true"
+                old_entry_name=$(echo "${old_entry}" | jq -r '.name')
+                for new_entry in ${ENTRIES}; do
+                    new_entry_name=$(echo "${new_entry}" | jq -r '.name')
+                    if [ "${old_entry_name}" = "${new_entry_name}" ]; then
+                        PURGE="false"
+                        break
                     fi
                 done
-            fi
+                if [ "${PURGE}" = "true" ]; then
+                    apt-get -y purge ${old_entry_name}
+                fi
+            done
+        fi
+        for entry in $ENTRIES; do
+            entry_name=$(echo "${entry}" | jq -r '.name')
             dpkg -l ${entry_name} > /dev/null || apt-get -y install ${entry_name}
-            ;;
-        "delete")
+        done
+        ;;
+    "delete")
+        for entry in $ENTRIES; do
+            entry_name=$(echo "${entry}" | jq -r '.name')
             apt-get -y purge ${entry_name}
-            echo "Package deleted"
-            ;;
-        "compare")
+            echo "Package ${entry_name} deleted"
+        done
+        ;;
+    "compare")
+        for entry in $ENTRIES; do
+            entry_name=$(echo "${entry}" | jq -r '.name')
             dpkg -l ${entry_name} > /dev/null
-            ;;
-    esac
-done
+        done
+        ;;
+esac
