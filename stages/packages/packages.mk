@@ -1,4 +1,4 @@
-ifeq ($(MAKECMDGOALS), production)
+ifeq ($(MACHINE_ROLE), production)
 	PYTHON_PACKAGES := $(shell yq -r '.python.server[]' stages/packages/variables/packages.yaml | xargs)
 packages: packages_begin packages_generic packages_server packages_end packages_venv
 else
