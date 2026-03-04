@@ -40,3 +40,4 @@ package:
   - name: "zip"
   - name: "redis"
   - name: "webdis"
+  - name: "mcabber"

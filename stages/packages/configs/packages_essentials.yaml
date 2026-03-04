@@ -25,3 +25,4 @@ package:
   - name: "vim"
   - name: "whois"
   - name: "neovim"
+  - name: "pv"
