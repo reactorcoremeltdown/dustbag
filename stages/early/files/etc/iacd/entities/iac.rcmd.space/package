@@ -5,11 +5,16 @@ set -eo pipefail
 IFS=$'\n'
 ENTRIES=$(yq -o=json '.package' ${IACD_DOCUMENT} | jq -cr '.[]')
 
+case ${1} in
+    "create"|"update")
+        apt-get -y update
+        ;;
+esac
+
 for entry in $ENTRIES; do
     entry_name=$(echo "${entry}" | jq -r '.name')
     case ${1} in
         "create")
-            apt-get -y update
             apt-get -y install ${entry_name}
             echo "Package installed"
             ;;
@@ -29,9 +34,7 @@ for entry in $ENTRIES; do
                         apt-get -y purge ${old_entry_name}
                     fi
                 done
-            fi
-            apt-get -y update
-            dpkg -l ${entry_name} || apt-get -y install ${entry_name}
+            dpkg -l ${entry_name} > /dev/null || apt-get -y install ${entry_name}
             ;;
         "delete")
             apt-get -y purge ${entry_name}
