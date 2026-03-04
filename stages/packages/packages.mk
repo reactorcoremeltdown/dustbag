@@ -9,7 +9,7 @@ endif
 packages_begin:
 	iac begin packages
 
-packages_begin:
+packages_end:
 	iac end packages
 
 packages_server:
