@@ -17,5 +17,5 @@ nginx_printer: nginx
 	bash stages/services/includes/nginx/templates/nginx/sites/printer.sh
 
 nginx:
-	iac stages/services/includes/nginx/nginx_base.yaml
+	iac stages/services/includes/nginx/configs/nginx_base.yaml
 	@echo "$(ccgreen)Setting up nginx completed$(ccend)"
