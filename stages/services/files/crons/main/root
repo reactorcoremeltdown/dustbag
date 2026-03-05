@@ -26,7 +26,7 @@
 
 ### Restart reaction
 
-10 0 * * * systemctl restart reaction.service
+*/10 * * * * systemctl restart reaction.service
 
 ### Podman cleanup
 10 3 * * * podman container prune --force && podman image prune --all --force
