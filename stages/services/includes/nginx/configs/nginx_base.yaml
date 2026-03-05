@@ -63,10 +63,10 @@ file:
     mode: "644"
     ownership: "root:root"
     source: "stages/services/includes/nginx/files/etc/nginx/conf.d/limits.conf"
-  - name: "/etc/nginx/conf.d/common_ratelimit.conf"
+  - name: "/etc/nginx/common_ratelimit.conf"
     mode: "644"
     ownership: "root:root"
-    source: "stages/services/includes/nginx/files/etc/nginx/conf.d/common_ratelimit.conf"
+    source: "stages/services/includes/nginx/files/etc/nginx/common_ratelimit.conf"
 ---
 kind: "iac.rcmd.space/template"
 id: "services.nginx.base.htpasswd"
