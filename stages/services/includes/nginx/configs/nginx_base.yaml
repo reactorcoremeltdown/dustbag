@@ -1,0 +1,104 @@
+---
+kind: "iac.rcmd.space/package"
+id: "services.nginx.base.packages"
+package:
+  - name: "nginx-common"
+  - name: "nginx-full"
+---
+kind: "iac.rcmd.space/template"
+id: "services.nginx.certbot.credentials"
+template:
+  - name: "/root/.cloudflare.ini"
+    template: "stages/services/includes/nginx/templates/cloudflare.ini.tmpl"
+    config: "/etc/secrets/secrets.json"
+    mode: "600"
+    ownership: "root:root"
+  - name: "/root/.hetzner.ini"
+    template: "stages/services/includes/nginx/templates/hetzner.ini.tmpl"
+    config: "/etc/secrets/secrets.json"
+    mode: "600"
+    ownership: "root:root"
+---
+kind: "iac.rcmd.space/file"
+id: "services.nginx.certificates.bin"
+annotations:
+  triggers:
+    - "services.nginx.certificates.issue"
+file:
+  - name: "/usr/local/bin/init_certificates"
+    mode: "755"
+    ownership: "root:root"
+    source: "stages/services/includes/nginx/files/usr/local/bin/init_certificates"
+---
+kind: "iac.rcmd.space/command"
+id: "services.nginx.certificates.issue"
+command:
+  - createCommand: "/usr/local/bin/init_certificates"
+    deleteCommand: "/bin/true"
+---
+kind: "iac.rcmd.space/file"
+id: "services.nginx.base.configs"
+annotations:
+  triggers:
+    - "services.nginx.test"
+    - "services.nginx.reload"
+file:
+  - name: "/etc/logrotate.d/nginx"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/services/includes/nginx/files/etc/logrotate.d/nginx"
+  - name: "/usr/local/bin/clicks_count"
+    mode: "755"
+    ownership: "root:root"
+    source: "stages/services/includes/nginx/files/usr/local/bin/clicks_count"
+  - name: "/etc/nginx/conf.d/log_format_json.conf"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/services/includes/nginx/files/etc/nginx/conf.d/log_format_json.conf"
+  - name: "/etc/nginx/conf.d/traccar.conf"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/services/includes/nginx/files/etc/nginx/conf.d/traccar.conf"
+  - name: "/etc/nginx/conf.d/limits.conf"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/services/includes/nginx/files/etc/nginx/conf.d/limits.conf"
+  - name: "/etc/nginx/conf.d/common_ratelimit.conf"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/services/includes/nginx/files/etc/nginx/conf.d/common_ratelimit.conf"
+---
+kind: "iac.rcmd.space/template"
+id: "services.nginx.base.htpasswd"
+annotations:
+  triggers:
+    - "services.nginx.test"
+    - "services.nginx.reload"
+template:
+  - name: "/etc/nginx/htpasswd"
+    template: "stages/services/includes/nginx/templates/htpasswd.tmpl"
+    config: "/etc/secrets/secrets.json"
+    mode: "440"
+    ownership: "root:www-data"
+  - name: "/etc/nginx/htpasswd_secondary"
+    template: "stages/services/includes/nginx/templates/htpasswd_secondary.tmpl"
+    config: "/etc/secrets/secrets.json"
+    mode: "440"
+    ownership: "root:www-data"
+  - name: "/etc/nginx/htpasswd_tasksync"
+    template: "stages/services/includes/nginx/templates/htpasswd_tasksync.tmpl"
+    config: "/etc/secrets/secrets.json"
+    mode: "440"
+    ownership: "root:www-data"
+---
+kind: "iac.rcmd.space/command"
+id: "services.nginx.test"
+command:
+  - createCommand: "/usr/sbin/nginx -t"
+    deleteCommand: "/bin/true"
+---
+kind: "iac.rcmd.space/command"
+id: "services.nginx.reload"
+command:
+  - createCommand: "systemctl reload nginx"
+    deleteCommand: "/bin/true"

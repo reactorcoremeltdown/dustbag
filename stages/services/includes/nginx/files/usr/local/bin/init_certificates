@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+test -L /etc/letsencrypt/live/rcmd.space/fullchain.pem || yes | certbot certonly --agree-tos --non-interactive --authenticator dns-hetzner-cloud  --dns-hetzner-cloud-credentials /root/.hetzner.ini -d rcmd.space,*.rcmd.space
+test -L /etc/letsencrypt/live/tiredsysadmin.cc/fullchain.pem || yes | certbot certonly --agree-tos --non-interactive --email inbox@reactorcoremeltdown.anonaddy.com --dns-cloudflare --dns-cloudflare-propagation-seconds 60 --dns-cloudflare-credentials /root/.cloudflare.ini -d tiredsysadmin.cc,*.tiredsysadmin.cc --preferred-challenges dns-01

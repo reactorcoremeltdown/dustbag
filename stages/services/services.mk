@@ -11,7 +11,7 @@ else ifeq ($(MACHINE_ROLE), production)
 CRONS := stages/services/files/crons/main
 ROLE := production
 
-services: users packages motd sshd crons dave wastebox gitea exported_graphs nginx_sites nginx radicale network_hacks misc podman fdroid deviceping_receiver phockup vault_seal
+services: services_begin users packages motd sshd crons dave wastebox gitea exported_graphs nginx_sites nginx radicale network_hacks misc podman fdroid deviceping_receiver phockup vault_seal services_end
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium V2, the Pi 4 at home
@@ -20,7 +20,7 @@ CRONS := stages/services/files/crons/fermium
 DEVICEPING_ID := deviceping_fermium
 ROLE := homeserver
 
-services: users packages crons nginx_proxies nginx mpd motion podsync bootconfig deviceping podman woodpecker_server home_ip snapraid_nas vault_seal
+services: services_begin users packages crons nginx_proxies nginx mpd motion podsync bootconfig deviceping podman woodpecker_server home_ip snapraid_nas vault_seal services_end
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Seedbox
@@ -40,7 +40,7 @@ services: users packages podman drone_runner_amd64 seppuku
 else ifeq ($(MACHINE_ROLE), outpost)
 ROLE := outpost
 
-services: users packages podman nginx_packages nginx_certificates nginx_configs gotify vault_seal
+services: services_begin users packages podman nginx_packages nginx_certificates nginx_configs gotify vault_seal services_end
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Printserver V2, the Pi Zero W edition
@@ -49,7 +49,7 @@ CRONS := stages/services/files/crons/printserver
 DEVICEPING_ID := deviceping_printserver
 ROLE := printer
 
-services: users packages crons cups deviceping vault_seal
+services: services_begin users packages crons cups deviceping vault_seal services_end
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## All other hosts
@@ -61,6 +61,11 @@ endif
 ##################
 ## Service targets
 ##################
+services_begin:
+	iac begin services
+
+services_end:
+	iac end services
 
 home_ip:
 	install -D -m 755 stages/services/files/usr/local/bin/home-ip /usr/local/bin
