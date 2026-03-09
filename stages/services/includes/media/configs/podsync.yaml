@@ -10,7 +10,7 @@ command:
 kind: "iac.rcmd.space/download"
 id: "services.media.podsync.binary"
 download:
-  - url: "https://repo.rcmd.space/binaries/pdist/podsync_arm64"
+  - url: "https://repo.rcmd.space/binaries/podsync/podsync_linux_arm64"
     mode: "755"
     ownership: "root:root"
     destination: "/usr/local/bin/podsync"
