@@ -5,19 +5,18 @@ set -eo pipefail
 IFS=$'\n'
 ENTRIES=$(yq -o=json '.file' ${IACD_DOCUMENT} | jq -cr '.[]')
 
-for entry in $ENTRIES; do
-    entry_name=$(echo "${entry}" | jq -r '.name')
-    entry_source_input=$(echo "${entry}" | jq -r '.source')
-    if [ "${entry_source_input}" != "directory" ]; then
-        entry_source="${IACD_PWD}/${entry_source_input}"
-    else
-        entry_source="${entry_source_input}"
-    fi
-    entry_mode=$(echo "${entry}" | jq -r '.mode')
-    entry_ownership=$(echo "${entry}" | jq -r '.ownership')
-
-    case ${1} in
-        "create" | "update")
+case ${1} in
+    "create")
+        for entry in $ENTRIES; do
+            entry_name=$(echo "${entry}" | jq -r '.name')
+            entry_source_input=$(echo "${entry}" | jq -r '.source')
+            if [ "${entry_source_input}" != "directory" ]; then
+                entry_source="${IACD_PWD}/${entry_source_input}"
+            else
+                entry_source="${entry_source_input}"
+            fi
+            entry_mode=$(echo "${entry}" | jq -r '.mode')
+            entry_ownership=$(echo "${entry}" | jq -r '.ownership')
             if [ "${entry_source}" = "directory" ]; then
                 mkdir -p "${entry_name}"
                 chmod "${entry_mode}" "${entry_name}"
@@ -30,18 +29,74 @@ for entry in $ENTRIES; do
                 chmod "${entry_mode}" "${entry_name}"
                 chown "${entry_ownership}" "${entry_name}"
             fi
-            echo "File ${entry_name} created (or updated)"
-            ;;
-        "delete")
+            echo "File ${entry_name} created"
+        done
+        ;;
+    "update")
+        if [ "${IACD_OLD_DOCUMENT}" != "" ]; then
+            OLD_ENTRIES=$(yq -o=json '.package' ${IACD_OLD_DOCUMENT} | jq -cr '.[]')
+            for old_entry in ${OLD_ENTRIES}; do
+                PURGE="true"
+                old_entry_name=$(echo "${old_entry}" | jq -r '.name')
+                for new_entry in ${ENTRIES}; do
+                    new_entry_name=$(echo "${new_entry}" | jq -r '.name')
+                    if [ "${old_entry_name}" = "${new_entry_name}" ]; then
+                        PURGE="false"
+                        break
+                    fi
+                done
+                if [ "${PURGE}" = "true" ]; then
+                    rm -fr ${old_entry_name}
+                fi
+            done
+        fi
+        for entry in $ENTRIES; do
+            entry_name=$(echo "${entry}" | jq -r '.name')
+            entry_source_input=$(echo "${entry}" | jq -r '.source')
+            if [ "${entry_source_input}" != "directory" ]; then
+                entry_source="${IACD_PWD}/${entry_source_input}"
+            else
+                entry_source="${entry_source_input}"
+            fi
+            entry_mode=$(echo "${entry}" | jq -r '.mode')
+            entry_ownership=$(echo "${entry}" | jq -r '.ownership')
+            if [ "${entry_source}" = "directory" ]; then
+                mkdir -p "${entry_name}"
+                chmod "${entry_mode}" "${entry_name}"
+                chown "${entry_ownership}" "${entry_name}"
+            elif [ -d "${entry_source}" ]; then
+                install -D -v -m "${entry_mode}" "${entry_source}"/* "${entry_name}"
+                chown "${entry_ownership}" "${entry_name}"/*
+            else
+                cp -R "${entry_source}" "${entry_name}"
+                chmod "${entry_mode}" "${entry_name}"
+                chown "${entry_ownership}" "${entry_name}"
+            fi
+            echo "File ${entry_name} updated"
+        done
+        ;;
+    "delete")
+        for entry in $ENTRIES; do
+            entry_name=$(echo "${entry}" | jq -r '.name')
             rm -fr "${entry_name}"
             echo "File ${entry_name} deleted"
-            ;;
-        "compare")
+        done
+        ;;
+    "compare")
+        for entry in $ENTRIES; do
+            entry_name=$(echo "${entry}" | jq -r '.name')
+            entry_source_input=$(echo "${entry}" | jq -r '.source')
+            if [ "${entry_source_input}" != "directory" ]; then
+                entry_source="${IACD_PWD}/${entry_source_input}"
+            else
+                entry_source="${entry_source_input}"
+            fi
             if [ "${entry_source}" != "directory" ]; then
                 diff -q "${entry_source}" "${entry_name}"
             else
                 test -d "${entry_name}"
             fi
-            ;;
-    esac
-done
+        done
+        ;;
+esac
+
