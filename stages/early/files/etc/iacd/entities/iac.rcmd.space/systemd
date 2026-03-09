@@ -112,7 +112,7 @@ case ${1} in
 
             if [ ! -f "${target_file}" ]; then
                 echo "Drift detected: ${target_file} is missing"
-                continue
+                exit 1
             fi
 
             # Create temporary expected unit file
@@ -120,16 +120,18 @@ case ${1} in
             generate_unit_file "${entry}" > "${TMP_FILE}"
 
             # Compare file content
-            diff -q "${TMP_FILE}" "${target_file}" || echo "Drift detected: Configuration for ${entry_name}.service has changed"
+            diff -q "${TMP_FILE}" "${target_file}" || echo "Drift detected: Configuration for ${entry_name}.service has changed" && exit 1
             rm -f "${TMP_FILE}"
 
             # Check systemd states
             if ! systemctl is-active --quiet "${entry_name}.service"; then
                 echo "Drift detected: Service ${entry_name} is not running"
+                exit 1
             fi
 
             if ! systemctl is-enabled --quiet "${entry_name}.service"; then
                 echo "Drift detected: Service ${entry_name} is not enabled"
+                exit 1
             fi
         done
         ;;
