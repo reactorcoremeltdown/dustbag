@@ -1,13 +1,14 @@
 ---
 kind: "iac.rcmd.space/command"
-id: "services.media.podsync.youtubedl"
+id: "services.media.podsync.preflight"
 command:
   - createCommand: "test -L /usr/local/bin/youtube-dl || ln -s /opt/virtualenv/bin/yt-dlp /usr/local/bin/youtube-dl"
+    deleteCommand: "/bin/true"
+  - createCommand: "systemctl stop podsync.service || true"
     deleteCommand: "/bin/true"
 ---
 kind: "iac.rcmd.space/download"
 id: "services.media.podsync.binary"
-
 download:
   - url: "https://repo.rcmd.space/binaries/pdist/podsync_arm64"
     mode: "755"
