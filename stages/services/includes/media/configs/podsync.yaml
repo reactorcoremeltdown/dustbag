@@ -1,0 +1,38 @@
+---
+kind: "iac.rcmd.space/command"
+id: "services.media.podsync.youtubedl"
+command:
+  - createCommand: "test -L /usr/local/bin/youtube-dl || ln -s /opt/virtualenv/bin/yt-dlp /usr/local/bin/youtube-dl"
+    deleteCommand: "/bin/true"
+---
+kind: "iac.rcmd.space/download"
+id: "services.media.podsync.binary"
+
+download:
+  - url: "https://repo.rcmd.space/binaries/pdist/podsync_arm64"
+    mode: "755"
+    ownership: "root:root"
+    destination: "/usr/local/bin/podsync"
+---
+kind: "iac.rcmd.space/file"
+id: "services.media.podsync.directories"
+file:
+  - name: "/etc/podsync"
+    mode: "750"
+    ownership: "syncthing:syncthing"
+    source: "directory"
+  - name: "/var/log/podsync"
+    mode: "750"
+    ownership: "syncthing:syncthing"
+    source: "directory"
+---
+kind: "iac.rcmd.space/systemd"
+id: "services.media.podsync.systemd"
+service:
+  - name: "podsync"
+    description: "A simple media sync tool for podcasts and YouTube channels."
+    type: "simple"
+    execStart: "/usr/local/bin/podsync -config /etc/podsync/podsync.toml"
+    user: "syncthing"
+    restart: "always"
+    wantedBy: "multi-user.target" 
