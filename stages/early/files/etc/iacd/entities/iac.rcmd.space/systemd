@@ -1,0 +1,136 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+IFS=$'\n'
+# Extract the 'service' array instead of 'file'
+ENTRIES=$(yq -o=json '.service' ${IACD_DOCUMENT} | jq -cr '.[]')
+SYSTEMD_DIR="/etc/systemd/system"
+
+# Helper function to generate a unit file
+generate_unit_file() {
+    local entry="$1"
+    local name=$(echo "${entry}" | jq -r '.name')
+    local description=$(echo "${entry}" | jq -r '.description // empty')
+    local type=$(echo "${entry}" | jq -r '.type // "simple"')
+    local execStart=$(echo "${entry}" | jq -r '.execStart')
+    local user=$(echo "${entry}" | jq -r '.user // "root"')
+    local restart=$(echo "${entry}" | jq -r '.restart // "on-failure"')
+    local wantedBy=$(echo "${entry}" | jq -r '.wantedBy // "multi-user.target"')
+
+    cat <<EOF
+[Unit]
+Description=${description}
+
+[Service]
+Type=${type}
+ExecStart=${execStart}
+User=${user}
+Restart=${restart}
+
+[Install]
+WantedBy=${wantedBy}
+EOF
+}
+
+case ${1} in
+    "create")
+        for entry in $ENTRIES; do
+            entry_name=$(echo "${entry}" | jq -r '.name')
+            target_file="${SYSTEMD_DIR}/${entry_name}.service"
+
+            generate_unit_file "${entry}" > "${target_file}"
+
+            echo "Service unit ${entry_name}.service created"
+        done
+
+        systemctl daemon-reload
+
+        for entry in $ENTRIES; do
+            entry_name=$(echo "${entry}" | jq -r '.name')
+            systemctl enable --now "${entry_name}.service"
+            echo "Service ${entry_name} enabled and started"
+        done
+        ;;
+
+    "update")
+        if [ "${IACD_OLD_DOCUMENT}" != "" ]; then
+            # Assuming old document uses the same structure
+            OLD_ENTRIES=$(yq -o=json '.service' ${IACD_OLD_DOCUMENT} | jq -cr '.[]')
+            for old_entry in ${OLD_ENTRIES}; do
+                PURGE="true"
+                old_entry_name=$(echo "${old_entry}" | jq -r '.name')
+                for new_entry in ${ENTRIES}; do
+                    new_entry_name=$(echo "${new_entry}" | jq -r '.name')
+                    if [ "${old_entry_name}" = "${new_entry_name}" ]; then
+                        PURGE="false"
+                        break
+                    fi
+                done
+
+                if [ "${PURGE}" = "true" ]; then
+                    systemctl disable --now "${old_entry_name}.service" || true
+                    rm -f "${SYSTEMD_DIR}/${old_entry_name}.service"
+                    echo "Service ${old_entry_name} stopped, disabled, and removed"
+                fi
+            done
+        fi
+
+        for entry in $ENTRIES; do
+            entry_name=$(echo "${entry}" | jq -r '.name')
+            target_file="${SYSTEMD_DIR}/${entry_name}.service"
+
+            generate_unit_file "${entry}" > "${target_file}"
+        done
+
+        systemctl daemon-reload
+
+        for entry in $ENTRIES; do
+            entry_name=$(echo "${entry}" | jq -r '.name')
+            systemctl enable "${entry_name}.service"
+            systemctl restart "${entry_name}.service"
+            echo "Service ${entry_name} updated and restarted"
+        done
+        ;;
+
+    "delete")
+        for entry in $ENTRIES; do
+            entry_name=$(echo "${entry}" | jq -r '.name')
+
+            systemctl disable --now "${entry_name}.service" || true
+            rm -f "${SYSTEMD_DIR}/${entry_name}.service"
+
+            echo "Service ${entry_name} deleted"
+        done
+        systemctl daemon-reload
+        ;;
+
+    "compare")
+        for entry in $ENTRIES; do
+            entry_name=$(echo "${entry}" | jq -r '.name')
+            target_file="${SYSTEMD_DIR}/${entry_name}.service"
+
+            if [ ! -f "${target_file}" ]; then
+                echo "Drift detected: ${target_file} is missing"
+                continue
+            fi
+
+            # Create temporary expected unit file
+            TMP_FILE=$(mktemp)
+            generate_unit_file "${entry}" > "${TMP_FILE}"
+
+            # Compare file content
+            diff -q "${TMP_FILE}" "${target_file}" || echo "Drift detected: Configuration for ${entry_name}.service has changed"
+            rm -f "${TMP_FILE}"
+
+            # Check systemd states
+            if ! systemctl is-active --quiet "${entry_name}.service"; then
+                echo "Drift detected: Service ${entry_name} is not running"
+            fi
+
+            if ! systemctl is-enabled --quiet "${entry_name}.service"; then
+                echo "Drift detected: Service ${entry_name} is not enabled"
+            fi
+        done
+        ;;
+esac
