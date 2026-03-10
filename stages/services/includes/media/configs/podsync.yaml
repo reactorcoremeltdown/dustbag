@@ -33,7 +33,7 @@ service:
   - name: "podsync"
     description: "A simple media sync tool for podcasts and YouTube channels."
     type: "simple"
-    execStart: "/usr/local/bin/podsync -config /etc/podsync/podsync.toml"
+    execStart: "/usr/local/bin/podsync --config=/etc/podsync/podsync.toml"
     user: "syncthing"
     restart: "always"
     wantedBy: "multi-user.target" 
