@@ -20,7 +20,7 @@ command:
 kind: "iac.rcmd.space/download"
 id: "services.media.dave.binary"
 download:
-  - url: "https://repo.rcmd.space/binaries/podsync/dave_linux_arm64"
+  - url: "https://repo.rcmd.space/binaries/dave/dave_linux_arm64"
     mode: "755"
     ownership: "root:root"
     destination: "/usr/local/bin/dave"

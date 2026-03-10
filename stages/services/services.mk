@@ -11,7 +11,7 @@ else ifeq ($(MACHINE_ROLE), production)
 CRONS := stages/services/files/crons/main
 ROLE := production
 
-services: users packages services_begin motd sshd crons dave wastebox gitea exported_graphs nginx_sites nginx radicale network_hacks misc podman fdroid deviceping_receiver phockup vault_seal services_end
+services: users packages services_begin motd sshd crons wastebox gitea exported_graphs nginx_sites nginx radicale network_hacks misc podman fdroid deviceping_receiver phockup vault_seal services_end
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium V2, the Pi 4 at home
@@ -20,7 +20,7 @@ CRONS := stages/services/files/crons/fermium
 DEVICEPING_ID := deviceping_fermium
 ROLE := homeserver
 
-services: users packages services_begin crons nginx_proxies nginx mpd motion podsync bootconfig deviceping podman woodpecker_server home_ip snapraid_nas vault_seal services_end
+services: users packages services_begin crons nginx_proxies nginx mpd motion dave podsync bootconfig deviceping podman woodpecker_server home_ip snapraid_nas vault_seal services_end
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Seedbox
