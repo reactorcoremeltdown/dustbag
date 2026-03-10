@@ -1,0 +1,37 @@
+---
+kind: "iac.rcmd.space/file"
+id: "services.media.dave.configs"
+file:
+  - name: "/var/www/.dave"
+    mode: "750"
+    ownership: "www-data:www-data"
+    source: "directory"
+  - name: "/etc/dave.yaml"
+    mode: "644"
+    ownership: "www-data:www-data"
+    source: "stages/services/includes/media/files/var/www/dave/config.yaml"
+---
+kind: "iac.rcmd.space/command"
+id: "services.media.dave.preflight"
+command:
+  - createCommand: "systemctl stop dave.service || true"
+    deleteCommand: "/bin/true"
+---
+kind: "iac.rcmd.space/download"
+id: "services.media.dave.binary"
+download:
+  - url: "https://repo.rcmd.space/binaries/podsync/dave_linux_arm64"
+    mode: "755"
+    ownership: "root:root"
+    destination: "/usr/local/bin/dave"
+---
+kind: "iac.rcmd.space/systemd"
+id: "services.media.dave.systemd"
+service:
+  - name: "dave"
+    description: "Minimalistic WebDAV server"
+    type: "simple"
+    execStart: "/usr/local/bin/dave --config=/etc/dave.yaml"
+    user: "www-data"
+    restart: "always"
+    wantedBy: "multi-user.target" 
