@@ -1,7 +1,5 @@
 motd:
-	install -D -v -m 644 stages/services/includes/system/files/etc/motd \
-		/etc/motd
-	@echo "$(ccgreen)Setting up motd completed$(ccend)"
+	iac stages/services/includes/system/configs/motd.yaml
 
 sshd_config:
 	install -D -v -m 644 \

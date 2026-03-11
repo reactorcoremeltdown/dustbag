@@ -1,0 +1,8 @@
+---
+kind: "iac.rcmd.space/file"
+id: "services.system.motd"
+file:
+  - name: "/etc/motd"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/services/includes/system/files/etc/motd"
