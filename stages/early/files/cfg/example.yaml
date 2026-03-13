@@ -1,6 +1,14 @@
 ---
+kind: "iac.rcmd.space/command"
+id: "early.example.precondition"
+annotations:
+  blocks:
+    - "early.example.file"
+command:
+  - createCommand: "uname -m | grep -oq 'x86_64'"
+---
 kind: "iac.rcmd.space/template"
-id: "early.example"
+id: "early.example.file"
 template:
   - name: "/etc/example.txt"
     template: "stages/early/templates/example.txt.tmpl"
