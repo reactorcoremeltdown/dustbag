@@ -6,6 +6,7 @@ annotations:
     - "early.example.file"
 command:
   - createCommand: "uname -m | grep -oq 'x86_64'"
+    deleteCommand: "/bin/true"
 ---
 kind: "iac.rcmd.space/template"
 id: "early.example.file"
