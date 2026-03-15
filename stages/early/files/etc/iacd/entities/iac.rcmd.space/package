@@ -3,7 +3,7 @@
 set -eo pipefail
 
 IFS=$'\n'
-ENTRIES=$(yq -o=json '.package' ${IACD_DOCUMENT} | jq -cr '.[]')
+ENTRIES=$(yq -o=json '.package' ${IACD_DOCUMENT} | jq -c '.[]')
 
 case ${1} in
     "create"|"update")

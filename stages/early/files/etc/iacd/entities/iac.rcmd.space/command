@@ -3,16 +3,16 @@
 set -eo pipefail
 
 IFS=$'\n'
-ENTRIES=$(yq -o=json '.command' ${IACD_DOCUMENT} | jq -cr '.[]')
+ENTRIES=$(yq -o=json '.command' ${IACD_DOCUMENT} | jq -c '.[]')
 
 for entry in $ENTRIES; do
     entry_create=$(echo "${entry}" | jq -r '.createCommand')
     entry_delete=$(echo "${entry}" | jq -r '.deleteCommand')
     entry_compare=$(echo "${entry}" | jq -r '.compareCommand')
-    if [ "${entry_delete}" = "" ]; then
+    if [ "${entry_delete}" = "null" ]; then
         entry_delete="/bin/true"
     fi
-    if [ "${entry_compare}" = "" ]; then
+    if [ "${entry_compare}" = "null" ]; then
         entry_compare="/bin/true"
     fi
 

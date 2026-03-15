@@ -4,7 +4,7 @@ set -eo pipefail
 
 IFS=$'\n'
 # Extract the 'service' array instead of 'file'
-ENTRIES=$(yq -o=json '.service' ${IACD_DOCUMENT} | jq -cr '.[]')
+ENTRIES=$(yq -o=json '.service' ${IACD_DOCUMENT} | jq -c '.[]')
 SYSTEMD_DIR="/etc/systemd/system"
 
 # Helper function to generate a unit file

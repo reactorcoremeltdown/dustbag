@@ -8,7 +8,7 @@ IFS=$'\n'
 echo "Printing ${IACD_DOCUMENT}"
 cat "${IACD_DOCUMENT}"
 
-ENTRIES=$(yq -o=json '.file' ${IACD_DOCUMENT} | jq -cr '.[]')
+ENTRIES=$(yq -o=json '.file' ${IACD_DOCUMENT} | jq -c '.[]')
 
 
 for entry in $ENTRIES; do
