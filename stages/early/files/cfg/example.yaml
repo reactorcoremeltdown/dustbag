@@ -3,7 +3,7 @@ kind: "iac.rcmd.space/command"
 id: "early.example.precondition"
 annotations:
   blocks:
-    - "early.example.file"
+    - "early.example.templatedfile"
 command:
   - createCommand: "uname -m | grep -oq 'x86_64'"
     deleteCommand: "/bin/true"
