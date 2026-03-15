@@ -8,6 +8,13 @@ ENTRIES=$(yq -o=json '.command' ${IACD_DOCUMENT} | jq -cr '.[]')
 for entry in $ENTRIES; do
     entry_create=$(echo "${entry}" | jq -r '.createCommand')
     entry_delete=$(echo "${entry}" | jq -r '.deleteCommand')
+    entry_compare=$(echo "${entry}" | jq -r '.compareCommand')
+    if [ "${entry_delete}" = "" ]; then
+        entry_delete="/bin/true"
+    fi
+    if [ "${entry_compare}" = "" ]; then
+        entry_compare="/bin/true"
+    fi
 
     case ${1} in
         "create" | "update")
@@ -17,7 +24,7 @@ for entry in $ENTRIES; do
             bash -c "${entry_delete}"
             ;;
         "compare")
-            exit 0
+            bash -c "${entry_compare}"
             ;;
     esac
 done
