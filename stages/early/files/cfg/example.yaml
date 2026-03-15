@@ -9,7 +9,7 @@ command:
     deleteCommand: "/bin/true"
 ---
 kind: "iac.rcmd.space/template"
-id: "early.example.file"
+id: "early.example.templatedfile"
 template:
   - name: "/etc/example.txt"
     template: "stages/early/templates/example.txt.tmpl"
