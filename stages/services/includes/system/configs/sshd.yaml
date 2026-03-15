@@ -1,0 +1,24 @@
+---
+kind: "iac.rcmd.space/file"
+id: "services.system.sshd.configs"
+annotations:
+  triggers:
+    - "services.system.sshd.restart"
+file:
+  - name: "/etc/ssh/sshd_config"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/services/includes/system/files/etc/ssh/sshd_config"
+  - name: "/etc/ssh/login-notify.sh"
+    mode: "755"
+    ownership: "root:root"
+    source: "stages/services/includes/system/files/etc/ssh/login-notify.sh"
+  - name: "/etc/pam.d/sshd"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/services/includes/system/files/etc/pam.d/sshd"
+---
+kind: "iac.rcmd.space/command"
+id: "services.system.sshd.restart"
+command:
+  - createCommand: "systemctl restart sshd.service"

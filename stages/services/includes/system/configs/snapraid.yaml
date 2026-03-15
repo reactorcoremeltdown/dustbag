@@ -1,0 +1,18 @@
+---
+kind: "iac.rcmd.space/package"
+id: "services.system.snapraid.packages"
+package:
+  - name: "snapraid"
+  - name: "mergerfs"
+---
+kind: "iac.rcmd.space/file"
+id: "services.system.snapraid.configs"
+file:
+  - name: "/usr/local/bin/snapraid_sync.sh"
+    mode: "755"
+    ownership: "root:root"
+    source: "stages/services/includes/system/files/usr/local/bin/snapraid_sync.sh"
+  - name: "/etc/snapraid.conf"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/services/includes/system/files/etc/snapraid.conf"

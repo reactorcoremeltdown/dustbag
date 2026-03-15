@@ -1,37 +1,14 @@
 motd:
 	iac stages/services/includes/system/configs/motd.yaml
 
-sshd_config:
-	install -D -v -m 644 \
-		stages/services/includes/system/files/etc/ssh/sshd_config \
-		/etc/ssh
-	install -D -v -m 755 \
-		stages/services/includes/system/files/etc/ssh/login-notify.sh \
-		/etc/ssh
-	install -D -v -m 644 \
-		stages/services/includes/system/files/etc/pam.d/sshd \
-		/etc/pam.d
-
-sshd_restart:
-	systemctl restart sshd.service
-
-sshd: sshd_config sshd_restart
-	@echo "$(ccgreen)Setting up sshd completed$(ccend)"
+sshd:
+	iac stages/services/includes/system/configs/sshd.yaml
 
 crons:
 	timedatectl set-timezone "Europe/Berlin" || true
 	test -f /boot/dietpi.txt && ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime || true
 	bash stages/services/includes/system/templates/crons.sh $(CRONS)
 	@echo "$(ccgreen)Setting up crons completed$(ccend)"
-
-tinc:
-	bash stages/services/includes/system/templates/tinc/configs.sh
-	@echo "$(ccgreen)Setting up tinc completed$(ccend)"
-
-tinc_client:
-	bash stages/services/includes/system/templates/tinc/configs_client.sh
-	@echo "$(ccgreen)Setting up tinc completed$(ccend)"
-	systemctl restart tinc@clusternet
 
 bootconfig:
 	install -D -m 755 stages/services/includes/system/files/boot/config.txt /boot
@@ -40,9 +17,6 @@ bootconfig:
 password_reset:
 	echo "rcmd:n0b0dyish0m3" | chpasswd
 
-pki:
-	install -D -m 755 -v stages/services/includes/system/files/usr/local/bin/genpfx /usr/local/bin
-
 seppuku:
 	install -D -m 755 stages/services/includes/system/files/usr/local/bin/seppuku /usr/local/bin
 	atq | cut -f 1 | xargs atrm
@@ -50,6 +24,4 @@ seppuku:
 	@echo "$(ccgreen)Installed seppuku$(ccend)"
 
 snapraid_nas:
-	install -D -m 755 stages/services/includes/system/files/usr/local/bin/snapraid_sync.sh /usr/local/bin
-	apt install -y snapraid mergerfs
-	install -D -m 644 stages/services/includes/system/files/etc/snapraid.conf /etc
+	iac stages/services/includes/system/configs/snapraid.yaml
