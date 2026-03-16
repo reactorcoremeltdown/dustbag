@@ -7,6 +7,7 @@ packages: repos packages_begin packages_generic packages_end packages_venv
 endif
 
 packages_begin:
+	yamllint stages/packages/configs/*.yaml
 	iac begin packages
 
 packages_end:
