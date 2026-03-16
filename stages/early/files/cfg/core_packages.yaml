@@ -8,3 +8,4 @@ package:
   - name: "git"
   - name: "wget"
   - name: "lsb-release"
+  - name: "yamllint"
