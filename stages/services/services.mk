@@ -62,6 +62,9 @@ endif
 ## Service targets
 ##################
 services_begin:
+	yamllint stages/services/includes/media/configs/*.yaml
+	yamllint stages/services/includes/nginx/configs/*.yaml
+	yamllint stages/services/includes/system/configs/*.yaml
 	iac begin services
 
 services_end:
