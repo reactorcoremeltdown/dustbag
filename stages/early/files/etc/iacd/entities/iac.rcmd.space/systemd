@@ -120,7 +120,7 @@ case ${1} in
             generate_unit_file "${entry}" > "${TMP_FILE}"
 
             # Compare file content
-            diff -q "${TMP_FILE}" "${target_file}" || echo "Drift detected: Configuration for ${entry_name}.service has changed" && exit 1
+            diff -q "${TMP_FILE}" "${target_file}"
             rm -f "${TMP_FILE}"
 
             # Check systemd states
