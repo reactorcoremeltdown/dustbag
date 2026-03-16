@@ -20,6 +20,7 @@ prometheus:
 	@echo "$(ccgreen)Installing prometheus completed$(ccend)"
 
 monitoring_begin:
+	yamllint stages/monitoring/configs/*.yaml
 	iac begin monitoring_stage
 
 monitoring_end:
