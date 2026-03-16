@@ -40,7 +40,10 @@ reset_gmail: remove_config_gmail misc
 remove_config_podsync:
 	rm -fr /etc/podsync/podsync.toml
 
-reset_podsync: remove_config_podsync podsync
+provide_podsync_config:
+	test -f /etc/podsync/podsync.toml || (vault-request-unlock && bash stages/services/includes/media/templates/podsync/podsync.toml.sh stages/services/includes/media/variables/podsync.yaml)
+
+reset_podsync: remove_config_podsync provide_podsync_config podsync
 	@echo "$(ccgreen) Podsync config has been updated"
 
 remove_config_gitea:
