@@ -19,7 +19,7 @@ for entry in $ENTRIES; do
 
     case ${1} in
         "create" | "update")
-            cat "${entry_config_path}" | tpl -f ${entry_template} > ${entry_name}
+            cat "${entry_config_path}" | yq -o=json . | tpl -f ${entry_template} > ${entry_name}
             chown "${entry_ownership}" "${entry_name}"
             chmod "${entry_mode}" "${entry_name}"
             echo "Template ${entry_name} created (or updated)"
@@ -29,7 +29,7 @@ for entry in $ENTRIES; do
             echo "Template ${entry_name} deleted"
             ;;
         "compare")
-            diff -q <(cat "${entry_config_path}" | tpl -f ${entry_template}) "${entry_name}"
+            diff -q <(cat "${entry_config_path}" | yq -o=json . | tpl -f ${entry_template}) "${entry_name}"
             ;;
     esac
 done
