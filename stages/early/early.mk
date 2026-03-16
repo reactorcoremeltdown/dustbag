@@ -22,6 +22,7 @@ CORE_BINARIES_CONFIG := "stages/early/files/cfg/core_binaries_arm64.yaml"
 endif
 
 early_begin:
+	yamllint stages/early/files/cfg/*.yaml
 	iac begin early_stage
 
 early_end:
