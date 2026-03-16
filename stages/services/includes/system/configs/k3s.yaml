@@ -8,7 +8,7 @@ kind: "iac.rcmd.space/command"
 id: "services.system.k3s.detect.amd64"
 annotations:
   blocks:
-    - "services.system.k3s.binary.arm64"
+    - "services.system.k3s.binary.amd64"
 command:
   - createCommand: "uname -m | grep -oq 'x86_64'"
 ---
@@ -16,7 +16,7 @@ kind: "iac.rcmd.space/command"
 id: "services.system.k3s.detect.arm64"
 annotations:
   blocks:
-    - "services.system.k3s.binary.amd64"
+    - "services.system.k3s.binary.arm64"
 command:
   - createCommand: "uname -m | grep -oq 'aarch64'"
 ---
