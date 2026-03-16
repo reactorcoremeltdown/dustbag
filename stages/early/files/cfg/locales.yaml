@@ -14,5 +14,3 @@ kind: "iac.rcmd.space/command"
 id: "early.locales.update"
 command:
   - createCommand: "/sbin/locale-gen || /usr/sbin/locale-gen"
-    deleteCommand: "/bin/true"
-
