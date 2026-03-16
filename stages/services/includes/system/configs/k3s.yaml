@@ -1,0 +1,55 @@
+---
+kind: "iac.rcmd.space/command"
+id: "services.system.k3s.preflight"
+command:
+  - createCommand: "systemctl stop k3s.service || true"
+---
+kind: "iac.rcmd.space/command"
+id: "services.system.k3s.detect.amd64"
+annotations:
+  blocks:
+    - "services.system.k3s.binary.arm64"
+command:
+  - createCommand: "uname -m | grep -oq 'x86_64'"
+---
+kind: "iac.rcmd.space/command"
+id: "services.system.k3s.detect.arm64"
+annotations:
+  blocks:
+    - "services.system.k3s.binary.amd64"
+command:
+  - createCommand: "uname -m | grep -oq 'aarch64'"
+---
+kind: "iac.rcmd.space/download"
+id: "services.system.k3s.binary.amd64"
+download:
+  - url: "https://github.com/k3s-io/k3s/releases/download/v1.35.2%2Bk3s1/k3s"
+    mode: "755"
+    ownership: "root:root"
+    destination: "/usr/local/bin/k3s"
+---
+kind: "iac.rcmd.space/download"
+id: "services.system.k3s.binary.arm64"
+download:
+  - url: "https://github.com/k3s-io/k3s/releases/download/v1.35.2%2Bk3s1/k3s-arm64"
+    mode: "755"
+    ownership: "root:root"
+    destination: "/usr/local/bin/k3s"
+---
+kind: "iac.rcmd.space/file"
+id: "services.system.k3s.systemd.service"
+annotations:
+  triggers:
+    - "services.system.k3s.systemd.restart"
+file:
+  - name: "/etc/systemd/system/k3s.service"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/services/includes/system/files/etc/systemd/system/k3s.service"
+---
+kind: "iac.rcmd.space/command"
+id: "services.system.k3s.systemd.restart"
+command:
+  - createCommand: "systemctl daemon-reload"
+  - createCommand: "systemctl enable k3s.service"
+  - createCommand: "systemctl restart k3s.service"
