@@ -20,4 +20,4 @@ template:
 kind: "iac.rcmd.space/command"
 id: "services.media.mpd.service"
 command:
-  - createCommand: "mpc status | grep -oq playing || systemctl restart mpd.service""
+  - createCommand: "mpc status | grep -oq playing || systemctl restart mpd.service"
