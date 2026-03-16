@@ -36,4 +36,4 @@ service:
     execStart: "/usr/local/bin/podsync --config=/etc/podsync/podsync.toml"
     user: "syncthing"
     restart: "always"
-    wantedBy: "multi-user.target" 
+    wantedBy: "multi-user.target"

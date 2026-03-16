@@ -34,4 +34,4 @@ service:
     execStart: "/usr/local/bin/dave --config=/etc/dave.yaml"
     user: "www-data"
     restart: "always"
-    wantedBy: "multi-user.target" 
+    wantedBy: "multi-user.target"
