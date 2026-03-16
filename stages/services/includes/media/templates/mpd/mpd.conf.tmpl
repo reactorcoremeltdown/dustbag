@@ -1,0 +1,43 @@
+music_directory         "{{ .mpd.music_directory }}"
+playlist_directory              "{{ .mpd.playlist_directory }}"
+db_file                 "/var/lib/mpd/tag_cache"
+log_file                        "/var/log/mpd/mpd.log"
+pid_file                        "/run/mpd/pid"
+state_file                      "/var/lib/mpd/state"
+sticker_file                   "/var/lib/mpd/sticker.sql"
+
+user                            "mpd"
+bind_to_address         "{{ .mpd.host }}"
+
+input {
+        plugin "curl"
+}
+
+input {
+        enabled    "no"
+        plugin     "qobuz"
+}
+
+input {
+        enabled      "no"
+        plugin       "tidal"
+}
+
+
+decoder {
+        plugin                  "hybrid_dsd"
+        enabled                 "no"
+}
+
+
+audio_output {
+        type            "alsa"
+        name            "Default"
+        device          "hw:CARD=CODEC,DEV=0"   # optional
+        mixer_type      "hardware"      # optional
+        mixer_device    "hw:CARD=CODEC"       # optional
+        mixer_control   "PCM"           # optional
+        mixer_index     "0"             # optional
+}
+
+filesystem_charset              "UTF-8"

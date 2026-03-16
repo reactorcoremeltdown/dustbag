@@ -45,15 +45,6 @@ phockup:
 	ln -sf /opt/phockup/phockup.py /usr/local/bin/phockup
 	install -D -m 755 stages/services/includes/media/files/usr/local/bin/phockup-wrapper /usr/local/bin
 
-diskplayer: mpd
-	install -D -m 644 stages/services/includes/media/files/etc/udev/rules.d/100-floppy-change.rules /etc/udev/rules.d
-	install -D -m 755 stages/services/includes/media/files/usr/local/bin/media_mount /usr/local/bin
-	test -d /mnt/floppy || mkdir -p /mnt/floppy
-	test -d /usr/local/share/diskplayer || mkdir -p /usr/local/share/diskplayer
-	install -D -m 644 stages/services/includes/media/files/usr/local/share/diskplayer/bleep.mp3 /usr/local/share/diskplayer
-	systemctl restart udev.service
-	@echo "$(ccgreen)Setting up diskplayer completed$(ccend)"
-
 motion:
 	dpkg-query -s motion > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y motion
 	install -D -m 644 stages/services/includes/media/files/etc/motion/motion.conf /etc/motion
@@ -68,9 +59,4 @@ cups: nginx_printer
 	@echo "$(ccgreen)Setting up cups completed$(ccend)"
 
 mpd:
-	bash stages/services/includes/media/templates/mpd/mpd.conf.sh
-	systemctl daemon-reload
-	systemctl enable mpd.service
-	systemctl stop mpdscribble.service && systemctl disable mpdscribble.service
-	mpc status | grep -oq playing || systemctl restart mpd.service
-	@echo "$(ccgreen)Setting up mpd completed$(ccend)"
+	iac stages/services/includes/media/configs/mpd.yaml

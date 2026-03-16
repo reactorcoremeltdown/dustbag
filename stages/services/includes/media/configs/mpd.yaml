@@ -1,0 +1,23 @@
+---
+kind: "iac.rcmd.space/package"
+id: "services.media.mpd.packages"
+package:
+  - name: "mpd"
+  - name: "ncmpcpp"
+---
+kind: "iac.rcmd.space/template"
+id: "services.media.mpd.config"
+annotations:
+  triggers:
+    - "services.media.mpd.service"
+template:
+  - name: "/etc/mpd.conf"
+    template: "stages/services/includes/media/templates/mpd/mpd.conf.tmpl"
+    config: "stages/services/includes/media/variables/mpd.yaml"
+    mode: "640"
+    ownership: "mpd:audio"
+---
+kind: "iac.rcmd.space/command"
+id: "services.media.mpd.service"
+command:
+  - createCommand: "mpc status | grep -oq playing || systemctl restart mpd.service""

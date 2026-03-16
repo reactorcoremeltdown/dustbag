@@ -1,0 +1,5 @@
+---
+mpd:
+  host: localhost
+  music_directory: /mnt/pool/Music/Library
+  playlist_directory: /mnt/pool/Music/Library
