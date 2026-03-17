@@ -79,3 +79,15 @@ command:
     deleteCommand: "rm -f /root/helm"
   - createCommand: "find /root -name 'helm' -type f -executable -exec mv {} /usr/local/bin/helm \\;"
     deleteCommand: "rm -f /usr/local/bin/helm"
+---
+kind: "iac.rcmd.space/file"
+id: "services.system.k3s.kubeconfig"
+file:
+  - name: "/root/.kube"
+    mode: "700"
+    ownership: "root:root"
+    source: "directory"
+  - name: "/root/.kube/config"
+    mode: "600"
+    ownership: "root:root"
+    source: "/etc/rancher/k3s/k3s.yaml"
