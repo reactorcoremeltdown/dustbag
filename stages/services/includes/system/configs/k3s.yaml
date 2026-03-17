@@ -75,7 +75,7 @@ download:
 kind: "iac.rcmd.space/command"
 id: "services.system.k3s.helm.install"
 command:
-  - createCommand: "tar -xf /root/helm.tar.gz -C /root --strip-components=1 linux-*/helm"
+  - createCommand: "tar -xf /root/helm.tar.gz -C /root"
     deleteCommand: "rm -f /root/helm"
-  - createCommand: "mv /root/helm /usr/local/bin/helm"
+  - createCommand: "find /root -name 'helm' -type f -executable -exec mv {} /usr/local/bin/helm \\;"
     deleteCommand: "rm -f /usr/local/bin/helm"
