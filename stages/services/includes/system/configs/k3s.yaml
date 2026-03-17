@@ -81,13 +81,9 @@ command:
     deleteCommand: "rm -f /usr/local/bin/helm"
 ---
 kind: "iac.rcmd.space/file"
-id: "services.system.k3s.kubeconfig"
+id: "services.system.k3s.kubeconfig.v2"
 file:
   - name: "/root/.kube"
     mode: "700"
     ownership: "root:root"
     source: "directory"
-  - name: "/root/.kube/config"
-    mode: "600"
-    ownership: "root:root"
-    source: "/etc/rancher/k3s/k3s.yaml"
