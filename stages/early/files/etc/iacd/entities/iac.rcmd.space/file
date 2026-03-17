@@ -10,7 +10,9 @@ case ${1} in
         for entry in $ENTRIES; do
             entry_name=$(echo "${entry}" | jq -r '.name')
             entry_source_input=$(echo "${entry}" | jq -r '.source')
-            if [ "${entry_source_input}" != "directory" ] || ![ -f "${entry_source_input}" ]; then
+            if [ -f "${entry_source_input}"]; then
+                 entry_source_input="${entry_source_input}"
+            elif [ "${entry_source_input}" != "directory" ]; then
                 entry_source="${IACD_PWD}/${entry_source_input}"
             else
                 entry_source="${entry_source_input}"
