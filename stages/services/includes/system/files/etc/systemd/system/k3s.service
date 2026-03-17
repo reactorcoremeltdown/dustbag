@@ -29,4 +29,5 @@ ExecStartPre=-/sbin/modprobe overlay
 ExecStart=/usr/local/bin/k3s \
     server \
     --disable=traefik \
-    --kube-proxy-arg=nodeport-addresses=127.0.0.1/32
+    --kube-proxy-arg=nodeport-addresses=127.0.0.1/32 \
+    --kube-apiserver-arg=service-node-port-range=100-65535
