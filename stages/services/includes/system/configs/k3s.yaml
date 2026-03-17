@@ -53,3 +53,8 @@ command:
   - createCommand: "systemctl daemon-reload"
   - createCommand: "systemctl enable k3s.service"
   - createCommand: "systemctl restart k3s.service"
+---
+kind: "iac.rcmd.space/package"
+id: "services.system.k3s.helm"
+package:
+  - name: "helm"
