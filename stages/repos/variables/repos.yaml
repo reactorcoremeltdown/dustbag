@@ -9,7 +9,7 @@ debian:
       section: "stable stable-v2"
     - name: "helm"
       state: "present"
-      install_on: "production fermium"
+      install_on: "production fermium outpost"
       key: "https://packages.buildkite.com/helm-linux/helm-debian/gpgkey"
       url: "https://packages.buildkite.com/helm-linux/helm-debian/any/"
       distro: "any"
