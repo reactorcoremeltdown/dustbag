@@ -28,3 +28,4 @@ snapraid_nas:
 
 k3s: repos
 	iac stages/services/includes/system/configs/k3s.yaml
+	# dummy comment to trigger pipeline
