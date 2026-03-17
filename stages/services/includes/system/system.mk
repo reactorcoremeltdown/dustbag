@@ -26,5 +26,5 @@ seppuku:
 snapraid_nas:
 	iac stages/services/includes/system/configs/snapraid.yaml
 
-k3s:
+k3s: repos
 	iac stages/services/includes/system/configs/k3s.yaml
