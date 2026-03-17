@@ -26,6 +26,5 @@ seppuku:
 snapraid_nas:
 	iac stages/services/includes/system/configs/snapraid.yaml
 
-k3s: repos
+k3s:
 	iac stages/services/includes/system/configs/k3s.yaml
-	# dummy comment to trigger pipeline
