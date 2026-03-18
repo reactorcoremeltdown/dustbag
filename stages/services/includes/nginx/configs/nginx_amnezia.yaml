@@ -14,7 +14,7 @@ template:
 ---
 kind: "iac.rcmd.space/symlink"
 id: "services.nginx.site.amnezia.link"
-file:
+symlink:
   - name: "/etc/nginx/sites-enabled/amnezia.conf"
     mode: "777"
     ownership: "root:root"
