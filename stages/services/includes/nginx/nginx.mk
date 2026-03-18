@@ -12,7 +12,7 @@ nginx_sites:
 	bash stages/services/includes/nginx/templates/nginx/sites/repo.sh
 	bash stages/services/includes/nginx/templates/nginx/sites/sync.sh
 	bash stages/services/includes/nginx/templates/nginx/sites/mood.sh
-	bash stages/services/includes/nginx/templates/nginx/sites/vpn.sh
+	iac stages/services/includes/nginx/configs/nginx_amnezia.yaml
 
 nginx_printer: nginx
 	bash stages/services/includes/nginx/templates/nginx/sites/printer.sh

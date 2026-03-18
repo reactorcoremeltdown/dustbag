@@ -1,0 +1,21 @@
+---
+kind: "iac.rcmd.space/template"
+id: "services.nginx.site.amnezia.config"
+annotations:
+  triggers:
+    - "services.nginx.test"
+    - "services.nginx.reload"
+template:
+  - name: "/etc/nginx/sites-available/amnezia.conf"
+    template: "stages/services/includes/nginx/templates/nginx/sites/vpn.conf.tmpl"
+    config: "variables/main.json"
+    mode: "644"
+    ownership: "root:root"
+---
+kind: "iac.rcmd.space/symlink"
+id: "services.nginx.site.amnezia.link"
+file:
+  - name: "/etc/nginx/sites-enabled/amnezia.conf"
+    mode: "777"
+    ownership: "root:root"
+    source: "/etc/nginx/sites-available/amnezia.conf"
