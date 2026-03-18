@@ -48,7 +48,7 @@ server {
 
     error_page 401 = @error401;
     location @error401 {
-        return 302 https://auth.rcmd.space/login?url=\$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err;
+        return 302 https://auth.rcmd.space/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err;
     }
 
     location / {
