@@ -1,20 +1,27 @@
 ifeq ($(MACHINE_ROLE), production)
 USERSDB := stages/users/variables/users.yaml
 
-users: early accounts sudoers configs ledger_scripts
+users: early users_begin accounts sudoers configs ledger_scripts users_end
 	@echo "$(ccgreen)Setting up users completed$(ccend)"
 else
 USERSDB := stages/users/variables/users_lite.yaml
 
-users: early accounts sudoers
+users: early users_begin accounts sudoers users_end
 	@echo "$(ccgreen)Setting up users completed$(ccend)"
 endif
+
+users_begin:
+	yamllint stages/users/configs/*.yaml
+	iac begin users
+
+users_end:
+	iac end users
 
 accounts:
 	bash stages/users/templates/users.sh $(USERSDB)
 
 sudoers:
-	apt install -y sudo
+	iac stages/users/configs/users.yaml
 	install -D -v -m 440 \
 	stages/users/files/etc/sudoers.d/* /etc/sudoers.d/
 

@@ -1,0 +1,5 @@
+---
+kind: "iac.rcmd.space/package"
+id: "users.packages"
+package:
+  - name: "sudo"
