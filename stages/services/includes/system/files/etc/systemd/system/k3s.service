@@ -29,5 +29,12 @@ ExecStartPre=-/sbin/modprobe overlay
 ExecStart=/usr/local/bin/k3s \
     server \
     --disable=traefik \
+    --disable servicelb \
+    --disable local-storage \
+    --disable metrics-server \
+    --flannel-backend=host-gw \
     --kube-proxy-arg=nodeport-addresses=127.0.0.1/32 \
-    --kube-apiserver-arg=service-node-port-range=100-65535
+    --kube-apiserver-arg=service-node-port-range=100-65535 \
+    --kube-apiserver-arg=max-requests-inflight=50 \
+    --kube-controller-manager-arg=node-monitor-period=60s \
+    --kube-controller-manager-arg=node-monitor-grace-period=180s
