@@ -15,7 +15,7 @@ nginx_sites:
 	iac stages/services/includes/nginx/configs/nginx_amnezia.yaml
 
 nginx_printer: nginx
-	bash stages/services/includes/nginx/templates/nginx/sites/printer.sh
+	iac stages/services/includes/nginx/configs/nginx_printer.yaml
 
 nginx:
 	iac stages/services/includes/nginx/configs/nginx_base.yaml

@@ -1,0 +1,21 @@
+---
+kind: "iac.rcmd.space/template"
+id: "services.nginx.site.printer.config"
+annotations:
+  triggers:
+    - "services.nginx.test"
+    - "services.nginx.reload"
+template:
+  - name: "/etc/nginx/sites-available/printer.conf"
+    template: "stages/services/includes/nginx/templates/nginx/sites/printer.conf.tmpl"
+    config: "variables/main.json"
+    mode: "644"
+    ownership: "root:root"
+---
+kind: "iac.rcmd.space/symlink"
+id: "services.nginx.site.printer.link"
+symlink:
+  - name: "/etc/nginx/sites-enabled/printer.conf"
+    mode: "777"
+    ownership: "root:root"
+    source: "/etc/nginx/sites-available/printer.conf"
