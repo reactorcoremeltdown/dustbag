@@ -11,7 +11,6 @@ debian:
     - git
     - jq
     - markdown
-    - iptables-persistent
     - needrestart
     - python3-pip
     - python3-venv
