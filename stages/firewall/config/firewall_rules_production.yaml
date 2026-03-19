@@ -1,0 +1,17 @@
+---
+kind: "iac.rcmd.space/template"
+id: "firewall.rules.production.public"
+annotations:
+  triggers:
+    - "firewall.apply"
+template:
+  - name: "/etc/firewalld/zones/public.xml"
+    template: "stages/firewall/templates/public.xml.tmpl"
+    config: "stages/firewall/variables/firewall.yaml"
+    mode: "644"
+    ownership: "root:root"
+  - name: "/etc/firewalld/zones/trusted.xml"
+    template: "stages/firewall/templates/trusted.xml.tmpl"
+    config: "stages/firewall/variables/firewall.yaml"
+    mode: "644"
+    ownership: "root:root"

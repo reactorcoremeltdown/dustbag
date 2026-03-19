@@ -2,7 +2,7 @@
 when:
   - path:
       include:
-        - 'stages/firewall/*'
+        - 'stages/firewall/**'
         - '.woodpecker/production_firewall.yaml'
     event: push
 labels:

@@ -1,0 +1,10 @@
+---
+kind: "iac.rcmd.space/package"
+id: "firewall.packages"
+package:
+  - name: "firewalld"
+---
+kind: "iac.rcmd.space/command"
+id: "firewall.apply"
+command:
+  - createCommand: "firewall-cmd --reload"

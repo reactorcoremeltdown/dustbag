@@ -1,3 +1,9 @@
+networks:
+  production:
+    public:
+      interfaces:
+        - name: eth0
+          description: "Internet-facing network"
 shortcuts:
   worldv4: 0.0.0.0/0
   worldv6: ::/0
@@ -53,12 +59,12 @@ rules:
     address_v4: worldv4
     address_v6: worldv6
   - name: Mosh server
-    port: 60000:61000
+    port: 60000-61000
     protocol: udp
     address_v4: worldv4
     address_v6: worldv6
   - name: Wireguard
-    port: 51820:51920
+    port: 51820-51920
     protocol: udp
     address_v4: worldv4
     address_v6: worldv6

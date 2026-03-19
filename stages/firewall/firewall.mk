@@ -1,15 +1,13 @@
-firewall: early apply_rules
+firewall: firewall_end
+	
 	@echo "$(ccgreen)Firewall setup completed$(ccend)"
 
-template_rules:
-	install -d -m 755 /etc/firewall
-	install -d -m 755 /etc/iptables
-	bash stages/firewall/templates/input.sh stages/firewall/variables/firewall.yaml
+firewall_begin:
+	iac begin firewall
 
-apply_rules: template_rules
-	iptables --flush INPUT
-	cat /etc/firewall/iptables-input | bash
-	iptables-save > /etc/iptables/rules.v4
-	ip6tables --flush INPUT
-	cat /etc/firewall/ip6tables-input | bash
-	ip6tables-save > /etc/iptables/rules.v6
+firewall_production: firewall_begin
+	iac stages/firewall/configs/firewall_base.yaml
+	iac stages/firewall/configs/firewall_rules_production.yaml
+
+firewall_end: firewall_production
+	iac end firewall
