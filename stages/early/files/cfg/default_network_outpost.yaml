@@ -1,0 +1,9 @@
+---
+kind: "iac.rcmd.space/template"
+id: "early.network.internal"
+template:
+  - name: "/etc/default/default_network"
+    template: "stages/early/templates/default_network.tmpl"
+    config: "stages/early/variables/outpost.yaml"
+    mode: "644"
+    ownership: "root:root"

@@ -1,0 +1,4 @@
+---
+network:
+  ip:
+    internal: "10.200.1.4"

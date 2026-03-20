@@ -13,6 +13,16 @@ early: early_begin iacd test facts mirrors vault_unseal apt_configs keygen early
 	@echo "$(ccgreen)Early provisioning stage completed$(ccend)"
 endif
 
+ifeq ($(MACHINE_ROLE), production)
+DEFAULT_NETWORK_CONFIG := "stages/early/files/cfg/default_network_production.yaml"
+else ifeq ($(MACHINE_ROLE), outpost)
+DEFAULT_NETWORK_CONFIG := "stages/early/files/cfg/default_network_outpost.yaml"
+else ifeq ($(MACHINE_ROLE), homeserver)
+DEFAULT_NETWORK_CONFIG := "stages/early/files/cfg/default_network_homeserver.yaml"
+else ifeq ($(MACHINE_ROLE), printserver)
+DEFAULT_NETWORK_CONFIG := "stages/early/files/cfg/default_network_printserver.yaml"
+endif
+
 ifeq ($(MACHINE_ARCH), x86_64)
 CORE_BINARIES_CONFIG := "stages/early/files/cfg/core_binaries_amd64.yaml"
 else ifeq ($(MACHINE_ARCH), armv6l)
@@ -43,6 +53,7 @@ endif
 
 facts:
 	iac stages/early/files/cfg/facts.yaml
+	iac $(DEFAULT_NETWORK_CONFIG)
 	iac stages/early/files/cfg/example.yaml
 
 vault_unseal:
