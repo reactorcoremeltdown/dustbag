@@ -10,6 +10,7 @@ WantedBy=multi-user.target
 [Service]
 Type=notify
 EnvironmentFile=-/etc/default/%N
+EnvironmentFile=-/etc/default/default_network
 EnvironmentFile=-/etc/sysconfig/%N
 EnvironmentFile=-/etc/systemd/system/k3s.service.env
 KillMode=process
@@ -33,7 +34,7 @@ ExecStart=/usr/local/bin/k3s \
     --disable local-storage \
     --disable metrics-server \
     --flannel-backend=host-gw \
-    --kube-proxy-arg=nodeport-addresses=127.0.0.1/32,10.200.1.0/24 \
+    --kube-proxy-arg=nodeport-addresses=127.0.0.1/32,${INTERNAL_IP}/32 \
     --kube-apiserver-arg=service-node-port-range=100-65535 \
     --kube-apiserver-arg=max-requests-inflight=50 \
     --kube-controller-manager-arg=node-monitor-period=60s \
