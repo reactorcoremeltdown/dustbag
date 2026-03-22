@@ -44,6 +44,17 @@ items:
       - telegram
       - gotify
       - alert_fatigue
+  - name: prod_firewalld
+    plugin: check_systemd_service
+    option: firewalld.service
+    interval: 1m
+    description: 'Firewalld: production (systemd service)'
+    hostname: garage.rcmd.space
+    timeoutSec: 120
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
   - name: prod_syncthing
     plugin: check_http_success_rate
     warningThreshold: "99"
