@@ -55,6 +55,16 @@ items:
       - telegram
       - gotify
       - alert_fatigue
+  - name: prod_iacd
+    plugin: check_systemd_service
+    option: iacd.service
+    interval: 1m
+    description: 'IACD: production (systemd service)'
+    hostname: garage.rcmd.space
+    timeoutSec: 120
+    notify:
+      - telegram
+      - alert_fatigue
   - name: prod_syncthing
     plugin: check_http_success_rate
     warningThreshold: "99"

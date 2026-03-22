@@ -170,3 +170,12 @@ items:
     notify:
       - gotify
       - alert_fatigue
+  - name: iacd
+    plugin: check_systemd_service
+    option: iacd.service
+    interval: 1m
+    description: 'IACD: production (systemd service)'
+    timeoutSec: 120
+    notify:
+      - telegram
+      - alert_fatigue
