@@ -28,3 +28,9 @@ snapraid_nas:
 
 k3s:
 	iac stages/services/includes/system/configs/k3s.yaml
+
+nfs_server:
+	iac stages/services/includes/system/configs/nfs_server.yaml
+
+nfs_exports_outpost: nfs_server
+	iac stages/services/includes/system/configs/nfs_exports_outpost.yaml

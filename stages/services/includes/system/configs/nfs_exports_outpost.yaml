@@ -1,0 +1,16 @@
+---
+kind: "iac.rcmd.space/file"
+id: "services.nfs.exports.outpost"
+annotations:
+  triggers:
+    - "services.nfs.server.restart"
+file:
+  - name: "/etc/exports"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/services/includes/system/templates/exports_outpost.tmpl"
+---
+kind: "iac.rcmd.space/command"
+id: "services.nfs.server.restart"
+command:
+  - createCommand: "systemctl restart nfs-kernel-server nfs-server"

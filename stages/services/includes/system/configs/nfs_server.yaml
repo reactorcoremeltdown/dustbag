@@ -1,0 +1,6 @@
+---
+kind: "iac.rcmd.space/package"
+id: "services.nfs.server"
+package:
+  - name: "nfs-common"
+  - name: "nfs-kernel-server"
