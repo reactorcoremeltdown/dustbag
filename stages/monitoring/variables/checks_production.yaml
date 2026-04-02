@@ -491,7 +491,7 @@ items:
       - telegram
       - gotify
       - alert_fatigue
-  - name: Ledger SQLite lock
+  - name: ledger_sqlite_lock
     plugin: check_sqlite_lock
     option: /home/ledger/expenses.db
     interval: 30m
