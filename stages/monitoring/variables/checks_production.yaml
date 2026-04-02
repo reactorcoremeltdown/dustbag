@@ -491,3 +491,12 @@ items:
       - telegram
       - gotify
       - alert_fatigue
+  - name: Ledger SQLite lock
+    plugin: check_sqlite_lock
+    option: /home/ledger/expenses.db
+    interval: 30m
+    description: 'Ledger SQLite TSDB lock status'
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
