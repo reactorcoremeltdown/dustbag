@@ -503,8 +503,8 @@ items:
   - name: fsmq_queue_size
     plugin: check_file_num
     option: '/var/spool/api/queues'
-    warningThreshold: '2'
-    criticalThreshold: '3'
+    warningThreshold: '10'
+    criticalThreshold: '30'
     interval: 1m
     description: 'FSMQ queue size'
     hostname: garage.rcmd.space
