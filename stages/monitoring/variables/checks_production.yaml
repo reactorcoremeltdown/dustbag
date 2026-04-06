@@ -500,3 +500,16 @@ items:
       - telegram
       - gotify
       - alert_fatigue
+  - name: fsmq_queue_size
+    plugin: check_file_num
+    option: '/var/spool/api/queues'
+    warningThreshold: '2'
+    criticalThreshold: '3'
+    interval: 1m
+    description: 'FSMQ queue size'
+    hostname: garage.rcmd.space
+    timeoutSec: 120
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
