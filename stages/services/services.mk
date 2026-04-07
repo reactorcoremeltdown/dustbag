@@ -11,7 +11,7 @@ else ifeq ($(MACHINE_ROLE), production)
 CRONS := stages/services/files/crons/main
 ROLE := production
 
-services: users packages services_begin motd sshd crons wastebox gitea exported_graphs nginx_sites nginx radicale network_hacks misc podman fdroid deviceping_receiver phockup shared_functions vault_seal services_end
+services: users packages services_begin motd sshd crons wastebox gitea exported_graphs nginx_sites nginx radicale network_hacks misc podman fdroid deviceping_receiver shared_functions vault_seal services_end
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium V2, the Pi 4 at home

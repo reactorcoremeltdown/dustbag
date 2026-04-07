@@ -46,6 +46,3 @@
 
 ### Kanboard stats
 30 8 * * 2,4,7 /usr/local/bin/kanboard-stats
-
-### Sorting photos
-20 2 * * 7 /usr/local/bin/phockup-wrapper

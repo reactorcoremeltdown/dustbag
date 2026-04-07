@@ -39,12 +39,6 @@ radicale:
 	systemctl restart radicale
 	@echo "$(ccgreen)Setting up radicale completed$(ccend)"
 
-phockup:
-	test -d /opt/phockup || mkdir -p /opt/phockup
-	rsync -av stages/services/includes/media/files/opt/phockup/ /opt/phockup
-	ln -sf /opt/phockup/phockup.py /usr/local/bin/phockup
-	install -D -m 755 stages/services/includes/media/files/usr/local/bin/phockup-wrapper /usr/local/bin
-
 motion:
 	dpkg-query -s motion > /dev/null || DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y motion
 	install -D -m 644 stages/services/includes/media/files/etc/motion/motion.conf /etc/motion
