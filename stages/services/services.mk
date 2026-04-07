@@ -11,7 +11,7 @@ else ifeq ($(MACHINE_ROLE), production)
 CRONS := stages/services/files/crons/main
 ROLE := production
 
-services: users packages services_begin motd sshd crons wastebox gitea exported_graphs nginx_sites nginx radicale network_hacks misc podman fdroid deviceping_receiver phockup vault_seal services_end
+services: users packages services_begin motd sshd crons wastebox gitea exported_graphs nginx_sites nginx radicale network_hacks misc podman fdroid deviceping_receiver phockup shared_functions vault_seal services_end
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Fermium V2, the Pi 4 at home
@@ -20,7 +20,7 @@ CRONS := stages/services/files/crons/fermium
 DEVICEPING_ID := deviceping_fermium
 ROLE := homeserver
 
-services: users packages services_begin crons nginx_proxies nginx motion dave podsync bootconfig deviceping podman woodpecker_server mpd home_ip snapraid_nas k3s vault_seal services_end
+services: users packages services_begin crons nginx_proxies nginx motion dave podsync bootconfig deviceping podman woodpecker_server mpd home_ip snapraid_nas k3s shared_functions vault_seal services_end
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Seedbox
@@ -40,7 +40,7 @@ services: users packages podman drone_runner_amd64 seppuku
 else ifeq ($(MACHINE_ROLE), outpost)
 ROLE := outpost
 
-services: users packages services_begin podman nginx gotify k3s nfs_exports_outpost vault_seal services_end
+services: users packages services_begin podman nginx gotify k3s nfs_exports_outpost shared_functions vault_seal services_end
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Printserver V2, the Pi Zero W edition
@@ -76,9 +76,11 @@ home_ip:
 misc:
 	install -D -m 755 stages/services/files/usr/local/bin/rcmd-space-stats /usr/local/bin
 	install -D -m 755 stages/services/files/usr/local/bin/kanboard-stats /usr/local/bin
-	install -D -m 755 stages/services/files/usr/local/src/rcmd-functions.mk /usr/local/src
 	test -f /etc/secrets/gmail_config || (vault-request-unlock && vault-request-key gmail_config tasks > /etc/secrets/gmail_config && chmod 400 /etc/secrets/gmail_config)
 	@echo "$(ccgreen)Setting up misc scripts completed$(ccend)"
+
+shared_functions:
+	install -D -m 755 stages/services/files/usr/local/src/rcmd-functions.mk /usr/local/src
 
 vault_seal:
 	/usr/local/bin/vault-request-lock
