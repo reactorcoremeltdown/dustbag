@@ -503,7 +503,7 @@ items:
   - name: fsmq_queue_size
     plugin: check_file_num
     option: '/var/spool/api/queues'
-    warningThreshold: '10'
+    warningThreshold: '15'
     criticalThreshold: '30'
     interval: 1m
     description: 'FSMQ queue size'
