@@ -1,0 +1,8 @@
+[Unit]
+Description=Generalized IaC with batteries
+
+[Service]
+ExecStart=/usr/local/bin/iacd
+
+[Install]
+WantedBy=multi-user.target

@@ -32,6 +32,11 @@ CORE_BINARIES_CONFIG := "stages/early/files/cfg/core_binaries_arm64.yaml"
 endif
 
 early_begin:
+	which yamllint || apt-get -y install yamllint
+	which wget && test -x /usr/local/bin/iac || wget -c https://repo.rcmd.space/binaries/iacd/iac_$(MACHINE_ARCH) -O /usr/local/bin/iac && chmod +x /usr/local/bin/iac
+	which wget && test -x /usr/local/bin/iacd || wget -c https://repo.rcmd.space/binaries/iacd/iacd_$(MACHINE_ARCH) -O /usr/local/bin/iacd && chmod +x /usr/local/bin/iacd
+	install -D -m 644 stages/early/files/iacd.service /etc/systemd/system && systemctl daemon-reload && systemctl enable iacd && systemctl start iacd
+	which wget && test -x /usr/local/bin/yq && wget -c https://repo.rcmd.space/binaries/yq/yq_$(MACHINE_ARCH) -O /usr/local/bin/yq && chmod +x /usr/local/bin/yq
 	yamllint stages/early/files/cfg/*.yaml
 	iac begin early_stage
 
