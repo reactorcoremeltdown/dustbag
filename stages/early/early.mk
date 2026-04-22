@@ -36,7 +36,7 @@ early_begin:
 	which wget && test -x /usr/local/bin/iac || wget -c https://repo.rcmd.space/binaries/iacd/iac_$(MACHINE_ARCH) -O /usr/local/bin/iac && chmod +x /usr/local/bin/iac
 	which wget && test -x /usr/local/bin/iacd || wget -c https://repo.rcmd.space/binaries/iacd/iacd_$(MACHINE_ARCH) -O /usr/local/bin/iacd && chmod +x /usr/local/bin/iacd
 	install -D -m 644 stages/early/files/iacd.service /etc/systemd/system && systemctl daemon-reload && systemctl enable iacd && systemctl start iacd
-	which wget && test -x /usr/local/bin/yq && wget -c https://repo.rcmd.space/binaries/yq/yq_$(MACHINE_ARCH) -O /usr/local/bin/yq && chmod +x /usr/local/bin/yq
+	which wget && test -x /usr/local/bin/yq || wget -c https://repo.rcmd.space/binaries/yq/yq_$(MACHINE_ARCH) -O /usr/local/bin/yq && chmod +x /usr/local/bin/yq
 	yamllint stages/early/files/cfg/*.yaml
 	iac begin early_stage
 
