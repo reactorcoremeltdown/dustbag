@@ -79,8 +79,9 @@ endif
 
 earlystagepackages:
 	iac stages/early/files/cfg/required_packages.yaml
-ifneq ($(RETRY), true)
-	pip3 install --break-system-packages certbot-dns-hetzner-cloud
+ifeq ($(MACHINE_ROLE), production)
+	which pip3 || apt-get -y install python3-pip
+	pip3 show certbot-dns-hetzner-cloud > /dev/null || pip3 install --break-system-packages certbot-dns-hetzner-cloud
 endif
 
 locales:
