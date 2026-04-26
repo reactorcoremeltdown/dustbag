@@ -10,8 +10,7 @@ matrix:
     - production
     - homeserver
     - outpost
-    # - printserver
-    # Temporarily broken
+    - printserver
 labels:
   role: ${ROLE}
 skip_clone: true
