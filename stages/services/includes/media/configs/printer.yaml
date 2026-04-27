@@ -1,0 +1,24 @@
+---
+kind: "iac.rcmd.space/package"
+id: "services.media.printer.packages"
+package:
+  - name: "cups"
+  - name: "avahi-daemon"
+  - name: "hpijs-ppds"
+  - name: "printer-driver-hpijs"
+---
+kind: "iac.rcmd.space/file"
+id: "services.media.printer.config"
+annotations:
+  triggers:
+    - "services.media.printer.service"
+file:
+  - name: "/etc/cups/cupsd.conf"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/services/includes/media/files/etc/cups/cupsd.conf"
+---
+kind: "iac.rcmd.space/command"
+id: "services.media.printer.service"
+command:
+  - createCommand: "systemctl restart cups.service"
