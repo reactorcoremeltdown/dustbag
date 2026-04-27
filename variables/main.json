@@ -20,10 +20,13 @@
                 "upstream": "10.200.1.3:28003"
             },
             "dav": {
-                "server_name": "dav.rcmd.space"
+                "server_name": "dav.rcmd.space",
+                "upstream": "127.0.0.1:5232",
+                "upstream_ingest_route": "127.0.0.1:30071"
             },
             "webdav": {
-                "server_name": "webdav.rcmd.space"
+                "server_name": "webdav.rcmd.space",
+                "upstream": "10.200.1.3:38000"
             },
             "dm": {
                 "server_name": "dm.tiredsysadmin.cc"

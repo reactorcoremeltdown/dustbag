@@ -3,8 +3,6 @@ nginx_proxies:
 
 nginx_sites:
 	iac stages/services/includes/nginx/configs/nginx_sites.yaml
-	bash stages/services/includes/nginx/templates/nginx/sites/bank.sh
-	bash stages/services/includes/nginx/templates/nginx/sites/dav.sh
 	bash stages/services/includes/nginx/templates/nginx/sites/default.sh
 	bash stages/services/includes/nginx/templates/nginx/sites/dm.sh
 	bash stages/services/includes/nginx/templates/nginx/sites/git.sh
