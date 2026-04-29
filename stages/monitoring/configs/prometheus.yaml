@@ -5,7 +5,7 @@ package:
   - name: "prometheus"
   - name: "prometheus-nginx-exporter"
 ---
-kind: "iac.rcmd.space/file"
+kind: "iac.rcmd.space/file.v2"
 id: "monitoring.prometheus.config"
 annotations:
   triggers:

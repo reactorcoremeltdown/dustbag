@@ -1,28 +1,31 @@
 ---
 kind: "iac.rcmd.space/package"
-id: "early.core_packages"
+id: "monitoring.wtfd.packages"
 package:
   - name: "dafuq"
 ---
-kind: "iac.rcmd.space/file"
-id: "monitoring.wtfd.files"
-file:
+kind: "iac.rcmd.space/directory.v2"
+id: "monitoring.wtfd.directories"
+directory:
   - name: "/var/www/healthchecks"
     mode: "755"
     ownership: "root:root"
-    source: "directory"
   - name: "/etc/monitoring/configs"
     mode: "755"
     ownership: "root:root"
-    source: "directory"
   - name: "/etc/monitoring/plugins"
     mode: "755"
     ownership: "root:root"
-    source: "directory"
   - name: "/etc/monitoring/notifiers"
     mode: "755"
     ownership: "root:root"
-    source: "directory"
+---
+kind: "iac.rcmd.space/file.v2"
+id: "monitoring.wtfd.core"
+annotations:
+  triggers:
+    - "monitoring.wtfd.restart"
+file:
   - name: "/usr/local/bin/wtf"
     mode: "755"
     ownership: "root:root"
@@ -31,6 +34,14 @@ file:
     mode: "644"
     ownership: "root:root"
     source: "stages/monitoring/files/configs/config.ini"
+  - name: "/etc/systemd/system/wtfd.service"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/monitoring/files/configs/wtfd-standard.service"
+---
+kind: "iac.rcmd.space/install.v2"
+id: "monitoring.wtfd.plugins"
+install:
   - name: "/etc/monitoring/plugins"
     mode: "755"
     ownership: "root:root"
