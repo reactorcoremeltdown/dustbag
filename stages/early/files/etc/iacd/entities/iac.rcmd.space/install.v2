@@ -3,23 +3,25 @@
 set -eo pipefail
 
 IFS=$'\n'
-ENTRIES=$(yq -o=json '.directory' ${IACD_DOCUMENT} | jq -c '.[]')
+ENTRIES=$(yq -o=json '.install' ${IACD_DOCUMENT} | jq -c '.[]')
 
 case ${1} in
     "create")
         for entry in $ENTRIES; do
             entry_name=$(echo "${entry}" | jq -r '.name')
+            entry_source_input=$(echo "${entry}" | jq -r '.source')
+            entry_source="${IACD_PWD}/${entry_source_input}"
             entry_mode=$(echo "${entry}" | jq -r '.mode')
             entry_ownership=$(echo "${entry}" | jq -r '.ownership')
-            mkdir -p "${entry_name}"
-            chmod "${entry_mode}" "${entry_name}"
-            chown "${entry_ownership}" "${entry_name}"
-            echo "Directory ${entry_name} created"
+            install -D -v -m "${entry_mode}" "${entry_source}"/* "${entry_name}"
+            chown "${entry_ownership}" "${entry_name}"/*
+            chmod "${entry_mode}" "${entry_name}"/*
+            echo "Files for ${entry_name} installed"
         done
         ;;
     "update")
         if [ "${IACD_OLD_DOCUMENT}" != "" ]; then
-            OLD_ENTRIES=$(yq -o=json '.directory' ${IACD_OLD_DOCUMENT} | jq -cr '.[]')
+            OLD_ENTRIES=$(yq -o=json '.install' ${IACD_OLD_DOCUMENT} | jq -cr '.[]')
             for old_entry in ${OLD_ENTRIES}; do
                 PURGE="true"
                 old_entry_name=$(echo "${old_entry}" | jq -r '.name')
@@ -37,25 +39,33 @@ case ${1} in
         fi
         for entry in $ENTRIES; do
             entry_name=$(echo "${entry}" | jq -r '.name')
+            entry_source_input=$(echo "${entry}" | jq -r '.source')
+            entry_source="${IACD_PWD}/${entry_source_input}"
             entry_mode=$(echo "${entry}" | jq -r '.mode')
             entry_ownership=$(echo "${entry}" | jq -r '.ownership')
-            mkdir -p "${entry_name}"
-            chmod "${entry_mode}" "${entry_name}"
-            chown "${entry_ownership}" "${entry_name}"
-            echo "Directory ${entry_name} updated"
+            install -D -v -m "${entry_mode}" "${entry_source}"/* "${entry_name}"
+            chown "${entry_ownership}" "${entry_name}"/*
+            chmod "${entry_mode}" "${entry_name}"/*
+            echo "Files from ${entry_name} updated"
         done
         ;;
     "delete")
         for entry in $ENTRIES; do
             entry_name=$(echo "${entry}" | jq -r '.name')
-            rm -fr "${entry_name}"
-            echo "Directory ${entry_name} deleted"
+            entry_source_input=$(echo "${entry}" | jq -r '.source')
+            entry_source="${IACD_PWD}/${entry_source_input}"
+            for file_to_delete in `ls -1 "${entry_source}"`; do
+                rm -f "${entry_name}/${file_to_delete}"
+            done
+            echo "Files from ${entry_name} uninstalled"
         done
         ;;
     "compare")
         for entry in $ENTRIES; do
             entry_name=$(echo "${entry}" | jq -r '.name')
-            test -d "${entry_name}"
+            entry_source_input=$(echo "${entry}" | jq -r '.source')
+            entry_source="${IACD_PWD}/${entry_source_input}"
+            diff -q "${entry_source}" "${entry_name}"
         done
         ;;
 esac
