@@ -1,9 +1,9 @@
 # Main server
 ifeq ($(MACHINE_ROLE), production)
-monitoring: monitoring_begin wtfd checks prometheus monitoring_end
+monitoring: repos monitoring_begin wtfd checks prometheus monitoring_end
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 else
-monitoring: monitoring_begin wtfd checks monitoring_end
+monitoring: repos monitoring_begin wtfd checks monitoring_end
 	@echo "$(ccgreen)Setting up monitoring completed$(ccend)"
 endif
 
