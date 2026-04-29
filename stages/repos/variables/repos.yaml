@@ -28,7 +28,7 @@ debian:
       section: "main"
     - name: "tiredsysadmin"
       state: "present"
-      install_on: "production fermium printserver outpost"
+      install_on: "production homeserver printserver outpost"
       key: "https://deb.tiredsysadmin.cc/dists/bookworm/tiredsysadmin-repo.gpg"
       url: "https://deb.tiredsysadmin.cc/"
       section: "main"
