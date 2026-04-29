@@ -1,5 +1,5 @@
 ---
-kind: "iac.rcmd.space/file"
+kind: "iac.rcmd.space/file.v2"
 id: "early.vault_binaries.v1"
 file:
   - name: "/usr/local/bin/vault-request-lock"
@@ -15,7 +15,7 @@ file:
     ownership: "root:root"
     source: "stages/early/files/vault-request-key"
 ---
-kind: "iac.rcmd.space/file"
+kind: "iac.rcmd.space/file.v2"
 id: "early.rbw_binaries.v1"
 file:
   - name: "/usr/local/bin/rbw-request-lock"
