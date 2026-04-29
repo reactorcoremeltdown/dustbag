@@ -34,7 +34,7 @@ case ${1} in
         ;;
     "update")
         if [ "${IACD_OLD_DOCUMENT}" != "" ]; then
-            OLD_ENTRIES=$(yq -o=json '.package' ${IACD_OLD_DOCUMENT} | jq -cr '.[]')
+            OLD_ENTRIES=$(yq -o=json '.file' ${IACD_OLD_DOCUMENT} | jq -cr '.[]')
             for old_entry in ${OLD_ENTRIES}; do
                 PURGE="true"
                 old_entry_name=$(echo "${old_entry}" | jq -r '.name')
