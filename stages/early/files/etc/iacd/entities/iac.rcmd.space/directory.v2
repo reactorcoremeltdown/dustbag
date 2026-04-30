@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -eo pipefail
+set -x
 
 IFS=$'\n'
 ENTRIES=$(yq -o=json '.directory' ${IACD_DOCUMENT} | jq -c '.[]')
