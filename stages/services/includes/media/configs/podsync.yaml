@@ -17,6 +17,7 @@ download:
 ---
 kind: "iac.rcmd.space/directory.v2"
 id: "services.media.podsync.directories"
+# test
 directory:
   - name: "/etc/podsync"
     mode: "750"
