@@ -16,7 +16,7 @@ download:
     destination: "/usr/local/bin/podsync"
 ---
 kind: "iac.rcmd.space/directory.v2"
-id: "services.media.podsync.directories"
+id: "services.media.podsync.directories.v2"
 # test
 directory:
   - name: "/etc/podsync"
