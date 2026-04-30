@@ -15,17 +15,15 @@ download:
     ownership: "root:root"
     destination: "/usr/local/bin/podsync"
 ---
-kind: "iac.rcmd.space/file"
+kind: "iac.rcmd.space/directory.v2"
 id: "services.media.podsync.directories"
-file:
+directory:
   - name: "/etc/podsync"
     mode: "750"
     ownership: "syncthing:syncthing"
-    source: "directory"
   - name: "/var/log/podsync"
     mode: "750"
     ownership: "syncthing:syncthing"
-    source: "directory"
 ---
 kind: "iac.rcmd.space/systemd"
 id: "services.media.podsync.systemd"

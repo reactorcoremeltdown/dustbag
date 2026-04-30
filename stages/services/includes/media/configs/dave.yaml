@@ -1,11 +1,14 @@
 ---
-kind: "iac.rcmd.space/file"
-id: "services.media.dave.configs"
-file:
+kind: "iac.rcmd.space/directory.v2"
+id: "services.media.dave.directory"
+directory:
   - name: "/var/www/.dave"
     mode: "750"
     ownership: "syncthing:syncthing"
-    source: "directory"
+---
+kind: "iac.rcmd.space/file.v2"
+id: "services.media.dave.configs"
+file:
   - name: "/etc/dave.yaml"
     mode: "644"
     ownership: "syncthing:syncthing"

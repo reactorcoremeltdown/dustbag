@@ -7,7 +7,7 @@ package:
   - name: "hpijs-ppds"
   - name: "printer-driver-hpijs"
 ---
-kind: "iac.rcmd.space/file"
+kind: "iac.rcmd.space/file.v2"
 id: "services.media.printer.config"
 annotations:
   triggers:
