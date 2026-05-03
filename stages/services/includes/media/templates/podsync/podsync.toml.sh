@@ -23,6 +23,8 @@ for feed in $(echo "${FEEDS}" | yq -o=json -I=0 '.[]'); do
     url=$(echo "${feed}" | jq -cr '.url')
     filters=$(echo "${feed}" | jq -cr '.filters')
     keep_last=$(echo "${feed}" | jq -cr '.keep_last')
+    format=$(echo "${feed}" | jq -cr '.format')
+    max_height=$(echo "${feed}" | jq -cr '.max_height')
     cron_schedule=$(echo "${feed}" | jq -cr '.cron_schedule')
     playlist_sort=$(echo "${feed}" | jq -cr '.playlist_sort')
     youtube_dl_args=$(echo "${feed}" | jq -cr '.youtube_dl_args')
@@ -31,8 +33,12 @@ for feed in $(echo "${FEEDS}" | yq -o=json -I=0 '.[]'); do
     echo "  url = \"${url}\"" >>  /etc/podsync/podsync.toml
     echo "  page_size = 3" >> /etc/podsync/podsync.toml
     echo "  quality = \"high\"" >> /etc/podsync/podsync.toml
-    echo "  format = \"audio\"" >> /etc/podsync/podsync.toml
     echo "  private_feed = true" >> /etc/podsync/podsync.toml
+    if [[ ${format} != "null" ]]; then
+        echo "  format = \"${format}\"" >> /etc/podsync/podsync.toml
+    else
+        echo '  format = \"audio\"' >> /etc/podsync/podsync.toml
+    fi
     if [[ ${youtube_dl_args} != "null" ]]; then
         echo "  youtube_dl_args = ${youtube_dl_args}" >> /etc/podsync/podsync.toml
     else
@@ -40,6 +46,9 @@ for feed in $(echo "${FEEDS}" | yq -o=json -I=0 '.[]'); do
     fi
     if [[ ${filters} != "null" ]]; then
         echo "  filters = ${filters}" >> /etc/podsync/podsync.toml
+    fi
+    if [[ ${max_height} != "null" ]]; then
+        echo "  max_height = ${max_height}" >> /etc/podsync/podsync.toml
     fi
     if [[ ${keep_last} != "null" ]]; then
         echo "  clean = { keep_last = ${keep_last} }" >> /etc/podsync/podsync.toml
