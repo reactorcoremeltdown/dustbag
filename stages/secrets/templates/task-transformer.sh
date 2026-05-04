@@ -17,6 +17,9 @@ network:
   port: 8080
   webdis: "rbw.rcmd.space:7379"
 services:
+  client:
+    sync:
+      url: http://task-transformer-client.apps.svc.cluster.local:8000/sync
   fsmq:
     url: "https://api.rcmd.space/v6/"
     queue: "tasksync"
