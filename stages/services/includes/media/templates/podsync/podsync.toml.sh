@@ -37,7 +37,7 @@ for feed in $(echo "${FEEDS}" | yq -o=json -I=0 '.[]'); do
     if [[ ${format} != "null" ]]; then
         echo "  format = \"${format}\"" >> /etc/podsync/podsync.toml
     else
-        echo '  format = \"audio\"' >> /etc/podsync/podsync.toml
+        echo '  format = "audio"' >> /etc/podsync/podsync.toml
     fi
     if [[ ${youtube_dl_args} != "null" ]]; then
         echo "  youtube_dl_args = ${youtube_dl_args}" >> /etc/podsync/podsync.toml
