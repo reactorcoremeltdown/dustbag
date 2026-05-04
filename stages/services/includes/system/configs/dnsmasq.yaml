@@ -1,0 +1,21 @@
+---
+kind: "iac.rcmd.space/package"
+id: "services.system.dnsmasq.packages"
+package:
+  - name: "dnsmasq"
+---
+kind: "iac.rcmd.space/file.v2"
+id: "services.system.dnsmasq.configs"
+annotations:
+  triggers:
+    - "services.system.dnsmasq.restart"
+file:
+  - name: "/etc/dnsmasq.d/split-dns.conf"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/services/includes/system/files/etc/dnsmasq.d/split-dns.conf"
+---
+kind: "iac.rcmd.space/command"
+id: "services.system.dnsmasq.restart"
+command:
+  - createCommand: "systemctl restart dnsmasq.service"
