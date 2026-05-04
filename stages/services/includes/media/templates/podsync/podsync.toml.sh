@@ -47,7 +47,7 @@ for feed in $(echo "${FEEDS}" | yq -o=json -I=0 '.[]'); do
         echo "  clean = { keep_last = 10 }" >> /etc/podsync/podsync.toml
     fi
     if [[ ${playlist_sort} != "null" ]]; then
-        echo "  playlist_sort = ${playlist_sort}" >> /etc/podsync/podsync.toml
+        echo "  playlist_sort = \"${playlist_sort}\"" >> /etc/podsync/podsync.toml
     fi
     if [[ ${cron_schedule} != "null" ]]; then
         echo "  cron_schedule = \"${cron_schedule}\"" >> /etc/podsync/podsync.toml
