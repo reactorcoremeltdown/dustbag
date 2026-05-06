@@ -80,7 +80,7 @@ command:
   - createCommand: "find /root -name 'helm' -type f -executable -exec mv {} /usr/local/bin/helm \\;"
     deleteCommand: "rm -f /usr/local/bin/helm"
 ---
-kind: "iac.rcmd.space/file.v2"
+kind: "iac.rcmd.space/directory.v2"
 id: "services.system.k3s.kubeconfig.v3"
 directory:
   - name: "/root/.kube"
