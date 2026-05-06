@@ -19,7 +19,7 @@ template:
     mode: "600"
     ownership: "root:root"
 ---
-kind: "iac.rcmd.space/file"
+kind: "iac.rcmd.space/file.v2"
 id: "services.nginx.certificates.bin"
 annotations:
   triggers:
@@ -36,7 +36,7 @@ command:
   - createCommand: "/usr/local/bin/init_certificates"
     deleteCommand: "/bin/true"
 ---
-kind: "iac.rcmd.space/file"
+kind: "iac.rcmd.space/file.v2"
 id: "services.nginx.base.configs"
 annotations:
   triggers:

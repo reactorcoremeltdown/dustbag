@@ -1,5 +1,5 @@
 ---
-kind: "iac.rcmd.space/file"
+kind: "iac.rcmd.space/file.v2"
 id: "services.system.motd"
 file:
   - name: "/etc/motd"

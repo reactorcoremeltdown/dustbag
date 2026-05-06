@@ -38,7 +38,7 @@ download:
     ownership: "root:root"
     destination: "/usr/local/bin/k3s"
 ---
-kind: "iac.rcmd.space/file"
+kind: "iac.rcmd.space/file.v2"
 id: "services.system.k3s.systemd.service"
 annotations:
   triggers:
@@ -80,10 +80,9 @@ command:
   - createCommand: "find /root -name 'helm' -type f -executable -exec mv {} /usr/local/bin/helm \\;"
     deleteCommand: "rm -f /usr/local/bin/helm"
 ---
-kind: "iac.rcmd.space/file"
-id: "services.system.k3s.kubeconfig.v2"
-file:
+kind: "iac.rcmd.space/file.v2"
+id: "services.system.k3s.kubeconfig.v3"
+directory:
   - name: "/root/.kube"
     mode: "700"
     ownership: "root:root"
-    source: "directory"

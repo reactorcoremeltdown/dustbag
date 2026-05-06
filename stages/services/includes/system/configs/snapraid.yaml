@@ -5,7 +5,7 @@ package:
   - name: "snapraid"
   - name: "mergerfs"
 ---
-kind: "iac.rcmd.space/file"
+kind: "iac.rcmd.space/file.v2"
 id: "services.system.snapraid.configs"
 file:
   - name: "/usr/local/bin/snapraid_sync.sh"
