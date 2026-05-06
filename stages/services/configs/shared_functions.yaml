@@ -1,0 +1,8 @@
+---
+kind: "iac.rcmd.space/file.v2"
+id: "services.shared_functions"
+file:
+  - name: "/usr/local/src/rcmd-functions.mk"
+    mode: "755"
+    ownership: "root:root"
+    source: "stages/services/files/usr/local/src/rcmd-functions.mk"

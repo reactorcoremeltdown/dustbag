@@ -20,7 +20,7 @@ CRONS := stages/services/files/crons/fermium
 DEVICEPING_ID := deviceping_fermium
 ROLE := homeserver
 
-services: users packages services_begin crons nginx_proxies nginx motion dave podsync bootconfig deviceping podman woodpecker_server mpd home_ip snapraid_nas k3s shared_functions vault_seal services_end
+services: users packages services_begin crons nginx_proxies nginx motion dave podsync bootconfig deviceping podman woodpecker_server mpd snapraid_nas k3s shared_functions vault_seal services_end
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Seedbox
@@ -70,17 +70,12 @@ services_begin:
 services_end:
 	iac end services
 
-home_ip:
-	install -D -m 755 stages/services/files/usr/local/bin/home-ip /usr/local/bin
-
 misc:
-	install -D -m 755 stages/services/files/usr/local/bin/rcmd-space-stats /usr/local/bin
-	install -D -m 755 stages/services/files/usr/local/bin/kanboard-stats /usr/local/bin
-	test -f /etc/secrets/gmail_config || (vault-request-unlock && vault-request-key gmail_config tasks > /etc/secrets/gmail_config && chmod 400 /etc/secrets/gmail_config)
+	iac stages/services/configs/misc.yaml
 	@echo "$(ccgreen)Setting up misc scripts completed$(ccend)"
 
 shared_functions:
-	install -D -m 755 stages/services/files/usr/local/src/rcmd-functions.mk /usr/local/src
+	iac stages/services/configs/shared_functions.yaml
 
 vault_seal:
 	/usr/local/bin/vault-request-lock

@@ -1,0 +1,25 @@
+---
+kind: "iac.rcmd.space/file.v2"
+id: "services.misc.files"
+file:
+  - name: "/usr/local/bin/rcmd-space-stats"
+    mode: "755"
+    ownership: "root:root"
+    source: "stages/services/files/usr/local/bin/rcmd-space-stats"
+  - name: "/usr/local/bin/kanboard-stats"
+    mode: "755"
+    ownership: "root:root"
+    source: "stages/services/files/usr/local/bin/kanboard-stats"
+---
+kind: "iac.rcmd.space/command"
+id: "services.misc.gmail.precondition"
+annotations:
+  blocks:
+    - "services.misc.gmail.config"
+command:
+  - createCommand: "test -f /etc/secrets/gmail_config"
+---
+kind: "iac.rcmd.space/command"
+id: "services.misc.gmail.config"
+command:
+  - createCommand: "vault-request-unlock && vault-request-key gmail_config tasks > /etc/secrets/gmail_config && chmod 400 /etc/secrets/gmail_config"
