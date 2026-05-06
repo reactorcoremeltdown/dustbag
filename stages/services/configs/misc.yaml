@@ -14,7 +14,7 @@ file:
 kind: "iac.rcmd.space/command"
 id: "services.misc.gmail.precondition"
 annotations:
-  blocks:
+  triggers:
     - "services.misc.gmail.config"
 command:
   - createCommand: "test -f /etc/secrets/gmail_config"
