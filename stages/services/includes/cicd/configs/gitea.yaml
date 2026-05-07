@@ -12,8 +12,8 @@ annotations:
   triggers:
     - "services.cicd.gitea.secrets_command"
 command:
-  - createCommand: "test -f /etc/gitea/app.ini"
-  - createCommand: "test -f /etc/gitea/secrets.json"
+  - createCommand: "/bin/true"
+    compareCommand: "test -f /etc/gitea/secrets.json"
 ---
 kind: "iac.rcmd.space/file.v2"
 id: "services.cicd.gitea.secrets_command"
