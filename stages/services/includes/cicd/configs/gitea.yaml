@@ -59,7 +59,7 @@ file:
   - name: "/etc/systemd/system/gitea.service"
     ownership: "root:root"
     mode: "644"
-    source: "stages/services/includes/files/etc/systemd/system/gitea.service"
+    source: "stages/services/includes/cicd/files/etc/systemd/system/gitea.service"
   - name: "/usr/local/bin/gitea-common-hook"
     ownership: "root:root"
     source: "stages/services/includes/cicd/files/usr/local/bin/gitea-common-hook"
