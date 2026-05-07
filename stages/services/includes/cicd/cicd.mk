@@ -3,7 +3,7 @@ gitea:
 	@echo "$(ccgreen)Setting up gitea completed$(ccend)"
 
 registry:
-	iac stages/services/includes/cicd/configs/gitea.yaml
+	iac stages/services/includes/cicd/configs/registry.yaml
 	@echo "$(ccgreen)Setting up docker registry completed$(ccend)"
 
 network_hacks:
