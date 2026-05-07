@@ -1,17 +1,5 @@
-gitea_directory:
-	install -d -m 770 --owner git --group git /etc/gitea
-
-gitea_config: /etc/secrets/secrets.json
-	test -d /home/git/.config || mkdir -p /home/git/.config && chown git:git /home/git/.config
-	test -f /etc/gitea/app.ini || (vault-request-unlock && bash stages/services/includes/cicd/templates/gitea/config.sh)
-	install -D -m 644 -v stages/services/includes/cicd/files/etc/systemd/system/gitea.service /etc/systemd/system
-	test -f /home/git/.config/drone_api_key || (vault-request-unlock && vault-request-key DRONE_API_KEY 'gitea/server' > /home/git/.config/drone_api_key)
-	chmod 400 /home/git/.config/drone_api_key && chown git:git /home/git/.config/drone_api_key
-	install -D -m 755 -v stages/services/includes/cicd/files/usr/local/bin/gitea-common-hook /usr/local/bin	
-	systemctl enable gitea.service
-	systemctl daemon-reload
-
-gitea: gitea_directory gitea_config
+gitea:
+	iac stages/services/includes/cicd/configs/gitea.yaml
 	@echo "$(ccgreen)Setting up gitea completed$(ccend)"
 
 registry:

@@ -1,22 +1,14 @@
-#!/usr/bin/env bash
-
-JWT_SECRET=$(vault-request-key JWT_SECRET 'gitea/oauth2')
-INTERNAL_TOKEN=$(vault-request-key INTERNAL_TOKEN 'gitea/security')
-SECRET_KEY=$(vault-request-key SECRET_KEY 'gitea/security')
-LFS_JWT_SECRET=$(vault-request-key LFS_JWT_SECRET 'gitea/server')
-
-cat <<EOF > /etc/gitea/app.ini
 APP_NAME = RCMD Funkhaus
 RUN_USER = git
 RUN_MODE = prod
 
 [oauth2]
-JWT_SECRET = ${JWT_SECRET}
+JWT_SECRET = {{ .jwt_secret }}
 
 [security]
-INTERNAL_TOKEN    = ${INTERNAL_TOKEN}
+INTERNAL_TOKEN    = {{ .internal_token }}
 INSTALL_LOCK      = true
-SECRET_KEY        = ${SECRET_KEY}
+SECRET_KEY        = {{ .secret_key }}
 DISABLE_GIT_HOOKS = false
 
 [server]
@@ -29,7 +21,7 @@ ROOT_URL         = https://git.rcmd.space/
 DISABLE_SSH      = false
 SSH_PORT         = 22
 LFS_START_SERVER = true
-LFS_JWT_SECRET   = ${LFS_JWT_SECRET}
+LFS_JWT_SECRET   = {{ .lfs_jwt_secret }}
 OFFLINE_MODE     = true
 
 [lfs]
@@ -84,7 +76,3 @@ SESSION_LIFE_TIME = 604800
 MODE      = file
 LEVEL     = info
 ROOT_PATH = /var/lib/gitea/log
-EOF
-
-chown git:git /etc/gitea/app.ini
-chmod 640 /etc/gitea/app.ini
