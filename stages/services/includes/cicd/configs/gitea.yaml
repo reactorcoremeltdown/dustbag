@@ -13,6 +13,7 @@ annotations:
     - "services.cicd.gitea.secrets_command"
 command:
   - createCommand: "test -f /etc/gitea/app.ini"
+  - createCommand: "test -f /etc/gitea/secrets.json"
 ---
 kind: "iac.rcmd.space/file.v2"
 id: "services.cicd.gitea.secrets_command"
@@ -35,20 +36,12 @@ command:
 ---
 kind: "iac.rcmd.space/template"
 id: "services.cicd.gitea.config"
-annotations:
-  triggers:
-    - "services.cicd.gitea.cleanup"
 template:
   - name: "/etc/gitea/app.ini"
     template: "stages/services/includes/cicd/templates/gitea/app.ini.tmpl"
     config: "/etc/gitea/secrets.json"
     ownership: "git:git"
     mode: "640"
----
-kind: "iac.rcmd.space/command"
-id: "services.cicd.gitea.cleanup"
-command:
-  - createCommand: "test -f /etc/gitea/secrets.json && rm -f /etc/gitea/secrets.json"
 ---
 kind: "iac.rcmd.space/file.v2"
 id: "services.cicd.gitea.files"
