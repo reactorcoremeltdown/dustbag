@@ -40,7 +40,7 @@ annotations:
     - "services.cicd.gitea.cleanup"
 template:
   - name: "/etc/gitea/app.ini"
-    template: "stages/services/includes/cicd/templates/app.ini.tmpl"
+    template: "stages/services/includes/cicd/templates/gitea/app.ini.tmpl"
     config: "/etc/gitea/secrets.json"
     ownership: "git:git"
     mode: "640"
