@@ -62,6 +62,7 @@ file:
     source: "stages/services/includes/cicd/files/etc/systemd/system/gitea.service"
   - name: "/usr/local/bin/gitea-common-hook"
     ownership: "root:root"
+    mode: "755"
     source: "stages/services/includes/cicd/files/usr/local/bin/gitea-common-hook"
 ---
 kind: "iac.rcmd.space/command"
