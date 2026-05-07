@@ -3,9 +3,7 @@ gitea:
 	@echo "$(ccgreen)Setting up gitea completed$(ccend)"
 
 registry:
-	install -D -m 644 stages/services/includes/cicd/files/etc/containers/containers.conf /etc/containers
-	install -D -m 644 stages/services/includes/cicd/files/etc/docker/registry/config.yml /etc/docker/registry
-	systemctl restart docker-registry
+	iac stages/services/includes/cicd/configs/gitea.yaml
 	@echo "$(ccgreen)Setting up docker registry completed$(ccend)"
 
 network_hacks:

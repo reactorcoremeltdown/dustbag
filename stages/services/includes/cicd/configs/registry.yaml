@@ -1,0 +1,20 @@
+---
+kind: "iac.rcmd.space/file.v2"
+id: "services.cicd.registry.configs"
+annotations:
+  triggers:
+    - "services.cicd.registry.restart"
+file:
+  - name: "/etc/containers/containers.conf"
+    ownership: "root:root"
+    mode: "644"
+    source: "stages/services/includes/cicd/files/etc/containers/containers.conf"
+  - name: "/etc/docker/registry/config.yml"
+    ownership: "root:root"
+    mode: "644"
+    source: "stages/services/includes/cicd/files/etc/docker/registry/config.yml"
+---
+kind: "iac.rcmd.space/command"
+id: "services.cicd.registry.restart"
+command:
+  - createCommand: "systemctl restart docker-registry.service"
