@@ -23,7 +23,6 @@ package:
   - name: "texlive-fonts-recommended"
   - name: "texlive-latex-recommended"
   - name: "texlive-latex-extra"
-  - name: "trivy"
   - name: "lmodern"
   - name: "percona-toolkit"
   - name: "postfix"
