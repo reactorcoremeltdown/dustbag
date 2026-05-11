@@ -50,7 +50,7 @@ remove_config_gitea:
 	rm -fr /etc/gitea/app.ini
 	rm -fr /home/git/.config/drone_api_key
 
-reset_gitea: remove_config_gitea gitea_config
+reset_gitea: remove_config_gitea gitea
 	@echo "$(ccgreen) Gitea config has been updated"
 
 reset_containers:
