@@ -1,0 +1,24 @@
+---
+kind: "iac.rcmd.space/directory.v2"
+id: "services.system.webdis.directory"
+directory:
+  - name: "/etc/webdis"
+    ownership: "root:root"
+    mode: "755"
+---
+kind: "iac.rcmd.space/template"
+id: "services.system.webdis.config"
+annotations:
+  triggers:
+    - "services.system.webdis.restart"
+template:
+  - name: "/etc/webdis/webdis.json"
+    ownership: "root:root"
+    mode: "644"
+    source: "stages/services/includes/system/templates/webdis.json.tmpl"
+    config: "variables/main.json"
+---
+kind: "iac.rcmd.space/command"
+id: "services.system.webdis.restart"
+command:
+  - createCommand: "systemctl restart webdis.service"

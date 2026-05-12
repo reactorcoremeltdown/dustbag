@@ -37,3 +37,6 @@ nfs_exports_outpost: nfs_server
 
 dnsmasq:
 	iac stages/services/includes/system/configs/dnsmasq.yaml
+
+webdis:
+	iac stages/services/includes/system/configs/webdis.yaml
