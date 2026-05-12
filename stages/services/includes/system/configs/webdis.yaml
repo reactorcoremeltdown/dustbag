@@ -15,7 +15,7 @@ template:
   - name: "/etc/webdis/webdis.json"
     ownership: "root:root"
     mode: "644"
-    source: "stages/services/includes/system/templates/webdis.json.tmpl"
+    template: "stages/services/includes/system/templates/webdis.json.tmpl"
     config: "variables/main.json"
 ---
 kind: "iac.rcmd.space/command"
