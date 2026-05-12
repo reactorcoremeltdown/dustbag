@@ -17,7 +17,6 @@ download:
 ---
 kind: "iac.rcmd.space/directory.v2"
 id: "services.media.podsync.directories.v2"
-# test
 directory:
   - name: "/etc/podsync"
     mode: "750"
@@ -25,6 +24,17 @@ directory:
   - name: "/var/log/podsync"
     mode: "750"
     ownership: "syncthing:syncthing"
+  - name: "/etc/yt-dlp"
+    mode: "750"
+    ownership: "syncthing:syncthing"
+---
+kind: "iac.rcmd.space/file.v2"
+id: "services.media.podsync.ytdlp.config"
+file:
+  - name: "/etc/yt-dlp/config"
+    mode: "640"
+    ownership: "syncthing:syncthing"
+    source: "stages/services/includes/media/files/etc/yt-dlp/config"
 ---
 kind: "iac.rcmd.space/systemd"
 id: "services.media.podsync.systemd"
