@@ -20,7 +20,7 @@ CRONS := stages/services/files/crons/fermium
 DEVICEPING_ID := deviceping_fermium
 ROLE := homeserver
 
-services: users packages services_begin crons nginx_proxies nginx motion dave podsync bootconfig deviceping podman woodpecker_server mpd snapraid_nas k3s shared_functions vault_seal services_end
+services: users packages services_begin crons nginx_proxies nginx motion dave podsync bootconfig deviceping registry podman woodpecker_server mpd snapraid_nas k3s shared_functions vault_seal services_end
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Seedbox
