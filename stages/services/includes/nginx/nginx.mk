@@ -7,7 +7,6 @@ nginx_sites:
 	bash stages/services/includes/nginx/templates/nginx/sites/dm.sh
 	bash stages/services/includes/nginx/templates/nginx/sites/git.sh
 	bash stages/services/includes/nginx/templates/nginx/sites/podcasts.sh
-	bash stages/services/includes/nginx/templates/nginx/sites/repo.sh
 	bash stages/services/includes/nginx/templates/nginx/sites/sync.sh
 	bash stages/services/includes/nginx/templates/nginx/sites/mood.sh
 	iac stages/services/includes/nginx/configs/nginx_amnezia.yaml
