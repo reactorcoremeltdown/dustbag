@@ -1,6 +1,7 @@
 debian:
   essentials:
     - at
+    - apache2-utils
     - bc
     - htop
     - bash-completion
