@@ -6,6 +6,7 @@ package:
   - name: "nginx-full"
   - name: "libnginx-mod-http-geoip"
   - name: "libnginx-mod-http-geoip2"
+  - name: "geoip-database"
 ---
 kind: "iac.rcmd.space/template"
 id: "services.nginx.certbot.credentials"
