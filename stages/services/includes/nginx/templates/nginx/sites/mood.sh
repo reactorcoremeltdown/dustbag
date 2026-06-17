@@ -46,8 +46,6 @@ server {
     application/rss+xml
     text/css;
 
-    root /opt/apps/${SITE};
-
     server_name ${SITE}.rcmd.space;
 
     include /etc/nginx/common_ratelimit.conf;
@@ -67,22 +65,28 @@ server {
     location @error401 {
         return 302 https://auth.rcmd.space/login?url=\$scheme://\$http_host\$request_uri&vouch-failcount=\$auth_resp_failcount&X-Vouch-Token=\$auth_resp_jwt&error=\$auth_resp_err;
     }
-    error_page 404 /404.html;
     location / {
+        auth_request /validate;
         proxy_set_header X-Vouch-User \$auth_resp_x_vouch_user;
-        add_header Access-Control-Allow-Origin *;
-        try_files /index.html =404;
-    }
-    location /404.html {
-        proxy_set_header X-Vouch-User \$auth_resp_x_vouch_user;
-        add_header Access-Control-Allow-Origin *;
-        try_files /404.html =404;
-    }
-    location /assets {
-        proxy_set_header X-Vouch-User \$auth_resp_x_vouch_user;
-        add_header Access-Control-Allow-Origin *;
-        expires 3d;
-        try_files \$uri \$uri/ =404;
+        proxy_pass http://10.200.1.3:32400;
+
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+
+        proxy_http_version 1.1;
+        proxy_redirect     off;
+
+        # disable buffering uploads to prevent OOM on reverse proxy server and make uploads twice as fast (no pause)
+        proxy_request_buffering off;
+
+        # set timeout
+        proxy_read_timeout 600s;
+        proxy_send_timeout 600s;
+        send_timeout       600s;
+        proxy_set_header   Upgrade    \$http_upgrade;
+        proxy_set_header   Connection "upgrade";
     }
     location /media {
         proxy_set_header X-Vouch-User \$auth_resp_x_vouch_user;
@@ -96,25 +100,6 @@ server {
         root /var/storage/wastebox/tiredsysadmin.cc/wiki;
         add_header Access-Control-Allow-Origin *;
         expires 3d;
-        try_files \$uri \$uri/ =404;
-    }
-    location /zettelkasten {
-        proxy_set_header X-Vouch-User \$auth_resp_x_vouch_user;
-        add_header Access-Control-Allow-Origin *;
-        try_files \$uri \$uri/ =404;
-    }
-    location /records {
-        proxy_set_header X-Vouch-User \$auth_resp_x_vouch_user;
-        if (\$request_method = OPTIONS ) {
-            add_header Access-Control-Allow-Origin *;
-            add_header Access-Control-Allow-Methods "GET, OPTIONS";
-            add_header Access-Control-Allow-Headers "origin, authorization, accept, X-Progress-ID, URI";
-            add_header Access-Control-Allow-Credentials "true";
-            add_header Content-Length 0;
-            add_header Content-Type text/plain;
-            return 204;
-        }
-        add_header Access-Control-Allow-Origin *;
         try_files \$uri \$uri/ =404;
     }
 }
