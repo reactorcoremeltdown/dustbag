@@ -4,6 +4,8 @@ id: "services.nginx.base.packages"
 package:
   - name: "nginx-common"
   - name: "nginx-full"
+  - name: "libnginx-mod-http-geoip"
+  - name: "libnginx-mod-http-geoip2"
 ---
 kind: "iac.rcmd.space/template"
 id: "services.nginx.certbot.credentials"
