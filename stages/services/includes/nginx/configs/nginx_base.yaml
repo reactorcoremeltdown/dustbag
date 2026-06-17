@@ -43,6 +43,10 @@ annotations:
     - "services.nginx.test"
     - "services.nginx.reload"
 file:
+  - name: "/etc/nginx/nginx.conf"
+    mode: "644"
+    ownership: "root:root"
+    source: "stages/services/includes/nginx/files/etc/nginx/nginx.conf"
   - name: "/etc/logrotate.d/nginx"
     mode: "644"
     ownership: "root:root"
