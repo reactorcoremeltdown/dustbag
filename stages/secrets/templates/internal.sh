@@ -14,6 +14,8 @@ if [ "${UPTIME}" -gt 10800 ]; then
     TASKS_FSMQ_TOKEN=$(vault-request-key 'fsmq_token' 'tasks')
 
     USERS="$(rbw-request-key 'users' 'api/internal')"
+    HEALTHDATA_TOKEN=$(rbw-request-key 'token' 'healthdata')
+    ACHIEVEBURGER_TOKEN=$(rbw-request-key 'token' 'healthdata/achieveburger')
 
     read -r -d '' YAML <<-EOF
 ---
@@ -35,6 +37,11 @@ services:
     botToken: "${TELEGRAM_BOT}"
   xmpp:
     unixSocketPath: "/var/lib/pizdabol/jabber.socket"
+  healthdata:
+    webhook:
+      token: "${HEALTHDATA_TOKEN}"
+    achieveburger:
+      token: "${ACHIEVEBURGER_TOKEN}"
   kanboard:
     api:
       url: "https://board.rcmd.space/jsonrpc.php"
