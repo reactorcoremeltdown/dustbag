@@ -43,6 +43,10 @@ if [[ ${JOB_ID} != 'EOQ' ]]; then
             sqlite3 /home/ledger/expenses.db "insert into expenses (time, category, amount) values (${TIMESTAMP}, \"${CATEGORY}\", ${AMOUNT})"
             # echo -e "\n$(date '+%Y/%m/%d') ${DESCRIPTION}\n    ${DESTINATION_TOPIC}  ${AMOUNT}\n    ${SOURCE_TOPIC}  -${AMOUNT}\n" >> /home/ledger/ledger.book
 
+            curl --request POST \
+            --url https://achievements.tiredsysadmin.cc/api/habits/expenses/log \
+            --header "Authorization: Bearer $(cat /home/ledger/.achieveburger.txt)"
+
             RATE=`sqlite3 /home/ledger/expenses.db "select (sum(amount)/30) as total from expenses where time > strftime(\"%s\", date(\"now\", \"-30 days\")) and category = \"${CATEGORY}\""`
 
             if (( $(echo "${RATE} > 1.65" | bc -l) )); then
