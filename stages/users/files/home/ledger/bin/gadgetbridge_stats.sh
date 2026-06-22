@@ -40,6 +40,12 @@ if [[ ${JOB_ID} != 'EOQ' ]]; then
             sqlite3 /home/ledger/expenses.db "insert into gadgetbridge_steps (score) values (${SCORE})"
             # echo -e "\n$(date '+%Y/%m/%d') ${DESCRIPTION}\n    ${DESTINATION_TOPIC}  ${AMOUNT}\n    ${SOURCE_TOPIC}  -${AMOUNT}\n" >> /home/ledger/ledger.book
 
+            if [[ "${SCORE}" -gt 9999 ]]; then
+                curl --request POST \
+                --url https://achievements.tiredsysadmin.cc/api/habits/x_10000_steps/log \
+                --header "Authorization: Bearer $(cat /home/ledger/.achieveburger.txt)"
+            fi
+
             echo "Unlocking job"
             UNLOCK_JOB_TOKEN=$(curl -s -XPOST -H "${UA}" --data-urlencode "token=${USER_TOKEN}" https://api.rcmd.space/v6/token/get)
             curl -s -XPOST -H "${UA}" \
