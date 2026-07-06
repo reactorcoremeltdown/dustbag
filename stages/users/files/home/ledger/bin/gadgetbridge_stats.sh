@@ -1,11 +1,31 @@
 #!/usr/bin/env bash
 
+IFS=$'\n'
+
 API_URL="https://api.rcmd.space/v6"
 UA="User-Agent: gadgetbridge/v0.1"
 
 # Getting a job token
 USER_TOKEN=$(cat /home/ledger/.token)
 QUEUE="gadgetbridge"
+
+# Cleaning up the queue
+GET_BATCH_TOKEN=$(curl -s -XPOST -H "${UA}" --data-urlencode "token=${USER_TOKEN}" "https://api.rcmd.space/v6/token/get")
+JOBS=$(curl -s -XPOST -H "${UA}" \
+    --data-urlencode "token=${GET_BATCH_TOKEN}" \
+    --data-urlencode "queue=${QUEUE}" \
+    "https://api.rcmd.space/v6/queue/get-batch")
+
+for i in $(echo "${JOBS}" | head -n -1); do
+    CLEANUP_TOKEN=$(curl -s -XPOST -H "${UA}" --data-urlencode "token=${USER_TOKEN}" "https://api.rcmd.space/v6/token/get")
+    curl -s -XPOST -H "${UA}" \
+        --data-urlencode "token=${CLEANUP_TOKEN}" \
+        --data-urlencode "queue=${QUEUE}" \
+        --data-urlencode "job=${i}" \
+        "https://api.rcmd.space/v6/queue/ack-job"
+done
+
+
 GET_JOB_TOKEN=$(curl -s -XPOST -H "${UA}" --data-urlencode "token=${USER_TOKEN}" "https://api.rcmd.space/v6/token/get")
 JOB_ID=$(curl -s -XPOST -H "${UA}" \
     --data-urlencode "token=${GET_JOB_TOKEN}" \
