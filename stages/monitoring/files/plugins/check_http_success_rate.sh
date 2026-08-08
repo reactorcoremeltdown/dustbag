@@ -6,6 +6,8 @@ test -d /var/lib/httpsuccessrate/ || mkdir -p /var/lib/httpsuccessrate
 
 TIMEFRAME=$(date --date "now -3 hours" '+%s')
 TIMEOUT="10000"
+# USER_AGENT="monit-ping-check"
+USER_AGENT="Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) FxQuantum/153.0 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Mobile Safari/537.36"
 
 sleep 0.2
 
@@ -31,7 +33,7 @@ sqlite3 /var/lib/httpsuccessrate/timeseries_${PLUGIN_NAME}.db <<EOF
 CREATE TABLE IF NOT EXISTS ${PLUGIN_NAME} (time timestamp default (strftime('%s', 'now')), status text);
 EOF
 
-status=`curl -A "monit-ping-check" -s -o /dev/null -w "%{http_code}" --connect-timeout 20 --max-time 20 ${OPTION}`
+status=`curl -A "${USER_AGENT}" -s -o /dev/null -w "%{http_code}" --connect-timeout 20 --max-time 20 ${OPTION}`
 
 sleep 0.2
 
