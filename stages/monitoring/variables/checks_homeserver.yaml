@@ -120,6 +120,20 @@ items:
       - gotify
       - telegram
       - alert_fatigue
+  - name: native_instruments
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "98"
+    flowOperator: downwards
+    option: https://www.native-instruments.com/en/
+    interval: 182s
+    timeoutSec: 5
+    description: Native Instruments Website
+    hostname: fermium-wg.tiredsysadmin.cc
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
   - name: main_website
     plugin: check_http_success_rate
     warningThreshold: "98"
