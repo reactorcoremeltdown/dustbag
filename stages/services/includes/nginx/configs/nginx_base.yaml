@@ -115,5 +115,5 @@ command:
 kind: "iac.rcmd.space/command"
 id: "services.nginx.reload"
 command:
-  - createCommand: "systemctl reload nginx"
+  - createCommand: "systemctl try-reload-or-restart nginx"
     deleteCommand: "/bin/true"
