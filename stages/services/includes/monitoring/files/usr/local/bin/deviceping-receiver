@@ -36,7 +36,9 @@ for ITEM in ${BATCH}; do
 
         ITEM_DEVICE_NAME=`echo "${ITEM_PAYLOAD}" | jq -cr '.device'`
 
-        echo "${ITEM_PAYLOAD}" > /var/spool/api/deviceping/${ITEM_DEVICE_NAME}
+        if [[ "${ITEM_DEVICE_NAME}" != '' ]]; then
+            echo "${ITEM_PAYLOAD}" > /var/spool/api/deviceping/${ITEM_DEVICE_NAME}
+        fi
 
         ACK_ITEM_TOKEN=$(curl --fail -s -XPOST -H "${UA}" --data-urlencode "token=${MONITORING_API_TOKEN}" https://api.rcmd.space/v6/token/get)
 
