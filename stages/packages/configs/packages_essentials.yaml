@@ -10,6 +10,7 @@ package:
   - name: "curl"
   - name: "davfs2"
   - name: "dialog"
+  - name: "geoip-database"
   - name: "markdown"
   - name: "iptables-persistent"
   - name: "needrestart"
