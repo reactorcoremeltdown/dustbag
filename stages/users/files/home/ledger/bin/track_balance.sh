@@ -35,9 +35,9 @@ if [[ ${JOB_ID} != 'EOQ' ]]; then
 
     echo "Payload: ${JOB_PAYLOAD}"
 
-    WEIGHT=$(echo "${JOB_PAYLOAD}" | jq -r '.weight')
-    if ! test -z ${WEIGHT}; then
-            sqlite3 /home/ledger/expenses.db "insert into balance (balance) values (${WEIGHT})"
+    BALANCE=$(echo "${JOB_PAYLOAD}" | jq -r '.balance')
+    if ! test -z ${BALANCE}; then
+            sqlite3 /home/ledger/expenses.db "insert into balance (balance) values (${BALANCE})"
 
             echo "Unlocking job"
             UNLOCK_JOB_TOKEN=$(curl -s -XPOST -H "${UA}" --data-urlencode "token=${USER_TOKEN}" https://api.rcmd.space/v6/token/get)
