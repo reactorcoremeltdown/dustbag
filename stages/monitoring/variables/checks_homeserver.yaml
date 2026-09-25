@@ -8,6 +8,15 @@ items:
     notify:
       - gotify
       - alert_fatigue
+  - name: disks_health
+    plugin: check_dmesg_disks
+    option: ""
+    interval: 15s
+    description: Critical errors count for disks in dmesg output
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
   - name: snapraid_parity
     plugin: check_file
     option: /mnt/snapraid/parity1/snapraid.parity
