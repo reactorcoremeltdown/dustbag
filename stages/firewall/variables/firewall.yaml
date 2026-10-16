@@ -43,6 +43,11 @@ rules:
     protocol: tcp
     address_v4: worldv4
     address_v6: worldv6
+  - name: rtmps
+    port: 1936
+    protocol: tcp
+    address_v4: worldv4
+    address_v6: worldv6
   - name: Syncthing TCP
     port: 22000
     protocol: tcp
