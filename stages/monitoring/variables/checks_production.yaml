@@ -151,19 +151,6 @@ items:
     notify:
       - gotify
       - alert_fatigue
-  - name: chatserver
-    plugin: check_http_success_rate
-    warningThreshold: "99"
-    criticalThreshold: "97"
-    flowOperator: downwards
-    option: https://382578846.site/#/status
-    interval: 1m
-    description: 'Databag online status'
-    hostname: 382578846.site
-    notify:
-      - telegram
-      - gotify
-      - alert_fatigue
   - name: gotify_health
     plugin: check_http_success_rate
     warningThreshold: "99"
