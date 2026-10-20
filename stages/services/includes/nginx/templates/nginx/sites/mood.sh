@@ -29,13 +29,6 @@ server {
     ssl_certificate ${new_ssl_certificate};
     ssl_certificate_key ${new_ssl_certificate_key};
 
-    ### Add SSL specific settings here ###
-    ssl_session_timeout 10m;
-
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers '${ssl_ciphers}';
-    ssl_prefer_server_ciphers on;
-
     ### Compression
     gzip on;
     gzip_comp_level    5;

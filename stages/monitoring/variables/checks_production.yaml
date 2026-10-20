@@ -449,7 +449,7 @@ items:
     flowOperator: downwards
     option: http://10.200.1.3:32283/api/server/ping
     interval: 1m
-    description: 'Syncthing: production'
+    description: 'Immich'
     hostname: garage.rcmd.space
     notify:
       - telegram
