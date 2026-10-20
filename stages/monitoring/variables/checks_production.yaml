@@ -442,3 +442,18 @@ items:
       - telegram
       - gotify
       - alert_fatigue
+  - name: immich
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    option: http://localhost:32283/api/server/ping
+    interval: 1m
+    description: 'Syncthing: production'
+    hostname: garage.rcmd.space
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
+    suppressedBy:
+      - printserver_online
