@@ -150,3 +150,12 @@ items:
     notify:
       - telegram
       - alert_fatigue
+  - name: dave
+    plugin: check_systemd_service
+    option: dave.service
+    interval: 1m
+    description: 'Dave, a compact webdav server'
+    timeoutSec: 120
+    notify:
+      - telegram
+      - alert_fatigue
