@@ -6,3 +6,4 @@
 20 3 * * * systemctl restart tinc@clusternet
 * */4 * * * /usr/local/bin/home-ip
 45 0 * * 6 /usr/bin/rsync -aHS --delete --delete-delay --info=progress2 rsync://packages.termux.dev/termux /mnt/pool/APOCALYPSE/Termux
+*/3 * * * /opt/weather/weather.sh
