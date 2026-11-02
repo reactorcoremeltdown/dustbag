@@ -32,6 +32,13 @@ debian:
       key: "https://deb.tiredsysadmin.cc/dists/bookworm/tiredsysadmin-repo.gpg"
       url: "https://deb.tiredsysadmin.cc/"
       section: "main"
+    - name: "infisical"
+      state: "present"
+      install_on: "production homeserver printserver outpost"
+      distro: "stable"
+      key: "https://artifacts-infisical-core.infisical.com/infisical.gpg"
+      url: "https://artifacts-cli.infisical.com/deb"
+      section: "main"
   reprepro:
     branches:
       - name: "debian"
