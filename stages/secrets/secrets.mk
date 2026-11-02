@@ -1,18 +1,18 @@
 MACHINE_ID := $(shell cat /etc/machine-id)
 
 ### Garage
-ifeq ($(MACHINE_ID), bbb5f20db211480faf15e28f1bf8b015)
-secrets: unpack reset_configs
+ifeq ($(MACHINE_ROLE), production)
+secrets: repos secrets_begin infisical secrets_end
 	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
 
 ### Fermium
-else ifeq ($(MACHINE_ID), 6b2164a96a984edbb8626ed09d87aa66)
-secrets: unpack reset_podsync vault_seal
+else ifeq ($(MACHINE_ROLE), homeserver)
+secrets: repos secrets_begin infisical secrets_end
 	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
 
 ### Other machines
 else
-secrets: vault_unseal unpack vault_seal
+secrets: repos secrets_begin infisical secrets_end
 	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
 
 endif
@@ -62,3 +62,12 @@ reset_containers:
 
 reset_configs: vault_unlock reset_gmail reset_podsync reset_gitea reset_containers vault_seal
 	@echo "$(ccgreen) All configs have been updated"
+
+secrets_begin:
+	iac begin secrets
+
+secrets_end:
+	iac end secrets
+
+infisical:
+	iac stages/secrets/configs/infisical.yaml
