@@ -40,7 +40,7 @@ services: users packages podman seppuku
 else ifeq ($(MACHINE_ROLE), outpost)
 ROLE := outpost
 
-services: users packages services_begin podman nginx gotify k3s nfs_exports_outpost shared_functions vault_seal services_end
+services: users packages services_begin podman nginx gotify shared_functions vault_seal services_end
 	@echo "$(ccgreen)Setting up services completed$(ccend)"
 
 ## Printserver V2, the Pi Zero W edition
