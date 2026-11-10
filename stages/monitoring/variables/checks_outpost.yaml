@@ -179,3 +179,16 @@ items:
     notify:
       - telegram
       - alert_fatigue
+  - name: vpn_tower_health
+    plugin: check_http_success_rate
+    warningThreshold: "90"
+    criticalThreshold: "70"
+    flowOperator: downwards
+    option: https://vpntower.tiredsysadmin.cc/flow-health
+    interval: 1m
+    description: VPN Tower health status
+    hostname: outpost.rcmd.space
+    notify:
+      - gotify
+      - telegram
+      - alert_fatigue
