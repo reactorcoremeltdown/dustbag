@@ -359,54 +359,6 @@ items:
     notify:
       - telegram
       - alert_fatigue
-  - name: home_stereo
-    plugin: relay
-    option: http://fermium.tiredsysadmin.cc:8881?check=home_stereo
-    interval: 30m
-    description: '[relay] MPD server online test'
-    hostname: fermium-wg.tiredsysadmin.cc
-    notify:
-      - telegram
-      - alert_fatigue
-  - name: home_printer
-    plugin: relay
-    option: http://fermium.tiredsysadmin.cc:8881?check=home_printer
-    interval: 30m
-    description: '[relay] CUPS server online test'
-    hostname: fermium-wg.tiredsysadmin.cc
-    suppressedBy:
-      - printserver_online
-    notify:
-      - telegram
-      - alert_fatigue
-  - name: home_printer_device
-    plugin: relay
-    option: http://fermium.tiredsysadmin.cc:8881?check=home_printer_device
-    interval: 10m
-    hostname: fermium-wg.tiredsysadmin.cc
-    description: '[relay] Checking printer status, Brother Industries, Ltd HL-2140 series'
-    notify:
-      - telegram
-      - alert_fatigue
-  - name: home_storage
-    plugin: relay
-    option: http://fermium.tiredsysadmin.cc:8881?check=home_storage
-    interval: 30m
-    description: '[relay] Home storage status'
-    hostname: fermium-wg.tiredsysadmin.cc
-    notify:
-      - telegram
-      - alert_fatigue
-  - name: nfs_storage
-    plugin: relay
-    option: http://fermium.tiredsysadmin.cc:8881?check=nfs_storage
-    interval: 30m
-    description: '[relay] NFS storage status'
-    hostname: fermium-wg.tiredsysadmin.cc
-    notify:
-      - telegram
-      - gotify
-      - alert_fatigue
   - name: ledger_sqlite_lock
     plugin: check_sqlite_lock
     option: /home/ledger/expenses.db
@@ -489,3 +441,205 @@ items:
       - alert_fatigue
     suppressedBy:
       - printserver_online
+  ### Relay checks: fermium
+  - name: home_stereo
+    plugin: relay
+    option: http://fermium.tiredsysadmin.cc:8881?check=home_stereo
+    interval: 30m
+    description: '[relay] MPD server online test'
+    hostname: fermium-wg.tiredsysadmin.cc
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: home_printer
+    plugin: relay
+    option: http://fermium.tiredsysadmin.cc:8881?check=home_printer
+    interval: 30m
+    description: '[relay] CUPS server online test'
+    hostname: fermium-wg.tiredsysadmin.cc
+    suppressedBy:
+      - printserver_online
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: home_printer_device
+    plugin: relay
+    option: http://fermium.tiredsysadmin.cc:8881?check=home_printer_device
+    interval: 10m
+    hostname: fermium-wg.tiredsysadmin.cc
+    description: '[relay] Checking printer status, Brother Industries, Ltd HL-2140 series'
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: home_storage
+    plugin: relay
+    option: http://fermium.tiredsysadmin.cc:8881?check=home_storage
+    interval: 30m
+    description: '[relay] Home storage status'
+    hostname: fermium-wg.tiredsysadmin.cc
+    notify:
+      - telegram
+      - alert_fatigue
+  - name: nfs_storage
+    plugin: relay
+    option: http://fermium.tiredsysadmin.cc:8881?check=nfs_storage
+    interval: 30m
+    description: '[relay] NFS storage status'
+    hostname: fermium-wg.tiredsysadmin.cc
+    notify:
+      - telegram
+      - gotify
+      - alert_fatigue
+  ### Relay checks: outpost
+  - name: blog_beta_protected
+    plugin: relay
+    option: http://10.200.1.2:8881?check=blog_beta_protected
+    interval: 30s
+    description: '[relay] Blog beta protection check'
+    hostname: garage
+    notify:
+      - dummy
+  - name: blog_domain_expiry
+    plugin: relay
+    option: http://10.200.1.2:8881?check=blog_domain_expiry
+    interval: 30s
+    description: '[relay] tiredsysadmin.cc domain expiry check'
+    hostname: garage
+    notify:
+      - dummy
+  - name: blog_website
+    plugin: relay
+    option: http://10.200.1.2:8881?check=blog_website
+    interval: 30s
+    description: '[relay] Blog website'
+    hostname: garage
+    notify:
+      - dummy
+  - name: grafana_backend_protected
+    plugin: relay
+    option: http://10.200.1.2:8881?check=grafana_backend_protected
+    interval: 30s
+    description: '[relay] Grafana (backend) protection check'
+    hostname: garage
+    notify:
+      - dummy
+  - name: grafana_protected
+    plugin: relay
+    option: http://10.200.1.2:8881?check=grafana_protected
+    interval: 30s
+    description: '[relay] Grafana protection check'
+    hostname: garage
+    notify:
+      - dummy
+  - name: iacd
+    plugin: relay
+    option: http://10.200.1.2:8881?check=iacd
+    interval: 30s
+    description: '[relay] IACD: production (systemd service)'
+    hostname: garage
+    notify:
+      - dummy
+  - name: inventory_protected
+    plugin: relay
+    option: http://10.200.1.2:8881?check=inventory_protected
+    interval: 30s
+    description: '[relay] Inventory protection check'
+    hostname: garage
+    notify:
+      - dummy
+  - name: kanboard_backend_protected
+    plugin: relay
+    option: http://10.200.1.2:8881?check=kanboard_backend_protected
+    interval: 30s
+    description: '[relay] Kanboard (backend) protection check'
+    hostname: garage
+    notify:
+      - dummy
+  - name: kanboard_protected
+    plugin: relay
+    option: http://10.200.1.2:8881?check=kanboard_protected
+    interval: 30s
+    description: '[relay] Kanboard protection check'
+    hostname: garage
+    notify:
+      - dummy
+  - name: main_domain_expiry
+    plugin: relay
+    option: http://10.200.1.2:8881?check=main_domain_expiry
+    interval: 30s
+    description: '[relay] rcmd.space domain expiry check'
+    hostname: garage
+    notify:
+      - dummy
+  - name: main_website
+    plugin: relay
+    option: http://10.200.1.2:8881?check=main_website
+    interval: 30s
+    description: '[relay] RCMD.space website'
+    hostname: garage
+    notify:
+      - dummy
+  - name: mixtape_protected
+    plugin: relay
+    option: http://10.200.1.2:8881?check=mixtape_protected
+    interval: 30s
+    description: '[relay] Mixtape protection check'
+    hostname: garage
+    notify:
+      - dummy
+  - name: mood_protected
+    plugin: relay
+    option: http://10.200.1.2:8881?check=mood_protected
+    interval: 30s
+    description: '[relay] Mood journal protection check'
+    hostname: garage
+    notify:
+      - dummy
+  - name: outpost_provisioning
+    plugin: relay
+    option: http://10.200.1.2:8881?check=outpost_provisioning
+    interval: 30s
+    description: '[relay] Checking provisioning status of Outpost'
+    hostname: garage
+    notify:
+      - dummy
+  - name: reader_protected
+    plugin: relay
+    option: http://10.200.1.2:8881?check=reader_protected
+    interval: 30s
+    description: '[relay] RSS reader protection check'
+    hostname: garage
+    notify:
+      - dummy
+  - name: site_beta_protected
+    plugin: relay
+    option: http://10.200.1.2:8881?check=site_beta_protected
+    interval: 30s
+    description: '[relay] Site beta protection check'
+    hostname: garage
+    notify:
+      - dummy
+  - name: vpn_tower_health
+    plugin: relay
+    option: http://10.200.1.2:8881?check=vpn_tower_health
+    interval: 30s
+    description: '[relay] VPN Tower health status'
+    hostname: garage
+    notify:
+      - dummy
+  - name: wiki_backend_protected
+    plugin: relay
+    option: http://10.200.1.2:8881?check=wiki_backend_protected
+    interval: 30s
+    description: '[relay] Wiki (backend) protection check'
+    hostname: garage
+    notify:
+      - dummy
+  - name: wiki_protected
+    plugin: relay
+    option: http://10.200.1.2:8881?check=wiki_protected
+    interval: 30s
+    description: '[relay] Wiki protection check'
+    hostname: garage
+    notify:
+      - dummy
