@@ -113,13 +113,14 @@ items:
       - telegram
       - alert_fatigue
   - name: traccar
-    plugin: check_traccar_logs
-    option: ""
-    interval: 15s
+    plugin: check_http_success_rate
+    warningThreshold: "99"
+    criticalThreshold: "97"
+    flowOperator: downwards
+    option: https://tracbeat.tiredsysadmin.cc/health/ingest
+    interval: 1h
     description: Traccar location tracker
     hostname: garage.rcmd.space
-    criticalThreshold: "1814000"
-    flowOperator: upwards
     notify:
       - telegram
   - name: webdav_filesystem
