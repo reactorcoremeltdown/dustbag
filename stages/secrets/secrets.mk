@@ -2,7 +2,7 @@ MACHINE_ID := $(shell cat /etc/machine-id)
 
 ### Garage
 ifeq ($(MACHINE_ROLE), production)
-secrets: repos secrets_begin infisical secrets_end
+secrets: repos secrets_begin infisical infisical_configs_production secrets_end
 	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
 
 ### Fermium
@@ -67,7 +67,12 @@ secrets_begin:
 	iac begin secrets
 
 secrets_end:
+	iac stages/secrets/configs/infisical_service.yaml
 	iac end secrets
 
 infisical:
 	iac stages/secrets/configs/infisical.yaml
+	iac stages/secrets/configs/secrets_legacy.yaml
+
+infisical_configs_production:
+	iac stages/secrets/configs/configs_production.yaml
