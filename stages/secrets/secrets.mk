@@ -76,3 +76,5 @@ infisical:
 
 infisical_configs_production:
 	iac stages/secrets/configs/configs_production.yaml
+
+# New commit retrigger
