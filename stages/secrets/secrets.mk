@@ -73,8 +73,10 @@ secrets_end:
 infisical:
 	iac stages/secrets/configs/infisical.yaml
 	iac stages/secrets/configs/secrets_legacy.yaml
+	echo $(AGE_SECRET_KEY) > /tmp/age-secret-key
+	age -d -i /tmp/age-secret-key stages/secrets/files/etc/infisical/client-id-$(MACHINE_ROLE).age > /etc/infisical/client-id
+	age -d -i /tmp/age-secret-key stages/secrets/files/etc/infisical/client-secret-$(MACHINE_ROLE).age > /etc/infisical/client-secret
+	rm -f /tmp/age-secret-key
 
 infisical_configs_production:
 	iac stages/secrets/configs/configs_production.yaml
-
-# New commit retrigger
