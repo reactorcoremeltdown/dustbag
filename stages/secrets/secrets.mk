@@ -7,7 +7,7 @@ secrets: repos secrets_begin infisical infisical_configs_production secrets_end
 
 ### Fermium
 else ifeq ($(MACHINE_ROLE), homeserver)
-secrets: repos secrets_begin infisical secrets_end
+secrets: repos secrets_begin infisical infisical_configs_homeserver secrets_end
 	@echo "$(ccgreen)Setting up secrets completed$(ccend)"
 
 ### Other machines
