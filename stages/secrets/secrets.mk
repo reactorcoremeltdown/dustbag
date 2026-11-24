@@ -80,3 +80,6 @@ infisical:
 
 infisical_configs_production:
 	iac stages/secrets/configs/configs_production.yaml
+
+infisical_configs_homeserver:
+	iac stages/secrets/configs/configs_homeserver.yaml
